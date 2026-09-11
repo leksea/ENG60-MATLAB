@@ -10,21 +10,6 @@
 
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
-- [Week 2 — Lab 2](#week-2--lab-2)
-  - [Arrays (Chapter 2)](#arrays-chapter-2)
-  - [Polynomial Roots](#polynomial-roots)
-  - [Plotting with MATLAB (Chapter 5)](#plotting-with-matlab-chapter-5)
-  - [Script Files](#script-files)
-  - [Narrative — Projectile Motion](#narrative--projectile-motion)
-- [SDC Chapter 2 — Operators, Variables & Data Types](#sdc-chapter-2--operators-variables--data-types)
-  - [2.1 Operators](#21-operators)
-  - [2.2 Variables & Precedence](#22-variables--precedence)
-  - [2.3 Variable Naming & Classes](#23-variable-naming--classes)
-  - [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types)
-  - [2.5 Numerical Functions & Rounding](#25-numerical-functions--rounding)
-  - [2.6 Strings & Character Arrays](#26-strings--character-arrays)
-  - [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files)
-- [SDC Chapter 2 — Exercises](#sdc-chapter-2--exercises)
 
 ---
 
