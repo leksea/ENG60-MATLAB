@@ -279,3 +279,76 @@ ans =
 **Answer:** The roots are x = -10 and x = 2 ± 5i.
 
 ### Plotting with MATLAB (Chapter 5)
+**Example)** Plot $y = sin(2x)$ for $0 \le x \le 10$.
+
+```matlab
+>> x = 0:0.01:10;
+>> y = sin(2*x);
+>> plot(x, y, linewidth=2) 
+>> xlabel('x')
+>> ylabel('y')
+>> legend('y = sin2x') 
+>> grid on
+>> title('Function y = sin2x') 
+```
+
+![y = sin(2x)](media/plot_sin2x.png)
+
+### T3-3: Plot $s = 2sin(3t+2) + \sqrt {(5t+1)}$ for $0 \le t \le 5$:
+
+```matlab
+>> t = 0:0.01:5;
+>> s = 2*sin(3*t + 2) + sqrt(5*t + 1);
+>> plot(t,s, linewidth=2, LineStyle="--", Color= 'r')
+>> xlabel('t: time (seconds)')
+>> ylabel('s: speed (feet per second)')
+>> title('The function of s = 2sin(3t+2)+sqrt(5t+1)')
+>> legend('y = s = 2sin(3t+2)+sqrt(5t+1)') 
+>> grid on
+
+```
+
+![s = 2sin(3t+2) + sqrt(5t+1)](media/plot_s2sin.png)
+
+### T3-4: $y = 4* \sqrt {6x+1}$ and $z = 5e^{0.3x} − 2x$ for $0 \le x \le 1.5$:
+
+```matlab
+>> x = 0:0.01:1.5;
+>> y = 4*sqrt(6*x+1);
+>> z = 5*exp(0.3*x) - 2*x;
+>> plot(x,y, linestyle='-.')
+>> xlabel('x: distance (meters)')
+>> ylabel('y: force (newtons)'), ...
+>> title('The function of y = 4sqrt(6x+1)')
+>> grid on;
+>> legend('y = 4sqrt(6x+1)')
+```
+
+![y = 4sqrt(6x+1)](media/plot_y4sqrt.png)
+
+```matlab
+>> plot(x,z, '--*', 'MarkerSize', 3, 'MarkerEdgeColor', 'y') 
+>> xlabel('x: distance (meters)'), ylabel('z: force (newtons)'), ...
+>> title('The function of $z = 5e^{(0.3x)}-2x$', 'Interpreter', 'latex')
+>> legend('$z = 5e^{(0.3x)}-2x$', 'Interpreter', 'latex')
+>> grid on
+
+```
+
+![z = 5exp(0.3x) - 2x](media/plot_z5exp.png)
+
+**Example) Plot of rocket height**
+
+```matlab
+>> x = 0:0.1:52;
+>> y = 0.4*sqrt(1.8*x);
+>> x = 0:0.1:52;
+>> plot(x,y, 'vr')
+>> xlabel('Distance (miles)')
+>> ylabel('Height (miles)')
+>> title('Rocket Height as a Function of Downrange Distance')
+>> legend('Rocket!', 'Box', 'off', 'fontsize', 20, 'FontAngle', 'italic')
+```
+
+![Rocket Height vs. Downrange Distance](media/plot_rocket.png)
+
