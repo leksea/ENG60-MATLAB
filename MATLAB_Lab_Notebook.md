@@ -10,7 +10,12 @@
 
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
-
+- [Week 2 — Lab 2](#week-2--lab-2)
+  - [Arrays (Chapter 2)](#arrays-chapter-2)
+  - [Polynomial Roots](#polynomial-roots)
+  - [Plotting with MATLAB (Chapter 5)](#plotting-with-matlab-chapter-5)
+  - [Script Files](#script-files)
+  - [Narrative — Projectile Motion](#narrative--projectile-motion)
 ---
 
 ## Lesson 1 Slides: About MATLAB
@@ -155,3 +160,122 @@ ans =
 ```
 
 ---
+## Week 2 — Lab 2
+
+### T1-1 (repeated, parts c & d)
+
+**c.** 6(10/13) + 18/(5·7) + 5(9²)
+```matlab
+>> 6*(10/13) + 18/(5*7) + 5*(9^2)
+ans =
+   410.1297
+```
+
+**d.** 6(35^(1/4)) + 14^0.35
+```matlab
+>> 6*(35^(1/4)) + 14^0.35
+ans =
+   17.1123
+```
+
+### Cylinder Problem
+
+The volume of a circular cylinder of height *h* and radius *r* is V = πr²h. A cylindrical tank is 15 m tall with a radius of 8 m. Construct another tank with 20% greater volume but the same height — how large must its radius be?
+
+**Solution:** r = √(V / πh)
+
+```matlab
+>> r = 8;
+>> h = 15;
+>> V = pi*(r^2)*h;
+>> V = V + 0.2*V;
+>> r = sqrt(V/(pi*h))
+ans =
+    r = 8.7636
+```
+
+**Answer:** The new cylinder must have a radius of **8.7636 m**.
+
+### T1-2: Test Your Understanding
+
+Given x = -5 + 9i and y = 6 - 2i, show that x+y = 1 + 7i, xy = -12 + 64i, and x/y = -1.2 + 1.1i.
+
+```matlab
+>> x = -5 + 9*i;
+>> y = 6 - 2*i;
+>> x + y
+ans =
+   1.0000 + 7.0000i
+
+>> x*y
+ans =
+  -12.0000 +64.0000i
+
+>> x/y
+ans =
+  -1.2000 + 1.1000i
+```
+
+### Arrays (Chapter 2)
+```matlab
+>> u = [0:0.1:10];
+>> w = 5*sin(u);
+>> u(7)
+ans =
+    0.6000
+
+>> w(7)
+ans =
+    2.8232
+
+>> m = length(w)
+m =
+   101
+```
+
+### T3-1: 25th Element
+
+Determine how many elements are in the array `[cos(0):0.02:log10(100)]`, and find the 25th element.
+
+```matlab
+>> a = [cos(0):0.02:log10(100)];
+>> m = length(a)
+m =
+    51
+
+>> a(25)
+ans =
+    1.4800
+```
+
+**Answer:** There are 51 elements in the array, and the 25th element is 1.48.
+
+### Polynomial Roots
+
+**Example)** Find the roots of x³ − 7x² + 40x − 34 = 0.
+
+```matlab
+>> a = [1, -7, 40, -34];
+>> roots(a)
+ans =
+   3.0000 + 5.0000i
+   3.0000 - 5.0000i
+   1.0000 + 0.0000i
+```
+
+**Answer:** The roots are x = 1 and x = 3 ± 5i.
+
+### T3-2: Polynomial 290 − 11x + 6x² + x³
+
+```matlab
+>> a = [1, 6, -11, 290];
+>> roots(a)
+ans =
+  -10.0000 + 0.0000i
+    2.0000 + 5.0000i
+    2.0000 - 5.0000i
+```
+
+**Answer:** The roots are x = -10 and x = 2 ± 5i.
+
+### Plotting with MATLAB (Chapter 5)
