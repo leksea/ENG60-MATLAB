@@ -553,40 +553,576 @@ HorizontalDistance =
 ### 2.1 Operators
 
 **Arithmetic Operators (p.15)**
+| Operator | Meaning |
+|---|---|
+| `+` | Addition (3+2) |
+| `-` | Subtraction (3-2) |
+| `*` | Multiplication (3*2) |
+| `/` | Division (3/2) |
+| `^` | Raise to a power (3^2) |
 **Relational Operators (p.15)**
+| Operator | Meaning |
+|---|---|
+| `<` | Less than |
+| `<=` | Less than or equal to |
+| `>` | Greater than |
+| `>=` | Greater than or equal to |
+| `==` | Equals |
+| `~=` | Does not equal |
+
+> (p.16) Using a single equals sign, `=`, assigns the value on the right side to the variable on the left side. Using two, `==`, asks whether the two sides are mathematically/logically equal (1 for True, 0 for False).
 **Logical Operators (p.16)**
 
+| Operator | Meaning |
+|---|---|
+| `&&` | and |
+| `\|\|` | or |
+| `~` | not |
+
+> (p.17) The `~` operator reverses the logical value it's applied to — true (1) becomes false (0) and vice versa.
+> ```matlab
+> >> ~(x==3)
+> ans =
+>   logical
+>    0
+> ```
+> Since x was previously set to 3, `x==3` evaluates to true, and `~` reverses it to false (0).
+
+**The `&` operator (and)** — true only when both compared values are true:
+
+| X | Y | X & Y | Explanation |
+|---|---|---|---|
+| True (1) | True (1) | True (1) | X & Y is true if X is true and Y is true |
+| True (1) | False (0) | False (0) | X & Y is false if X is true and Y is false |
+| False (0) | True (1) | False (0) | X & Y is false if X is false and Y is true |
+| False (0) | False (0) | False (0) | X & Y is false if X is false and Y is false |
+
+**The `|` operator (or)** — true when either or both compared values are true:
+
+| X | Y | X \| Y | Explanation |
+|---|---|---|---|
+| True (1) | True (1) | True (1) | X \| Y is true if X is true and Y is true |
+| True (1) | False (0) | True (1) | X \| Y is true if X is true and Y is false |
+| False (0) | True (1) | True (1) | X \| Y is true if X is false and Y is true |
+| False (0) | False (0) | False (0) | X \| Y is true if X is false and Y is false |
+
 ### 2.2 Variables & Precedence
+
+(p.18) Type into the Command Window:
+
+```matlab
+>> x=3
+x =
+    3
+>> y=2
+y =
+    2
+>> z=2
+z =
+    2
+>> x==y
+ans =
+  logical
+   0
+>> y==z
+ans =
+  logical
+   1
+>> x==y & y==z
+ans =
+  logical
+   0
+>> x==y | y==z
+ans =
+  logical
+   1
+>> ~(x==y) & y==z
+ans =
+  logical
+   1
+```
+
+**Logical type / `class()` / `islogical()`:**
+
+```matlab
+>> x=1;
+>> y=logical(1);      % assigned y to be logical 1
+>> class(x)            % asks the class of the variable x
+ans =
+    'double'
+>> class(y)             % asks the class of the variable y
+ans =
+    'logical'
+>> islogical(x)          % returned false(0) because not assigned logical
+ans =
+  logical
+   0
+>> islogical(y)           % returned true(1) because assigned logical
+ans =
+  logical
+   1
+```
+
+`double` is the default numeric data type in MATLAB and stores values between ±3.4×10³⁸. Use `islogical()` to check whether a value is of type `logical`.
+
 **Operator precedence (p.18-19)**
+
+```matlab
+>> 3+2*6
+ans =
+    15
+>> (3+2)*6
+ans =
+    30
+```
+
+The `==` relational operator has higher precedence than `&&`/`||` — this is why `x == y` and `y == z` were evaluated *before* the `&`/`|` operators above.
+
 **Order of Operations (p.19)**
+1. Parentheses
+2. Logical negation (`~`), unary minus (`-`)
+3. Multiplication, division
+4. Addition, subtraction
+5. Relational operators (`<`, `<=`, `>`, `>=`, `==`, `~=`)
+6. Logical AND (`&`)
+7. Logical OR (`|`)
+
+A variable holds a value; it has a name (e.g. `x` or `city`) assigned a value (e.g. `3` or `'Paris'`).
+
 **Variable Naming Rules (p.19)**
 
+- Can include letters, numbers, and underscores
+- MUST begin with a letter, cannot begin with a number. Underscore ok.
+- Names with capital and lowercase letters are **not** interchangeable (`abc` and `Abc` are different variables)
+
 ### 2.3 Variable Naming & Classes
+(p.19-20) Type into the Command Window:
+
+```matlab
+>> a=5
+a =
+    5
+>> A=15
+A =
+   15
+>> a+3
+ans =
+    8
+>> A+3
+ans =
+   18
+>> A+a
+ans =
+   20
+>> win_win=3
+win_win =
+    3
+>> 2win=3
+2win=3
+   ↑
+Error: Unexpected 'win'.
+Check for missing multiplication operator.
+>> win-win=3
+win-win=3
+   ↑
+Incorrect use of '=' operator. Assign a value to
+a variable using '=' and compare values for equality
+using '=='.
+>> win.win=3
+win =
+  struct with fields:
+    win: 3
+```
 
 **Invalid variable names:**
+
+| Invalid name | Result | Reason |
+|---|---|---|
+| `2win` | Error: Unexpected MATLAB expression | Variable begins with a number |
+| `win-win` | Error: The expression to the left of the equals sign is not a valid target for an assignment | MATLAB thinks you're subtracting a variable called `win` from itself |
+| `win.win` | A new structure `win` is created with a member `win` | The name contains an invalid character but is a valid way to refer to a member of a structure (an advanced data type covered later); MATLAB creates it instead of erroring |
+
+> (p.20) It's best to write code that's easily understood by others, since other programmers will review and later maintain it — use descriptive variable names (e.g. `altitude_in_meters`). You can also click and drag variable names from the Workspace and Editor into the Command Window to avoid retyping them.
+
+
 **Classes / types (p.21):**
+```matlab
+>> x=666
+x =
+   666
+>> class(x)
+ans =
+    'double'
+```
+
+Even though an integer was entered, MATLAB creates a `double` by default unless the type is explicitly specified.
+
+```matlab
+>> x=int8(666);
+>> class(x)
+ans =
+    'int8'
+```
+
+`int8` stores the number as an 8-bit integer. The `class` function reports the class/type. The number of bits determines how many binary digits the value can store; if one bit is reserved for the sign, the storable range shrinks accordingly.
+
+| 2⁷ | 2⁶ | 2⁵ | 2⁴ | 2³ | 2² | 2¹ | 2⁰ |
+|---|---|---|---|---|---|---|---|
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 | = 255 |
+
 
 ### 2.4 Integer & Floating-Point Types
+
 **Integer Types (p.21)**
+| Type | Bits | Signed/Unsigned | Range |
+|---|---|---|---|
+| `int8` | 8 | signed | -128 to 127 |
+| `uint8` | 8 | unsigned | 0 to 255 |
+| `int16` | 16 | signed | -32,768 to 32,767 |
+| `uint16` | 16 | unsigned | 0 to 65,535 |
+| `int32` | 32 | signed | -2,147,483,648 to 2,147,483,647 |
+| `uint32` | 32 | unsigned | 0 to 4,294,967,295 |
+| `int64` | 64 | signed | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
+| `uint64` | 64 | unsigned | 0 to 18,446,744,073,709,551,615 |
+
+Supplying a type to `intmin()` / `intmax()` tells you the minimum/maximum value that type can hold.
+
 **Floating Point Types (p.22)**
+| Type | Bits | Signed/Unsigned | Range |
+|---|---|---|---|
+| `single` | 32 | signed | -1.79×10³⁸ to 1.79×10³⁸ |
+| `double` | 64 | signed | -1.79×10³⁰⁸ to 1.79×10³⁰⁸ |
+
 **Constants — `Inf` and `NaN` (p.22)**
+
+A constant is a value that, once assigned, cannot be changed. Two special floating-point values result from certain operations:
+
+```matlab
+>> 3/0
+ans =
+    Inf
+>> inf-inf
+ans =
+    NaN
+```
+
+Instead of an error, MATLAB returns `Inf` (or `-Inf`) for results that are enormously large/small, and `NaN` ("not a number") for operations that are not mathematically defined. `pi` is another built-in constant:
+
+```matlab
+>> format long
+>> pi
+ans =
+   3.141592653589793
+>> pi+7
+ans =
+   10.141592653589793
+```
+
 **Overflow behavior (p.22-23)**
+```matlab
+>> x=128 +2
+x =
+   130
+>> y=int8(128)+2
+y =
+  int8
+   127
+>> z=int8(128)
+z =
+  int8
+   127
+```
+
+If a number is larger or smaller than a type can handle, MATLAB returns the largest/smallest value that type can hold, with no error (127 is as high as an `int8` can go).
+
 
 ### 2.5 Numerical Functions & Rounding
+| Function | Action |
+|---|---|
+| `ceil` | Rounds toward positive infinity |
+| `floor` | Rounds toward negative infinity |
+| `fix` | Rounds toward zero |
+| `round` | Rounds toward the nearest whole number |
+| `mod(a, b)` | Modulus of a divided by b; retains the sign of the divisor (e.g. `mod(10, -7)` returns -4) |
+| `rem(a, b)` | Remainder of a division; retains the sign of the dividend (e.g. `rem(10, -7)` returns 3) |
+
+```matlab
+>> ceil(3.4)
+ans =
+    4
+>> ceil(-3.4)
+ans =
+   -3
+>> floor(3.4)
+ans =
+    3
+>> floor(-3.4)
+ans =
+   -4
+>> fix(3.4)
+ans =
+    3
+>> fix(-3.4)
+ans =
+   -3
+>> round(3.4)
+ans =
+    3
+>> round(-3.4)
+ans =
+   -3
+>> mod(5, 2)
+ans =
+    1
+>> rem(5, 2)
+ans =
+    1
+>> mod(5, -2)
+ans =
+   -1
+>> rem(5, -2)
+ans =
+    1
+>> mod(-5, 2)
+ans =
+    1
+>> rem(-5, 2)
+ans =
+   -1
+```
+
 **Precision loss on conversion (p.24)**
+```matlab
+>> x=uint8(255)
+x =
+  uint8
+   255
+>> y=int8(x)
+y =
+  int8
+   127
+```
+
+`int16(43)` converts the double `43` into a 16-bit integer. Converting unsigned types to signed types can easily lose precision or exceed the range. (Search MATLAB help for "trigonometry" to see the full list of available trig functions.)
 
 ### 2.6 Strings & Character Arrays
+(p.24) A **string** holds text and can contain any valid character (`"123456"`, `"< <= > >="`, etc.). An **array** is a collection of data all of the same type, each item accessible by index. Consider the phrase "Carpe diem." stored as a character array:
+
+| Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Character | C | a | r | p | e | (space) | d | i | e | m | . |
+
+This is a 1×11 one-dimensional array of characters.
+
+```matlab
+>> st='Carpe diem.'
+st =
+    'Carpe diem.'
+>> size(st)
+ans =
+    1   11
+>> length(st)
+ans =
+   11
+>> st(4)
+ans =
+    'p'
+>> st(4)='9'
+st =
+    'Car9e diem.'
+>> st(4)=33
+st =
+    'Car!e diem.'
+```
+
+`size()` reports the array's dimensions (1×11); `length()` reports the number of elements (11). `st(4)` accesses a specific element. Setting `st(4) = 33` overwrites that element with the character whose ASCII code is 33 (`!`) — all elements of a character-array variable must share the same type, so numeric values are interpreted as ASCII codes.
+
 **Character arrays vs. string arrays (p.26)**
+Character arrays use single quotes (`'the'`); string arrays use double quotes (`"the"`), producing a 1×1 array containing one string. A character array is a 1×length array of individual characters; a string array is a 1×1 array containing a single string.
+
+```matlab
+>> clc
+>> sc='This is a character array'
+sc =
+    'This is a character array'
+>> st="This is a string array"
+st =
+    "This is a string array"
+>> class(sc)
+ans =
+    'char'
+>> class(st)
+ans =
+    'string'
+>> size(sc)
+ans =
+    1   25
+>> length(sc)
+ans =
+   25
+>> size(st)
+ans =
+    1    1
+>> length(st)
+ans =
+    1
+>> sc(1)
+ans =
+    'T'
+>> st(1)
+ans =
+    "This is a string array"
+>> sc(2)='H';
+>> sc
+sc =
+    'THis is a character array'
+>> st(2)="And this is the second dtring in the array";
+>> st
+st =
+  1x2 string array
+    Column 1
+      "This is a string array"
+    Column 2
+      "And this is the second dtr..."
+```
+
 **Character/string test functions (p.27-28)**
+```matlab
+>> charArray='This is a character array.'
+>> stringArray="This is a string array."
+>> ischar(charArray)
+ans =
+  logical
+   1
+>> ischar(stringArray)
+ans =
+  logical
+   0
+>> isstring(stringArray)
+ans =
+  logical
+   1
+>> isletter(charArray)
+ans =
+  1x26 logical array
+  Columns 1 through 14
+   1 1 1 1 0 1 0 1 0 1 1 1 1 1
+  Columns 15 through 26
+   1 1 1 1 0 1 1 1 1 0
+>> isspace(charArray)
+ans =
+  1x26 logical array
+  Columns 1 through 14
+   0 0 0 0 1 0 0 1 0 0 0 0 0 0
+  Columns 15 through 26
+   0 0 0 0 1 0 0 0 0 0
+>> upper(stringArray)
+ans =
+    "THIS IS A STRING ARRAY."
+>> stringArray=upper(stringArray)
+stringArray =
+    "THIS IS A STRING ARRAY."
+```
+
+Search "Characters and Strings" in MATLAB help for the full function list.
+
 **Comparing strings — `strcmp` (p.28)**
+Whenever you want to compare two strings, use `strcmp(a, b)`.
+
+```matlab
+>> text1='Four score an seven years ago'
+>> text2='87 years ago'
+>> text3='Four score and seven years ago'
+>> strcmp(text1, text2)
+ans =
+  logical
+   0
+>> strcmp(text1, text3)
+ans =
+  logical
+   1
+>> text1==text3
+ans =
+  1x30 logical array
+  Columns 1 through 14
+   1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  Columns 15 through 28
+   1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  Columns 29 through 30
+   1 1
+```
+
 **Finding & modifying substrings (p.28-29)**
+```matlab
+>> contains(text1, 'seven')
+ans =
+  logical
+   1
+>> strfind(text1, 'seven')
+ans =
+   16
+>> insertBefore(text1, strfind(text1, 'seven'), 'fifty-')
+ans =
+    'Four score and fifty-seven years ago'
+```
+
+`contains` tells you the substring `'seven'` is present; `strfind` reports where (the `'s'` of "seven" is at index 16). `insertBefore` shows a function used as a value within another function — when parentheses are nested, MATLAB highlights the matching open parenthesis to help track them.
+
 **Type coercion (p.29-30)**
+```matlab
+>> x=3
+>> class(x)
+ans =
+    'double'
+>> x='I am some text'
+>> class(x)
+ans =
+    'char'
+```
+
+A variable becomes the type of whatever is assigned to it, regardless of its previous type.
+
+```matlab
+>> x=3
+>> y=single(5)
+>> z=x+y
+>> class(z)
+ans =
+    'single'
+>> x=int16(5)+int8(3)
+Error using  +
+Integers can only be combined with
+integers of the same class, or scalar
+doubles.
+```
+
+Integer types can't be freely mixed with each other — only with same-class integers or scalar doubles; this restriction doesn't apply to floating-point types.
+
+```matlab
+>> x=3
+>> y='I am a string'
+>> z=x+y
+z =
+  Columns 1 through 7
+   76  35  100  112  35  100  35
+  Columns 8 through 13
+   118  119  117  108  113  106
+>> class(z)
+ans =
+    'double'
+>> char(z)
+ans =
+    'L#dp#d#vwulqj'
+```
+
+MATLAB treated the string as a character array, added 3 to each character's ASCII value, and returned a numeric array of those values. `char(z)` casts the array back to a character-array string based on the (shifted) ASCII values.
 
 ### 2.7 Importing Data (VCF Files)
+
 **Definition of VCF**
 **Steps to Import Data (p.32-34)**
 **Sorting imported data (p.34)**
-
 
 ## SDC Chapter 2 — Exercises
 
