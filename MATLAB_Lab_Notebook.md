@@ -1120,19 +1120,280 @@ MATLAB treated the string as a character array, added 3 to each character's ASCI
 
 ### 2.7 Importing Data (VCF Files)
 
-**Definition of VCF**
+(p.31) A **Variant Call Format (VCF)** file contains information about positions in the genome and genotype information for each sample. It's a text file with a header section followed by this required data per line:
+
+| Field | Description |
+|---|---|
+| `CHROM` | Chromosome number. (Course dataset only has chromosome 22 data.) |
+| `POS` | Position — location of the gene on the chromosome (range ~1 to 1.2 million; no decimal portion) |
+| `ID` | dbSNP identifier(s); `.` if none available (string, no whitespace/semicolons) |
+| `REF` | Reference base(s) — one of A, C, G, T, or N (not case-sensitive; more than one letter allowed; string) |
+| `ALT` | Alternate base(s) — A, C, G, T, N, or `*` (missing due to upstream deletion) |
+| `QUAL` | Quality score (Phred-scale); course dataset uses 100 throughout |
+| `FILTER` | Filter status; `"PASS"` indicates a passing quality score |
+| `INFO` | Additional info keys, e.g. AA (ancestral allele), AC (allele count), AF (allele frequency) |
+
 **Steps to Import Data (p.32-34)**
+
+1. Use the **Import Data** tool from the Home tab of the ribbon.
+2. Change the file filter to **All Files (\*.\*)** to show the `.vcf` file.
+3. Set **Text Type** to **String Array**. *(Note: this setting wasn't found in the Import Data window during this exercise.)*
+4. Leave the **Output Type** as **Table**.
+5. Data has delimiters (tabs), so leave the option set to **Tab delimited**. *(Note: this setting also wasn't located.)*
+6. Choose a row for the **Variable Names** (or double-click the header to set names after importing), and select the data **Range** from the same menu.
+7. Click **Import Selection** to add the data to the Workspace; double-click it there to open.
+
 **Sorting imported data (p.34)**
+
+To sort the data by `'ID'` (or any column):
+
+```matlab
+>> tblIDs=sortrows(ChromeExport2, 'ID')
+tblIDs =
+  36x9 table
+  CHROM     POS         ID          REF   ALT   QUAL   FILTER
+  -----   --------   -------------   ---   ---   ----   ------
+    22    16050678   "rs139377059"    C     T     100    PASS
+    22    16050984   "rs188945759"    C     G     100    PASS
+    22    16050922   "rs367963583"    T     G     100    PASS
+    22    16050627   "rs587593704"    G     T     100    PASS
+    22    16050840   "rs587616822"    C     G     100    PASS
+```
+
+The new variable `tblIDs` appears in the Workspace alongside `ChromeExport2`. The sorted data was saved to the `datafiles-matlab` folder as `Chrome22data.mat`.
+
+---
 
 ## SDC Chapter 2 — Exercises
 
 *(p.36-38) Exercises 2.1 – 2.8*
 
 ### 2.1
+
+Based on operator precedence, predict the result without using MATLAB:
+
+**5 + 2 \* 8 / 2 − (3 \* 2 + 10) / -1**
+
+Work the parentheses first (multiplication before addition inside): `3*2+10 = 16`. Then left-to-right multiplication/division: `5 + 8 − (-16)`. Finally addition/subtraction left to right: **29**.
+
+```matlab
+>> 5+2*8/2-(3*2+10)/-1
+ans =
+   29
+```
+Yes, the answers agree.
+
 ### 2.2
+
+Predict the value of `z`:
+```matlab
+>> x=1
+>> y=5
+>> z=~(x<y||~(y<x)&&islogical(x))
+```
+
+The `&&` operation happens before `||` (order of operations). To evaluate `&&`, first compute `~(y<x)`, which is `1`. `islogical(x)` is `0`, so `1 && 0 = 0`. Then `1 || 0 = 1`, and `~(1) = 0`. Expected: **0**.
+
+```matlab
+>> x=1
+x =
+    1
+>> y=5
+y =
+    5
+>> z=~(x<y||~(y<x)&&islogical(x))
+z =
+  logical
+   0
+```
+Yes, the answers agree.
+
 ### 2.3
+
+Predict both the value and data type of `x`:
+
+**x = 55 + uint32(-22) + pi**
+
+`uint32` is unsigned and starts at 0, so the closest value it can represent for -22 is 0. Then `55 + 0 + pi = 58.14159…`, and the result should take on type `uint32`.
+
+```matlab
+>> x=55+uint32(-22)+pi
+x =
+  uint32
+   58
+```
+The answers are slightly different — MATLAB displays just the whole number (`58`) rather than `58.14159…`. This demonstrates that variable types follow strict rules, and misunderstanding them can silently produce unexpected results (the integer type truncates/rounds the floating-point result).
+
 ### 2.4
+
+Predict the value of each:
+```matlab
+>> int8(ceil(127.1))
+>> int8(floor(127.9))
+>> int8(fix(127.5))
+>> int8(round(127.7))
+>> int8(ceil(rem(-528.6,200)))
+```
+
+Predicted, in order: **127, 127, 127, 127, -128**
+
+```matlab
+>> int8(ceil(127.1))
+ans =
+  int8
+   127
+>> int8(floor(127.9))
+ans =
+  int8
+   127
+>> int8(fix(127.5))
+ans =
+  int8
+   127
+>> int8(round(127.7))
+ans =
+  int8
+   127
+>> int8(ceil(rem(-528.6,200)))
+ans =
+  int8
+   -128
+```
+Yes, the numbers match.
+
 ### 2.5
+
+Predict what you'd expect to see (generally, not precisely) from the last two lines:
+```matlab
+>> x='small kittens'
+>> y="small kittens"
+>> 3+x
+>> 3+y
+```
+
+For `3+x`: a bunch of numbers — the ASCII codes of each letter, each shifted by 3. For `3+y`: it might just prepend the `3` to the string.
+
+```matlab
+>> x='small kittens'
+x =
+    'small kittens'
+>> y="small kittens"
+y =
+    "small kittens"
+>> 3+x
+ans =
+  Columns 1 through 8
+   118  112  100  111  111   35  110  108
+  Columns 9 through 13
+   119  119  104  113  118
+>> 3+y
+ans =
+    "3small kittens"
+```
+
 ### 2.6
+
+Data type likely used to store each kind of information, with brief reasoning:
+
+| Item | Likely data type | Reasoning |
+|---|---|---|
+| a. Data table | **Table** | Makes it easier to sort through |
+| b. Numeric measurements | **Numeric** | So calculations can be performed on the data |
+| c. Seating chart (rows & seats per row) | **Character array** | Because of both rows and number of seats in each row |
+| d. Non-numeric categories | **Categorical array** | Because the data is non-numeric |
+| e. Sentences | **String array** | To hold every word in a string |
+| f. List of separate entries | **String array** | So each entry will be its own string |
+| g. True/false data | **Numeric** (logical) | True and false can be represented by 1 and 0 |
+| h. Non-numeric categories | **Categorical array** | Because it's non-numeric data |
+
 ### 2.7
+
+Carpet costs $1.69/ft², sold on a roll 12 ft wide. For each room, calculate the cost and percentage of wasted carpet:
+
+```matlab
+>> (((12*8)-(8*11))/(12*8))*100
+ans =
+    8.3333
+>> 12*8*1.69
+ans =
+   162.2400
+
+>> (((12*12)-(14*9))/(12*12))*100
+ans =
+   12.5000
+>> 12*12*1.69
+ans =
+   243.3600
+
+>> 144*102
+ans =
+   14688
+>> 14688/144
+ans =
+   102
+>> 102*1.69
+ans =
+   172.3800
+
+>> (((12*20)-(18*13))/(12*20))*100
+ans =
+    2.5000
+>> 12*20*1.69
+ans =
+   405.6000
+```
+
+| Room | Dimensions | Cost | Waste |
+|---|---|---|---|
+| a. | 8' × 11' | **$162.24** | **8.3%** |
+| b. | 14' × 9' | **$243.36** | **12.5%** |
+| c. | 12' × 8'-6" | **$172.38** | **0%** |
+| d. | 18' × 13' | **$405.60** | **2.5%** |
+
 ### 2.8
+
+The Great Pacific Garbage Patch (GPGP) — a zone of plastic debris between California and Hawaii — is estimated at 79,000 tons of plastic across 1.6 million km². 75% of the mass is from pieces larger than 5 cm; microplastics account for 8% of the mass but 94% of the estimated 1.8 trillion pieces. Estimate:
+
+**a. Average weight of a piece of plastic debris:**
+```matlab
+>> m_grams=79000*1000000
+m_grams =
+   7.9000e+10
+>> avg_m_grams=(m_grams)/(1.8*10^12)
+avg_m_grams =
+    0.0439
+```
+
+**b. Average number of pieces per square mile:**
+```matlab
+>> (0.621371)^2
+ans =
+    0.3861
+>> A_sqmi=(1.6*10^6)*(0.3861)
+A_sqmi =
+   617760
+>> piece_sqmi=(1.8*10^12)/(A_sqmi)
+piece_sqmi =
+   2.9138e+06
+```
+
+**c. Volume in cubic yards if condensed into one solid mass (density 1.20 g/cm³):**
+```matlab
+>> m_grams=79000*1000000
+m_grams =
+   7.9000e+10
+>> V_cm3=(m_grams)/(1.20)
+V_cm3 =
+   6.5833e+10
+>> (91.44)^3
+ans =
+   7.6455e+05
+>> V_yd3=(V_cm3)/(ans)
+V_yd3 =
+   8.6107e+04
+```
+
+**Answers:**
+- a. **0.0439 grams**
+- b. **2.9138 × 10⁶ pieces per square mile**
+- c. **8.6107 × 10⁴ cubic yards**
