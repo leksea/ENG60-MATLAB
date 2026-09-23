@@ -24,7 +24,10 @@
   - [2.5 Numerical Functions & Rounding](#25-numerical-functions--rounding)
   - [2.6 Strings & Character Arrays](#26-strings--character-arrays)
   - [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files)
-- [SDC Chapter 2 — Exercises](#sdc-chapter-2--exercises) 
+- [SDC Chapter 2 — Exercises](#sdc-chapter-2--exercises)
+- [Home Loan Assignment](#home-loan-assignment) 
+- [SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables](#sdc-chapter-3-arrays-structures-tables)
+ 
 ---
 
 ## Lesson 1 Slides: About MATLAB
@@ -1397,3 +1400,11 @@ V_yd3 =
 - a. **0.0439 grams**
 - b. **2.9138 × 10⁶ pieces per square mile**
 - c. **8.6107 × 10⁴ cubic yards**
+
+## Home Loan Assignment
+
+This week you will do some Engineering Economic Analysis and see how computers iterate their formulas to derive answers.  This starts with understanding the time value of money.  You will choose and compare a home with a 30 and 15-year loan to observe the difference in the exercise Home Loan.  I've done a sample, but you will choose your own price and interest and write over my results to get the results for your home.  Answer the questions in the boxes provided and place into your notebook. 
+
+![Table data](media/housing_assignment.png)
+
+## SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables
