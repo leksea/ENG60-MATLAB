@@ -1408,3 +1408,482 @@ This week you will do some Engineering Economic Analysis and see how computers i
 ![Table data](media/housing_assignment.png)
 
 ## SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables
+
+### Objectives:
+
+1. Understand what constitutes an array.
+2. Access array elements using indexes.
+3. Explain the difference between an array, matrix, vector, and scalar.
+4. Define a series of numbers using the colon (`:`) operator.
+5. Access selected array elements in multiple dimensions using the colon (`:`) operator and the `end` keyword.
+6. Explain the difference between an array and a cell array.
+7. Use the MATLAB Variables window to examine and modify array and structure elements.
+8. Create a structure and add and modify its fields.
+9. Work with an array of structures.
+10. Create a table from various data sources.
+11. Extract a sub-table.
+12. Convert a table to a structure and back again.
+
+### Summary of functions used in this chapter
+
+### Type & Shape Checks
+| Function | Purpose | Example |
+|---|---|---|
+| `class` | Returns a variable's data type | `class(aVector)` → `double` |
+| `size` | Returns the dimensions (rows, then columns) | `size(string1)` → `1 18` |
+| `length` | Returns the size of the largest dimension | `length(1:5)` → `5` |
+| `ndims` | Returns the number of dimensions | `ndims(randi(15,4,5,2))` → `3` |
+| `numel` | Returns the total number of elements | `numel(magic(4))` → `16` |
+| `isscalar` | Is it 1×1? | `isscalar(57)` → `1` |
+| `isvector` | Is it 1×n or n×1? | `isvector(1:5)` → `1` |
+| `ismatrix` | Is it 2-D? | `ismatrix(57)` → `1` |
+| `isrow` | Is it a row vector? | `isrow(1:5)` → `1` |
+| `iscolumn` | Is it a column vector? | `iscolumn((1:5)')` → `1` |
+| `isempty` | Does it have no elements? | `isempty([])` → `1` |
+
+### Array Creation
+| Function | Purpose | Example |
+|---|---|---|
+| `zeros` | Array of all 0s | `zeros(3)` |
+| `ones` | Array of all 1s | `ones(10, 4)` |
+| `rand` | Random floats between 0 and 1 | `rand(3)` |
+| `randi` | Random integers from 1 to imax | `randi(10, 4)` |
+| `true` / `false` | Logical 1s / 0s | `true(2, 3)` |
+| `diag` | Diagonal matrix | `diag([1 2 3])` |
+| `magic` | n×n matrix with equal row and column sums | `magic(5)` |
+| `int16` | Converts to a 16-bit integer | `int16(345)` |
+
+### Concatenation
+| Function | Purpose | Example |
+|---|---|---|
+| `cat` | Joins arrays along a chosen dimension | `cat(1, A, B)` |
+| `horzcat` | Joins side by side (needs the same number of rows) | `horzcat(A, B)` |
+| `vertcat` | Stacks top to bottom (needs the same number of columns) | `vertcat(A, B)` |
+
+### Strings & Math
+| Function | Purpose | Example |
+|---|---|---|
+| `strcmp` | Is the whole text equal? Returns a single 1/0 | `strcmp(string1, 'b')` → `0` |
+| `sum` | Adds up elements (column-wise for a matrix) | `sum(M(:))` |
+| `cos` | Cosine (input in radians) | `cos(45)` |
+
+### Cell Arrays
+| Function | Purpose | Example |
+|---|---|---|
+| `cell` | Creates a cell array of empty `[]` cells | `cell(4, 5)` |
+| `iscell` | Is it a cell array? | `iscell(b)` → `1` |
+| `cell2mat` | Cell array → matrix (all cells must be the same type) | `cell2mat({1, 2; 3, 4})` |
+| `cell2struct` | Cell array → structure | `cell2struct(c, fields, 2)` |
+| `cell2table` | Cell array → table | `cell2table(c)` |
+
+### Structures
+| Function | Purpose | Example |
+|---|---|---|
+| `struct` | Creates a structure (empty, or from name/value pairs) | `struct('name', "Ludwig", 'age', 20)` |
+| `fieldnames` | Cell array of the field names | `fieldnames(rocket)` |
+| `rmfield` | Removes a field (from every element of a struct array) | `rocket = rmfield(rocket, 'stages')` |
+| `struct2cell` | Structure → cell array | `struct2cell(person)` |
+| `struct2table` | Structure → table | `struct2table(s, 'RowNames', rowNames)` |
+
+### Tables
+| Function | Purpose | Example |
+|---|---|---|
+| `table` | Creates a table from variables | `table(diameter, rings, 'RowNames', planets)` |
+| `summary` | Shows the metadata plus min/median/max of each variable | `summary(planetary_data)` |
+| `table2array` | Table → array (data must be all one type) | `table2array(T(:, 1:3))` |
+| `table2cell` | Table → cell array | `table2cell(T)` |
+| `table2struct` | Table → structure | `table2struct(planetary_data)` |
+| `table2timetable` | Table → timetable | `table2timetable(T)` |
+| `array2table` | Array → table | `array2table(magic(3))` |
+| `timetable2table` | Timetable → table | `timetable2table(TT)` |
+
+### Workspace & Display (commands)
+| Command | Purpose | Example |
+|---|---|---|
+| `clear` | Removes all variables from the workspace | `clear` |
+| `format` | Sets how many digits are displayed | `format long`, `format short` |
+
+### Arrays
+
+A **complex data type** holds a collection of values rather than a single one. In MATLAB the core one is the **array**: a collection of one data type, where each value is an **element** reached by an **index** in parentheses — `(row, column, page, ...)`.
+
+| Term | Shape | Example |
+|---|---|---|
+| Array | any number of dimensions | `randi(15,4,5,2)` |
+| Matrix | 2-D (rows × columns) | `magic(4)` |
+| Vector | 1 × n (row) or n × 1 (column) | `1:5`, a char array |
+| Scalar | 1 × 1 | `57`, an `int32` value |
+
+These nest: every scalar is also a vector, a matrix, and an array.
+
+```matlab
+>> isscalar(57)
+ans =
+  logical
+   1
+>> isvector(57)
+ans =
+  logical
+   1
+>> ismatrix(57)
+ans =
+  logical
+   1
+```
+**Key idea:** to MATLAB, almost everything is a matrix.
+
+Because of this hierarchy, any array can be passed to a function written for its own type or for any broader type. For example, `57` works in functions that expect scalars, vectors, matrices, or arrays.
+
+Arrays can have any number of dimensions.
+
+**Indexing is 1-based.** The first element is `(1)` or `(1,1)`, not `(0,0)` as in C++, Java, or Python.
+
+### Growing Arrays
+
+If you assign to an index beyond the current size, the array expands. Arrays must stay rectangular, so every new filler element is set to `0`.
+
+**Example of array growth 
+
+```matlab
+A =
+    10     9
+     5     2
+>> A(4,3) = 54
+A =
+    10     9     0
+     5     2     0
+     0     0     0
+     0     0    54
+```
+### Creating Arrays
+
+Assigning a value to an element in a non-existent array creates that array with the new value in the lower right corner.
+
+**Example of new array assignement 
+
+```matlab
+
+>> A(3,4) = 16
+A =
+     0     0     0     0
+     0     0     0     0
+     0     0     0    16
+```
+### The Empty Array
+`[]` is an array with no elements. Operations return it when there's no answer, and it is also a common way to initialize an array.Test using  `isempty` function.
+
+```matlab
+>> A = []
+A =
+     []
+>> size(A)
+ans =
+     0     0
+>> isempty(A)
+ans =
+  logical
+   1
+```
+
+### Matrix Basics
+
+A matrix is a two-dimensional grid of values, indexed in rows and columns.
+**In MATLAB, array indexes are 1-based, which means that the first item is (1), (1,1), (1,1,1), etc.
+
+Example: tic-tac-toe game:
+```text
+        (1,1) (1,2) (1,3)
+(1,1)     X  |  X  |  O
+        -----+-----+-----
+(2,1)     O  |  O  |  X
+        -----+-----+-----
+(3,1)     X  |  O  |  X
+```
+
+*Note:** Single quotes produce a character array, while double quotes produce a string array.
+
+```matlab
+aScalar = int16(345);
+string1 = 'To be or not to be';
+string2 = "that is the question";
+aVector = 1:5;
+class(aScalar)
+class(string1)
+class(string2)
+class(aVector)
+
+ans =
+    'int16'
+ans =
+    'char'
+ans =
+    'string'
+ans =
+    'double'
+```
+
+
+The variable *aScalar*, a single number of type int16, is considered by MATLAB as a matrix with one row and one column (ans = 1 1), which is to say a scalar. The vector *aVector* (ans = 1 5) is a matrix of one row and five columns, each of which contains a single number.
+Note how *string1* is an array of characters and *string2* is interpreted as a single string.
+
+```matlab
+
+size(aScalar)
+size(string1)
+size(string2)
+size(aVector)
+ans =
+
+     1     1
+
+
+ans =
+
+     1    18
+
+
+ans =
+
+     1     1
+
+
+ans =
+
+     1     5
+```
+### Strings as Matrices
+
+The character array string is a matrix of one row and many columns, each of which contains a single letter. 
+The string array is a matrix of one row and one column: a single element that contains the entire string. 
+
+Eaxmple:
+
+```matlab
+string2 == 'b'
+strcmp(string2, 'b')
+string1 == 'b'
+strcmp(string1, 'b')
+
+ans =
+
+  logical
+
+   0
+
+
+ans =
+
+  logical
+
+   0
+
+
+ans =
+
+  1×18 logical array
+
+   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0
+
+
+ans =
+
+  logical
+
+   0
+
+```
+
+The `==` operator and the `strcmp()` function give the same result for string array *string2*. They give very different results for the character array *string1*: == is being compared elemntwise and `strcmp()` compares by value. 
+
+| | `==` | `strcmp()` |
+|---|---|---|
+| **Char array** `'...'` | Compares character by character and gives a logical array the same length as the text. Both sides must be the same length, or one side a single character. | Compares the whole text and gives a single `1` or `0` |
+| `string1 == 'b'` / `strcmp(string1,'b')` | 1×18 logical, with `1` at positions 4 and 17 | `0` |
+| `'abc' == 'abd'` / `strcmp('abc','abd')` | `[1 1 0]` | `0` |
+| `'abc' == 'ab'` / `strcmp('abc','ab')` | **Error**, because the lengths don't match | `0` |
+| **String array** `"..."` | Compares the whole text and gives a single `1` or `0` | Compares the whole text and gives a single `1` or `0` |
+| `string2 == 'b'` / `strcmp(string2,'b')` | `0` | `0` |
+| `"abc" == "abc"` / `strcmp("abc","abc")` | `1` | `1` |
+
+### The (:) Colon Operator
+
+The colon operator is used to specify an evenly spaced series of numbers in a conveniently terse manner.
+```text
+first number : step amount : limit
+```
+
+The *first number* is the starting number in the series.
+
+The *step amount* is the numerical distance between each number in the series that can be negative if *limit >= first number*. 
+The step amount is optional, he default step amount is 1.
+
+The *limit* is the maximum number that can be found in the series (or the minimum if the step amount is negative). The step amount can cause this number to be exceeded but not hit precisely, so it might not be included in the resulting series. 
+
+```matlab
+1:5
+1:2:5
+1:2:6
+ans =
+
+     1     2     3     4     5
+
+
+ans =
+
+     1     3     5
+
+
+ans =
+
+     1     3     5
+
+```
+The colon operator has four main uses:
+
+| Use | Example |
+|---|---|
+| Build a vector | `v = 1:2.5:100` |
+| Select an index range | `M(1:3)`, `M(1:3, 2:4)` |
+| Mean "all of this dimension" | `M(:, 4)` |
+| Flatten into one column | `M(:)` |
+
+Example:
+
+```matlab
+V = 1:5
+M = randi(10, 4)
+A = randi(15, 4, 5, 2)
+V =
+
+     1     2     3     4     5
+
+
+M =
+
+     9     7    10    10
+    10     1    10     5
+     2     3     2     9
+    10     6    10     2
+
+
+A(:,:,1) =
+
+     7    10    11    10     5
+    14     1    12     3     1
+    12    13    12    11     2
+    15    15     6     1    13
+
+
+A(:,:,2) =
+
+    11     7     3    11    10
+     5     6     8    12     3
+    15    12     7     5     2
+     1    12    10    11     8
+
+```
+Example slicing:
+
+```matlab
+sub = V(3:5)
+sub =
+
+     3     4     5
+```
+The command asks for the element in row 2, column 4 of matrix M and returned a floating-point number:
+```matlab
+M(2, 4)
+ans =
+
+     5
+```
+That command asks for columns 1 and 2 from row 1 and row 2 of M and returned a 2 x 2 matrix. The row is specified first and the column second, as in *M(row, column)*.
+
+```matlab
+M(1:2, 1:2)
+ans =
+
+     9     7
+    10     1
+
+```
+This command selects all elemnts in colkn 1. Putting a colon in place of any array dimension tells MATLAB to get the full range of that dimension – in this case all rows. It is equivalent to `1:end`.
+```matlab
+M(1:4, 1)
+M(:, 1)
+ans =
+
+     9
+    10
+     2
+    10
+
+
+ans =
+
+     9
+    10
+     2
+    10
+```
+This command creates a new matrix `A2` made up of every other row of every other column in an existing array `A1`.
+```matlab
+A1 = randi(15, 8, 10)
+A2 = A1(1:2:8, 1:2:10)
+A1 =
+
+    15    14    13     6     6     9     3     4     2     4
+     6    15     4    13     9     8    10    14    15    13
+     9     9    14     9     2     1     4     3     1     7
+     4     3     6     9     1     6    10    13    12    14
+    12     3     3    14     8     3    11     9    13     3
+     4     4     4     5    12    12    12    15    14     4
+     8    13    10    12    15     5     7     2     2     3
+    11     4     8    12     2     8     2     7     6     3
+
+
+A2 =
+
+    15    13     6     3     2
+     9    14     2     4     1
+    12     3     8    11    13
+     8    10    15     7     2
+```
+
+```matlab
+A2 = A1(1:2:8, :)
+A3 = A2(:, 1:2:10)
+
+A2 =
+
+    15    14    13     6     6     9     3     4     2     4
+     9     9    14     9     2     1     4     3     1     7
+    12     3     3    14     8     3    11     9    13     3
+     8    13    10    12    15     5     7     2     2     3
+
+
+A3 =
+
+    15    13     6     3     2
+     9    14     2     4     1
+    12     3     8    11    13
+     8    10    15     7     2
+```
+
+The colon-specified ranges can also be placed on the left side of an equation to allow you to assign a new value to only those selected array elements.
+
+```matlab
+A1(1:2:8, 1:2:10) = 0
+1 =
+
+     0    14     0     6     0     9     0     4     0     4
+     6    15     4    13     9     8    10    14    15    13
+     0     9     0     9     0     1     0     3     0     7
+     4     3     6     9     1     6    10    13    12    14
+     0     3     0    14     0     3     0     9     0     3
+     4     4     4     5    12    12    12    15    14     4
+     0    13     0    12     0     5     0     2     0     3
+    11     4     8    12     2     8     2     7     6     3
+```
+
+
