@@ -55,6 +55,19 @@
   - [4.10 Exiting a Loop](#410-exiting-a-loop)
   - [4.11 Stopping an Infinite Loop](#411-stopping-an-infinite-loop)
 - [SDC Chapter 4 — Exercises](#sdc-chapter-4--exercises)
+- [SDC Chapter 5 — Matrices](#sdc-chapter-5--matrices)
+  - [5.1 What Is a Matrix?](#51-what-is-a-matrix)
+  - [5.2 Special Matrices: Diagonal, Identity, Magic](#52-special-matrices-diagonal-identity-magic)
+  - [5.3 Creating Test Matrices & Random Numbers](#53-creating-test-matrices--random-numbers)
+  - [5.4 Array Math: Addition & Subtraction](#54-array-math-addition--subtraction)
+  - [5.5 Element-wise (Dot) Operators](#55-element-wise-dot-operators)
+  - [5.6 Scalar Math Operations](#56-scalar-math-operations)
+  - [5.7 Transposition](#57-transposition)
+  - [5.8 Powers & Logical Operations](#58-powers--logical-operations)
+  - [5.9 Matrix Multiplication](#59-matrix-multiplication)
+  - [5.10 Matrix Division & Inverse Matrices](#510-matrix-division--inverse-matrices)
+  - [5.11 Examples: Solving Linear Systems](#511-examples-solving-linear-systems)
+- [SDC Chapter 5 — Exercises](#sdc-chapter-5--exercises)
 
 ---
 
@@ -3022,7 +3035,7 @@ ans =
     Neptune         49244     {'No' }
 ```
 
-The new column's values go in a column (semicolons between them). The book separates them with commas instead, which makes a 1×8 row, and MATLAB rejects that because the table has 8 rows.
+Note: The new column's values go in a column (semicolons between them). The book separates them with commas instead, which makes a 1×8 row, and MATLAB rejects that because the table has 8 rows.
 
 ### 3.14 Table Conversion Functions
 
@@ -3534,9 +3547,6 @@ The sum is 1000001000000
 ```
 
 Loop ran 1,000,000 times in a blink. (Check: 2 + 4 + … + 2n = n(n + 1) → 10⁶ · (10⁶ + 1).)
-
-> **Book typo:** the text above Figure 4.6 prints `'The sum is %d/n'`. It must be `\n` (backslash), as in the figure, or you get a literal `/n`.
-
 ### 4.4 for Loops
 
 Loop **index** controls how many times the block runs; often also used as a variable inside.
@@ -4353,3 +4363,1015 @@ x =
 
 </details>
 
+## SDC Chapter 5 — Matrices
+
+### Objectives
+
+1. Explain the difference between an array, a matrix, a vector, and a scalar.
+2. Specify an array in MATLAB using brackets and semi-colons.
+3. Understand the concepts of a diagonal, identity, and magic matrix.
+4. Add, subtract, multiply, and divide a matrix by a scalar or vector.
+5. Raise the values in a matrix to a scalar power or a vector of powers.
+6. Use MATLAB functions to create test matrices.
+7. Seed a sequence of random numbers so that the sequence can be replicated.
+8. Recognize when two matrices meet the requirements for matrix multiplication.
+9. Perform a matrix multiplication manually.
+10. Have a rudimentary understanding of an inverse matrix and a matrix determinant.
+
+### Summary of functions used in this chapter
+
+| Function / operator | What it does | Example |
+|---|---|---|
+| `[a b; c d]` | build matrix; space/comma = next col, `;` = next row | `[1 2 3; 4 5 6]` |
+| `size(A)` | rows, cols | `size(A)` → `2 3` |
+| `diag(v)` | vector → diagonal matrix | `diag(1:4)` |
+| `diag(A)` | matrix → its diagonal as column | `diag(A)` |
+| `eye(n)` | n×n identity | `eye(4)` |
+| `magic(n)` | n×n, 1..n², equal row/col sums | `magic(5)` |
+| `rand(n)` / `rand(n,m)` | uniform floats 0–1 | `rand(3,5)` |
+| `randn(n)` / `randn(n,m)` | normal floats, mean 0 (±) | `randn(3,5)` |
+| `randi(max,n)` / `randi(max,n,m)` | ints 1..max | `randi(10,3,5)` |
+| `ones(n)` / `ones(n,m)` | all 1s | `ones(5)` |
+| `zeros(n)` / `zeros(n,m)` | all 0s | `zeros(2,3)` |
+| `rng(seed)` | seed RNG → repeatable "random" | `rng(0)` |
+| `+` `-` | element-wise add/sub (same size or scalar) | `A + B` |
+| `.*` `./` `.^` | element-wise mult/div/power | `A .* B` |
+| `*` | matrix multiplication (inner dims match) | `A * B` |
+| `/` | matrix "division" (`x = B/A` solves `x*A = B`) | `B / A` |
+| `'` | transpose + complex conjugate | `A'` |
+| `.'` | transpose only | `A.'` |
+| `transpose(A)` | same as `.'` | `transpose(A)` |
+| `<` `<=` `>` `>=` `==` `~=` | element-wise compare → logical matrix | `A <= 5` |
+| `det(A)` | determinant | `det(A)` |
+| `inv(A)` | inverse matrix | `inv(A)` |
+| `sqrt(-2)` | gives imaginary result | `sqrt(-2)` → `0 + 1.4142i` |
+| `format short` | 4 decimals display | `format short` |
+| `sum(A,dim)` | sum (1 = down cols, 2 = across rows) — exercises | `sum(D,2)` |
+
+### 5.1 What Is a Matrix?
+
+- MATLAB's big strength = matrices. **Linear algebra** = interaction/manipulation of matrices to solve problems. Used in engineering (circuits, robotics, signal processing), physics (QM), graphics (reflections, 3D→2D), photography (color correction).
+- **Matrix** = 2-D rectangular array, rows × columns.
+- **Vector** = 1 × N (row) or N × 1 (column).
+- **Scalar** = single value = 1 × 1 to MATLAB.
+
+$$\begin{bmatrix}1 & 2 & 3\\4 & 5 & 6\end{bmatrix}$$
+
+```matlab
+[1 2 3; 4 5 6]
+```
+
+- `;` = **row separator**. Every row must have the same number of elements.
+- **Square brackets → define** matrices. **Parentheses → use/index** them.
+- Always **row first, then column**.
+- Values in a row can be separated by commas or spaces: `[1,2,3; 4,5,6]` = `[1 2 3; 4 5 6]`.
+
+```matlab
+A = [1 2 3; 4 5 6]
+size(A)
+
+A =
+
+     1     2     3
+     4     5     6
+
+
+ans =
+
+     2     3
+```
+
+2 rows, 3 cols → A is 2 × 3.
+
+### 5.2 Special Matrices: Diagonal, Identity, Magic
+
+**Diagonal matrix** → square; values on the diagonal (upper-left → lower-right), 0 everywhere else.
+
+```matlab
+V = [1:4];
+A = diag(V)
+
+A =
+
+     1     0     0     0
+     0     2     0     0
+     0     0     3     0
+     0     0     0     4
+```
+
+`diag` on a matrix → pulls the diagonal out as a vector:
+
+```matlab
+X = diag(A)
+
+X =
+
+     1
+     2
+     3
+     4
+```
+
+**Identity matrix** → diagonal of 1s, rest 0. Matrix version of the number 1: `A * I = A`.
+
+```matlab
+eye(4)
+
+ans =
+
+     1     0     0     0
+     0     1     0     0
+     0     0     1     0
+     0     0     0     1
+```
+
+**Magic matrix** → N × N, integers 1 … N², every row and column sums to the same value.
+
+```matlab
+magic(5)
+
+ans =
+
+    17    24     1     8    15
+    23     5     7    14    16
+     4     6    13    20    22
+    10    12    19    21     3
+    11    18    25     2     9
+```
+
+One number N to a matrix-generation function → square N × N matrix.
+
+**Matrix math** = any math with at least one matrix:
+
+- add/subtract a scalar to each element
+- multiply/divide each element by a scalar
+- raise each element to a power
+- add/subtract same-size matrices
+- multiply/divide matrices → **two very different kinds** (array vs matrix)
+
+### 5.3 Creating Test Matrices & Random Numbers
+
+| Function | Creates |
+|---|---|
+| `magic(n)` | n × n, numbers 1 … n², equal row/col sums |
+| `eye(n)` | n × n zeros with diagonal of 1s |
+| `rand(n)` / `rand(n,m)` | random floats between 0 and 1 |
+| `randn(n)` / `randn(n,m)` | small random floats, mean 0 (neg + pos) |
+| `randi(max,n)` / `randi(max,n,m)` | random integers 1 … max |
+| `ones(n)` / `ones(n,m)` | all ones |
+| `zeros(n)` / `zeros(n,m)` | all zeros |
+
+**Random numbers** → no such thing as truly random on a computer. **Pseudo-random**: each number based on the one before; first one based on a **seed**. Same seed → same sequence.
+
+```matlab
+randi(10,1,10)
+randi(10,1,10)
+ans =
+
+     8     8     3     7     7     2     2     5    10     4
+
+
+ans =
+
+     6     3     8     3     6     7     9    10     6     2
+```
+
+(Press **↑** to repeat a command.) Two different outputs. Now seed it:
+
+```matlab
+rng(0)
+randi(10,1,10)
+rng(0)
+randi(10,1,10)
+
+ans =
+
+     9    10     2    10     7     1     3     6    10    10
+
+
+ans =
+
+     9    10     2    10     7     1     3     6    10    10
+```
+
+`rng(0)` resets the **random number generator** → same seed → same sequence. Useful for consistent test data. (`rng(0)` = `rng('default')`, the setting used in these notes.)
+
+### 5.4 Array Math: Addition & Subtraction
+
+**Array math** → element by element. Arrays must be **same dimensions** (or one is a scalar). Works on 3-D+ arrays too.
+
+**Matrix addition** → A(1,1) + B(1,1), A(1,2) + B(1,2), …
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}+\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a+h&b+i&c+j\\d+k&e+l&f+m\end{bmatrix}$$
+
+**Matrix subtraction** → same, but order counts: A − B ≠ B − A (not **commutative**).
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a-h&b-i&c-j\\d-k&e-l&f-m\end{bmatrix}$$
+
+```matlab
+rng('default')
+A = randi(10,3,5)
+B = randn(3,5);
+C = rand(3,5);
+D = [1 2 3; 4 5 6; 7 8 9]
+E = A + B + C;
+F = A - C;
+
+A =
+
+     9    10     3    10    10
+    10     7     6     2     5
+     2     1    10    10     9
+
+
+D =
+
+     1     2     3
+     4     5     6
+     7     8     9
+```
+
+`B`, `C`, `E`, `F` hold random decimals, so they're suppressed here. Now the size mismatch:
+
+```matlab
+G = A - D
+
+Arrays have incompatible sizes for this operation.
+```
+
+A is 3 × 5, D is 3 × 3.
+
+
+### 5.5 Element-wise (Dot) Operators
+
+As long as at least one dimension agrees, **array multiplication/division** works element by element. Three new operators:
+
+| Operator | Name |
+|---|---|
+| `.*` | element-wise multiplication |
+| `./` | element-wise division |
+| `.^` | element-wise power |
+
+- The `.` makes them element-wise, not matrix operators.
+- Same precedence as `*` `/` `^`.
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a h&b i&c j\\d k&e l&f m\end{bmatrix}$$
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a/h&b/i&c/j\\d/k&e/l&f/m\end{bmatrix}$$
+
+Agree in only one dimension (2 × 3 `.*` 1 × 3) → the row is applied to every row:
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*\begin{bmatrix}g&h&i\end{bmatrix}=\begin{bmatrix}a g&b h&c i\\d g&e h&f i\end{bmatrix}$$
+
+### 5.6 Scalar Math Operations
+
+Scalar in an array equation → applied to **every element**.
+
+$$n+\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}n+a&n+b&n+c\\n+d&n+e&n+f\end{bmatrix}$$
+
+```matlab
+A = ones(5)
+A + 6
+
+A =
+
+     1     1     1     1     1
+     1     1     1     1     1
+     1     1     1     1     1
+     1     1     1     1     1
+     1     1     1     1     1
+
+
+ans =
+
+     7     7     7     7     7
+     7     7     7     7     7
+     7     7     7     7     7
+     7     7     7     7     7
+     7     7     7     7     7
+```
+
+```matlab
+B = rand(1,3)
+x = 1
+B + x
+
+B =
+
+    0.4898    0.4456    0.6463
+
+
+x =
+
+     1
+
+
+ans =
+
+    1.4898    1.4456    1.6463
+```
+
+**Subtraction** → same, order counts:
+
+$$n-\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}n-a&n-b&n-c\\n-d&n-e&n-f\end{bmatrix}\qquad\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-n=\begin{bmatrix}a-n&b-n&c-n\\d-n&e-n&f-n\end{bmatrix}$$
+
+**Mult/div by scalar** → same result with or without the dot. Use the one that matches your intent.
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*n=\begin{bmatrix}a n&b n&c n\\d n&e n&f n\end{bmatrix}\qquad\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./n=\begin{bmatrix}a/n&b/n&c/n\\d/n&e/n&f/n\end{bmatrix}$$
+
+```matlab
+A = magic(3)
+n = 5
+A / n
+A ./ n
+n ./ A
+
+A =
+
+     8     1     6
+     3     5     7
+     4     9     2
+
+
+n =
+
+     5
+
+
+ans =
+
+    1.6000    0.2000    1.2000
+    0.6000    1.0000    1.4000
+    0.8000    1.8000    0.4000
+
+
+ans =
+
+    1.6000    0.2000    1.2000
+    0.6000    1.0000    1.4000
+    0.8000    1.8000    0.4000
+
+
+ans =
+
+    0.6250    5.0000    0.8333
+    1.6667    1.0000    0.7143
+    1.2500    0.5556    2.5000
+```
+
+```matlab
+n / A
+
+Error using  / 
+Matrix dimensions must agree.
+```
+
+(Newer MATLAB versions may word this error differently.)
+Array and matrix forms give the same result here, but don't assume it. Use the operator that says what you mean.
+
+**Under the hood:** MATLAB expands the scalar into an array of the same size, then does a normal array operation. That's why scalar `./` array works.
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./n=\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./\begin{bmatrix}n&n&n\\n&n&n\end{bmatrix}=\begin{bmatrix}a/n&b/n&c/n\\d/n&e/n&f/n\end{bmatrix}$$
+
+### 5.7 Transposition
+
+**Transpose** → rows ↔ columns. Row vector ↔ column vector.
+
+| Operator | Effect |
+|---|---|
+| `.'` | transpose; precedence just below parentheses |
+| `'` | transpose **+ complex conjugate** (flips sign of imaginary part) |
+| `transpose(A)` | same as `.'`, easier to see |
+
+No complex numbers → `'` and `.'` give the same result.
+
+$$A=\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}\qquad A'=\begin{bmatrix}a&d\\b&e\\c&f\end{bmatrix}$$
+
+```matlab
+A = [1:2:6; 3:5:15; 10:10:30]
+A'
+A.'
+
+A =
+
+     1     3     5
+     3     8    13
+    10    20    30
+
+
+ans =
+
+     1     3    10
+     3     8    20
+     5    13    30
+
+
+ans =
+
+     1     3    10
+     3     8    20
+     5    13    30
+```
+
+Colon-built rows must all be the same length, or you get "Dimensions of arrays being concatenated are not consistent." Matrix doesn't have to be square.
+
+**With an imaginary number** (`sqrt(-2)` → `1.4142i`; `i` = imaginary unit):
+
+```matlab
+format short
+A = [1 3 10; 3 sqrt(-2) 20; 5 13 30]
+A'
+A.'
+
+A =
+
+   1.0000 + 0.0000i   3.0000 + 0.0000i  10.0000 + 0.0000i
+   3.0000 + 0.0000i   0.0000 + 1.4142i  20.0000 + 0.0000i
+   5.0000 + 0.0000i  13.0000 + 0.0000i  30.0000 + 0.0000i
+
+
+ans =
+
+   1.0000 + 0.0000i   3.0000 + 0.0000i   5.0000 + 0.0000i
+   3.0000 + 0.0000i   0.0000 - 1.4142i  13.0000 + 0.0000i
+  10.0000 + 0.0000i  20.0000 + 0.0000i  30.0000 + 0.0000i
+
+
+ans =
+
+   1.0000 + 0.0000i   3.0000 + 0.0000i   5.0000 + 0.0000i
+   3.0000 + 0.0000i   0.0000 + 1.4142i  13.0000 + 0.0000i
+  10.0000 + 0.0000i  20.0000 + 0.0000i  30.0000 + 0.0000i
+```
+
+`'` → `-1.4142i`; `.'` → `+1.4142i`. Not the same operator!
+
+**Transpose in array multiplication:**
+
+```matlab
+A = [1:6; 3:8; 4:9]
+B = [2 4 6]
+
+A =
+
+     1     2     3     4     5     6
+     3     4     5     6     7     8
+     4     5     6     7     8     9
+
+
+B =
+
+     2     4     6
+```
+
+```matlab
+B .* A
+
+Arrays have incompatible sizes for this operation.
+```
+
+1 × 3 `.*` 3 × 6 → no match. Flip A → 6 × 3:
+
+```matlab
+B .* A'
+
+ans =
+
+     2    12    24
+     4    16    30
+     6    20    36
+     8    24    42
+    10    28    48
+    12    32    54
+```
+
+Each row of A' multiplied by matching element of B.
+
+### 5.8 Powers & Logical Operations
+
+**Power** → `.^`, same pattern as other element-wise ops:
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\,2=\begin{bmatrix}a^2&b^2&c^2\\d^2&e^2&f^2\end{bmatrix}$$
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\begin{bmatrix}r&s&t\end{bmatrix}=\begin{bmatrix}a^r&b^s&c^t\\d^r&e^s&f^t\end{bmatrix}\qquad\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\begin{bmatrix}r\\s\end{bmatrix}=\begin{bmatrix}a^r&b^r&c^r\\d^s&e^s&f^s\end{bmatrix}$$
+
+$$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\begin{bmatrix}g&h&i\\j&k&l\end{bmatrix}=\begin{bmatrix}a^g&b^h&c^i\\d^j&e^k&f^l\end{bmatrix}$$
+
+Scalar raised to an n × m matrix → n × m matrix:
+
+$$2\,.\hat{}\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}2^a&2^b&2^c\\2^d&2^e&2^f\end{bmatrix}$$
+
+In MATLAB these are `.^` — plain `^` is the matrix power (eigenvalue stuff, not covered).
+
+**Logical operations** (`<` `<=` `>` `>=` `==` `~=`) → element by element; n × m matrix in → n × m logical out.
+
+```matlab
+A = [1 2 3 4 5 6; 3 4 5 6 7 8; 4 5 6 7 8 9]
+B = A <= 5
+
+A =
+
+     1     2     3     4     5     6
+     3     4     5     6     7     8
+     4     5     6     7     8     9
+
+
+B =
+
+  3×6 logical array
+
+   1   1   1   1   1   0
+   1   1   1   0   0   0
+   1   1   0   0   0   0
+```
+
+Can compare:
+
+- two matrices of the same size
+- a matrix and a vector sharing one dimension
+- a matrix and a scalar
+
+The list also names `&&` and `||`. Those only work on scalars; element-wise AND/OR on matrices = `&` and `|`.
+
+### 5.9 Matrix Multiplication
+
+- No separate matrix versions of `+` / `-`.
+- Matrix `^` exists → linear algebra (eigenvalues/eigenvectors), not covered.
+- **Matrix `*` and `/` are very different from `.*` and `./`.**
+
+**Rule:** # columns in first = # rows in second. Result = combination of multiplication **and** addition. Real power of matrices → solve parallel equations simultaneously, model huge data sets.
+
+```text
+A * B   →   (3,5) (5,2)
+```
+
+- **Inner** dims match (5) → valid. Result size = **outer** dims → (3,2).
+- Not commutative: `B * A` → (5,2)(3,5), inner 2 ≠ 3 → error.
+
+For A (r,s) and B (t,u):
+
+- multiply only if **s = t**
+- result is **(r,u)**
+
+**General formula:**
+
+$$R(r,c)=\sum_x A(r,x)\,B(x,c)$$
+
+Element (r,c) of R = sum over x of A(row r, x) × B(x, col c) → row of A "dotted" with column of B.
+
+**Example:**
+
+$$A=\begin{bmatrix}a&b\\c&d\\e&f\end{bmatrix}\qquad B=\begin{bmatrix}g&h\\i&j\end{bmatrix}$$
+
+A cols (2) = B rows (2) → valid; R is (3,2). Picture B above, A to the left, R at the intersection:
+
+```text
+            B
+        [ g  h ]
+        [ i  j ]
+
+  A                 R
+[ a  b ]        [ R11  R12 ]
+[ c  d ]        [ R21  R22 ]
+[ e  f ]        [ R31  R32 ]
+```
+
+| Element | Value | Index form |
+|---|---|---|
+| R(1,1) | (a·g) + (b·i) | A(1,1)·B(1,1) + A(1,2)·B(2,1) |
+| R(1,2) | (a·h) + (b·j) | A(1,1)·B(1,2) + A(1,2)·B(2,2) |
+| R(2,1) | (c·g) + (d·i) | A(2,1)·B(1,1) + A(2,2)·B(2,1) |
+| R(2,2) | (c·h) + (d·j) | A(2,1)·B(1,2) + A(2,2)·B(2,2) |
+| R(3,1) | (e·g) + (f·i) | A(3,1)·B(1,1) + A(3,2)·B(2,1) |
+| R(3,2) | (e·h) + (f·j) | A(3,1)·B(1,2) + A(3,2)·B(2,2) |
+
+$$R=\begin{bmatrix}A_{11}B_{11}+A_{12}B_{21} & A_{11}B_{12}+A_{12}B_{22}\\A_{21}B_{11}+A_{22}B_{21} & A_{21}B_{12}+A_{22}B_{22}\\A_{31}B_{11}+A_{32}B_{21} & A_{31}B_{12}+A_{32}B_{22}\end{bmatrix}$$
+
+MATLAB does it in a few keystrokes — but know what it's doing. Very different from scalar × matrix, or element × matching element (that's `.*`).
+
+**Quick check with numbers:**
+
+```matlab
+A = [1 2; 3 4; 5 6];
+B = [7 8; 9 10];
+A * B
+
+ans =
+
+    25    28
+    57    64
+    89   100
+```
+
+R(1,1) = 1·7 + 2·9 = 25 ✓.
+
+### 5.10 Matrix Division & Inverse Matrices
+
+Technically no "matrix division". For `x = B/A`, MATLAB help says:
+
+- A scalar → `B/A` = `B./A`.
+- A square n × n, B has n columns → `x = B/A` solves `x*A = B` (if a solution exists).
+- A rectangular m × n (m ≠ n), B has n columns → least-squares solution of `x*A = B` (beyond scope).
+
+Middle case = the useful one → needs **inverse matrices**.
+
+$$A \cdot B = C \quad\Rightarrow\quad B = A^{-1} \cdot C$$
+
+Know A and C, want B → multiply by inverse of A (like 3 ÷ 4 = 3 × ¼, but order matters).
+
+- **A⁻¹** = inverse; must be **n × n square**.
+- Definition: A·A⁻¹ = A⁻¹·A = **I** (identity). Shorthand: "cancels out", like 1.
+- Built from the **determinant** and the **adjugate**.
+
+**2 × 2 case:**
+
+$$A=\begin{bmatrix}a&b\\c&d\end{bmatrix}$$
+
+- **Determinant** (scalar) = (a·d) − (c·b)
+- **Adjugate** = swap a ↔ d, negate b and c:
+
+$$\operatorname{adj}(A)=\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\qquad A^{-1}=\frac{1}{\det(A)}\,.\!*\,\operatorname{adj}(A)$$
+
+Larger than 2 × 2 → many more steps, beyond scope. MATLAB does it with `inv`.
+
+| Function | Result |
+|---|---|
+| `det(A)` | Determinant of a matrix |
+| `inv(A)` | Inverse of a matrix |
+
+### 5.11 Examples: Solving Linear Systems
+
+**Example 1:**
+
+$$\begin{aligned}3x+3y&=16\\2x-5y&=-4\end{aligned}$$
+
+Coefficients → A, right side → B, unknowns → D.
+
+Single-column variable/solution matrices = column vectors.
+
+```matlab
+A = [3 3; 2 -5]
+B = [16; -4]
+
+A =
+
+     3     3
+     2    -5
+
+
+B =
+
+    16
+    -4
+```
+
+```matlab
+C = inv(A)
+D = C * B
+
+C =
+
+    0.2381    0.1429
+    0.0952   -0.1429
+
+
+D =
+
+    3.2381
+    2.0952
+```
+
+x = 3.2381, y = 2.0952 → the intersection point of the two lines. (No solution / lines never cross → MATLAB returns `Inf`. Note: a singular A actually also prints a warning "Matrix is singular to working precision.")
+
+**Check:**
+
+```matlab
+3*D(1) + 3*D(2)
+2*D(1) - 5*D(2)
+
+ans =
+
+    16
+
+
+ans =
+
+   -4.0000
+```
+
+Later chapter → `fplot`. Come back and plot both lines to see the intersection.
+
+**Example 2: Justice League fundraiser (week 1)**
+
+| | Hero | Sidekick | Villain | Total |
+|---|---|---|---|---|
+| Space Station | 800 | 300 | 200 | 8900 |
+| Fortress of Solitude | 700 | 400 | 200 | 9400 |
+| Batcave | 300 | 500 | 100 | 7700 |
+
+How many heroes, sidekicks, villains? Coefficients = Hero/Sidekick/Villain cols; answer matrix = Total.
+
+```matlab
+A = [800 300 200; 700 400 200; 300 500 100]
+C = [8900; 9400; 7700]
+
+A =
+
+   800   300   200
+   700   400   200
+   300   500   100
+
+
+C =
+
+        8900
+        9400
+        7700
+```
+
+A · B = C, B = [heroes; sidekicks; villains]. Inverse + multiply in one step:
+
+```matlab
+B = inv(A)*C
+
+B =
+
+    6.0000
+   11.0000
+    4.0000
+```
+
+**6 heroes, 11 sidekicks, 4 villains.**
+
+`A\C` (backslash) solves the same system without forming the inverse — faster and more accurate. Same answer here.
+
+#### Key Terms
+
+array division · array multiplication · commutative · diagonal matrix · element-by-element · element-by-element logical operation · element-wise division · element-wise multiplication · element-wise power · identity matrix · imaginary number i · magic matrix · matrices · matrix · matrix addition · matrix math · matrix subtraction · pseudo-random · random number · random number generator · row separator · scalar · seed · square matrix · transposition · vector
+
+#### Key Commands
+
+`'` · `.*` · `.^` · `./` · `diag` · `eye` · `magic` · `ones` · `rand` · `randi` · `randn` · `rng` · `size` · `transpose` · `zeros`
+
+---
+
+## SDC Chapter 5 — Exercises
+
+**Exercise 5.1** — A.\*A results in the square of each value in matrix A. A\*A, however, which gives an entirely different answer, can only be performed if what condition is true?
+
+<details><summary>Solution</summary>
+
+A must be **square** (n × n): columns of the first (n) must equal rows of the second, and both are A.
+
+```matlab
+A = [1 2; 3 4];
+A .* A
+A * A
+
+ans =
+
+     1     4
+     9    16
+
+
+ans =
+
+     7    10
+    15    22
+```
+
+</details>
+
+**Exercise 5.2** — In the second week of the Justice League fundraiser discussed in the lesson, contributions were as follows:
+
+- For the space station: from each hero $500, each sidekick $300, and each villain $200: a total of $7100
+- For the Fortress of Solitude: from each hero $1000, each sidekick $100, each villain $300: a total of $8300
+- For the Batcave: from each hero $200, each sidekick $200, each villain $0 (really, nobody likes Batman): a total of $3400
+
+Prove that the number of heroes, sidekicks, and villains is the same as found in the lesson (6 heroes, 11 sidekicks, 4 villains).
+
+<details><summary>Solution</summary>
+
+```matlab
+A = [500 300 200; 1000 100 300; 200 200 0];
+C = [7100; 8300; 3400];
+B = inv(A)*C
+
+B =
+
+    6.0000
+   11.0000
+    4.0000
+```
+
+Same as week 1. ✓
+
+</details>
+
+**Exercise 5.3** — Create a 3 × 3 matrix A, with any numerical content. Use MATLAB to determine its inverse, then *manually* perform the matrix multiplication A \* A⁻¹ to prove that the answer is 1.
+
+<details><summary>Solution</summary>
+
+```matlab
+A = [2 1 3; 0 1 4; 5 6 0]
+Ainv = inv(A)
+
+A =
+
+     2     1     3
+     0     1     4
+     5     6     0
+
+
+Ainv =
+
+    0.5581   -0.4186   -0.0233
+   -0.4651    0.3488    0.1860
+    0.1163    0.1628   -0.0465
+```
+
+Exact values are fractions over 43 (`format rat` shows them): Ainv = (1/43)·[24 −18 −1; −20 15 8; 5 7 −2].
+
+Row 1 of A · column 1 of A⁻¹:
+
+$$\tfrac{1}{43}\big(2\cdot24 + 1\cdot(-20) + 3\cdot5\big) = \tfrac{43}{43} = 1$$
+
+Row 1 of A · column 2 of A⁻¹:
+
+$$\tfrac{1}{43}\big(2\cdot(-18) + 1\cdot15 + 3\cdot7\big) = \tfrac{0}{43} = 0$$
+
+Repeat for all 9 → identity matrix ("1" for matrices). MATLAB check:
+
+```matlab
+A * Ainv
+
+ans =
+
+    1.0000         0         0
+         0    1.0000         0
+         0         0    1.0000
+```
+
+(Tiny round-off like `-0.0000` may show.)
+
+</details>
+
+**Exercise 5.4** — In Germany, annual professional fees are set by law for engineers, doctors, and lawyers. In Frankfurt, the total fees charged in a single year by 23 doctors, 18 lawyers, and 12 engineers were equivalent to $76,500,000 US. In that same year in Berlin, 25 doctors, 20 lawyers, and 16 engineers charged $85,500,000. In Munich, 18 doctors, 9 lawyers, and 20 engineers charged $55,000,000.
+
+In MATLAB, use the formula B = A⁻¹\*C to determine the annual fee charged by each doctor, each lawyer, and each engineer. Tip: Use 76.5 rather than 76,500,000 (etc.) in constructing that matrix.
+
+<details><summary>Solution</summary>
+
+Rows = cities (Frankfurt, Berlin, Munich); cols = doctors, lawyers, engineers. Values in $ millions.
+
+```matlab
+A = [23 18 12; 25 20 16; 18 9 20];
+C = [76.5; 85.5; 55];
+B = inv(A)*C
+
+B =
+
+    1.5000
+    2.0000
+    0.5000
+```
+
+Doctor **$1.5M**, lawyer **$2.0M**, engineer **$0.5M** per year.
+
+</details>
+
+**Exercise 5.5** — Using the matrices A and B from Exercise 5.4, in a single MATLAB command, calculate a new 3 × 3 matrix D that contains the specific amounts charged by each profession in each city. For example, (1,1) will be the total fees charged by doctors in Frankfurt, (2,2) the total fees charged by doctors in Berlin, and so on.
+
+<details><summary>Solution</summary>
+
+Multiply each column of A by that profession's fee → `.*` with B transposed to a row.
+
+```matlab
+D = A .* B'
+
+D =
+
+   34.5000   36.0000    6.0000
+   37.5000   40.0000    8.0000
+   27.0000   18.0000   10.0000
+```
+
+Rows = cities, cols = professions ($M). (1,1) = doctors in Frankfurt.
+
+Book typo: doctors in Berlin are at **(2,1)**, not (2,2). (2,2) = lawyers in Berlin.
+
+</details>
+
+**Exercise 5.6** — To the matrix D created in Exercise 5.5, add a 4th column that is a sum of each row. Do this with a single MATLAB command. Hint: the sum function, the colon operator, and MATLAB help are your friends.
+
+<details><summary>Solution</summary>
+
+```matlab
+D(:,4) = sum(D,2)
+
+D =
+
+   34.5000   36.0000    6.0000   76.5000
+   37.5000   40.0000    8.0000   85.5000
+   27.0000   18.0000   10.0000   55.0000
+```
+
+Column 4 = city totals → matches the C totals. ✓
+
+</details>
+
+**Exercise 5.7** — To the matrix D from Exercise 5.6, add a 4th row that is a sum of each column. Do this with a single MATLAB command.
+
+<details><summary>Solution</summary>
+
+```matlab
+D(4,:) = sum(D,1)
+
+D =
+
+   34.5000   36.0000    6.0000   76.5000
+   37.5000   40.0000    8.0000   85.5000
+   27.0000   18.0000   10.0000   55.0000
+   99.0000   94.0000   24.0000  217.0000
+```
+
+Row 4 = profession totals; D(4,4) = grand total $217M.
+
+</details>
+
+**Exercise 5.8** — Using a single MATLAB command applied to matrix D from Exercise 5.8, calculate a matrix E where each element is reduced by half to account for the local and national taxes paid by each profession.
+
+<details><summary>Solution</summary>
+
+Book typo: "from Exercise 5.8" — means 5.7.
+
+```matlab
+E = D ./ 2
+
+E =
+
+   17.2500   18.0000    3.0000   38.2500
+   18.7500   20.0000    4.0000   42.7500
+   13.5000    9.0000    5.0000   27.5000
+   49.5000   47.0000   12.0000  108.5000
+```
+
+</details>
+
+**Exercise 5.9** — Based on matrix E from Exercise 5.8, and once again using a single MATLAB command, calculate a new 1 × 3 matrix F that specifies the average annual after-tax income of a doctor, a lawyer, and an engineer in this year. Are you still happy with your career choice?
+
+<details><summary>Solution</summary>
+
+Total after-tax per profession (row 4) ÷ total people per profession (column sums of A):
+
+```matlab
+F = E(4,1:3) ./ sum(A)
+
+F =
+
+    0.7500    1.0000    0.2500
+```
+
+After tax: doctor **$750K**, lawyer **$1.0M**, engineer **$250K**. (= B'/2, as expected.)
+
+</details>
+
+**Exercise 5.10** — On Monday, a farmer sells 8 pounds of potatoes, 3 pounds of beets, and 6 pounds of asparagus. He receives a total of $44. On Tuesday, he receives $48 dollars for 5 pounds of beets, 3 pounds of potatoes and 7 pounds of asparagus. On Wednesday, he receives a total of $31 for 9 pounds of potatoes, 1 pound of beets, and 4 pounds of asparagus.
+
+Using MATLAB, determine the inverse of the coefficient matrix. Manually perform the matrix multiplication to determine what price per pound the farmer charges for each of the produce types. Verify your answer using MATLAB.
+
+<details><summary>Solution</summary>
+
+Cols = potatoes, beets, asparagus (watch Tuesday's order — beets listed first).
+
+```matlab
+A = [8 3 6; 3 5 7; 9 1 4];
+C = [44; 48; 31];
+Ainv = inv(A)
+
+Ainv =
+
+    2.6000   -1.2000   -1.8000
+   10.2000   -4.4000   -7.6000
+   -8.4000    3.8000    6.2000
+```
+
+Manual A⁻¹·C (each row of A⁻¹ · C):
+
+- potatoes = 2.6·44 − 1.2·48 − 1.8·31 = 114.4 − 57.6 − 55.8 = **1**
+- beets = 10.2·44 − 4.4·48 − 7.6·31 = 448.8 − 211.2 − 235.6 = **2**
+- asparagus = −8.4·44 + 3.8·48 + 6.2·31 = −369.6 + 182.4 + 192.2 = **5**
+
+```matlab
+B = Ainv * C
+
+B =
+
+    1.0000
+    2.0000
+    5.0000
+```
+
+Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44 ✓
+
+</details>
