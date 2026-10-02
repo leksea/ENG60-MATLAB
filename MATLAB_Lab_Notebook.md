@@ -42,6 +42,19 @@
   - [3.13 Accessing & Adding Table Data](#313-accessing--adding-table-data)
   - [3.14 Table Conversion Functions](#314-table-conversion-functions)
 - [SDC Chapter 3 — Exercises](#sdc-chapter-3--exercises)
+- [SDC Chapter 4 — Looping & Conditionals](#sdc-chapter-4--looping--conditionals)
+  - [4.1 Using the MATLAB Editor](#41-using-the-matlab-editor)
+  - [4.2 Loops & Algorithms](#42-loops--algorithms)
+  - [4.3 while Loops](#43-while-loops)
+  - [4.4 for Loops](#44-for-loops)
+  - [4.5 Step Values & Index Arrays](#45-step-values--index-arrays)
+  - [4.6 if & if-else Statements](#46-if--if-else-statements)
+  - [4.7 if-elseif-else & switch Statements](#47-if-elseif-else--switch-statements)
+  - [4.8 Terminal Velocity with Conditionals](#48-terminal-velocity-with-conditionals)
+  - [4.9 Loops & Conditionals: Make a Negative](#49-loops--conditionals-make-a-negative)
+  - [4.10 Exiting a Loop](#410-exiting-a-loop)
+  - [4.11 Stopping an Infinite Loop](#411-stopping-an-infinite-loop)
+- [SDC Chapter 4 — Exercises](#sdc-chapter-4--exercises)
 
 ---
 
@@ -3334,3 +3347,1009 @@ cars_table =
 This solution makes two tables, because rooms and cars have different fields. `struct2table` turns the `cars` struct array straight into a table.
 
 </details>
+
+## SDC Chapter 4 — Looping & Conditionals
+
+### Objectives
+
+1. Define the most basic of functions and save it in a .m file.
+2. Declare and use the two loop styles found in MATLAB: while and for.
+3. Declare and use the two conditional styles found in MATLAB: if(-elseif-else) and switch.
+4. Understand the flow of execution in a function that contains looping and conditional statements.
+5. Exit a function at the line of your choosing.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `edit name` | open/create `name.m` in Editor | `edit loops` |
+| `function … end` | define function; name = file name | `function loops()` |
+| `while cond … end` | repeat while cond true; check at start | `while x < 6` |
+| `for i = a:s:b … end` | repeat once per array element | `for i = 1:3` |
+| `if / elseif / else / end` | run first block whose cond true | `if strcmp(p,'Mars')` |
+| `switch / case / otherwise / end` | pick block by value | `switch planet` |
+| `strcmp(a,b)` | text equal? → 1/0 | `strcmp(planet,'Mars')` |
+| `fprintf(fmt, vals)` | formatted print; `%d` int, `\n` newline, `\t` tab | `fprintf('x = %d\n', x)` |
+| `disp(x)` | plain print, simpler than fprintf | `disp("Gravity = " + g)` |
+| `ceil(x)` | round toward +∞ | `ceil(-2.4)` → `-2` |
+| `size(A, dim)` | length along one dim (1 = rows, 2 = cols) | `size(ImageMap, 1)` |
+| `imread(file)` | image → array (rows × cols × 3 for RGB) | `imread('pretty.png')` |
+| `imwrite(A, file)` | array → image file | `imwrite(ImageMap, f)` |
+| `break` | quit loop, go past its `end` | `if x == 6, break; end` |
+| `continue` | skip rest of this iteration | `if x == 6, continue; end` |
+| `return` | quit whole function | `return` |
+| `factorial(n)` | n! (built-in, for checking Ex 4.4) | `factorial(150)` |
+
+### 4.1 Using the MATLAB Editor
+
+- **Script** = list of commands saved in `.m` file. Basic program type.
+- **Function** = package of code, called from Command Window or other function. Takes inputs, (usually) returns outputs. More in next chapter.
+- Both stored in `.m` files.
+
+**Ways to open a new function:**
+
+- Home ribbon → **New** → **Function** (Figure 4.1). Opens unnamed file with skeleton + helpful text.
+- `edit` → new blank unnamed file; ribbon switches to Editor tab.
+- `edit filename` → new blank file saved as `filename.m` in current folder.
+
+![Figure 4.1 — New → Function](media/matlab_ch4_fig4-1_new_function.png)
+
+```matlab
+edit loops
+```
+
+Select **Yes** if asked to create the file. Editor opens above the Command Window (Figure 4.2).Don't need `.m` — MATLAB adds it. `edit loops.m` also works.
+
+
+![Figure 4.2 — Editor window with loops.m](media/matlab_ch4_fig4-2_editor.png)
+
+
+Enter skeleton, blank line before `end` (Figure 4.3):
+
+```matlab
+function loops()
+
+end
+```
+![Figure 4.3 — Editor window with loops.m](media/matlab_ch4_fig4-3_editor.png)
+
+
+> **Tip:** Can also type code in any editor (Notepad etc.) and paste into the MATLAB Editor later.
+
+### 4.2 Loops & Algorithms
+
+**Loop** = run same block over and over, usually w/ different data each time. Uses:
+
+- same operation on each member of a set
+- walk through info looking for a match
+- operation a given number of times
+
+**Algorithm** = sequence of steps in plain language before code. Adding first 5 even numbers:
+
+1. Start with the first even number: 2
+2. Get the second even number: 4
+3. Add 2 + 4
+4. Get the third even number: 6
+5. Add (2 + 4) + 6
+6. Get the fourth even number: 8
+7. Add ((2 + 4) + 6) + 8
+8. Get the fifth even number: 10
+9. Add (((2 + 4) + 6) + 8) + 10
+
+From step 4, just repeating steps 2 & 3. Generalized:
+
+1. Get a number
+2. Get the next number
+3. Add those numbers and call the sum X
+4. Get the next number
+5. X = X + the new number
+6. Repeat steps 4 & 5 until you're done
+7. Get on with your life
+
+**End condition** = how you know you're done ("retrieved a million numbers yet?"). Evaluates true/false.
+
+**Infinite loop** = condition can never be met (e.g. "Does X = 3?" when adding even numbers). Sometimes on purpose, usually a bug. Function churning, no output → suspect infinite loop.
+
+### 4.3 while Loops
+
+```text
+while condition
+    block of code
+end
+```
+
+- Block runs as long as condition true.
+- Condition checked at **start** → block may never run.
+- Condition = simple logical, complex logical, or function call, as long as result true/false.
+- Parentheses around condition optional.
+
+MATLAB does not have a **do-while** loop.
+**Formatting:** indent code between opening statement and `end` (loops, branches, functions). Nested blocks → another level. MATLAB auto-indents. 2 or 4 spaces most common. Set in Preferences → Editor/Debugger → Tab.
+
+**Example loops.m**
+
+```matlab
+function loops()
+    x = 0;
+    while x < 6
+        x = x + 1;
+        fprintf('x = %d\n',x);
+    end
+end
+```
+
+- `x = 0` → enter loop → `0 < 6` true → body (loop body) runs: x + 1, print.
+- Back to `while`, re-check. When x = 6 → false → jump past loop `end` → function `end` → exit.
+
+Run by typing function name in Command Window:
+
+```matlab
+loops
+
+x = 1
+x = 2
+x = 3
+x = 4
+x = 5
+x = 6
+```
+
+> **Tip:** `%d` = print as signed integer, `\n` = new line.
+
+**Semicolons:** optional in MATLAB (unlike C++/Java), but suppress output.
+
+
+**Sum of first million even numbers** — add before the last `end` :
+
+```matlab
+function loops()
+    x = 0;
+    while x < 6
+        x = x + 1;
+        fprintf('x = %d\n',x);
+    end
+
+    count = 0;
+    runningSum = 0;
+    evenNum = 0;
+    while count < 1000000
+        evenNum = evenNum + 2;
+        runningSum = runningSum + evenNum;
+        count = count + 1;
+    end
+    fprintf('The sum is %d\n', runningSum);
+end
+```
+
+```matlab
+loops
+
+x = 1
+x = 2
+x = 3
+x = 4
+x = 5
+x = 6
+The sum is 1000001000000
+```
+
+Loop ran 1,000,000 times in a blink. (Check: 2 + 4 + … + 2n = n(n + 1) → 10⁶ · (10⁶ + 1).)
+
+> **Book typo:** the text above Figure 4.6 prints `'The sum is %d/n'`. It must be `\n` (backslash), as in the figure, or you get a literal `/n`.
+
+### 4.4 for Loops
+
+Loop **index** controls how many times the block runs; often also used as a variable inside.
+
+```text
+for loopIndex = firstValue : lastValue
+    block of code
+end
+```
+
+- `loopIndex` → any legal name. Tradition = `i`, but easy to confuse with `1` / `l`.
+- `firstValue` / `lastValue` → integers or floats; numbers, variables, calculations, function calls, any mix.
+- The `:` part is just the colon operator → makes an array of index values.
+- The `for` condition can be **any** array, even 3-D.
+
+```matlab
+index = 1:4
+
+index =
+
+     1     2     3     4
+```
+
+```matlab
+num = 12;
+firstValue = 2;
+lastValue = 8;
+index = firstValue : lastValue
+index = ceil(-2.4) : 5
+index = 3/8 + num : 2*7.5
+
+index =
+
+     2     3     4     5     6     7     8
+
+
+index =
+
+    -2    -1     0     1     2     3     4     5
+
+
+index =
+
+   12.3750   13.3750   14.3750
+```
+
+**forloops.m** — `edit forloops`, select **Yes**:
+
+```matlab
+function forloops()
+    x = 10;
+    loopCounter = 1;
+    for i = 1:3
+        fprintf("Entering loop #" + loopCounter);
+
+        loopCounter = loopCounter + 1;
+
+        fprintf("\n\ti (loop index) = " + i);
+        fprintf("\n\tx (on entry) = " + x);
+
+        x = x + i;
+
+        fprintf("\n\tx (on exit) = " + x);
+        fprintf("\n");
+    end
+end
+```
+
+> **Important:** Function name **must** match the file name.
+
+> **Warning:** Don't use `i` or `j` as loop variables if your code uses imaginary numbers — `i`/`j` = √-1 in MATLAB and get overwritten.
+
+```matlab
+>> i
+
+ans =
+
+   0.0000 + 1.0000i
+
+>> j
+
+ans =
+
+   0.0000 + 1.0000i
+
+>>
+```
+
+```matlab
+forloops
+
+Entering loop #1
+	i (loop index) = 1
+	x (on entry) = 10
+	x (on exit) = 11
+Entering loop #2
+	i (loop index) = 2
+	x (on entry) = 11
+	x (on exit) = 13
+Entering loop #3
+	i (loop index) = 3
+	x (on entry) = 13
+	x (on exit) = 16
+```
+
+Loop # matches loop index → default step = 1.
+
+### 4.5 Step Values & Index Arrays
+
+Add a step between first and last, like any colon array:
+
+```text
+for loopIndex = firstValue : stepAmount : lastValue
+    block of code
+end
+```
+
+Change line 4 of `forloops.m` from `for i = 1:3` to:
+
+```matlab
+for i = 1 : 0.3 : 3
+```
+
+```matlab
+forloops
+
+Entering loop #1
+	i (loop index) = 1
+	x (on entry) = 10
+	x (on exit) = 11
+Entering loop #2
+	i (loop index) = 1.3
+	x (on entry) = 11
+	x (on exit) = 12.3
+Entering loop #3
+	i (loop index) = 1.6
+	x (on entry) = 12.3
+	x (on exit) = 13.9
+Entering loop #4
+	i (loop index) = 1.9
+	x (on entry) = 13.9
+	x (on exit) = 15.8
+Entering loop #5
+	i (loop index) = 2.2
+	x (on entry) = 15.8
+	x (on exit) = 18
+Entering loop #6
+	i (loop index) = 2.5
+	x (on entry) = 18
+	x (on exit) = 20.5
+Entering loop #7
+	i (loop index) = 2.8
+	x (on entry) = 20.5
+	x (on exit) = 23.3
+```
+
+`lastValue` 3 not in the array: 2.8 + 0.3 = 3.1 > 3 → stop.
+
+```matlab
+i = 1 : 0.3 : 3
+
+i =
+
+    1.0000    1.3000    1.6000    1.9000    2.2000    2.5000    2.8000
+```
+
+
+**Negative step** → count down. `firstValue` must be > `lastValue`, else body never runs.
+
+```matlab
+x = 10
+for i = 2 : -0.4 : 1
+    x = x + 1;
+end
+x
+
+x =
+
+    10
+
+
+x =
+
+    13
+```
+
+`i` = 2, 1.6, 1.2 → 3 passes. (Last line `x` added here to show the result.)
+Step can be number, variable, or calculation; int or float.
+
+**Any array works** as the loop condition. Change the line to:
+
+```matlab
+for i = [1, 1.3, 1.6, 1.9, 2.2, 2.5, 2.8]
+```
+
+`forloops` → same output as the `1 : 0.3 : 3` run. Colon form is more practical for long arrays.
+
+Array in a variable:
+
+```matlab
+indexArray = 1:200;
+for i = indexArray
+```
+
+### 4.6 if & if-else Statements
+
+**Conditional statements** → decide whether to run a block, or pick between mutually exclusive blocks. Two flavors: **if** (+ sub-flavors) and **switch**.
+
+**if:**
+
+```text
+if condition
+    block of code
+end
+```
+
+- Condition → any logical expression (like `while`).
+- True → run block. False → skip to the line after `end`.
+
+> **Tip:** Parentheses around condition optional.
+
+Terminal velocity example, as a function, set values from a String `planet`:
+
+```matlab
+if (strcmp(planet, 'Mars'))
+    gravity = 3.711;
+    atmosphericDensity = 0.020;
+end
+```
+
+**if-else** → exactly one of two blocks runs:
+
+```text
+if condition
+    block of code 1
+else
+    block of code 2
+end
+```
+
+Only one `else` per `if`.
+
+```matlab
+edit branches
+```
+
+**branches.m — Figure 4.8:**
+
+```matlab
+function branches()
+    planet = 'Earth';
+    if strcmp(planet, 'Mars')
+        gravity = 3.711;
+        atmosphericDensity = 0.020;
+    else
+        gravity = 9.798;
+        atmosphericDensity = 1.2170;
+    end
+    disp("Gravity = " + gravity);
+end
+```
+
+> **Note:** `disp` = output command like `fprintf`, but simpler, doesn't format, just outputs the value.
+
+```matlab
+branches
+
+Gravity = 9.798
+```
+
+Condition false → `else` block → Earth values. Change `planet` to `'Mars'` and re-run:
+
+```matlab
+branches
+
+Gravity = 3.711
+```
+
+### 4.7 if-elseif-else & switch Statements
+
+**if-elseif-else** → add one or more `elseif` blocks, each with own condition:
+
+```text
+if condition 1
+    block of code 1
+elseif condition 2
+    block of code 2
+elseif condition 3
+    block of code 3
+...
+else
+    block of code 4
+end
+```
+
+- Only first block whose condition is true runs.
+- `else` = optional fallback. Omit → possible that no block runs.
+- Too many `elseif`s → look for a more elegant design.
+
+**Figure 4.9 — flow chart:** Condition 1 → true → Block 1 → End; false → Condition 2 → true → Block 2 → End; false → Condition 3 → true → Block 3 → End; false → Block 4 → End.
+
+```mermaid
+flowchart LR
+    C1{Condition 1} -- true --> B1[Code Block 1] --> E[End]
+    C1 -- false --> C2{Condition 2}
+    C2 -- true --> B2[Code Block 2] --> E
+    C2 -- false --> C3{Condition 3}
+    C3 -- true --> B3[Code Block 3] --> E
+    C3 -- false --> B4[Code Block 4] --> E
+```
+
+> **Tip:** **Elegant** code = brevity, clarity, efficiency. Clever, but not so clever others can't read or change it.
+
+**switch** → same variable tested against many values (**cases**). Cleaner than a long `elseif` chain.
+
+```text
+switch variable
+    case value 1
+        block of code 1
+    case value 2
+        block of code 2
+    case value 3
+        block of code 3
+    ...
+    otherwise
+        block of code 4
+end
+```
+
+**Same result, two ways** (default = Earth):
+
+| switch | if-elseif-else |
+|---|---|
+| <pre>switch planet<br>  case 'Mars'<br>    gravity = 3.71;<br>    atmosphericDensity = 0.020;<br>  case 'Saturn'<br>    gravity = 10.44;<br>    atmosphericDensity = 0.19;<br>  case 'Neptune'<br>    gravity = 11.15;<br>    atmosphericDensity = 0.45;<br>  otherwise<br>    gravity = 9.798;<br>    atmosphericDensity = 1.217;<br>end</pre> | <pre>if strcmp(planet, 'Mars')<br>  gravity = 3.71;<br>  atmosphericDensity = 0.020;<br>elseif strcmp(planet, 'Saturn')<br>  gravity = 10.44;<br>  atmosphericDensity = 0.19;<br>elseif strcmp(planet, 'Neptune')<br>  gravity = 11.15;<br>  atmosphericDensity = 0.45;<br>else<br>  gravity = 9.798;<br>  atmosphericDensity = 1.217;<br>end</pre> |
+
+### 4.8 Terminal Velocity with Conditionals
+
+Terminal velocity of a 25 mm ball bearing, script version.
+
+1. Clear the Command Window and Workspace (`clc`, `clear`).
+2. **Open** button → `terminalVelocityConditionals.m` from the data files (Figure 4.10).
+
+**terminalVelocityConditionals.m** 
+
+```matlab
+function terminalVelocityConditionals(planet)
+
+% program to calculate terminal velocity
+% Vt = terminal velocity
+% dia = diameter of sphere (in cm)
+% mass = mass of the falling object(65.4710 grams)
+% gravity = acceleration due to gravity (in cm/sec^2)
+% atmosphericDensity = density of the medium through which the object is
+% falling (in g/cm^3)
+% area = cross-sectional area of the object,
+%        for a sphere it is pi*radius^2
+% C = drag coefficient (sphere is approx 0.47)
+%
+% Set planet in the Command Window before running, e.g.
+%   planet = 'Neptune'
+% planet = 'Mars'
+
+    if ~nargin
+        planet  = 'Neptune';
+    end
+
+    switch planet
+        case 'Mars'
+            gravity = 371;
+            atmosphericDensity = 0.000020;
+        case 'Saturn'
+            gravity = 1044;
+            atmosphericDensity = 0.00019;
+        case 'Neptune'
+            gravity = 1115;
+            atmosphericDensity = 0.00045;
+        otherwise   % Earth
+            gravity = 981;
+            atmosphericDensity = 0.001217;
+    end % end switch
+    dia = 2.5;
+    area = pi*((dia/2)^2);
+    mass = 65.4710;
+    C = 0.47;
+    Vt = sqrt((2*mass*gravity)/(atmosphericDensity*area*C));
+    fprintf('For %s, terminal velocity is %.4f cm/s units \n', planet, Vt);
+end % end of function
+```
+
+```matlab
+>> terminalVelocityConditionals
+For Neptune, terminal velocity is 11858.6918 cm/s units 
+```
+
+
+**Save As** `terminalVelocityCond2.m` and replace the `switch` with `if-elseif`:
+
+```matlab
+if strcmp (planet, 'Mars')
+    gravity = 371;
+    atmosphericDensity = 0.000020;
+elseif strcmp (planet, 'Saturn')
+    gravity = 1044;
+    atmosphericDensity = 0.00019;
+elseif strcmp (planet, 'Neptune')
+    gravity = 1115;
+    atmosphericDensity = 0.00045;
+else
+    gravity = 981;
+    atmosphericDensity = 0.001217;
+end
+```
+
+
+→ same results. Parallel methods; `otherwise`/`else` both optional. `switch` reads cleaner; `if`/`elseif` works fine. Pick per situation (or preference).
+
+
+**Idea:** use `otherwise`/`else` as a data check → print "Pluto, the Moon, Krypton, or Tatooine aren't real planets, try again."
+
+### 4.9 Loops & Conditionals: Make a Negative
+
+
+```matlab
+edit negative
+```
+
+- Pixel = small colored dot = mix of red, green, blue.
+- Full pixel = (x, y) position + 3 color values.
+- `imread` → 3-D array, pixel-by-pixel: (row, col, color). Color index 1 = red, 2 = green, 3 = blue.
+- Each value 0–255 (uint8) → negative = `255 - value`.
+
+**negative.m:**
+
+```matlab
+  function negative()
+      % Specify the image file
+  
+      imageFile = fullfile('Users', 'alexandrayakovleva', 'Documents', 'WVC', 'Matlab', 'Week4', 'submission', 'media',  'pretty.png');
+      % Read the pixel information into an array
+      ImageMap = imread(imageFile);
+      % Get the height and width of the image
+      rows = size(ImageMap,1);
+      columns = size(ImageMap,2);
+      % Ensure that the image is valid
+      if (rows > 0 && columns > 0)
+          y = 1;
+          % Process one row at a time
+          while y <= rows
+              % Look at each column in that row
+              for x = 1:columns
+                  % Get each red, green, and blue value
+                  % and change the value to its opposite
+                  for i = 1:3
+                      ImageMap(y, x, i) = 255 - ImageMap(y, x, i);
+                  end
+              end
+              % Go to the next row and do it all over again
+              y = y + 1;
+          end
+          % Write the information back to the image file
+          imwrite(ImageMap, imageFile);
+      else
+          disp("The image is invalid");
+      end
+  end
+```
+
+> **Tip:** Well-commented code = sign of a fine programmer. Don't comment every line, but do comment key points.
+
+1. Save `negative.m`.
+2. View `pretty.png` (Figure 4.4).
+3. Run `negative` (Command Window or **Run** on Editor ribbon).
+4. View `pretty_inv.png` again → negative, opposite colors (Figure 4.5).
+5. Run again → back to normal (negative of a negative = positive).
+
+| Before | After |
+|---|---|
+| ![Figure 4.4 — pretty.png](media/ch4_fig4-14_pretty.png) | ![Figure 4.5 — Negative](media/ch4_fig4-14_pretty_inv.png) |
+
+```matlab
+negative
+```
+
+No Command Window output (only the image file changes).
+
+- Usually written with nested `for` loops; done with `for` inside `while` to show any of these can contain any other. `switch` inside `for` inside `while` inside `if` → fine if it suits the problem.
+
+### 4.10 Exiting a Loop
+
+No point looping once you've found what you need. Three ways out:
+
+| Command | Effect |
+|---|---|
+| `break` | stop the loop, go to the statement after the loop's `end` |
+| `continue` | stop this iteration, go to the next one |
+| `return` | exit the whole function (works anywhere, not just loops); more in a later chapter |
+
+```matlab
+edit loops2
+```
+
+**loops2.m — basic:**
+
+```matlab
+function loops2()
+    for x=1:10
+        disp(x);
+    end
+end
+```
+
+```matlab
+loops2
+
+     1
+
+     2
+
+     3
+
+     4
+
+     5
+
+     6
+
+     7
+
+     8
+
+     9
+
+    10
+```
+
+(In loose format `disp` puts a blank line after each value; with `format compact` they print on consecutive lines.)
+
+**With `break`:**
+
+```matlab
+function loops2()
+    for x=1:10
+        if x == 6
+            break;
+        end
+        disp(x);
+    end
+end
+```
+
+```matlab
+loops2
+
+     1
+
+     2
+
+     3
+
+     4
+
+     5
+```
+
+x = 6 → `if` true → `break` → loop exits, never reaches 10.
+
+**With `continue`:**
+
+```matlab
+function loops2()
+    for x=1:10
+        if x == 6
+            continue;
+        end
+        disp(x);
+    end
+end
+```
+
+```matlab
+loops2
+
+     1
+
+     2
+
+     3
+
+     4
+
+     5
+
+     7
+
+     8
+
+     9
+
+    10
+```
+
+6 missing: at x = 6 `continue` skips `disp(x)` for that pass, x becomes 7, loop finishes.
+
+### 4.11 Stopping an Infinite Loop
+
+Stuck in an infinite loop → halt the function before fixing it.
+
+- Editor ribbon → **Run** section. Lets you run the function directly instead of typing it in the Command Window.
+- While a function runs, the Run section shows **Pause** 
+- **Pause** → Run section becomes **Debug** → **Quit Debugging** exits
+
+**loops3.m:**
+
+```matlab
+function loops3()
+    while 1
+        disp("All work and no play makes Jack a dull boy");
+    end
+end
+```
+
+Condition always true (`logical(1)`) → runs forever.
+
+1. **Run** (Editor ribbon) → launch `loops3`.
+2. **Pause**.
+3. **Quit Debugging** → leaves loop and function.
+
+
+```matlab
+loops3
+
+All work and no play makes Jack a dull boy
+All work and no play makes Jack a dull boy
+All work and no play makes Jack a dull boy
+...
+```
+
+Also useful outside infinite loops. Plan a graceful exit; if code keeps going on and on, be ready with **Pause**. (Keyboard alternative: **Ctrl+C** in the Command Window.)
+
+#### Key Terms
+
+branching · condition · conditionals · firstValue · function · infinite loop · lastValue · loop body · loop index · loops · pause
+
+#### Key Commands
+
+`for` · `if` · `imread` · `imwrite` · `otherwise` · `switch` · `while`
+
+---
+
+## SDC Chapter 4 — Exercises
+
+**Exercise 4.1** — Explain why this loop will never execute, in terms of an array declaration and the resulting array.
+
+```matlab
+for x = 1 : -2 : 10
+    disp(x);
+end
+```
+
+<details><summary>Solution</summary>
+
+Step is negative (-2) but 10 > 1, so counting down from 1 can never reach 10 → colon makes an **empty** array → zero passes.
+
+```matlab
+1 : -2 : 10
+
+ans =
+
+  1×0 empty double row vector
+```
+
+</details>
+
+**Exercise 4.2** — Rewrite this while loop as a for loop.
+
+```matlab
+x = 1;
+while x <= 10
+    disp(x);
+    x = x + 1;
+end
+```
+
+<details><summary>Solution</summary>
+
+```matlab
+for x = 1:10
+    disp(x);
+end
+```
+
+Same output: 1 through 10. The `for` handles the start, the +1 step and the stop condition for you.
+
+</details>
+
+**Exercise 4.3** — Rewrite this if statement as a switch statement. Assume that the String variable *hero* has been defined earlier in the function.
+
+```matlab
+if strcmp(hero, 'Superman')
+    villain = 'Bizarro';
+elseif strcmp(hero, 'The Thing')
+    villain = 'Fin Fang Foom';
+elseif strcmp(hero, 'Hellboy')
+    villain = 'Baba Yaga';
+else
+    villain = 'Dracula';
+end
+```
+
+<details><summary>Solution</summary>
+
+```matlab
+switch hero
+    case 'Superman'
+        villain = 'Bizarro';
+    case 'The Thing'
+        villain = 'Fin Fang Foom';
+    case 'Hellboy'
+        villain = 'Baba Yaga';
+    otherwise
+        villain = 'Dracula';
+end
+```
+
+```matlab
+hero = 'Hellboy';
+switch hero
+    case 'Superman'
+        villain = 'Bizarro';
+    case 'The Thing'
+        villain = 'Fin Fang Foom';
+    case 'Hellboy'
+        villain = 'Baba Yaga';
+    otherwise
+        villain = 'Dracula';
+end
+villain
+
+villain =
+
+    'Baba Yaga'
+```
+
+</details>
+
+**Exercise 4.4** — The factorial of a number is the product of all of the positive integers less than or equal to the number. An exclamation point (!) after a number is used to designate the factorial of that number, for example 150!. Create a script to calculate the factorial of 150 using loops and conditionals. MATLAB has a built-in function to compute factorials, but do not use it in your code. Look in Help for the factorial function, and use it to check your results.
+
+<details><summary>Solution</summary>
+
+```matlab
+% factorial150.m
+n = 150;
+if n < 0
+    disp("Factorial is undefined for negative numbers");
+else
+    result = 1;
+    for k = 2:n
+        result = result * k;
+    end
+    result
+    factorial(n)
+end
+```
+
+```matlab
+factorial150
+
+result =
+
+  5.7134e+262
+
+
+ans =
+
+  5.7134e+262
+```
+
+Match. (`n = 0` → loop runs zero times → `result = 1` = 0!, correct.)
+
+</details>
+
+**Exercise 4.5** — Create your own code example that will result in an infinite loop. Modify the code to provide a conditional that will exit the loop.
+
+<details><summary>Solution</summary>
+
+Infinite (x never equals 3 when adding 2 from 0):
+
+```matlab
+x = 0;
+while x ~= 3
+    x = x + 2;
+end
+```
+
+Fixed with a conditional exit:
+
+```matlab
+x = 0;
+while x ~= 3
+    x = x + 2;
+    if x > 100
+        disp("x skipped past 3 — stopping");
+        break;
+    end
+end
+x
+
+x skipped past 3 — stopping
+
+x =
+
+   102
+```
+
+</details>
+
