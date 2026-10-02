@@ -25,8 +25,8 @@
   - [2.6 Strings & Character Arrays](#26-strings--character-arrays)
   - [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files)
 - [SDC Chapter 2 — Exercises](#sdc-chapter-2--exercises)
-- [Home Loan Assignment](#home-loan-assignment) 
-- [SDC Chapter 3 — Arrays, Structures & Tables](#sdc-chapter-3--arrays-structures--tables)
+- [Home Loan Assignment](#home-loan-assignment)
+- [SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables](#sdc-chapter-3--programming-basics-arrays-structures--tables)
   - [3.1 Arrays, Matrices, Vectors & Scalars](#31-arrays-matrices-vectors--scalars)
   - [3.2 Growing Arrays & the Empty Array](#32-growing-arrays--the-empty-array)
   - [3.3 Matrix Basics & Size](#33-matrix-basics--size)
@@ -41,7 +41,8 @@
   - [3.12 Table Properties](#312-table-properties)
   - [3.13 Accessing & Adding Table Data](#313-accessing--adding-table-data)
   - [3.14 Table Conversion Functions](#314-table-conversion-functions)
-- [SDC Chapter 3 — Exercises](#sdc-chapter-3--exercises) 
+- [SDC Chapter 3 — Exercises](#sdc-chapter-3--exercises)
+
 ---
 
 ## Lesson 1 Slides: About MATLAB
@@ -69,10 +70,12 @@
 ### About MATLAB
 
 MATLAB is:
+
 - A computer programming language
 - A software environment for using that language effectively
 
 **Two modes of operation:**
+
 - **Interactive calculator mode** — commands typed and executed one at a time
 - **Script mode** — execution of complete programs (script files)
 
@@ -105,6 +108,7 @@ Running MATLAB opens one or more windows. The primary one is the **MATLAB Deskto
 | `-` | subtraction: a − b | `a-b` |
 
 **Examples:**
+
 ```matlab
 >> 5^2
 ans =
@@ -125,12 +129,14 @@ ans =
 | Fourth | Addition and subtraction (equal precedence), left to right |
 
 **Precedence examples:**
+
 ```
 8 + 3 * 5 = 23            → (8 + (3 * 5))
 4 ^ 2 – 12 – 8 / 4 * 2 = 0 → ((4^2) – 12 – ((8/4) * 2))
 3 * 4 ^ 2 + 5 = 53         → ((3 * (4^2)) + 5)
 27 ^ 1 / 3 + 32 ^ 0.2 = 11 → (((27^1) / 3) + (32^0.2))
 ```
+
 *Text reference: page 10*
 
 ---
@@ -144,9 +150,11 @@ Your first exercise using MATLAB begins with calculations.
 **What is MATLAB?** A numerical computation computer application that basically performs symbolic algebra — computations done in terms of symbols and variables instead of pure numbers.
 
 As shown in the slides, typing into the Command Window:
+
 ```matlab
 >> 5^2
 ```
+
 should return `25`.
 
 Once comfortable with the basic operations from the slides, the lab moves on to computations and symbolic algebra in MATLAB (or Octave, if MATLAB isn't installed).
@@ -172,6 +180,7 @@ Useful commands to memorize (used frequently throughout the course):
 ### T1-1 — Use MATLAB to compute the following
 
 **a.** 6(10/13) + 18/(5·7) + 5(9²)
+
 ```matlab
 >> 6*(10/13) + 18/(5*7) + 5*(9^2)
 ans =
@@ -179,6 +188,7 @@ ans =
 ```
 
 **b.** 6(35^(1/4)) + 14^0.35
+
 ```matlab
 >> 6*(35^(1/4)) + 14^0.35
 ans =
@@ -186,11 +196,13 @@ ans =
 ```
 
 ---
+
 ## Week 2 — Lab 2
 
 ### T1-1 (repeated, parts c & d)
 
 **c.** 6(10/13) + 18/(5·7) + 5(9²)
+
 ```matlab
 >> 6*(10/13) + 18/(5*7) + 5*(9^2)
 ans =
@@ -198,6 +210,7 @@ ans =
 ```
 
 **d.** 6(35^(1/4)) + 14^0.35
+
 ```matlab
 >> 6*(35^(1/4)) + 14^0.35
 ans =
@@ -216,8 +229,8 @@ The volume of a circular cylinder of height *h* and radius *r* is V = πr²h. A 
 >> V = pi*(r^2)*h;
 >> V = V + 0.2*V;
 >> r = sqrt(V/(pi*h))
-ans =
-    r = 8.7636
+r =
+    8.7636
 ```
 
 **Answer:** The new cylinder must have a radius of **8.7636 m**.
@@ -243,6 +256,7 @@ ans =
 ```
 
 ### Arrays (Chapter 2)
+
 ```matlab
 >> u = [0:0.1:10];
 >> w = 5*sin(u);
@@ -305,22 +319,23 @@ ans =
 **Answer:** The roots are x = -10 and x = 2 ± 5i.
 
 ### Plotting with MATLAB (Chapter 5)
+
 **Example)** Plot $y = sin(2x)$ for $0 \le x \le 10$.
 
 ```matlab
 >> x = 0:0.01:10;
 >> y = sin(2*x);
->> plot(x, y, linewidth=2) 
+>> plot(x, y, linewidth=2)
 >> xlabel('x')
 >> ylabel('y')
->> legend('y = sin2x') 
+>> legend('y = sin2x')
 >> grid on
->> title('Function y = sin2x') 
+>> title('Function y = sin2x')
 ```
 
 ![y = sin(2x)](media/plot_sin2x.png)
 
-### T3-3: Plot $s = 2sin(3t+2) + \sqrt {(5t+1)}$ for $0 \le t \le 5$:
+### T3-3: Plot $s = 2sin(3t+2) + \sqrt {(5t+1)}$ for $0 \le t \le 5$
 
 ```matlab
 >> t = 0:0.01:5;
@@ -329,14 +344,13 @@ ans =
 >> xlabel('t: time (seconds)')
 >> ylabel('s: speed (feet per second)')
 >> title('The function of s = 2sin(3t+2)+sqrt(5t+1)')
->> legend('y = s = 2sin(3t+2)+sqrt(5t+1)') 
+>> legend('y = s = 2sin(3t+2)+sqrt(5t+1)')
 >> grid on
-
 ```
 
 ![s = 2sin(3t+2) + sqrt(5t+1)](media/plot_s2sin.png)
 
-### T3-4: $y = 4* \sqrt {6x+1}$ and $z = 5e^{0.3x} − 2x$ for $0 \le x \le 1.5$:
+### T3-4: $y = 4* \sqrt {6x+1}$ and $z = 5e^{0.3x} − 2x$ for $0 \le x \le 1.5$
 
 ```matlab
 >> x = 0:0.01:1.5;
@@ -353,12 +367,11 @@ ans =
 ![y = 4sqrt(6x+1)](media/plot_y4sqrt.png)
 
 ```matlab
->> plot(x,z, '--*', 'MarkerSize', 3, 'MarkerEdgeColor', 'y') 
+>> plot(x,z, '--*', 'MarkerSize', 3, 'MarkerEdgeColor', 'y')
 >> xlabel('x: distance (meters)'), ylabel('z: force (newtons)'), ...
 >> title('The function of $z = 5e^{(0.3x)}-2x$', 'Interpreter', 'latex')
 >> legend('$z = 5e^{(0.3x)}-2x$', 'Interpreter', 'latex')
 >> grid on
-
 ```
 
 ![z = 5exp(0.3x) - 2x](media/plot_z5exp.png)
@@ -512,6 +525,7 @@ The average of points scored in a game is:
 **Predict landing distance of an object in projectile motion.** The object is launched at 45 degrees from ground level at 50 meters per second. Ignore air drag and wind.
 
 **Variables:**
+
 - Angle: 45° (= 45° × π/180° rad = π/4 rad = 0.7854 rad)
 - Speed: 50 (m/s)
 - Starting height: 0 (m)
@@ -546,6 +560,7 @@ HorizontalDistance =
 ```
 
 **Answer:**
+
 - Horizontal starting velocity = 35.3553 m/s
 - Vertical starting velocity = 35.3553 m/s
 - Time in flight: 7.2080 s
@@ -570,6 +585,7 @@ HorizontalDistance =
 ### 2.1 Operators
 
 **Arithmetic Operators (p.15)**
+
 | Operator | Meaning |
 |---|---|
 | `+` | Addition (3+2) |
@@ -577,7 +593,9 @@ HorizontalDistance =
 | `*` | Multiplication (3*2) |
 | `/` | Division (3/2) |
 | `^` | Raise to a power (3^2) |
+
 **Relational Operators (p.15)**
+
 | Operator | Meaning |
 |---|---|
 | `<` | Less than |
@@ -588,6 +606,7 @@ HorizontalDistance =
 | `~=` | Does not equal |
 
 > (p.16) Using a single equals sign, `=`, assigns the value on the right side to the variable on the left side. Using two, `==`, asks whether the two sides are mathematically/logically equal (1 for True, 0 for False).
+
 **Logical Operators (p.16)**
 
 | Operator | Meaning |
@@ -621,7 +640,7 @@ HorizontalDistance =
 | True (1) | True (1) | True (1) | X \| Y is true if X is true and Y is true |
 | True (1) | False (0) | True (1) | X \| Y is true if X is true and Y is false |
 | False (0) | True (1) | True (1) | X \| Y is true if X is false and Y is true |
-| False (0) | False (0) | False (0) | X \| Y is true if X is false and Y is false |
+| False (0) | False (0) | False (0) | X \| Y is false if X is false and Y is false |
 
 ### 2.2 Variables & Precedence
 
@@ -680,7 +699,7 @@ ans =
    1
 ```
 
-`double` is the default numeric data type in MATLAB and stores values between ±3.4×10³⁸. Use `islogical()` to check whether a value is of type `logical`.
+`double` is the default numeric data type in MATLAB and stores values between ±1.79×10³⁰⁸. Use `islogical()` to check whether a value is of type `logical`.
 
 **Operator precedence (p.18-19)**
 
@@ -696,6 +715,7 @@ ans =
 The `==` relational operator has higher precedence than `&&`/`||` — this is why `x == y` and `y == z` were evaluated *before* the `&`/`|` operators above.
 
 **Order of Operations (p.19)**
+
 1. Parentheses
 2. Logical negation (`~`), unary minus (`-`)
 3. Multiplication, division
@@ -713,6 +733,7 @@ A variable holds a value; it has a name (e.g. `x` or `city`) assigned a value (e
 - Names with capital and lowercase letters are **not** interchangeable (`abc` and `Abc` are different variables)
 
 ### 2.3 Variable Naming & Classes
+
 (p.19-20) Type into the Command Window:
 
 ```matlab
@@ -761,8 +782,8 @@ win =
 
 > (p.20) It's best to write code that's easily understood by others, since other programmers will review and later maintain it — use descriptive variable names (e.g. `altitude_in_meters`). You can also click and drag variable names from the Workspace and Editor into the Command Window to avoid retyping them.
 
-
 **Classes / types (p.21):**
+
 ```matlab
 >> x=666
 x =
@@ -783,15 +804,15 @@ ans =
 
 `int8` stores the number as an 8-bit integer. The `class` function reports the class/type. The number of bits determines how many binary digits the value can store; if one bit is reserved for the sign, the storable range shrinks accordingly.
 
-| 2⁷ | 2⁶ | 2⁵ | 2⁴ | 2³ | 2² | 2¹ | 2⁰ |
-|---|---|---|---|---|---|---|---|
-| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| 2⁷ | 2⁶ | 2⁵ | 2⁴ | 2³ | 2² | 2¹ | 2⁰ | Sum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | |
 | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 | = 255 |
-
 
 ### 2.4 Integer & Floating-Point Types
 
 **Integer Types (p.21)**
+
 | Type | Bits | Signed/Unsigned | Range |
 |---|---|---|---|
 | `int8` | 8 | signed | -128 to 127 |
@@ -806,9 +827,10 @@ ans =
 Supplying a type to `intmin()` / `intmax()` tells you the minimum/maximum value that type can hold.
 
 **Floating Point Types (p.22)**
+
 | Type | Bits | Signed/Unsigned | Range |
 |---|---|---|---|
-| `single` | 32 | signed | -1.79×10³⁸ to 1.79×10³⁸ |
+| `single` | 32 | signed | -3.4×10³⁸ to 3.4×10³⁸ |
 | `double` | 64 | signed | -1.79×10³⁰⁸ to 1.79×10³⁰⁸ |
 
 **Constants — `Inf` and `NaN` (p.22)**
@@ -837,6 +859,7 @@ ans =
 ```
 
 **Overflow behavior (p.22-23)**
+
 ```matlab
 >> x=128 +2
 x =
@@ -853,8 +876,8 @@ z =
 
 If a number is larger or smaller than a type can handle, MATLAB returns the largest/smallest value that type can hold, with no error (127 is as high as an `int8` can go).
 
-
 ### 2.5 Numerical Functions & Rounding
+
 | Function | Action |
 |---|---|
 | `ceil` | Rounds toward positive infinity |
@@ -910,6 +933,7 @@ ans =
 ```
 
 **Precision loss on conversion (p.24)**
+
 ```matlab
 >> x=uint8(255)
 x =
@@ -924,6 +948,7 @@ y =
 `int16(43)` converts the double `43` into a 16-bit integer. Converting unsigned types to signed types can easily lose precision or exceed the range. (Search MATLAB help for "trigonometry" to see the full list of available trig functions.)
 
 ### 2.6 Strings & Character Arrays
+
 (p.24) A **string** holds text and can contain any valid character (`"123456"`, `"< <= > >="`, etc.). An **array** is a collection of data all of the same type, each item accessible by index. Consider the phrase "Carpe diem." stored as a character array:
 
 | Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
@@ -956,6 +981,7 @@ st =
 `size()` reports the array's dimensions (1×11); `length()` reports the number of elements (11). `st(4)` accesses a specific element. Setting `st(4) = 33` overwrites that element with the character whose ASCII code is 33 (`!`) — all elements of a character-array variable must share the same type, so numeric values are interpreted as ASCII codes.
 
 **Character arrays vs. string arrays (p.26)**
+
 Character arrays use single quotes (`'the'`); string arrays use double quotes (`"the"`), producing a 1×1 array containing one string. A character array is a 1×length array of individual characters; a string array is a 1×1 array containing a single string.
 
 ```matlab
@@ -1005,6 +1031,7 @@ st =
 ```
 
 **Character/string test functions (p.27-28)**
+
 ```matlab
 >> charArray='This is a character array.'
 >> stringArray="This is a string array."
@@ -1045,6 +1072,7 @@ stringArray =
 Search "Characters and Strings" in MATLAB help for the full function list.
 
 **Comparing strings — `strcmp` (p.28)**
+
 Whenever you want to compare two strings, use `strcmp(a, b)`.
 
 ```matlab
@@ -1071,6 +1099,7 @@ ans =
 ```
 
 **Finding & modifying substrings (p.28-29)**
+
 ```matlab
 >> contains(text1, 'seven')
 ans =
@@ -1087,6 +1116,7 @@ ans =
 `contains` tells you the substring `'seven'` is present; `strfind` reports where (the `'s'` of "seven" is at index 16). `insertBefore` shows a function used as a value within another function — when parentheses are nested, MATLAB highlights the matching open parenthesis to help track them.
 
 **Type coercion (p.29-30)**
+
 ```matlab
 >> x=3
 >> class(x)
@@ -1198,11 +1228,13 @@ Work the parentheses first (multiplication before addition inside): `3*2+10 = 16
 ans =
    29
 ```
+
 Yes, the answers agree.
 
 ### 2.2
 
 Predict the value of `z`:
+
 ```matlab
 >> x=1
 >> y=5
@@ -1223,6 +1255,7 @@ z =
   logical
    0
 ```
+
 Yes, the answers agree.
 
 ### 2.3
@@ -1239,11 +1272,13 @@ x =
   uint32
    58
 ```
+
 The answers are slightly different — MATLAB displays just the whole number (`58`) rather than `58.14159…`. This demonstrates that variable types follow strict rules, and misunderstanding them can silently produce unexpected results (the integer type truncates/rounds the floating-point result).
 
 ### 2.4
 
 Predict the value of each:
+
 ```matlab
 >> int8(ceil(127.1))
 >> int8(floor(127.9))
@@ -1276,11 +1311,13 @@ ans =
   int8
    -128
 ```
+
 Yes, the numbers match.
 
 ### 2.5
 
 Predict what you'd expect to see (generally, not precisely) from the last two lines:
+
 ```matlab
 >> x='small kittens'
 >> y="small kittens"
@@ -1372,6 +1409,7 @@ ans =
 The Great Pacific Garbage Patch (GPGP) — a zone of plastic debris between California and Hawaii — is estimated at 79,000 tons of plastic across 1.6 million km². 75% of the mass is from pieces larger than 5 cm; microplastics account for 8% of the mass but 94% of the estimated 1.8 trillion pieces. Estimate:
 
 **a. Average weight of a piece of plastic debris:**
+
 ```matlab
 >> m_grams=79000*1000000
 m_grams =
@@ -1382,6 +1420,7 @@ avg_m_grams =
 ```
 
 **b. Average number of pieces per square mile:**
+
 ```matlab
 >> (0.621371)^2
 ans =
@@ -1395,6 +1434,7 @@ piece_sqmi =
 ```
 
 **c. Volume in cubic yards if condensed into one solid mass (density 1.20 g/cm³):**
+
 ```matlab
 >> m_grams=79000*1000000
 m_grams =
@@ -1411,19 +1451,24 @@ V_yd3 =
 ```
 
 **Answers:**
+
 - a. **0.0439 grams**
 - b. **2.9138 × 10⁶ pieces per square mile**
 - c. **8.6107 × 10⁴ cubic yards**
 
+---
+
 ## Home Loan Assignment
 
-This week you will do some Engineering Economic Analysis and see how computers iterate their formulas to derive answers.  This starts with understanding the time value of money.  You will choose and compare a home with a 30 and 15-year loan to observe the difference in the exercise Home Loan.  I've done a sample, but you will choose your own price and interest and write over my results to get the results for your home.  Answer the questions in the boxes provided and place into your notebook. 
+This week you will do some Engineering Economic Analysis and see how computers iterate their formulas to derive answers.  This starts with understanding the time value of money.  You will choose and compare a home with a 30 and 15-year loan to observe the difference in the exercise Home Loan.  I've done a sample, but you will choose your own price and interest and write over my results to get the results for your home.  Answer the questions in the boxes provided and place into your notebook.
 
 ![Table data](media/housing_assignment.png)
 
+---
+
 ## SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables
 
-### Objectives:
+### Objectives
 
 1. Understand what constitutes an array.
 2. Access array elements using indexes.
@@ -1440,7 +1485,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 
 ### Summary of functions used in this chapter
 
-### Type & Shape Checks
+#### Type & Shape Checks
+
 | Function | Purpose | Example |
 |---|---|---|
 | `class` | Returns a variable's data type | `class(aVector)` → `double` |
@@ -1455,7 +1501,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `iscolumn` | Is it a column vector? | `iscolumn((1:5)')` → `1` |
 | `isempty` | Does it have no elements? | `isempty([])` → `1` |
 
-### Array Creation
+#### Array Creation
+
 | Function | Purpose | Example |
 |---|---|---|
 | `zeros` | Array of all 0s | `zeros(3)` |
@@ -1467,21 +1514,24 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `magic` | n×n matrix with equal row and column sums | `magic(5)` |
 | `int16` | Converts to a 16-bit integer | `int16(345)` |
 
-### Concatenation
+#### Concatenation
+
 | Function | Purpose | Example |
 |---|---|---|
 | `cat` | Joins arrays along a chosen dimension | `cat(1, A, B)` |
 | `horzcat` | Joins side by side (needs the same number of rows) | `horzcat(A, B)` |
 | `vertcat` | Stacks top to bottom (needs the same number of columns) | `vertcat(A, B)` |
 
-### Strings & Math
+#### Strings & Math
+
 | Function | Purpose | Example |
 |---|---|---|
 | `strcmp` | Is the whole text equal? Returns a single 1/0 | `strcmp(string1, 'b')` → `0` |
 | `sum` | Adds up elements (column-wise for a matrix) | `sum(M(:))` |
 | `cos` | Cosine (input in radians) | `cos(45)` |
 
-### Cell Arrays
+#### Cell Arrays
+
 | Function | Purpose | Example |
 |---|---|---|
 | `cell` | Creates a cell array of empty `[]` cells | `cell(4, 5)` |
@@ -1490,7 +1540,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `cell2struct` | Cell array → structure | `cell2struct(c, fields, 2)` |
 | `cell2table` | Cell array → table | `cell2table(c)` |
 
-### Structures
+#### Structures
+
 | Function | Purpose | Example |
 |---|---|---|
 | `struct` | Creates a structure (empty, or from name/value pairs) | `struct('name', "Ludwig", 'age', 20)` |
@@ -1499,7 +1550,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `struct2cell` | Structure → cell array | `struct2cell(person)` |
 | `struct2table` | Structure → table | `struct2table(s, 'RowNames', rowNames)` |
 
-### Tables
+#### Tables
+
 | Function | Purpose | Example |
 |---|---|---|
 | `table` | Creates a table from variables | `table(diameter, rings, 'RowNames', planets)` |
@@ -1511,7 +1563,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `array2table` | Array → table | `array2table(magic(3))` |
 | `timetable2table` | Timetable → table | `timetable2table(TT)` |
 
-### Workspace & Display (commands)
+#### Workspace & Display (commands)
+
 | Command | Purpose | Example |
 |---|---|---|
 | `clear` | Removes all variables from the workspace | `clear` |
@@ -1531,19 +1584,31 @@ A **complex data type** holds a collection of values rather than a single one. I
 These nest: every scalar is also a vector, a matrix, and an array.
 
 ```matlab
->> isscalar(57)
+isscalar(57)
+isvector(57)
+ismatrix(57)
+
 ans =
+
   logical
+
    1
->> isvector(57)
+
+
 ans =
+
   logical
+
    1
->> ismatrix(57)
+
+
 ans =
+
   logical
+
    1
 ```
+
 **Key idea:** to MATLAB, almost everything is a matrix.
 
 Because of this hierarchy, any array can be passed to a function written for its own type or for any broader type. For example, `57` works in functions that expect scalars, vectors, matrices, or arrays.
@@ -1556,51 +1621,71 @@ Arrays can have any number of dimensions.
 
 If you assign to an index beyond the current size, the array expands. Arrays must stay rectangular, so every new filler element is set to `0`.
 
-**Example of array growth 
+**Example: array growth**
 
 ```matlab
+A = randi(10, 2)
+A(4,3) = 54
+
 A =
+
     10     9
      5     2
->> A(4,3) = 54
+
+
 A =
+
     10     9     0
      5     2     0
      0     0     0
      0     0    54
 ```
 
-**Example : assigning a value to an element in a non-existent array creates that array with the new value in the lower right corner.
+**Example:** assigning a value to an element in a non-existent array creates that array with the new value in the lower right corner.
 
 ```matlab
+clear
+A(3,4) = 16
 
->> A(3,4) = 16
 A =
+
      0     0     0     0
      0     0     0     0
      0     0     0    16
 ```
-`[]` is an array with no elements. Operations return it when there's no answer, and it is also a common way to initialize an array.Test using  `isempty` function.
+
+`[]` is an array with no elements. Operations return it when there's no answer, and it is also a common way to initialize an array. Test for it using the `isempty` function.
 
 ```matlab
->> A = []
+A = []
+size(A)
+isempty(A)
+
 A =
+
      []
->> size(A)
+
+
 ans =
+
      0     0
->> isempty(A)
+
+
 ans =
+
   logical
+
    1
 ```
 
 ### 3.3 Matrix Basics & Size
 
 A matrix is a two-dimensional grid of values, indexed in rows and columns.
-**In MATLAB, array indexes are 1-based, which means that the first item is (1), (1,1), (1,1,1), etc.
+
+**In MATLAB, array indexes are 1-based**, which means that the first item is (1), (1,1), (1,1,1), etc.
 
 Example: tic-tac-toe game:
+
 ```text
         (1,1) (1,2) (1,3)
 (1,1)     X  |  X  |  O
@@ -1610,7 +1695,7 @@ Example: tic-tac-toe game:
 (3,1)     X  |  O  |  X
 ```
 
-*Note:** Single quotes produce a character array, while double quotes produce a string array.
+**Note:** Single quotes produce a character array, while double quotes produce a string array.
 
 ```matlab
 aScalar = int16(345);
@@ -1623,25 +1708,34 @@ class(string2)
 class(aVector)
 
 ans =
+
     'int16'
+
+
 ans =
+
     'char'
+
+
 ans =
+
     'string'
+
+
 ans =
+
     'double'
 ```
-
 
 The variable *aScalar*, a single number of type int16, is considered by MATLAB as a matrix with one row and one column (ans = 1 1), which is to say a scalar. The vector *aVector* (ans = 1 5) is a matrix of one row and five columns, each of which contains a single number.
 Note how *string1* is an array of characters and *string2* is interpreted as a single string.
 
 ```matlab
-
 size(aScalar)
 size(string1)
 size(string2)
 size(aVector)
+
 ans =
 
      1     1
@@ -1661,12 +1755,13 @@ ans =
 
      1     5
 ```
+
 ### 3.4 Strings as Matrices
 
-The character array string is a matrix of one row and many columns, each of which contains a single letter. 
-The string array is a matrix of one row and one column: a single element that contains the entire string. 
+The character array string is a matrix of one row and many columns, each of which contains a single letter.
+The string array is a matrix of one row and one column: a single element that contains the entire string.
 
-Eaxmple:
+Example:
 
 ```matlab
 string2 == 'b'
@@ -1700,10 +1795,9 @@ ans =
   logical
 
    0
-
 ```
 
-The `==` operator and the `strcmp()` function give the same result for string array *string2*. They give very different results for the character array *string1*: == is being compared elemntwise and `strcmp()` compares by value. 
+The `==` operator and the `strcmp()` function give the same result for string array *string2*. They give very different results for the character array *string1*: `==` compares element-wise and `strcmp()` compares the whole value.
 
 | | `==` | `strcmp()` |
 |---|---|---|
@@ -1718,21 +1812,23 @@ The `==` operator and the `strcmp()` function give the same result for string ar
 ### 3.5 The Colon Operator
 
 The colon operator is used to specify an evenly spaced series of numbers in a conveniently terse manner.
+
 ```text
 first number : step amount : limit
 ```
 
 The *first number* is the starting number in the series.
 
-The *step amount* is the numerical distance between each number in the series that can be negative if *limit >= first number*. 
-The step amount is optional, he default step amount is 1.
+The *step amount* is the numerical distance between each number in the series. It can be negative if *limit <= first number*.
+The step amount is optional; the default step amount is 1.
 
-The *limit* is the maximum number that can be found in the series (or the minimum if the step amount is negative). The step amount can cause this number to be exceeded but not hit precisely, so it might not be included in the resulting series. 
+The *limit* is the maximum number that can be found in the series (or the minimum if the step amount is negative). The step amount can cause this number to be exceeded but not hit precisely, so it might not be included in the resulting series.
 
 ```matlab
 1:5
 1:2:5
 1:2:6
+
 ans =
 
      1     2     3     4     5
@@ -1746,7 +1842,6 @@ ans =
 ans =
 
      1     3     5
-
 ```
 
 ### 3.6 Indexing with Colon & End
@@ -1761,9 +1856,11 @@ The colon operator has four main uses:
 | Flatten into one column | `M(:)` |
 
 ```matlab
+rng('default')
 V = 1:5
 M = randi(10, 4)
 A = randi(15, 4, 5, 2)
+
 V =
 
      1     2     3     4     5
@@ -1791,37 +1888,45 @@ A(:,:,2) =
      5     6     8    12     3
     15    12     7     5     2
      1    12    10    11     8
-
 ```
-**Example slicing:**
+
+**Example: slicing**
 
 ```matlab
 sub = V(3:5)
+
 sub =
 
      3     4     5
 ```
-The command asks for the element in row 2, column 4 of matrix M and returned a floating-point number:
+
+This command asks for the element in row 2, column 4 of matrix M and returns a floating-point number:
+
 ```matlab
 M(2, 4)
+
 ans =
 
      5
 ```
-That command asks for columns 1 and 2 from row 1 and row 2 of M and returned a 2 x 2 matrix. The row is specified first and the column second, as in *M(row, column)*.
+
+This command asks for columns 1 and 2 from row 1 and row 2 of M and returns a 2 x 2 matrix. The row is specified first and the column second, as in *M(row, column)*.
 
 ```matlab
 M(1:2, 1:2)
+
 ans =
 
      9     7
     10     1
-
 ```
-This command selects all elemnts in colkn 1. Putting a colon in place of any array dimension tells MATLAB to get the full range of that dimension – in this case all rows. It is equivalent to `1:end`.
+
+This command selects all elements in column 1. Putting a colon in place of any array dimension tells MATLAB to get the full range of that dimension – in this case all rows. It is equivalent to `1:end`.
+
 ```matlab
 M(1:4, 1)
 M(:, 1)
+
 ans =
 
      9
@@ -1838,11 +1943,14 @@ ans =
     10
 ```
 
-**Example: Every other row and column:**
+**Example: every other row and column**
+
 This command creates a new matrix `A2` made up of every other row of every other column in an existing array `A1`.
+
 ```matlab
 A1 = randi(15, 8, 10)
 A2 = A1(1:2:8, 1:2:10)
+
 A1 =
 
     15    14    13     6     6     9     3     4     2     4
@@ -1863,6 +1971,8 @@ A2 =
      8    10    15     7     2
 ```
 
+The same selection in two steps:
+
 ```matlab
 A2 = A1(1:2:8, :)
 A3 = A2(:, 1:2:10)
@@ -1882,13 +1992,15 @@ A3 =
     12     3     8    11    13
      8    10    15     7     2
 ```
-**Example: assigning to a selection:**
+
+**Example: assigning to a selection**
 
 The colon-specified ranges can also be placed on the left side of an equation to allow you to assign a new value to only those selected array elements.
 
 ```matlab
 A1(1:2:8, 1:2:10) = 0
-1 =
+
+A1 =
 
      0    14     0     6     0     9     0     4     0     4
      6    15     4    13     9     8    10    14    15    13
@@ -1899,8 +2011,16 @@ A1(1:2:8, 1:2:10) = 0
      0    13     0    12     0     5     0     2     0     3
     11     4     8    12     2     8     2     7     6     3
 ```
->> S = ones(10, 4)
+
+You can also replace a block with elements from another array:
+
+```matlab
+S = ones(10, 4)
+T = randi(100, 2)
+S(2:3, 2:3) = T
+
 S =
+
      1     1     1     1
      1     1     1     1
      1     1     1     1
@@ -1911,12 +2031,16 @@ S =
      1     1     1     1
      1     1     1     1
      1     1     1     1
->> T = randi(100, 2)
+
+
 T =
+
     87    55
     58    15
->> S(2:3, 2:3) = T
+
+
 S =
+
      1     1     1     1
      1    87    55     1
      1    58    15     1
@@ -1934,63 +2058,98 @@ To replace a block, the array on the right must be the same size as the selectio
 **Drills with `end`:**
 
 ```matlab
->> X = ones(3, 7)
+X = ones(3, 7)
+X(2, [1 3]) = 2
+X(2, 1:3) = 3
+X([2 1], 2) = 4
+X(end, 2) = 5
+X(end, end) = 6
+X([1 end], 4) = 7
+X(1:end, 5) = 8
+X(1, end-1) = 9
+X(1:end, 5:6) = 10
+X(1:end, 2:3) = [11 11; 12 12; 13 13]
+X(:) = X(1, end)
+
 X =
+
      1     1     1     1     1     1     1
      1     1     1     1     1     1     1
      1     1     1     1     1     1     1
->> X(2, [1 3]) = 2
+
+
 X =
+
      1     1     1     1     1     1     1
      2     1     2     1     1     1     1
      1     1     1     1     1     1     1
->> X(2, 1:3) = 3
+
+
 X =
+
      1     1     1     1     1     1     1
      3     3     3     1     1     1     1
      1     1     1     1     1     1     1
->> X([2 1], 2) = 4
+
+
 X =
+
      1     4     1     1     1     1     1
      3     4     3     1     1     1     1
      1     1     1     1     1     1     1
->> X(end, 2) = 5
+
+
 X =
+
      1     4     1     1     1     1     1
      3     4     3     1     1     1     1
      1     5     1     1     1     1     1
->> X(end, end) = 6
+
+
 X =
+
      1     4     1     1     1     1     1
      3     4     3     1     1     1     1
      1     5     1     1     1     1     6
->> X([1 end], 4) = 7
+
+
 X =
+
      1     4     1     7     1     1     1
      3     4     3     1     1     1     1
      1     5     1     7     1     1     6
->> X(1:end, 5) = 8
+
+
 X =
+
      1     4     1     7     8     1     1
      3     4     3     1     8     1     1
      1     5     1     7     8     1     6
->> X(1, end-1) = 9
+
+
 X =
+
      1     4     1     7     8     9     1
      3     4     3     1     8     1     1
      1     5     1     7     8     1     6
->> X(1:end, 5:6) = 10
+
+
 X =
+
      1     4     1     7    10    10     1
      3     4     3     1    10    10     1
      1     5     1     7    10    10     6
->> X(1:end, 2:3) = [11 11; 12 12; 13 13]
+
+
 X =
+
      1    11    11     7    10    10     1
      3    12    12     1    10    10     1
      1    13    13     7    10    10     6
->> X(:) = X(1, end)
+
+
 X =
+
      1     1     1     1     1     1     1
      1     1     1     1     1     1     1
      1     1     1     1     1     1     1
@@ -2001,15 +2160,20 @@ The last line sets every element to the value in the top-right corner, which is 
 **Flip a matrix top to bottom:**
 
 ```matlab
->> X = magic(5)
+X = magic(5)
+X(end:-1:1, 1:end)
+
 X =
+
     17    24     1     8    15
     23     5     7    14    16
      4     6    13    20    22
     10    12    19    21     3
     11    18    25     2     9
->> X(end:-1:1, 1:end)
+
+
 ans =
+
     11    18    25     2     9
     10    12    19    21     3
      4     6    13    20    22
@@ -2024,8 +2188,12 @@ ans =
 `(:)` stacks every column into a single column vector. That's useful for functions like `sum()`.
 
 ```matlab
->> M(:)
+M(:)
+V(:)
+A(:)
+
 ans =
+
      9
     10
      2
@@ -2042,15 +2210,19 @@ ans =
      5
      9
      2
->> V(:)
+
+
 ans =
+
      1
      2
      3
      4
      5
->> A(:)
+
+
 ans =
+
      7
     14
     12
@@ -2068,12 +2240,29 @@ ans =
 `A(:)` returns 40 rows; only the first 8 and last 3 are shown here.
 
 ```matlab
->> sum(M(:))
+sum(M(:))
+
 ans =
+
    106
 ```
 
 > **Tip:** Double-click a variable in the **Workspace** to open it in the spreadsheet-style **Variables** window. There you can edit cells and insert or delete rows and columns.
+
+**Figures 3.3 & 3.4 — Workspace and Variables window** (recreated in MATLAB):
+
+```matlab
+clear; clc
+rng('default')
+V  = 1:5;
+A1 = randi(15, 8, 10);
+A2 = A1(1:2:8, :);
+A3 = A2(:, 1:2:10);
+workspace
+openvar('A1')
+```
+
+![Workspace and Variables window — A1, A2, A3, V](media/matlab_ch3_workspace.png)
 
 | Function | Action |
 |---|---|
@@ -2093,37 +2282,65 @@ ans =
 | `isrow` / `iscolumn` | Is it a row / column vector? |
 
 ```matlab
->> length(A)
+length(A)
+size(A)
+ndims(A)
+numel(A)
+isrow(V)
+iscolumn(V)
+diag([1 2 3])
+horzcat([1; 2], [3; 4])
+vertcat([1 2], [3 4])
+
 ans =
+
      5
->> size(A)
+
+
 ans =
+
      4     5     2
->> ndims(A)
+
+
 ans =
+
      3
->> numel(A)
+
+
 ans =
+
     40
->> isrow(V)
+
+
 ans =
+
   logical
+
    1
->> iscolumn(V)
+
+
 ans =
+
   logical
+
    0
->> diag([1 2 3])
+
+
 ans =
+
      1     0     0
      0     2     0
      0     0     3
->> horzcat([1; 2], [3; 4])
+
+
 ans =
+
      1     3
      2     4
->> vertcat([1 2], [3 4])
+
+
 ans =
+
      1     2
      3     4
 ```
@@ -2133,28 +2350,41 @@ ans =
 A **cell array** can hold a different data type and size in each cell. Create one with `cell()` and index its contents with **curly braces `{}`**.
 
 ```matlab
->> a = cell(4)
+a = cell(4)
+b = cell(4, 5)
+c = cell(4, 5, 2);
+size(c)
+A = [4 5 2];
+d = cell(A);
+size(d)
+
 a =
+
   4×4 cell array
+
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
->> b = cell(4, 5)
+
+
 b =
+
   4×5 cell array
+
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}
->> c = cell(4, 5, 2);
->> size(c)
+
+
 ans =
+
      4     5     2
->> A = [4 5 2];
->> d = cell(A);
->> size(d)
+
+
 ans =
+
      4     5     2
 ```
 
@@ -2163,27 +2393,40 @@ Every cell starts as an empty `[]`, shown as `{0×0 double}`. The `c` and `d` co
 The four value assignments below also end with semicolons, so `b` is printed once at the end rather than after every line.
 
 ```matlab
->> b{2,2} = 4.2;
->> b{1,1} = 'Good morning';     % char
->> b{1,2} = "Bonjour";          % string
->> b{3,4} = cos(45);            % 45 is in radians
->> b{4,1} = int16(432);
->> b
+b{2,2} = 4.2;
+b{1,1} = 'Good morning';     % char
+b{1,2} = "Bonjour";          % string
+b{3,4} = cos(45);            % 45 is in radians
+b{4,1} = int16(432);
+b
+b{3,4}
+iscell(b)
+cell2mat({1 2; 3 4})
+
 b =
+
   4×5 cell array
+
     {'Good morning'}    {["Bonjour"]}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double    }    {[   4.2000]}    {0×0 double}    {0×0 double}    {0×0 double}
     {0×0 double    }    {0×0 double }    {0×0 double}    {[  0.5253]}    {0×0 double}
     {[         432]}    {0×0 double }    {0×0 double}    {0×0 double}    {0×0 double}
->> b{3,4}
+
+
 ans =
+
     0.5253
->> iscell(b)
+
+
 ans =
+
   logical
+
    1
->> cell2mat({1 2; 3 4})
+
+
 ans =
+
      1     2
      3     4
 ```
@@ -2205,19 +2448,29 @@ The char array shows in single quotes and the string array in double quotes.
 A **struct** groups named **fields**, and each field can hold any data type. Assigning to a field creates the field, and the struct too if it doesn't exist yet.
 
 ```matlab
->> rocket = struct
+rocket = struct
+rocket.manufacturer = "SpaceX"
+rocket.model = "Falcon9";
+rocket.height = 70;
+rocket.diameter = 3.7;
+rocket.stages = 2
+
 rocket =
+
   struct with no fields.
->> rocket.manufacturer = "SpaceX"
+
+
 rocket =
+
   struct with fields:
+
     manufacturer: "SpaceX"
->> rocket.model = "Falcon9";
->> rocket.height = 70;
->> rocket.diameter = 3.7;
->> rocket.stages = 2
+
+
 rocket =
+
   struct with fields:
+
     manufacturer: "SpaceX"
            model: "Falcon9"
           height: 70
@@ -2228,9 +2481,12 @@ rocket =
 **All at once, with name/value pairs:**
 
 ```matlab
->> person = struct('name', "Ludwig", 'age', 20, 'height', 6.1)
+person = struct('name', "Ludwig", 'age', 20, 'height', 6.1)
+
 person =
+
   struct with fields:
+
       name: "Ludwig"
        age: 20
     height: 6.1000
@@ -2239,26 +2495,36 @@ person =
 **A struct inside a struct:**
 
 ```matlab
->> enginesStage1.quantity = 9;
->> enginesStage1.burnTime = 162;
->> enginesStage1.totalThrustAtSeaLevel = 7600;
->> enginesStage1.totalThrustInVacuum = 8227;
->> rocket.engines = enginesStage1
+enginesStage1.quantity = 9;
+enginesStage1.burnTime = 162;
+enginesStage1.totalThrustAtSeaLevel = 7600;
+enginesStage1.totalThrustInVacuum = 8227;
+rocket.engines = enginesStage1
+time = rocket.engines.burnTime
+rocket.engines.totalThrustAtSeaLevel = 7607;
+rocket.engines
+
 rocket =
+
   struct with fields:
+
     manufacturer: "SpaceX"
            model: "Falcon9"
           height: 70
         diameter: 3.7000
           stages: 2
          engines: [1×1 struct]
->> time = rocket.engines.burnTime
+
+
 time =
+
    162
->> rocket.engines.totalThrustAtSeaLevel = 7607;
->> rocket.engines
+
+
 ans =
+
   struct with fields:
+
                  quantity: 9
                  burnTime: 162
     totalThrustAtSeaLevel: 7607
@@ -2270,27 +2536,37 @@ ans =
 Every struct is really a 1×1 struct array, so you can add elements to it by index.
 
 ```matlab
->> enginesStage2.quantity = 1;
->> enginesStage2.burnTime = 397;
->> enginesStage2.totalThrustAtSeaLevel = "N/A";
->> enginesStage2.totalThrustInVacuum = 934;
->> rocket.engines(2) = enginesStage2;
->> rocket.engines
+enginesStage2.quantity = 1;
+enginesStage2.burnTime = 397;
+enginesStage2.totalThrustAtSeaLevel = "N/A";
+enginesStage2.totalThrustInVacuum = 934;
+rocket.engines(2) = enginesStage2;
+rocket.engines
+rocket.engines(2)
+time = rocket.engines(1).burnTime
+
 ans =
+
   1×2 struct array with fields:
+
     quantity
     burnTime
     totalThrustAtSeaLevel
     totalThrustInVacuum
->> rocket.engines(2)
+
+
 ans =
+
   struct with fields:
+
                  quantity: 1
                  burnTime: 397
     totalThrustAtSeaLevel: "N/A"
       totalThrustInVacuum: 934
->> time = rocket.engines(1).burnTime
+
+
 time =
+
    162
 ```
 
@@ -2299,51 +2575,71 @@ The field types can differ between elements: `totalThrustAtSeaLevel` is a number
 **Rule:** every element of a struct array must have the **same fields**.
 
 ```matlab
->> engine3 = struct;
->> engine3.burnTime = 250;
->> rocket.engines(3) = engine3
+engine3 = struct;
+engine3.burnTime = 250;
+rocket.engines(3) = engine3
+
 Subscripted assignment between dissimilar structures.
 ```
 
 MATLAB keeps the fields consistent for you. Fields that haven't been given a value are filled with `[]`.
 
 ```matlab
->> rocket(2).model = "Gemini"
+rocket(2).model = "Gemini"
+rocket(2)
+rocket(1).engines(2).type = "Merlin";
+rocket(1).engines(1)
+fieldnames(person)
+person = rmfield(person, 'height')
+
 rocket =
+
   1×2 struct array with fields:
+
     manufacturer
     model
     height
     diameter
     stages
     engines
->> rocket(2)
+
+
 ans =
+
   struct with fields:
+
     manufacturer: []
            model: "Gemini"
           height: []
         diameter: []
           stages: []
          engines: []
->> rocket(1).engines(2).type = "Merlin";
->> rocket(1).engines(1)
+
+
 ans =
+
   struct with fields:
+
                  quantity: 9
                  burnTime: 162
     totalThrustAtSeaLevel: 7607
       totalThrustInVacuum: 8227
                      type: []
->> fieldnames(person)
+
+
 ans =
+
   3×1 cell array
+
     {'name'  }
     {'age'   }
     {'height'}
->> person = rmfield(person, 'height')
+
+
 person =
+
   struct with fields:
+
     name: "Ludwig"
      age: 20
 ```
@@ -2369,21 +2665,30 @@ A **table** stores data of mixed types in a labeled grid, together with **metada
 | `table('Size', sz, 'VariableTypes', varTypes)` | Preallocates a table filled with default values |
 
 ```matlab
->> table([1;2;3], [4;5;6], [7;8;9])
+table([1;2;3], [4;5;6], [7;8;9])
+Var1 = [1;2;3];
+Var2 = [4 7; 5 8; 6 9];
+table(Var1, Var2)
+
 ans =
+
   3×3 table
+
     Var1    Var2    Var3
     ____    ____    ____
+
      1       4       7
      2       5       8
      3       6       9
->> Var1 = [1;2;3];
->> Var2 = [4 7; 5 8; 6 9];
->> table(Var1, Var2)
+
+
 ans =
+
   3×2 table
+
     Var1     Var2
     ____    ______
+
      1      4    7
      2      5    8
      3      6    9
@@ -2394,15 +2699,16 @@ ans =
 **The planetary data table:**
 
 ```matlab
->> diameter = [4879.40; 12103.60; 12742; 6779; 139822; 116464; 50724; 49244];
->> rotational_period = [1407.50; 5832.43; 23.93; 24.62; 9.92; 10.66; 17.23; 16.10];
->> orbital_period = [0.24; 0.62; 1.00; 1.88; 11.86; 29.45; 84.02; 164.79];
->> rings = {'No'; 'No'; 'No'; 'No'; 'Yes'; 'Yes'; 'Yes'};
->> atmosphere = {'None'; 'Carbon Dioxide, Nitrogen'; 'Nitrogen, Oxygen'; ...
+diameter = [4879.40; 12103.60; 12742; 6779; 139822; 116464; 50724; 49244];
+rotational_period = [1407.50; 5832.43; 23.93; 24.62; 9.92; 10.66; 17.23; 16.10];
+orbital_period = [0.24; 0.62; 1.00; 1.88; 11.86; 29.45; 84.02; 164.79];
+rings = {'No'; 'No'; 'No'; 'No'; 'Yes'; 'Yes'; 'Yes'};
+atmosphere = {'None'; 'Carbon Dioxide, Nitrogen'; 'Nitrogen, Oxygen'; ...
        'Carbon Dioxide, Nitrogen, Argon'; 'Hydrogen, Helium'; ...
        'Hydrogen, Helium'; 'Hydrogen, Helium, Methane'; ...
        'Hydrogen, Helium, Methane'};
->> planetary_data = table(diameter, rotational_period, orbital_period, rings, atmosphere);
+planetary_data = table(diameter, rotational_period, orbital_period, rings, atmosphere);
+
 Error using tabular/verifyCountVars
 All variables must have the same number of rows.
 ```
@@ -2410,12 +2716,16 @@ All variables must have the same number of rows.
 `rings` only has 7 entries, so add the missing 8th one and try again:
 
 ```matlab
->> rings(8) = {'Yes'};
->> planetary_data = table(diameter, rotational_period, orbital_period, rings, atmosphere)
+rings(8) = {'Yes'};
+planetary_data = table(diameter, rotational_period, orbital_period, rings, atmosphere)
+
 planetary_data =
+
   8×5 table
+
      diameter     rotational_period    orbital_period    rings                atmosphere
     __________    _________________    ______________    _______    ___________________________________
+
         4879.4         1407.5                0.24        {'No' }    {'None'                           }
          12104         5832.4                0.62        {'No' }    {'Carbon Dioxide, Nitrogen'       }
          12742          23.93                   1        {'No' }    {'Nitrogen, Oxygen'               }
@@ -2443,9 +2753,12 @@ These syntax examples assume `var1`, `var2` and `var3` already exist, so there i
 ### 3.12 Table Properties
 
 ```matlab
->> planetary_data.Properties
+planetary_data.Properties
+
 ans =
+
   TableProperties with properties:
+
              Description: ''
                 UserData: []
           DimensionNames: {'Row'  'Variables'}
@@ -2471,17 +2784,21 @@ ans =
 | `RowNames` | Cell array | Heading for each row |
 
 ```matlab
->> planets = {'Mercury'; 'Venus'; 'Earth'; 'Mars'; 'Jupiter'; 'Saturn'; 'Uranus'; 'Neptune'};
->> planetary_data.Properties.RowNames = planets;
->> planetary_data.Properties.VariableNames(1) = {'Diameter'};
->> planetary_data.Properties.VariableNames(2) = {'Rotational_Period'};
->> planetary_data.Properties.VariableNames(3) = {'Orbital_Period'};
->> planetary_data.Properties.VariableNames(4) = {'Rings'};
->> planetary_data.Properties.VariableNames(5) = {'Atmosphere'}
+planets = {'Mercury'; 'Venus'; 'Earth'; 'Mars'; 'Jupiter'; 'Saturn'; 'Uranus'; 'Neptune'};
+planetary_data.Properties.RowNames = planets;
+planetary_data.Properties.VariableNames(1) = {'Diameter'};
+planetary_data.Properties.VariableNames(2) = {'Rotational_Period'};
+planetary_data.Properties.VariableNames(3) = {'Orbital_Period'};
+planetary_data.Properties.VariableNames(4) = {'Rings'};
+planetary_data.Properties.VariableNames(5) = {'Atmosphere'}
+
 planetary_data =
+
   8×5 table
+
                 Diameter     Rotational_Period    Orbital_Period    Rings                Atmosphere
                __________    _________________    ______________    _______    ___________________________________
+
     Mercury        4879.4         1407.5                0.24        {'No' }    {'None'                           }
     Venus           12104         5832.4                0.62        {'No' }    {'Carbon Dioxide, Nitrogen'       }
     Earth           12742          23.93                   1        {'No' }    {'Nitrogen, Oxygen'               }
@@ -2495,7 +2812,7 @@ planetary_data =
 The book uses the next command to show an error, because older MATLAB only allows valid variable names (no spaces) as column names.
 
 ```matlab
->> planetary_data.Properties.VariableNames(2) = {'Rotational Period'}
+planetary_data.Properties.VariableNames(2) = {'Rotational Period'}
 ```
 
 - **Before R2019b:** the command errors because `'Rotational Period'` is not a valid variable name.
@@ -2504,17 +2821,20 @@ The book uses the next command to show an error, because older MATLAB only allow
 If the rename worked in your version, set the name back so the commands later in this chapter still run:
 
 ```matlab
->> planetary_data.Properties.VariableNames(2) = {'Rotational_Period'};
+planetary_data.Properties.VariableNames(2) = {'Rotational_Period'};
 ```
 
 **Units and dimension names:**
 
 ```matlab
->> planetary_data.Properties.VariableUnits = {'km', 'hours', 'Earth years', '', ''};
->> planetary_data.Properties.DimensionNames = {'Planet', 'Data'};
->> planetary_data.Properties.VariableUnits
+planetary_data.Properties.VariableUnits = {'km', 'hours', 'Earth years', '', ''};
+planetary_data.Properties.DimensionNames = {'Planet', 'Data'};
+planetary_data.Properties.VariableUnits
+
 ans =
+
   1×5 cell array
+
     {'km'}    {'hours'}    {'Earth years'}    {0×0 char}    {0×0 char}
 ```
 
@@ -2522,8 +2842,9 @@ ans =
 - A table **copies** your data. Changing `diameter` afterwards doesn't update the table.
 
 ```matlab
->> planetary_data.Properties.Description = 'Planets of the solar system';
->> summary(planetary_data)
+planetary_data.Properties.Description = 'Planets of the solar system';
+summary(planetary_data)
+
 Description:  Planets of the solar system
 Variables:
     Diameter: 8×1 double
@@ -2556,37 +2877,54 @@ Variables:
 ### 3.13 Accessing & Adding Table Data
 
 ```matlab
->> mars = planetary_data(4, :)
+mars = planetary_data(4, :)
+mars = planetary_data('Mars', :);
+mars_rotation = planetary_data('Mars', 'Rotational_Period')
+
 mars =
+
   1×5 table
+
             Diameter    Rotational_Period    Orbital_Period    Rings     Atmosphere
             ________    _________________    ______________    ______    _________________________________
+
     Mars      6779            24.62               1.88         {'No'}    {'Carbon Dioxide, Nitrogen, Argon'}
->> mars = planetary_data('Mars', :);
->> mars_rotation = planetary_data('Mars', 'Rotational_Period')
+
+
 mars_rotation =
+
   table
+
             Rotational_Period
             _________________
+
     Mars          24.62
 ```
 
 `planetary_data('Mars', :)` gives the same result as `planetary_data(4, :)`, but uses the row name.
 
 ```matlab
->> planets = {'Mercury', 'Jupiter', 'Neptune'};
->> facts = {'Diameter', 'Rotational_Period'};
->> planetary_data(planets, facts)
+planets = {'Mercury', 'Jupiter', 'Neptune'};
+facts = {'Diameter', 'Rotational_Period'};
+planetary_data(planets, facts)
+planetary_data{planets, facts}
+
 ans =
+
   3×2 table
+
                 Diameter     Rotational_Period
                __________    _________________
+
     Mercury        4879.4         1407.5
     Jupiter    1.3982e+05           9.92
     Neptune         49244           16.1
->> planetary_data{planets, facts}
+
+
 ans =
+
    1.0e+05 *
+
     0.0488    0.0141
     1.3982    0.0001
     0.4924    0.0002
@@ -2603,20 +2941,29 @@ Parentheses `()` return a **table**. Curly braces `{}` return a plain **array**,
 | `planetary_data.Variables` | array | All rows, if the data is of compatible types |
 
 ```matlab
->> planetary_data.Rotational_Period('Saturn')
+planetary_data.Rotational_Period('Saturn')
+planetary_data.(2)(6)
+
 ans =
+
    10.6600
->> planetary_data.(2)(6)
+
+
 ans =
+
    10.6600
 ```
 
 **Filtering with a logical test:**
 
 ```matlab
->> small_planets = planetary_data.Diameter < planetary_data.Diameter('Earth')
+small_planets = planetary_data.Diameter < planetary_data.Diameter('Earth')
+small_planet_table = planetary_data(small_planets, :)
+
 small_planets =
+
   8×1 logical array
+
    1
    1
    0
@@ -2625,11 +2972,15 @@ small_planets =
    0
    0
    0
->> small_planet_table = planetary_data(small_planets, :)
+
+
 small_planet_table =
+
   3×5 table
+
                Diameter    Rotational_Period    Orbital_Period    Rings                Atmosphere
                ________    _________________    ______________    ______    ___________________________________
+
     Mercury     4879.4          1407.5               0.24         {'No'}    {'None'                           }
     Venus        12104          5832.4               0.62         {'No'}    {'Carbon Dioxide, Nitrogen'       }
     Mars          6779           24.62               1.88         {'No'}    {'Carbon Dioxide, Nitrogen, Argon'}
@@ -2638,12 +2989,16 @@ small_planet_table =
 **Adding a column:**
 
 ```matlab
->> planetary_data.Known_Life = {'No'; 'No'; 'Yes'; 'No'; 'No'; 'No'; 'No'; 'No'};
->> planetary_data(:, {'Diameter', 'Known_Life'})
+planetary_data.Known_Life = {'No'; 'No'; 'Yes'; 'No'; 'No'; 'No'; 'No'; 'No'};
+planetary_data(:, {'Diameter', 'Known_Life'})
+
 ans =
+
   8×2 table
+
                 Diameter     Known_Life
                __________    __________
+
     Mercury        4879.4     {'No' }
     Venus           12104     {'No' }
     Earth           12742     {'Yes'}
@@ -2670,38 +3025,55 @@ The new column's values go in a column (semicolons between them). The book separ
 | `timetable2table` | Converts a timetable to a table |
 
 ```matlab
->> planet_struct = table2struct(planetary_data);
->> size(planet_struct)
+planet_struct = table2struct(planetary_data);
+size(planet_struct)
+planet_struct(4)
+planet_table = struct2table(planet_struct);
+planet_table.Properties.RowNames
+
 ans =
+
      8     1
->> planet_struct(4)
+
+
 ans =
+
   struct with fields:
+
              Diameter: 6779
     Rotational_Period: 24.6200
        Orbital_Period: 1.8800
                 Rings: 'No'
            Atmosphere: 'Carbon Dioxide, Nitrogen, Argon'
            Known_Life: 'No'
->> planet_table = struct2table(planet_struct);
->> planet_table.Properties.RowNames
+
+
 ans =
+
   0×0 empty cell array
 ```
 
 The struct array has one element per planet, and each table variable became a field. The row names and units were lost in the conversion, so `planet_table` has no row names.
 
 ```matlab
->> rowNames = {'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'}
+rowNames = {'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'}
+planet_table = struct2table(planet_struct, 'RowNames', rowNames);
+planet_table('Mars', {'Diameter', 'Known_Life'})
+
 rowNames =
+
   1×8 cell array
+
     {'Mercury'}    {'Venus'}    {'Earth'}    {'Mars'}    {'Jupiter'}    {'Saturn'}    {'Uranus'}    {'Neptune'}
->> planet_table = struct2table(planet_struct, 'RowNames', rowNames);
->> planet_table('Mars', {'Diameter', 'Known_Life'})
+
+
 ans =
+
   1×2 table
+
             Diameter    Known_Life
             ________    __________
+
     Mars      6779        {'No'}
 ```
 
@@ -2718,8 +3090,10 @@ Each worked solution is collapsed, so you can try the exercise yourself before o
 <details><summary>Solution</summary>
 
 ```matlab
->> [1:2:9, 2:2:10]
+[1:2:9, 2:2:10]
+
 ans =
+
      1     3     5     7     9     2     4     6     8    10
 ```
 
@@ -2730,17 +3104,22 @@ ans =
 <details><summary>Solution</summary>
 
 ```matlab
->> rng('default')
->> R = randi(10, 6)
+rng('default')
+R = randi(10, 6)
+corner = R(1:3, 1:3)
+
 R =
+
      9     3    10     8     7     8
     10     6     5    10     8     1
      2    10     9     7     8     3
     10    10     2     1     4     1
      7     2     5     9     7     1
      1    10    10    10     2     9
->> corner = R(1:3, 1:3)
+
+
 corner =
+
      9     3    10
     10     6     5
      2    10     9
@@ -2753,9 +3132,12 @@ corner =
 <details><summary>Solution</summary>
 
 ```matlab
->> rng('default')
->> R = randi(10, 8)
+rng('default')
+R = randi(10, 8)
+everyOther = R(1:2:end, 1:2:end)
+
 R =
+
      9    10     5     7     3     5     8    10
     10    10    10     8     1     4     8     4
      2     2     8     8     1     8     3     6
@@ -2764,8 +3146,10 @@ R =
      1     5     1     2     4     5     2     3
      3     9     9     8    10     5     2     6
      6     2    10     1     1     7     5     7
->> everyOther = R(1:2:end, 1:2:end)
+
+
 everyOther =
+
      9     5     3     8
      2     8     1     3
      7     7     7     7
@@ -2779,29 +3163,43 @@ everyOther =
 <details><summary>Solution</summary>
 
 ```matlab
->> student = struct('name', 'Ada', 'age', int8(20), 'GPA', 3.85, 'major', "Physics")
+student = struct('name', 'Ada', 'age', int8(20), 'GPA', 3.85, 'major', "Physics")
+c = struct2cell(student)
+c{2} = c{2} * 3
+class(c{2})
+
 student =
+
   struct with fields:
+
      name: 'Ada'
       age: 20
       GPA: 3.8500
     major: "Physics"
->> c = struct2cell(student)
+
+
 c =
+
   4×1 cell array
+
     {'Ada'      }
     {[       20]}
     {[   3.8500]}
     {["Physics"]}
->> c{2} = c{2} * 3
+
+
 c =
+
   4×1 cell array
+
     {'Ada'      }
     {[       60]}
     {[   3.8500]}
     {["Physics"]}
->> class(c{2})
+
+
 ans =
+
     'int8'
 ```
 
@@ -2832,48 +3230,63 @@ house
 `man/woman_cave` isn't a valid field name because of the `/`, so this solution uses `man_woman_cave`.
 
 ```matlab
->> bedroom.sq_ft = 200;
->> bedroom.furniture = {'bed', 'dresser', 'nightstand'};
->> kitchen.sq_ft = 100;
->> kitchen.appliances = {'stove', 'refrigerator', 'dishwasher'};
->> cave.sq_ft = 300;
->> cave.gaming_systems = {'Xbox', 'Playstation'};
->> garage.sq_ft = 1000;
->> rooms.bedroom = bedroom;
->> rooms.kitchen = kitchen;
->> rooms.man_woman_cave = cave;
->> rooms.garage = garage;
->> cars(1).make = "Toyota";
->> cars(1).model = "Camry";
->> cars(1).year = 2020;
->> cars(2).make = "Tesla";
->> cars(2).model = "Model 3";
->> cars(2).year = 2023;
->> house.address = "123 Main St";
->> house.year_built = 1998;
->> house.rooms = rooms;
->> house.cars = cars
+bedroom.sq_ft = 200;
+bedroom.furniture = {'bed', 'dresser', 'nightstand'};
+kitchen.sq_ft = 100;
+kitchen.appliances = {'stove', 'refrigerator', 'dishwasher'};
+cave.sq_ft = 300;
+cave.gaming_systems = {'Xbox', 'Playstation'};
+garage.sq_ft = 1000;
+rooms.bedroom = bedroom;
+rooms.kitchen = kitchen;
+rooms.man_woman_cave = cave;
+rooms.garage = garage;
+cars(1).make = "Toyota";
+cars(1).model = "Camry";
+cars(1).year = 2020;
+cars(2).make = "Tesla";
+cars(2).model = "Model 3";
+cars(2).year = 2023;
+house.address = "123 Main St";
+house.year_built = 1998;
+house.rooms = rooms;
+house.cars = cars
+house.rooms
+house.rooms.kitchen
+house.cars(2)
+
 house =
+
   struct with fields:
+
        address: "123 Main St"
     year_built: 1998
          rooms: [1×1 struct]
           cars: [1×2 struct]
->> house.rooms
+
+
 ans =
+
   struct with fields:
+
            bedroom: [1×1 struct]
            kitchen: [1×1 struct]
     man_woman_cave: [1×1 struct]
             garage: [1×1 struct]
->> house.rooms.kitchen
+
+
 ans =
+
   struct with fields:
+
          sq_ft: 100
     appliances: {'stove'  'refrigerator'  'dishwasher'}
->> house.cars(2)
+
+
 ans =
+
   struct with fields:
+
      make: "Tesla"
     model: "Model 3"
      year: 2023
@@ -2886,25 +3299,34 @@ ans =
 <details><summary>Solution</summary>
 
 ```matlab
->> roomNames = {'bedroom'; 'kitchen'; 'man_woman_cave'; 'garage'};
->> sq_ft = [200; 100; 300; 1000];
->> contents = {{'bed', 'dresser', 'nightstand'}; ...
+roomNames = {'bedroom'; 'kitchen'; 'man_woman_cave'; 'garage'};
+sq_ft = [200; 100; 300; 1000];
+contents = {{'bed', 'dresser', 'nightstand'}; ...
                {'stove', 'refrigerator', 'dishwasher'}; ...
                {'Xbox', 'Playstation'}; {}};
->> rooms_table = table(sq_ft, contents, 'RowNames', roomNames)
+rooms_table = table(sq_ft, contents, 'RowNames', roomNames)
+cars_table = struct2table(house.cars)
+
 rooms_table =
+
   4×2 table
+
                       sq_ft     contents
                       _____    __________
+
     bedroom            200     {1×3 cell}
     kitchen            100     {1×3 cell}
     man_woman_cave     300     {1×2 cell}
     garage            1000     {0×0 cell}
->> cars_table = struct2table(house.cars)
+
+
 cars_table =
+
   2×3 table
+
      make        model      year
     ________    _________    ____
+
     "Toyota"    "Camry"      2020
     "Tesla"     "Model 3"    2023
 ```
@@ -2912,5 +3334,3 @@ cars_table =
 This solution makes two tables, because rooms and cars have different fields. `struct2table` turns the `cars` struct array straight into a table.
 
 </details>
-
-
