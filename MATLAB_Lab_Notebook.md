@@ -68,6 +68,20 @@
   - [5.10 Matrix Division & Inverse Matrices](#510-matrix-division--inverse-matrices)
   - [5.11 Examples: Solving Linear Systems](#511-examples-solving-linear-systems)
 - [SDC Chapter 5 — Exercises](#sdc-chapter-5--exercises)
+- [SDC Chapter 6 — Functions & Scripts](#sdc-chapter-6--functions--scripts)
+  - [6.1 Comment Statements](#61-comment-statements)
+  - [6.2 Scripts](#62-scripts)
+  - [6.3 Creating & Editing a Script](#63-creating--editing-a-script)
+  - [6.4 Making a Script Interactive](#64-making-a-script-interactive)
+  - [6.5 Functions: Built-in & Custom](#65-functions-built-in--custom)
+  - [6.6 Function File Format](#66-function-file-format)
+  - [6.7 From Algorithm to Code](#67-from-algorithm-to-code)
+  - [6.8 Return Values](#68-return-values)
+  - [6.9 Local Functions](#69-local-functions)
+  - [6.10 Variable Scope](#610-variable-scope)
+  - [6.11 Recursion](#611-recursion)
+  - [6.12 Persistent Variables](#612-persistent-variables)
+- [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
 
 ---
 
@@ -5375,3 +5389,1031 @@ B =
 Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44 ✓
 
 </details>
+
+## SDC Chapter 6 — Functions & Scripts
+
+### Objectives
+
+1. Understand the importance of commenting your code.
+2. Create a script from Command Window statements.
+3. Prompt for values from the user.
+4. Understand the difference between a script and a function.
+5. Know the advantages of building a complex program from single-task functions.
+6. Write an algorithm as a first step to writing code.
+7. Understand how to return and accept multiple values from a function.
+8. Know the difference between a main function and a local function.
+9. Understand variable scope.
+10. Use global and persistent variables.
+11. Write a recursive function.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `%` | comment; MATLAB skips it | `% Variables` |
+| `edit name` | open/create `name.m` | `edit matrixMax` |
+| `function … end` | define function; 1st function name = file name | `function biggie = matrixMax(A)` |
+| `[a, b] = f(x)` | receive multiple return values (in order) | `[dim, r, c, mx] = matrix_facts(A)` |
+| `input(prompt)` | ask user for a value | `f = input('Enter force: ');` |
+| `disp(x)` | plain print | `disp('in Newton-meters')` |
+| `fprintf(fmt, …)` | formatted print | `fprintf('r = %d\n', r)` |
+| `rad2deg(r)` | radians → degrees | `rad2deg(0.7854)` → `45.0001` |
+| `sin` / `sind` | sine of radians / degrees | `sind(30)` → `0.5` |
+| `size(A, dim)` | rows (1) or cols (2) | `size(A,1)` |
+| `ndims(A)` | number of dimensions | `ndims(A)` → `2` |
+| `max(M)` | max of each column (vector → single max) | `max(M(:))` |
+| `which name` | path to a function's `.m` file | `which blkdiag` |
+| `global x` | share variable across workspaces | `global b;` |
+| `persistent y` | keep value between calls | `persistent y;` |
+| `lower` / `upper` | change case — exercises | `lower('Mars')` |
+| `extractBetween` | substring by position — exercises | `extractBetween(s,2,4)` |
+
+### 6.1 Comment Statements
+- **Comment** = non-executable line. Starts with `%`. Works in scripts, functions, even the Command Window.
+
+```matlab
+% This is a comment
+% The following equation will not be executed:
+% x = 100 / sin(52)
+```
+
+No output — MATLAB skips them.
+
+- Comments are for humans: explain a variable's intent, label a section, explain your thinking.
+- Put them anywhere, as many as you need.
+- Bottom line: **include comments**. You'll thank yourself later.
+
+### 6.2 Scripts
+
+- **Script** = saved list of commands → no retyping. Run by name. Extension `.m` (same as functions). Basically a program.
+- Can contain loops and conditionals.
+- Since **R2016b** → can contain its own **helper functions** (callable only inside the script).
+- Easy to convert into a function → often very similar.
+- **Runs in the Command Window's scope** (base Workspace): sees existing Workspace variables, adds the ones it creates.
+- Two types: regular scripts (`.m`) and **Live Scripts** (`.mlx`, later tutorial).
+
+Loops/conditionals work in the Command Window too, but awkwardly: **Enter** after each line, nothing runs until the final `end`. Rerun = reselect from Command History. Just make a script.
+
+**Script example — torque**
+
+τ = F · d · sin θ → τ (tau) = torque, F = force, d = distance vector from pivot, θ (theta) = angle. No Greek letters, capitals usually mean matrices → `tau = f * d * sin(theta)`.
+
+- Torque normally in **N·m**.
+- Lab assistant gave distance **8.2021 ft** (1 ft = 0.3048 m) and angle **0.7854 rad** (expected degrees). Force = **15 N**.
+- Conversions easy in MATLAB — **must track units** or the result is meaningless.
+
+```matlab
+f = 15;
+ft = 8.2021;
+rads = 0.7854;
+d = ft * 0.3048;
+theta = rad2deg(rads);
+tau = f * d * sind(theta)
+
+tau =
+
+   26.5166
+```
+
+No `;` on the `tau` line on purpose → shows the answer (with `;` it's only in the Workspace).
+Symbolic Math toolbox has `symunit` for tracking/converting units (later tutorial).
+Trig functions come in radian form (`sin`, `cos`, `tan`) and degree form (`sind`, `cosd`, `tand`). Could skip the conversion and use `sin(rads)`. Know your units before picking the function!
+
+### 6.3 Creating & Editing a Script
+
+Turn the last three commands into a script:
+
+1. Press **↑** → show Command History.
+2. **Shift**-select the last three commands (2 conversions + torque formula).
+3. Right-click → **Create Script** (Figure 6.1).
+
+![Figure 6.1 — Command History → Create Script](media/ch6_fig6-1_create_script.png)
+New unnamed, unsaved Editor tab with those commands. Add to the end:
+
+```matlab
+disp('in Newton-meters')
+```
+
+Save to the current folder as **`Torque`**.
+
+> **Book typo:** text shows curly quotes `‘in Newton-meters’`. MATLAB needs straight quotes `'…'`.
+
+- Name is **case-sensitive** → `torque` ≠ `Torque`.
+- Runs each command in order using `f`, `ft`, `rads` from the Workspace. Not set → error.
+
+```matlab
+f = 12.5;
+ft = 4.0056;
+rads = 0.5236;
+Torque
+
+tau =
+
+    7.6307
+
+in Newton-meters
+```
+
+**Torque.m** (as created):
+
+```matlab
+d = ft * 0.3048;
+theta = rad2deg(rads);
+tau = f * d * sind(theta)
+disp('in Newton-meters')
+```
+![Figure 6.2 — Command History → Create Script](media/ch6_fig6-2_create_script.png)
+
+**3 more ways to make a script:**
+
+- **New → Script** on the ribbon (save manually to name it)
+- **Ctrl+N** (save manually to name it)
+- `edit scriptName` (creates a named file)
+
+> Script uses the name of an existing Workspace variable → that variable gets **overwritten**.
+
+**Comments in scripts** → explain what and why. Not echoed when the script runs; only seen in the Editor.
+
+### 6.4 Making a Script Interactive
+
+`input` → prompt the caller for values. Add to the top of `Torque`:
+
+```matlab
+f = input('Enter force in Newtons: ');
+ft = input('Enter distance from the axis in feet: ');
+rads = input('Enter angle of force in radians: ');
+```
+
+**Torque.m — Figure 6.2:**
+
+```matlab
+f = input('Enter force in Newtons: ');
+ft = input('Enter distance from the axis in feet: ');
+rads = input('Enter angle of force in radians: ');
+d = ft * 0.3048;
+theta = rad2deg(rads);
+tau = f * d * sind(theta)
+disp('in Newton-meters')
+```
+
+Run, enter f = 15, ft = 8.2021, rads = 0.7854 (**Enter** after each) — Figure 6.3:
+
+```matlab
+Torque
+
+Enter force in Newtons: 15
+Enter distance from the axis in feet: 8.2021
+Enter angle of force in radians: 0.7854
+
+tau =
+
+   26.5166
+
+in Newton-meters
+```
+
+Many approaches to torque; this one saves typing.
+
+### 6.5 Functions: Built-in & Custom
+
+**Function** = block of code that answers a question ("square root of this?") or does a task ("plot this"). Full program = many functions, each a focused subtask. Benefits:
+
+- simpler to test small pieces
+- each piece works → build big programs with confidence
+- safer updates: replace only what changes
+- **reuse** in any program
+
+| | Script | Function |
+|---|---|---|
+| Series of commands in `.m` | ✓ | ✓ |
+| Call from Command Window | ✓ | ✓ |
+| Input parameters / return values | ✗ | ✓ |
+| Workspace | base (Command Window) | its own |
+
+"Program" = anything from Excel or iOS to a phone app or a car's fuel controller. "Programming" = "coding", "programmers" = "developers".
+
+**Built-in functions** → already used dozens: `sum`, `length`, `logical`, `int32`, `ceil`, `mod`, `class`, `strcmp`, `ismatrix`, `islogical`, `magic`, `randi`, `struct2cell`, `rng`, …
+
+- Most take an input (`ismatrix(M)`) and return something (logical, matrix, value).
+- Some do a task and return nothing (`rng` sets the seed).
+- Written with the same code elements as yours. Source visible for some: `which blkdiag` → path to its `.m` file → open and read.
+
+```matlab
+which blkdiag
+```
+
+Prints the full path to `blkdiag.m` inside your MATLAB install folder.
+
+Most languages have a big built-in function library.
+
+**Custom functions** = heart of **procedural programming**. Big problems (engineering, huge data sets) → not solved by typing commands. Real apps = 100,000s of lines in 100s of functions.
+
+Review **4.1 Using the MATLAB Editor** (Chapter 4).
+
+### 6.6 Function File Format
+
+```text
+function [retVar1, retVar2, ...] = functionName (param1, param2, ...)
+```
+
+- **`function`** keyword → function file, not a script.
+- **Output variable(s)** → one (brackets optional) or bracketed comma list. Optional; none → drop the `=` too. Can be specified as `varargout`.
+- **Function name** → first function in the file **must match the file name**. Same rules as variable names: a–z, A–Z, 0–9, `_`, start with a letter.
+- **Input parameters** → comma list in `( )`. Must be supplied when called. None → parentheses optional. Can be specified as `varargin`.
+  
+
+**Examples:**
+
+```matlab
+function toast()
+function toast
+function toe = tic_tac(first_square)
+function [x, y, z] = angry_cat(meow, hiss)
+```
+
+**Fundamental facts:**
+
+- `.m` file name = name of its **first** function.
+- Only the first function is callable from the Command Window or other files.
+- A file can hold as many functions as needed.
+- Other functions in the file (**local functions**) → callable only by the first function or each other.
+- Inputs `( )` and outputs `[ ]` both optional.
+
+Close with `end` on its own line (like loops/branches). Optional if only one function in the file, but good practice.
+
+```text
+function [retVar1, retVar2, ...] = functionName (param1, param2, ...)
+    % Your code goes here
+end
+```
+
+Function syntax is language-specific; MATLAB's is a bit unusual.
+
+### 6.7 From Algorithm to Code
+
+**Algorithm** = steps to solve a problem in plain text or **pseudo-code** (code-ish, no syntax worries). Think about the problem, not the rules.
+
+**Task:** find the largest number in a matrix (pretend `max` doesn't exist).
+
+**First pass:**
+
+1. Start with the first column in the first row
+2. Automatically regard that value as the largest number so far
+3. Move to the second column of the first row. Is that number larger than the first column? If so, that's the new largest number. If not, move on.
+4. Keep looking at each column and comparing numbers until you reach the end of the row.
+5. Go to the next row. Do it all again until you reach end of the last row.
+
+**More detail:**
+
+1. Create a variable *biggie* to hold the maximum value
+2. *biggie* = the value at (1,1)
+3. Look at the next column and compare its value to *biggie*
+4. If the value is larger, set *biggie* to that value
+5. If the value is equal or smaller, do nothing
+6. Have we read the last column?
+7. No: repeat steps 3–6
+8. Yes: go to the next row
+9. Repeat steps 3–6 for the next row, starting at column 1
+10. Have we read the last row?
+11. No: repeat steps 9–10
+12. Yes: we're done
+13. Report *biggie* to the caller
+
+No single "right" algorithm — it's a craft. Time on the algorithm saves time coding.
+
+Alternative → **flowchart** (like the if-elseif-else one in Chapter 4). Good for visual thinkers.
+
+**Build it:**
+
+```matlab
+edit matrixMax
+```
+
+Tip: paste the algorithm as comments, write code under each step.
+
+```text
+function biggie = matrixMax(A)
+         ↑         ↑        ↑
+  single return  function  input
+  value (no [])    name    parameter
+```
+
+- Input = matrix `A`; output = scalar `biggie`.
+- Editor flags `A` (unused) and `biggie` (never assigned) until the body exists → ignore for now, but watch those warnings later.
+
+Parameter = alias for a value. `A` is the name *inside* the function; caller's variable name doesn't matter, just that it's a matrix.
+
+**Step 1 — initialize:**
+
+```matlab
+function biggie = matrixMax(A)
+    % Variables
+    biggie = A(1,1);
+```
+
+- `=` highlighted until you add the `;`. Most function lines end in `;` → suppress output. Leave a few off to see the noise.
+
+**Step 2 — rows/cols** (`size` with dim parameter: 1 = rows, 2 = cols):
+
+```matlab
+    rows = size(A,1);
+    columns = size(A,2);
+```
+
+- `*` next to the file name on the tab / title bar → unsaved changes. MATLAB won't run an unsaved file.
+- Click back in the Command Window → MATLAB auto-saves. Or **Save** on the ribbon.
+
+**Step 3 — nested `for` loops:**
+
+```matlab
+    % Walk the matrix
+    for r = 1:rows
+        for c = 1:columns
+        end
+    end
+```
+
+Type the `end`s before the loop bodies → no missing `end`s in big files.
+
+**Step 4 — compare (in-line comment):**
+
+**matrixMax.m (complete):**
+
+```matlab
+function biggie = matrixMax(A)
+    % Variables
+    biggie = A(1,1);
+    rows = size(A,1);
+    columns = size(A,2);
+
+    % Walk the matrix
+    for r = 1:rows
+        for c = 1:columns
+            if A(r,c) > biggie   % Is A(r,c) the largest yet?
+                biggie = A(r,c);
+            end
+        end
+    end
+end
+```
+
+**Test** — 5 × 7 matrix of random integers 1–15:
+
+```matlab
+rng('default')
+T = randi(15,5,7);
+matrixMax(T)
+
+ans =
+
+    15
+```
+
+- Answer 15. May appear more than once — we only wanted the max.
+- Test with other matrices on your own.
+
+```text
+matrixMax(T)
+    ↑      ↑
+function  input parameter (any variable,
+  call    value, or expression)
+```
+
+Inputs/outputs tracked by **position** in `( )` / `[ ]`. Same as built-ins: `sin(x)`.
+
+**Watch the loops** → add `fprintf` inside the inner loop:
+
+```matlab
+    % Walk the matrix
+    for r = 1:rows
+        for c = 1:columns
+            fprintf('r = %d, c = %d \n', r, c);
+            if A(r,c) > biggie   % Is A(r,c) the largest yet?
+                biggie = A(r,c);
+            end
+        end
+    end
+```
+
+```matlab
+matrixMax(T)
+
+r = 1, c = 1 
+r = 1, c = 2 
+r = 1, c = 3 
+r = 1, c = 4 
+r = 1, c = 5 
+r = 1, c = 6 
+r = 1, c = 7 
+r = 2, c = 1 
+...
+r = 5, c = 7 
+
+ans =
+
+    15
+```
+
+(35 lines total, one per element; middle trimmed here.)
+
+Higher-dimensional array → one more nested loop per extra dimension.
+
+### 6.8 Return Values
+
+Multiple returns → comma-separated, bracketed list. **Not an array**; values can be different types.
+
+```text
+function [retVar1, retVar2, ...] = functionName(...)
+```
+
+Returns a double x, string y, matrix Z:
+
+```matlab
+function [x, y, Z] = manyRetVals()
+```
+
+Caller uses the same format (commas optional):
+
+```matlab
+[a, b, C] = manyRetVals();
+```
+
+Fewer outputs requested → received **in order**, rest lost:
+
+```matlab
+[a, b] = manyRetVals();    % gets x, y — Z lost
+[a] = manyRetVals();       % gets x only
+```
+
+**Concrete example — `matrix_facts`, created from the ribbon:**
+
+1. **New → Function**  → framework to fill in :
+
+
+```matlab
+function [ output_args ] = untitled3( input_args )
+%UNTITLED3 Summary of this function goes here
+%   Detailed explanation goes here
+
+end
+```
+
+2. Replace `output_args` → `dimensions, rows, columns, maxval` 
+3. Replace `untitled3` → `matrix_facts`.
+4. **Save**  → name `matrix_facts` (file name = first function name).
+
+5. Replace `input_args` → `A` 
+6. Replace template comments with a real description.
+7. Add the body , then call `matrixMax`.
+
+**matrix_facts.m:**
+
+```matlab
+function [dimensions, rows, columns, maxval] = matrix_facts(A)
+% Accepts a matrix and returns
+%   - number of dimensions
+%   - number of rows
+%   - number of columns
+%   - highest value in the matrix
+
+    dimensions = ndims(A);
+    rows = size(A,1);
+    columns = size(A,2);
+    maxval = matrixMax(A);
+end
+```
+
+Calling our own function from another one → `matrixMax` needs to be in the same folder (or on the path). Remove the `fprintf` debug line from `matrixMax` first, or it prints 35 lines.
+
+```matlab
+clear
+rng('default')
+A = randi(15, 5, 7);
+[dim, r, c, mx] = matrix_facts(A)
+
+dim =
+
+     2
+
+
+r =
+
+     5
+
+
+c =
+
+     7
+
+
+mx =
+
+    15
+```
+
+Workspace now holds `dim`, `r`, `c`, `mx`.
+
+### 6.9 Local Functions
+
+**Local function** → callable only within its file (by another function there, or inside a script). Not from other files or the Command Window. Any number per file. Must come **after** the main function (first function = file name).
+
+In `matrix_facts.m`, change
+
+```matlab
+maxval = matrixMax(A);
+```
+
+to
+
+```matlab
+maxval = myMax(A);
+```
+
+and add `myMax` after the main function's `end`.
+
+**matrix_facts.m — Figure 6.14:**
+
+```matlab
+function [dimensions, rows, columns, maxval] = matrix_facts(A)
+% Accepts a matrix and returns
+%   - number of dimensions
+%   - number of rows
+%   - number of columns
+%   - highest value in the matrix
+
+    dimensions = ndims(A);
+    rows = size(A,1);
+    columns = size(A,2);
+    maxval = myMax(A);
+end
+
+function max_value = myMax(M)
+% Finds the largest value in a matrix
+
+    v = max(M);
+    max_value = max(v);
+end
+```
+
+- `max(M)` on m × n → row vector of length n = max of each column.
+- `max` on that vector → overall max.
+- Fancier, one call: `max_value = max(M(:));` → `(:)` turns M into one column, `max` works on it directly.
+
+```matlab
+[dim, r, c, mx] = matrix_facts(A)
+
+dim =
+
+     2
+
+
+r =
+
+     5
+
+
+c =
+
+     7
+
+
+mx =
+
+    15
+```
+
+Same results as before.
+
+### 6.10 Variable Scope
+
+**Scope** = which statements can see/use a variable. Three kinds: **local**, **persistent**, **global**.
+
+- Variable = alias for a memory address.
+- Passing to/returning from a function → the **value** is passed (not the address), copied into memory that function can reach.
+- Address space a set of commands can reach = its scope.
+
+**Rules:**
+
+- A function can't see the Command Window's address space.
+- The Command Window can't see a function's.
+- Functions can't see each other's.
+- Scripts use the Command Window's space, but a local function in a script sees only its own.
+
+Some languages pass memory addresses (**pointers**, C/C++). Not widely supported in MATLAB.
+In many languages a variable made inside a loop (incl. the counter) dies when the loop exits. **Not in MATLAB** — it stays.
+
+**Local scope demo** — two variables with the same name.
+
+```matlab
+clc
+clear
+local_var = 1000;
+a = logical(1);
+b = 57;
+c = 'autumn leaves';
+X = magic(4);
+```
+
+**Base Workspace — Figure 6.17:**
+
+| Name | Value | Size |
+|---|---|---|
+| a | 1 | 1x1 |
+| b | 57 | 1x1 |
+| c | 'autumn leaves' | 1x13 |
+| local_var | 1000 | 1x1 |
+| X | 4x4 double | 4x4 |
+
+New function `scope` — no inputs, no outputs (Figure 6.15):
+
+```matlab
+function scope()
+    local_var = 20;
+    local_var = local_var + 10;
+end
+```
+
+**Breakpoint** → stops the function at that line; you control the rest by hand. Click the dash next to line **2** → circle appears (gray = unsaved, red = saved). Execution stops **right before** that line.
+
+
+```matlab
+scope
+
+2       local_var = 20;
+K>> 
+```
+
+
+- Green arrow = current line. Prompt changes to `K>>` → you're in the **function's** workspace.
+- Workspace pane is **empty** → base variables not visible here.
+
+**Debug section** of the ribbon:
+
+1. **Step** → runs `local_var = 20` → appears in the function's Workspace.
+2. **Step** again → `local_var = local_var + 10` → Workspace shows 30.
+3. **Continue** → finishes, back to the Command Window.
+
+```matlab
+local_var
+
+local_var =
+
+        1000
+```
+
+Base variables back; `local_var` still **1000**. Function's `local_var` ≠ base `local_var`, despite the same name. That's scope.
+
+**Global scope** → shared across all functions, scripts, and the base workspace. Generally discouraged — often a sign of poor design, confusing errors.
+
+```matlab
+global b;
+```
+
+Declare and assign on **separate lines**:
+
+```matlab
+global b;
+b = randi(2000, 13, 22);
+```
+
+To use it somewhere else → declare again first:
+
+```matlab
+global b;    % Bring the variable into the function
+var1 = b;    % Use the variable
+b = var2;    % Set the variable
+```
+
+Change global `b` → changes everywhere it's used (any function, Command Window).
+
+ `b` already exists as a local in the base workspace from the scope demo → `global b` there gives a warning. Run `clear b` first.
+
+### 6.11 Recursion
+
+**Recursive function** = calls itself. Needs a **stop condition** or it spirals forever. Once hit → calls unwind, each returning its value to its caller, until the original caller gets the final result.
+
+**Factorial** n! = 1 · 2 · 3 · … · n (1! = 1). Example 4!:
+
+```text
+1 * 2 * 3 * 4
+(1 * 2 * 3) * 4
+((1 * 2) * 3) * 4
+(((1) * 2) * 3) * 4
+```
+
+So:
+
+```text
+4! = 3! * 4
+3! = 2! * 3
+2! = 1! * 2
+```
+
+Pattern → x! = (x−1)! · x.
+
+**Algorithm:**
+
+1. Begin with a number n
+2. If n = 1, then n! = 1 and we're done
+3. If n ~= 1, then get (n − 1)!
+4. Multiply (n − 1)! times n
+
+Stop condition: **n = 1**.
+
+**recurse.m:**
+
+```matlab
+function fact = recurse(n)
+    if n == 1
+        fact = 1;
+    else
+        fact = n * recurse(n-1);
+    end
+end
+```
+
+```matlab
+recurse(4)
+
+ans =
+
+    24
+```
+
+Trace: `recurse(4)` → 4 · `recurse(3)` → 3 · `recurse(2)` → 2 · `recurse(1)` = 1 → back up: 2 → 6 → **24**.
+
+`recurse(0)` or a negative n never reaches 1 → recursion until MATLAB's recursion limit error.
+
+### 6.12 Persistent Variables
+
+Normally a function's locals vanish when it exits. **`persistent`** → value kept in memory for the next call (until MATLAB restarts, or `clear fthw`).
+
+**fthw.m** ("factorials the hard way"):
+
+```matlab
+function f = fthw(x)
+    persistent y;
+    if x == 1
+        y = 1;
+    else
+        y = y * x;
+    end
+    f = y;
+end
+```
+
+Call with x = 1, then add 1 each time → manual factorial, no recursion (Figure 6.22):
+
+```matlab
+fthw(1)
+fthw(2)
+fthw(3)
+fthw(4)
+
+ans =
+
+     1
+
+
+ans =
+
+     2
+
+
+ans =
+
+     6
+
+
+ans =
+
+    24
+```
+
+Why do it this way? You wouldn't — demo only. Like globals, persistent variables have their place but are rarely needed.
+
+#### Key Terms
+
+algorithm · function definition · functions · global scope · initialize · input value · local functions · local scope · persistent variable · pseudo-code · return value · scope · scripts
+
+#### Key Commands
+
+`%` · `disp` · `edit` · `end` · `function` · `input` · `size` · `which`
+
+---
+
+## SDC Chapter 6 — Exercises
+
+**Exercise 6.1** — Rewrite the terminal velocity script, first seen in the Introduction and last modified in the loops and conditionals tutorial, as a function which accepts a planet name (as a character array string) as its input parameter and returns the terminal velocity for that planet. Hint: To avoid case-sensitivity issues, you can use the lower or upper function to convert the input string into a standard form that your function expects.
+
+<details><summary>Solution</summary>
+
+Uses the values from `terminalVelocityCond2` (Chapter 4.8). Formula assumed: Vt = √(2·m·g / (ρ·A·C)) — matches the book's Neptune result.
+
+```matlab
+function Vt = terminalVelocity(planet)
+% Terminal velocity (cm/s) of a 2.5 cm, 65.4710 g sphere on a given planet
+    switch lower(planet)
+        case 'mars'
+            gravity = 371;
+            atmosphericDensity = 0.000020;
+        case 'saturn'
+            gravity = 1044;
+            atmosphericDensity = 0.00019;
+        case 'neptune'
+            gravity = 1115;
+            atmosphericDensity = 0.00045;
+        otherwise
+            gravity = 981;
+            atmosphericDensity = 0.001217;
+    end
+    dia = 2.5;
+    area = pi*((dia/2)^2);
+    mass = 65.4710;
+    C = 0.47;
+    Vt = sqrt((2*mass*gravity)/(atmosphericDensity*area*C));
+end
+```
+
+```matlab
+terminalVelocity('NEPTUNE')
+terminalVelocity('mars')
+
+ans =
+
+   1.1859e+04
+
+
+ans =
+
+   3.2447e+04
+```
+
+Neptune matches the book's `1.185869183622224e+04` (shown there in `format long`).
+
+</details>
+
+**Exercise 6.2** — Modify the matrixMax function defined in the From Algorithm to Code section so that it also returns the row and column of the *last* occurrence of the maximum value, as a 1 × 2 row vector.
+
+<details><summary>Solution</summary>
+
+`>=` instead of `>` → a later equal value also updates the location → **last** occurrence.
+
+```matlab
+function [biggie, loc] = matrixMax(A)
+    % Variables
+    biggie = A(1,1);
+    loc = [1 1];
+    rows = size(A,1);
+    columns = size(A,2);
+
+    % Walk the matrix
+    for r = 1:rows
+        for c = 1:columns
+            if A(r,c) >= biggie   % >= keeps the LAST max
+                biggie = A(r,c);
+                loc = [r c];
+            end
+        end
+    end
+end
+```
+
+```matlab
+T = [3 9 1; 9 2 9; 4 5 6];
+[mx, where] = matrixMax(T)
+
+mx =
+
+     9
+
+
+where =
+
+     2     3
+```
+
+9 appears at (1,2), (2,1), (2,3) → walking row by row, (2,3) is last.
+
+</details>
+
+**Exercise 6.3** — Write a function called torque1 to calculate torque, which was discussed in the Scripts section. The function will accept five parameters:
+
+- a force *f*, in Newtons
+- a distance *d* from the pivot point
+- a unit indicator for the distance value: 'f' for feet or 'm' for meters
+- an angle at which the force is being applied
+- a unit indicator for the angle value: 'r' for radians or 'd' for degrees
+
+The function will return the value calculated by the formula *tau = f \* d \* sin(theta)*. Convert distance if necessary and select the proper sine function based on its unit indicator.
+
+<details><summary>Solution</summary>
+
+```matlab
+function tau = torque1(f, d, dUnit, theta, aUnit)
+% Torque in N·m. dUnit: 'f' feet / 'm' meters. aUnit: 'r' radians / 'd' degrees
+    if dUnit == 'f'
+        d = d * 0.3048;      % feet -> meters
+    end
+    if aUnit == 'd'
+        tau = f * d * sind(theta);
+    else
+        tau = f * d * sin(theta);
+    end
+end
+```
+
+```matlab
+torque1(15, 8.2021, 'f', 0.7854, 'r')
+torque1(15, 2.5, 'm', 45, 'd')
+
+ans =
+
+   26.5166
+
+
+ans =
+
+   26.5165
+```
+
+First matches the script result. Second = same setup given in meters + degrees (tiny difference: the book's 8.2021 ft and 0.7854 rad are rounded).
+
+</details>
+
+**Exercise 6.4** — Write a function called torque2 to calculate torque, based on the code in Exercise 6.3. This version accepts three parameters:
+
+- a three-column matrix, where column 1 contains the force value, column 2 contains the distance value, and column 3 contains the force angle value
+- a unit indicator for the distance value: 'f' for feet or 'm' for meters
+- a unit indicator for the angle value: 'r' for radians or 'd' for degrees
+
+The function will return a column vector with each row being the torque value for the corresponding row of the input matrix. As in Exercise 6.3, the torque value is calculated by the formula *tau = f \* d \* sin(theta)*, and the unit indicators are used to determine whether a distance conversion is necessary and to select the proper sine function.
+
+<details><summary>Solution</summary>
+
+Element-wise → no loop needed.
+
+```matlab
+function tau = torque2(M, dUnit, aUnit)
+% M = [force, distance, angle] per row. Returns a column of torques (N·m)
+    f = M(:,1);
+    d = M(:,2);
+    theta = M(:,3);
+    if dUnit == 'f'
+        d = d * 0.3048;
+    end
+    if aUnit == 'd'
+        tau = f .* d .* sind(theta);
+    else
+        tau = f .* d .* sin(theta);
+    end
+end
+```
+
+```matlab
+M = [15 8.2021 0.7854; 12.5 4.0056 0.5236];
+torque2(M, 'f', 'r')
+
+ans =
+
+   26.5166
+    7.6307
+```
+
+Both rows match the script runs.
+
+</details>
+
+**Exercise 6.5** — Write a recursive function called reversed that accepts a character array string and reverses its order. Do not use the built-in reverse function. Hint: Your solution can use the built-in extractBetween function. Pay close attention to the data types that you're passing and receiving.
+
+<details><summary>Solution</summary>
+
+Stop condition: 0 or 1 characters → already reversed. Otherwise → last char + reversed(rest).
+
+`extractBetween` on a char array returns a **cell** (`{'...'}`) → unwrap with `{1}` (or `char(...)`) before recursing.
+
+```matlab
+function out = reversed(s)
+% Recursively reverses a character array
+    n = length(s);
+    if n <= 1
+        out = s;
+    else
+        rest = extractBetween(s, 1, n-1);   % 1x1 cell
+        out = [s(n), reversed(rest{1})];
+    end
+end
+```
+
+```matlab
+reversed('autumn leaves')
+
+ans =
+
+    'sevael nmutua'
+```
+
+(Without `extractBetween`: `[s(end), reversed(s(1:end-1))]` does the same.)
+
+</details>
+
