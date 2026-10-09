@@ -82,6 +82,8 @@
   - [6.11 Recursion](#611-recursion)
   - [6.12 Persistent Variables](#612-persistent-variables)
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
+- [Midterm Example](#sdc-midterm)
+- [Numerical Integration](#sdc-numerical-integration)
 
 ---
 
@@ -6024,7 +6026,7 @@ X = magic(4);
 | local_var | 1000 | 1x1 |
 | X | 4x4 double | 4x4 |
 
-New function `scope` — no inputs, no outputs (Figure 6.15):
+New function `scope` — no inputs, no outputs:
 
 ```matlab
 function scope()
@@ -6417,3 +6419,150 @@ ans =
 
 </details>
 
+## Midterm Example
+An ambitious boss wants to be a Nobel Laureate for all of the prizes (chemistry, physics, peace, literature, economics and physiology or medicine). His start-up company, Kudos, is hosting job interviews and testing YOU for data-handling skills. It's time to qualify your half-semester skills of MATLAB.
+
+The first data has arrived from Sarah Spongejello, a Google and NASA JPL engineer. The data, a function file, came back from SpaceBee One, one of the Indian Polar Satellite Launch Vehicle (PSLV) rocket's under-sized cube satellites.
+
+### Part 1 — Keep a log
+### Part 2 — Run the function, save the data as `spacebee1`
+**ctof.m**
+
+```matlab
+function temptable = ctof(tinitial,tfinal)
+% CTOF : function to convert temperature from C to F
+% call syntax:
+%   temptable = ctof(tinitial,tfinal);
+%----------------
+    C = [tinitial:tfinal]';     % Create a column vector C
+    F = (9/5)*C + 32;           % compute corresponding F
+    temptable = [C F];          % make a 2 column matrix of C & F
+end
+```
+```matlab
+spacebee1 = ctof(0, 100);
+```
+**Find these values for column 2 (°F):**
+
+| Statistic | MATLAB command | Answer |
+|---|---|---|
+| MAX | max(spacebee1(:, 2)| 212|
+| MIN | min(spacebee1(:, 2) |32 |
+| RANGE | range(spacebee1(:, 2) |180 |
+| MEAN | mean(spacebee1(:, 2) | 122 |
+| MEDIAN | median(spacebee1(:, 2) | 122|
+| MODE | mode(spacebee1(:, 2) | 32 |
+### Part 3 — Forecast 4 more points (linear fit)
+
+You'll provide **4 more data points** beyond spacebee1 by forecasting. If column 1 = **x** and column 2 = **y**, linear data follows:
+
+$$y = mx + b$$
+### 3ab. Slope and intercept
+$$m = \frac{y_2 - y_1}{x_2 - x_1}$$
+
+```matlab
+p = polyfit((spacebee1(:, 1), (spacebee1(:, 2), 1);
+slope = p(1) = 1.8
+intercept = p(2) = 32
+```
+### 3c. Anonymous function → next 4 points
+```matlab
+f = @(x) p(1)*x + p(2)
+values = [f(101) f(102) f(103) f(104)]
+
+values = 1×4
+213.8000	215.6000	217.4000	219.2000
+```
+### Part 4 — Add a Kelvin column
+
+The boss offers to call his connection, Paige-Page Thompson, who works with large Capital One data. You tell him it isn't necessary, because you know how to manipulate arrays to add a column of **Kelvin** temperatures (K = °C + 273.15).
+
+### 4a. Build the Kelvin column (273.15 → 373.15)
+
+```matlab
+spacebee2 = (273.15:373.15)'
+size(spacebee2)
+
+ans = 1×2
+     101     1
+```
+### 4b. Combine with spacebee1
+
+```matlab
+B = [spacebee1, spacebee2]
+size(B)
+
+ans = 1×2
+     101     3
+```
+### 4c. Plot
+
+```matlab
+plot(B)
+title('Comparison of Celsius - Fahrenheit - Kelvin')
+xlabel('Degrees from 0 to 104 Celsius')
+ylabel('Comparison of Degrees')
+legend({'Celcius', 'Farenheight', 'Kevin'})
+axis equal
+```
+![C vs F vs K plot](media/midterm_spacebee_plot.png)
+
+## Numerical Integration
+
+**Assignment: "Distance planet travels in an orbit"** (last 3 pages of the PDF)
+Fill in a template that computes the **perimeter of an ellipse** — the distance a planet travels in one orbit — two ways, and return both.
+$$P = 4a\int_0^{\pi/2}\sqrt{1-k^2\sin^2\theta}\;d\theta,\qquad k=\frac{\sqrt{a^2-b^2}}{a}$$
+- `a` = major axis, `b` = minor axis
+
+**Template (given):**
+
+```matlab
+function [trapzApprox, numIntegrate] = PlanetDistance(a,b,points)
+    trapzApprox=TrapzPlanet(a,b,points);
+    numIntegrate=IntegratePlanet(a,b);
+end
+
+function trapzApprox=TrapzPlanet(a,b,points)
+    % Your code goes here
+end
+
+function numIntegrate=IntegratePlanet(a,b)
+    % Your code goes here
+end
+```
+
+**Your job → write the bodies of two local functions:**
+
+| Local function | Must use | Inputs | Does |
+|---|---|---|---|
+| `TrapzPlanet` | `trapz` | `a, b, points` | trapezoidal integration over `points` discrete θ values |
+| `IntegratePlanet` | `integral` | `a, b` | adaptive integration of an anonymous function |
+
+**Expected result:**
+
+```matlab
+a = 3.01*10^9; b = 2.74*10^9;
+[trapzApprox, numIntegrate] = PlanetDistance(a,b,1000)
+
+trapzApprox =
+
+   1.8074e+10
+
+
+numIntegrate =
+
+   1.8074e+10
+```
+
+**Auto-grader checks:**
+
+1. `PlanetDistance(a,b,10)` → `trapzApprox = 1.8074e+10` (even with only 10 points)
+2. `PlanetDistance(a,b,10)` → `numIntegrate = 1.8074e+10`
+3. `PlanetDistance.m` actually calls both `trapz` and `integral`
+
+**Things to get right:**
+
+- θ goes from **0 to π/2** (radians → use `sin`, not `sind`).
+- Don't forget the **4a** in front of the integral.
+- Element-wise ops (`.^`, `.*`) inside the integrand — `integral` passes in an array.
+- `trapz` needs **x and y arrays**; `integral` needs a **function handle** `@(theta) …` + limits.
