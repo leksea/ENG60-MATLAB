@@ -6627,3 +6627,165 @@ numIntegrate =
 - Debug = find where code went wrong. **Debugger** $\rightarrow$ control execution by hand, watch from inside.
 - **Error handling** = code that gracefully handles (or prevents) likely trouble spots.
 - **Syntactic error** = broke syntax rules (e.g. `#` in a var name). Easiest $\rightarrow$ MATLAB flags them as you type.
+
+
+```matlab
+clear
+a * 5
+```
+
+```text
+Unrecognized function or variable 'a'.
+```
+
+
+```matlab
+cos(sin(0.45)
+ cos(sin(0.45)
+              ↑
+Error: Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched delimiters.
+
+Did you mean:
+>> cos(sin(0.45))
+```
+
+- Arrow → where `)` should go. "Did you mean" $\rightarrow$  press **Enter** to accept. Often right.
+- **↑** → Command History. Failed command has a **red dash**
+- - Right-click that History line → **Create Script**.
+- Editor: no inline message $\rightarrow$  **red squiggle** under the error. Hover $\rightarrow$  tooltip : `Invalid syntax at end of line. Possibly, a ')' is missing.`
+
+**Error/warning alley** (right edge of Editor):
+
+| Box at top | Meaning |
+|---|---|
+| green | no errors |
+| yellow | warnings / potential errors |
+| red | definite errors |
+
+- Each problem line $\rightarrow$  red/yellow **dash** in the alley. Hover $\rightarrow$  line # + message. Big help in long files.
+- Run it anyway $\rightarrow$  same Command Window error.
+- Syntax error $\rightarrow$  stops execution **immediately** $\rightarrow$  only first error per run.
+#### Key Terms
+
+debug $\cdot$ debugger $\cdot$ error handling $\cdot$ syntax
+
+### 7.2 Semantic Errors
+
+- **Semantic error** = logic error. Syntax fine, wrong result. Sometimes a **runtime error**, sometimes silent.
+- Computer only does what the programmer tells it. Can't guess intent.
+
+```matlab
+function x = addSeven(num)
+    x = num + 7;
+    x = 10;
+end
+```
+
+- `addSeven(3)` → 10 (correct, by accident). Any other input → wrong. Legit code  $\rightarrow$ returns last `x`.
+
+#### Key Terms
+
+semantic error $\cdot$ runtime error
+
+### 7.3 Using the Debugger: Fixing the Obvious Errors
+
+Book file: **`terminalVelocityDebug.m`** (broken terminal velocity function). Open in Editor.
+
+**Error 1 — misspelled variable:**
+
+```matlab
+terminalVelocityDebug('Mars')
+```
+
+```text
+Undefined function or variable 'dia'.
+
+Error in terminalVelocityDebug (line 9)
+area = pi*((dia/2)^2)  % Cross-sectional area of the falling object,
+```
+
+- Underlined line # = link  $\rightarrow$ jumps to that line.
+- Defined as `diam`, used as `dia` (cut-and-paste slip). `diam` had a squiggle  $\rightarrow$ hover: value never used → alarm bell.
+
+```matlab
+dia = 2.5;          % Diameter of the sphere, in cm
+```
+
+- Rename a var  $\rightarrow$ MATLAB highlights all instances; rename again $\rightarrow$  offers to change all $\rightarrow$  no missed spots.
+
+Can drag-and-drop var names from Workspace $\rightarrow$ Editor/Command Window. Fast, no typos.
+**Error 2 — missing `;`** : `=` highlighted yellow + squiggle. Hover $\rightarrow$ `Terminate statement with semicolon to suppress output (in functions).` → **Details** (long explanation) / **Fix** (adds `;`).
+- Warnings OK to ignore with good reason. Not here → add `;`.
+
+**Error 3 — case-sensitive return var:**
+
+```matlab
+v = terminalVelocityDebug('Mars')
+```
+
+```text
+Output argument "Vt" (and maybe others) not assigned during call to "terminalVelocityDebug".
+```
+
+- Unassigned output $\rightarrow$ why? Line never reached: loop never runs, untaken branch, early `return`.
+- Here $\rightarrow$ alley shows 1 yellow square + 2 dashes:
+
+```text
+⚠ Line 6: The function return value 'Vt' might be unset.
+⚠ Line 45: The value assigned to variable 'vt' might be unused.
+```
+
+- `Vt` ≠ `vt` (case-sensitive). Change `vt` $\rightarrow$ `Vt` in the last assignment.
+
+```matlab
+v = terminalVelocityDebug('Mars')
+
+v =
+
+   3.2447e+04
+```
+
+
+- These 3 = flagged by MATLAB $\rightarrow$ in real life fixed while typing.
+
+#### Key Commands
+
+`return`
+
+### 7.4 Breakpoints
+
+New failure:
+
+```matlab
+terminalVelocityDebug('Pluto')
+```
+
+```text
+Undefined function or variable 'gravity'.
+
+Error in terminalVelocityDebug (line 45)
+Vt = sqrt((2 * mass * gravity) / (atmosphericDensity * C * area));
+```
+
+- Only works for planets, not dwarf planets $\rightarrow$ walk through it.
+- **Breakpoint** $\rightarrow$ pauses at a line $\rightarrow$ debug mode. Only on **executable lines**.
+
+```matlab
+function Vt = terminalVelocityDebug(planet)      % line 6
+    % Constant Values
+    dia = 2.5                 % Diameter of the sphere, in cm
+    area = pi*((dia/2)^2)     % Cross-sectional area of the falling object,
+                              % which for a sphere is pi*radius^2
+    mass = 65.4710;           % Mass of the sphere, in grams
+    C = 0.47;                 % Drag coefficient of a sphere
+```
+
+**On pause at a breakpoint:**
+
+- Command Window shows the paused line (line # = link)
+- prompt `>>`  $\rightarrow$ `K>>`
+- green arrow at paused line 
+- Workspace  $\rightarrow$ function's workspace (not base)
+- **Run** toolbar  $\rightarrow$ **Debug** toolbar
+
+
