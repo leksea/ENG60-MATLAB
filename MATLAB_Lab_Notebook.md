@@ -84,8 +84,21 @@
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
 - [Midterm Example](#sdc-midterm)
 - [Numerical Integration](#sdc-numerical-integration)
+- [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
+  - [7.1 Syntactic Errors](#71-syntactic-errors)
+  - [7.2 Semantic Errors](#72-semantic-errors)
+  - [7.3 Using the Debugger: Fixing the Obvious Errors](#73-using-the-debugger-fixing-the-obvious-errors)
+  - [7.4 Breakpoints](#74-breakpoints)
+  - [7.5 Debug Mode & the Debug Toolbar](#75-debug-mode--the-debug-toolbar)
+  - [7.6 Walking a Function](#76-walking-a-function)
+  - [7.7 Error Handling: Standardizing & Verifying Input](#77-error-handling-standardizing--verifying-input)
+  - [7.8 Try/Catch Blocks](#78-trycatch-blocks)
+  - [7.9 Manual Debugging Techniques](#79-manual-debugging-techniques)
+  - [7.10 Testing Your Code](#710-testing-your-code)
+- [SDC Chapter 7 — Exercises](#sdc-chapter-7--exercises)
 
 ---
+
 
 ## Lesson 1 Slides: About MATLAB
 
@@ -173,10 +186,10 @@ ans =
 **Precedence examples:**
 
 ```
-8 + 3 * 5 = 23            → (8 + (3 * 5))
-4 ^ 2 – 12 – 8 / 4 * 2 = 0 → ((4^2) – 12 – ((8/4) * 2))
-3 * 4 ^ 2 + 5 = 53         → ((3 * (4^2)) + 5)
-27 ^ 1 / 3 + 32 ^ 0.2 = 11 → (((27^1) / 3) + (32^0.2))
+8 + 3 * 5 = 23            -> (8 + (3 * 5))
+4 ^ 2 – 12 – 8 / 4 * 2 = 0 -> ((4^2) – 12 – ((8/4) * 2))
+3 * 4 ^ 2 + 5 = 53         -> ((3 * (4^2)) + 5)
+27 ^ 1 / 3 + 32 ^ 0.2 = 11 -> (((27^1) / 3) + (32^0.2))
 ```
 
 *Text reference: page 10*
@@ -221,7 +234,7 @@ Useful commands to memorize (used frequently throughout the course):
 
 ### T1-1 — Use MATLAB to compute the following
 
-**a.** 6(10/13) + 18/(5·7) + 5(9²)
+**a.** $6\left(\frac{10}{13}\right) + \frac{18}{5 \cdot 7} + 5\left(9^2\right)$
 
 ```matlab
 >> 6*(10/13) + 18/(5*7) + 5*(9^2)
@@ -243,7 +256,7 @@ ans =
 
 ### T1-1 (repeated, parts c & d)
 
-**c.** 6(10/13) + 18/(5·7) + 5(9²)
+**c.** $6\left(\frac{10}{13}\right) + \frac{18}{5 \cdot 7} + 5\left(9^2\right)$
 
 ```matlab
 >> 6*(10/13) + 18/(5*7) + 5*(9^2)
@@ -799,12 +812,12 @@ win_win =
     3
 >> 2win=3
 2win=3
-   ↑
+   ^
 Error: Unexpected 'win'.
 Check for missing multiplication operator.
 >> win-win=3
 win-win=3
-   ↑
+   ^
 Incorrect use of '=' operator. Assign a value to
 a variable using '=' and compare values for equality
 using '=='.
@@ -1306,7 +1319,7 @@ Predict both the value and data type of `x`:
 
 **x = 55 + uint32(-22) + pi**
 
-`uint32` is unsigned and starts at 0, so the closest value it can represent for -22 is 0. Then `55 + 0 + pi = 58.14159…`, and the result should take on type `uint32`.
+`uint32` is unsigned and starts at 0, so the closest value it can represent for -22 is 0. Then `55 + 0 + pi = 58.14159...`, and the result should take on type `uint32`.
 
 ```matlab
 >> x=55+uint32(-22)+pi
@@ -1315,7 +1328,7 @@ x =
    58
 ```
 
-The answers are slightly different — MATLAB displays just the whole number (`58`) rather than `58.14159…`. This demonstrates that variable types follow strict rules, and misunderstanding them can silently produce unexpected results (the integer type truncates/rounds the floating-point result).
+The answers are slightly different — MATLAB displays just the whole number (`58`) rather than `58.14159...`. This demonstrates that variable types follow strict rules, and misunderstanding them can silently produce unexpected results (the integer type truncates/rounds the floating-point result).
 
 ### 2.4
 
@@ -1531,17 +1544,17 @@ This week you will do some Engineering Economic Analysis and see how computers i
 
 | Function | Purpose | Example |
 |---|---|---|
-| `class` | Returns a variable's data type | `class(aVector)` → `double` |
-| `size` | Returns the dimensions (rows, then columns) | `size(string1)` → `1 18` |
-| `length` | Returns the size of the largest dimension | `length(1:5)` → `5` |
-| `ndims` | Returns the number of dimensions | `ndims(randi(15,4,5,2))` → `3` |
-| `numel` | Returns the total number of elements | `numel(magic(4))` → `16` |
-| `isscalar` | Is it 1×1? | `isscalar(57)` → `1` |
-| `isvector` | Is it 1×n or n×1? | `isvector(1:5)` → `1` |
-| `ismatrix` | Is it 2-D? | `ismatrix(57)` → `1` |
-| `isrow` | Is it a row vector? | `isrow(1:5)` → `1` |
-| `iscolumn` | Is it a column vector? | `iscolumn((1:5)')` → `1` |
-| `isempty` | Does it have no elements? | `isempty([])` → `1` |
+| `class` | Returns a variable's data type | `class(aVector)` $\rightarrow$ `double` |
+| `size` | Returns the dimensions (rows, then columns) | `size(string1)` $\rightarrow$ `1 18` |
+| `length` | Returns the size of the largest dimension | `length(1:5)` $\rightarrow$ `5` |
+| `ndims` | Returns the number of dimensions | `ndims(randi(15,4,5,2))` $\rightarrow$ `3` |
+| `numel` | Returns the total number of elements | `numel(magic(4))` $\rightarrow$ `16` |
+| `isscalar` | Is it 1×1? | `isscalar(57)` $\rightarrow$ `1` |
+| `isvector` | Is it 1×n or n×1? | `isvector(1:5)` $\rightarrow$ `1` |
+| `ismatrix` | Is it 2-D? | `ismatrix(57)` $\rightarrow$ `1` |
+| `isrow` | Is it a row vector? | `isrow(1:5)` $\rightarrow$ `1` |
+| `iscolumn` | Is it a column vector? | `iscolumn((1:5)')` $\rightarrow$ `1` |
+| `isempty` | Does it have no elements? | `isempty([])` $\rightarrow$ `1` |
 
 #### Array Creation
 
@@ -1568,7 +1581,7 @@ This week you will do some Engineering Economic Analysis and see how computers i
 
 | Function | Purpose | Example |
 |---|---|---|
-| `strcmp` | Is the whole text equal? Returns a single 1/0 | `strcmp(string1, 'b')` → `0` |
+| `strcmp` | Is the whole text equal? Returns a single 1/0 | `strcmp(string1, 'b')` $\rightarrow$ `0` |
 | `sum` | Adds up elements (column-wise for a matrix) | `sum(M(:))` |
 | `cos` | Cosine (input in radians) | `cos(45)` |
 
@@ -1577,10 +1590,10 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | Function | Purpose | Example |
 |---|---|---|
 | `cell` | Creates a cell array of empty `[]` cells | `cell(4, 5)` |
-| `iscell` | Is it a cell array? | `iscell(b)` → `1` |
-| `cell2mat` | Cell array → matrix (all cells must be the same type) | `cell2mat({1, 2; 3, 4})` |
-| `cell2struct` | Cell array → structure | `cell2struct(c, fields, 2)` |
-| `cell2table` | Cell array → table | `cell2table(c)` |
+| `iscell` | Is it a cell array? | `iscell(b)` $\rightarrow$ `1` |
+| `cell2mat` | Cell array $\rightarrow$ matrix (all cells must be the same type) | `cell2mat({1, 2; 3, 4})` |
+| `cell2struct` | Cell array $\rightarrow$ structure | `cell2struct(c, fields, 2)` |
+| `cell2table` | Cell array $\rightarrow$ table | `cell2table(c)` |
 
 #### Structures
 
@@ -1589,8 +1602,8 @@ This week you will do some Engineering Economic Analysis and see how computers i
 | `struct` | Creates a structure (empty, or from name/value pairs) | `struct('name', "Ludwig", 'age', 20)` |
 | `fieldnames` | Cell array of the field names | `fieldnames(rocket)` |
 | `rmfield` | Removes a field (from every element of a struct array) | `rocket = rmfield(rocket, 'stages')` |
-| `struct2cell` | Structure → cell array | `struct2cell(person)` |
-| `struct2table` | Structure → table | `struct2table(s, 'RowNames', rowNames)` |
+| `struct2cell` | Structure $\rightarrow$ cell array | `struct2cell(person)` |
+| `struct2table` | Structure $\rightarrow$ table | `struct2table(s, 'RowNames', rowNames)` |
 
 #### Tables
 
@@ -1598,12 +1611,12 @@ This week you will do some Engineering Economic Analysis and see how computers i
 |---|---|---|
 | `table` | Creates a table from variables | `table(diameter, rings, 'RowNames', planets)` |
 | `summary` | Shows the metadata plus min/median/max of each variable | `summary(planetary_data)` |
-| `table2array` | Table → array (data must be all one type) | `table2array(T(:, 1:3))` |
-| `table2cell` | Table → cell array | `table2cell(T)` |
-| `table2struct` | Table → structure | `table2struct(planetary_data)` |
-| `table2timetable` | Table → timetable | `table2timetable(T)` |
-| `array2table` | Array → table | `array2table(magic(3))` |
-| `timetable2table` | Timetable → table | `timetable2table(TT)` |
+| `table2array` | Table $\rightarrow$ array (data must be all one type) | `table2array(T(:, 1:3))` |
+| `table2cell` | Table $\rightarrow$ cell array | `table2cell(T)` |
+| `table2struct` | Table $\rightarrow$ structure | `table2struct(planetary_data)` |
+| `table2timetable` | Table $\rightarrow$ timetable | `table2timetable(T)` |
+| `array2table` | Array $\rightarrow$ table | `array2table(magic(3))` |
+| `timetable2table` | Timetable $\rightarrow$ table | `timetable2table(TT)` |
 
 #### Workspace & Display (commands)
 
@@ -2273,7 +2286,7 @@ ans =
      1
     13
     15
-   ⋮
+   ...
      3
      2
      8
@@ -3392,18 +3405,18 @@ This solution makes two tables, because rooms and cars have different fields. `s
 | Function / keyword | What it does | Example |
 |---|---|---|
 | `edit name` | open/create `name.m` in Editor | `edit loops` |
-| `function … end` | define function; name = file name | `function loops()` |
-| `while cond … end` | repeat while cond true; check at start | `while x < 6` |
-| `for i = a:s:b … end` | repeat once per array element | `for i = 1:3` |
+| `function ... end` | define function; name = file name | `function loops()` |
+| `while cond ... end` | repeat while cond true; check at start | `while x < 6` |
+| `for i = a:s:b ... end` | repeat once per array element | `for i = 1:3` |
 | `if / elseif / else / end` | run first block whose cond true | `if strcmp(p,'Mars')` |
 | `switch / case / otherwise / end` | pick block by value | `switch planet` |
-| `strcmp(a,b)` | text equal? → 1/0 | `strcmp(planet,'Mars')` |
+| `strcmp(a,b)` | text equal? $\rightarrow$ 1/0 | `strcmp(planet,'Mars')` |
 | `fprintf(fmt, vals)` | formatted print; `%d` int, `\n` newline, `\t` tab | `fprintf('x = %d\n', x)` |
 | `disp(x)` | plain print, simpler than fprintf | `disp("Gravity = " + g)` |
-| `ceil(x)` | round toward +∞ | `ceil(-2.4)` → `-2` |
+| `ceil(x)` | round toward +∞ | `ceil(-2.4)` $\rightarrow$ `-2` |
 | `size(A, dim)` | length along one dim (1 = rows, 2 = cols) | `size(ImageMap, 1)` |
-| `imread(file)` | image → array (rows × cols × 3 for RGB) | `imread('pretty.png')` |
-| `imwrite(A, file)` | array → image file | `imwrite(ImageMap, f)` |
+| `imread(file)` | image $\rightarrow$ array (rows × cols × 3 for RGB) | `imread('pretty.png')` |
+| `imwrite(A, file)` | array $\rightarrow$ image file | `imwrite(ImageMap, f)` |
 | `break` | quit loop, go past its `end` | `if x == 6, break; end` |
 | `continue` | skip rest of this iteration | `if x == 6, continue; end` |
 | `return` | quit whole function | `return` |
@@ -3417,11 +3430,11 @@ This solution makes two tables, because rooms and cars have different fields. `s
 
 **Ways to open a new function:**
 
-- Home ribbon → **New** → **Function** (Figure 4.1). Opens unnamed file with skeleton + helpful text.
-- `edit` → new blank unnamed file; ribbon switches to Editor tab.
-- `edit filename` → new blank file saved as `filename.m` in current folder.
+- Home ribbon $\rightarrow$ **New** $\rightarrow$ **Function** (Figure 4.1). Opens unnamed file with skeleton + helpful text.
+- `edit` $\rightarrow$ new blank unnamed file; ribbon switches to Editor tab.
+- `edit filename` $\rightarrow$ new blank file saved as `filename.m` in current folder.
 
-![Figure 4.1 — New → Function](media/matlab_ch4_fig4-1_new_function.png)
+![Figure 4.1 — New $\rightarrow$ Function](media/matlab_ch4_fig4-1_new_function.png)
 
 ```matlab
 edit loops
@@ -3477,7 +3490,7 @@ From step 4, just repeating steps 2 & 3. Generalized:
 
 **End condition** = how you know you're done ("retrieved a million numbers yet?"). Evaluates true/false.
 
-**Infinite loop** = condition can never be met (e.g. "Does X = 3?" when adding even numbers). Sometimes on purpose, usually a bug. Function churning, no output → suspect infinite loop.
+**Infinite loop** = condition can never be met (e.g. "Does X = 3?" when adding even numbers). Sometimes on purpose, usually a bug. Function churning, no output $\rightarrow$ suspect infinite loop.
 
 ### 4.3 while Loops
 
@@ -3488,12 +3501,12 @@ end
 ```
 
 - Block runs as long as condition true.
-- Condition checked at **start** → block may never run.
+- Condition checked at **start** $\rightarrow$ block may never run.
 - Condition = simple logical, complex logical, or function call, as long as result true/false.
 - Parentheses around condition optional.
 
 MATLAB does not have a **do-while** loop.
-**Formatting:** indent code between opening statement and `end` (loops, branches, functions). Nested blocks → another level. MATLAB auto-indents. 2 or 4 spaces most common. Set in Preferences → Editor/Debugger → Tab.
+**Formatting:** indent code between opening statement and `end` (loops, branches, functions). Nested blocks $\rightarrow$ another level. MATLAB auto-indents. 2 or 4 spaces most common. Set in Preferences $\rightarrow$ Editor/Debugger $\rightarrow$ Tab.
 
 **Example loops.m**
 
@@ -3507,8 +3520,8 @@ function loops()
 end
 ```
 
-- `x = 0` → enter loop → `0 < 6` true → body (loop body) runs: x + 1, print.
-- Back to `while`, re-check. When x = 6 → false → jump past loop `end` → function `end` → exit.
+- `x = 0` $\rightarrow$ enter loop $\rightarrow$ `0 < 6` true $\rightarrow$ body (loop body) runs: x + 1, print.
+- Back to `while`, re-check. When x = 6 $\rightarrow$ false $\rightarrow$ jump past loop `end` $\rightarrow$ function `end` $\rightarrow$ exit.
 
 Run by typing function name in Command Window:
 
@@ -3562,7 +3575,7 @@ x = 6
 The sum is 1000001000000
 ```
 
-Loop ran 1,000,000 times in a blink. (Check: 2 + 4 + … + 2n = n(n + 1) → 10⁶ · (10⁶ + 1).)
+Loop ran 1,000,000 times in a blink. (Check: $2 + 4 + \dots + 2n = n(n+1)$, so the sum is $10^6 \cdot (10^6 + 1)$.)
 ### 4.4 for Loops
 
 Loop **index** controls how many times the block runs; often also used as a variable inside.
@@ -3573,9 +3586,9 @@ for loopIndex = firstValue : lastValue
 end
 ```
 
-- `loopIndex` → any legal name. Tradition = `i`, but easy to confuse with `1` / `l`.
-- `firstValue` / `lastValue` → integers or floats; numbers, variables, calculations, function calls, any mix.
-- The `:` part is just the colon operator → makes an array of index values.
+- `loopIndex` $\rightarrow$ any legal name. Tradition = `i`, but easy to confuse with `1` / `l`.
+- `firstValue` / `lastValue` $\rightarrow$ integers or floats; numbers, variables, calculations, function calls, any mix.
+- The `:` part is just the colon operator $\rightarrow$ makes an array of index values.
 - The `for` condition can be **any** array, even 3-D.
 
 ```matlab
@@ -3668,7 +3681,7 @@ Entering loop #3
 	x (on exit) = 16
 ```
 
-Loop # matches loop index → default step = 1.
+Loop # matches loop index $\rightarrow$ default step = 1.
 
 ### 4.5 Step Values & Index Arrays
 
@@ -3719,7 +3732,7 @@ Entering loop #7
 	x (on exit) = 23.3
 ```
 
-`lastValue` 3 not in the array: 2.8 + 0.3 = 3.1 > 3 → stop.
+`lastValue` 3 not in the array: 2.8 + 0.3 = 3.1 > 3 $\rightarrow$ stop.
 
 ```matlab
 i = 1 : 0.3 : 3
@@ -3730,7 +3743,7 @@ i =
 ```
 
 
-**Negative step** → count down. `firstValue` must be > `lastValue`, else body never runs.
+**Negative step** $\rightarrow$ count down. `firstValue` must be > `lastValue`, else body never runs.
 
 ```matlab
 x = 10
@@ -3749,7 +3762,7 @@ x =
     13
 ```
 
-`i` = 2, 1.6, 1.2 → 3 passes. (Last line `x` added here to show the result.)
+`i` = 2, 1.6, 1.2 $\rightarrow$ 3 passes. (Last line `x` added here to show the result.)
 Step can be number, variable, or calculation; int or float.
 
 **Any array works** as the loop condition. Change the line to:
@@ -3758,7 +3771,7 @@ Step can be number, variable, or calculation; int or float.
 for i = [1, 1.3, 1.6, 1.9, 2.2, 2.5, 2.8]
 ```
 
-`forloops` → same output as the `1 : 0.3 : 3` run. Colon form is more practical for long arrays.
+`forloops` $\rightarrow$ same output as the `1 : 0.3 : 3` run. Colon form is more practical for long arrays.
 
 Array in a variable:
 
@@ -3769,7 +3782,7 @@ for i = indexArray
 
 ### 4.6 if & if-else Statements
 
-**Conditional statements** → decide whether to run a block, or pick between mutually exclusive blocks. Two flavors: **if** (+ sub-flavors) and **switch**.
+**Conditional statements** $\rightarrow$ decide whether to run a block, or pick between mutually exclusive blocks. Two flavors: **if** (+ sub-flavors) and **switch**.
 
 **if:**
 
@@ -3779,8 +3792,8 @@ if condition
 end
 ```
 
-- Condition → any logical expression (like `while`).
-- True → run block. False → skip to the line after `end`.
+- Condition $\rightarrow$ any logical expression (like `while`).
+- True $\rightarrow$ run block. False $\rightarrow$ skip to the line after `end`.
 
 > **Tip:** Parentheses around condition optional.
 
@@ -3793,7 +3806,7 @@ if (strcmp(planet, 'Mars'))
 end
 ```
 
-**if-else** → exactly one of two blocks runs:
+**if-else** $\rightarrow$ exactly one of two blocks runs:
 
 ```text
 if condition
@@ -3833,7 +3846,7 @@ branches
 Gravity = 9.798
 ```
 
-Condition false → `else` block → Earth values. Change `planet` to `'Mars'` and re-run:
+Condition false $\rightarrow$ `else` block $\rightarrow$ Earth values. Change `planet` to `'Mars'` and re-run:
 
 ```matlab
 branches
@@ -3843,7 +3856,7 @@ Gravity = 3.711
 
 ### 4.7 if-elseif-else & switch Statements
 
-**if-elseif-else** → add one or more `elseif` blocks, each with own condition:
+**if-elseif-else** $\rightarrow$ add one or more `elseif` blocks, each with own condition:
 
 ```text
 if condition 1
@@ -3859,10 +3872,10 @@ end
 ```
 
 - Only first block whose condition is true runs.
-- `else` = optional fallback. Omit → possible that no block runs.
-- Too many `elseif`s → look for a more elegant design.
+- `else` = optional fallback. Omit $\rightarrow$ possible that no block runs.
+- Too many `elseif`s $\rightarrow$ look for a more elegant design.
 
-**Figure 4.9 — flow chart:** Condition 1 → true → Block 1 → End; false → Condition 2 → true → Block 2 → End; false → Condition 3 → true → Block 3 → End; false → Block 4 → End.
+**Figure 4.9 — flow chart:** Condition 1 $\rightarrow$ true $\rightarrow$ Block 1 $\rightarrow$ End; false $\rightarrow$ Condition 2 $\rightarrow$ true $\rightarrow$ Block 2 $\rightarrow$ End; false $\rightarrow$ Condition 3 $\rightarrow$ true $\rightarrow$ Block 3 $\rightarrow$ End; false $\rightarrow$ Block 4 $\rightarrow$ End.
 
 ```mermaid
 flowchart LR
@@ -3876,7 +3889,7 @@ flowchart LR
 
 > **Tip:** **Elegant** code = brevity, clarity, efficiency. Clever, but not so clever others can't read or change it.
 
-**switch** → same variable tested against many values (**cases**). Cleaner than a long `elseif` chain.
+**switch** $\rightarrow$ same variable tested against many values (**cases**). Cleaner than a long `elseif` chain.
 
 ```text
 switch variable
@@ -3903,7 +3916,7 @@ end
 Terminal velocity of a 25 mm ball bearing, script version.
 
 1. Clear the Command Window and Workspace (`clc`, `clear`).
-2. **Open** button → `terminalVelocityConditionals.m` from the data files (Figure 4.10).
+2. **Open** button $\rightarrow$ `terminalVelocityConditionals.m` from the data files (Figure 4.10).
 
 **terminalVelocityConditionals.m** 
 
@@ -3977,10 +3990,10 @@ end
 ```
 
 
-→ same results. Parallel methods; `otherwise`/`else` both optional. `switch` reads cleaner; `if`/`elseif` works fine. Pick per situation (or preference).
+$\rightarrow$ same results. Parallel methods; `otherwise`/`else` both optional. `switch` reads cleaner; `if`/`elseif` works fine. Pick per situation (or preference).
 
 
-**Idea:** use `otherwise`/`else` as a data check → print "Pluto, the Moon, Krypton, or Tatooine aren't real planets, try again."
+**Idea:** use `otherwise`/`else` as a data check $\rightarrow$ print "Pluto, the Moon, Krypton, or Tatooine aren't real planets, try again."
 
 ### 4.9 Loops & Conditionals: Make a Negative
 
@@ -3991,8 +4004,8 @@ edit negative
 
 - Pixel = small colored dot = mix of red, green, blue.
 - Full pixel = (x, y) position + 3 color values.
-- `imread` → 3-D array, pixel-by-pixel: (row, col, color). Color index 1 = red, 2 = green, 3 = blue.
-- Each value 0–255 (uint8) → negative = `255 - value`.
+- `imread` $\rightarrow$ 3-D array, pixel-by-pixel: (row, col, color). Color index 1 = red, 2 = green, 3 = blue.
+- Each value 0–255 (uint8) $\rightarrow$ negative = `255 - value`.
 
 **negative.m:**
 
@@ -4035,8 +4048,8 @@ edit negative
 1. Save `negative.m`.
 2. View `pretty.png` (Figure 4.4).
 3. Run `negative` (Command Window or **Run** on Editor ribbon).
-4. View `pretty_inv.png` again → negative, opposite colors (Figure 4.5).
-5. Run again → back to normal (negative of a negative = positive).
+4. View `pretty_inv.png` again $\rightarrow$ negative, opposite colors (Figure 4.5).
+5. Run again $\rightarrow$ back to normal (negative of a negative = positive).
 
 | Before | After |
 |---|---|
@@ -4048,7 +4061,7 @@ negative
 
 No Command Window output (only the image file changes).
 
-- Usually written with nested `for` loops; done with `for` inside `while` to show any of these can contain any other. `switch` inside `for` inside `while` inside `if` → fine if it suits the problem.
+- Usually written with nested `for` loops; done with `for` inside `while` to show any of these can contain any other. `switch` inside `for` inside `while` inside `if` $\rightarrow$ fine if it suits the problem.
 
 ### 4.10 Exiting a Loop
 
@@ -4127,7 +4140,7 @@ loops2
      5
 ```
 
-x = 6 → `if` true → `break` → loop exits, never reaches 10.
+x = 6 $\rightarrow$ `if` true $\rightarrow$ `break` $\rightarrow$ loop exits, never reaches 10.
 
 **With `continue`:**
 
@@ -4168,11 +4181,11 @@ loops2
 
 ### 4.11 Stopping an Infinite Loop
 
-Stuck in an infinite loop → halt the function before fixing it.
+Stuck in an infinite loop $\rightarrow$ halt the function before fixing it.
 
-- Editor ribbon → **Run** section. Lets you run the function directly instead of typing it in the Command Window.
+- Editor ribbon $\rightarrow$ **Run** section. Lets you run the function directly instead of typing it in the Command Window.
 - While a function runs, the Run section shows **Pause** 
-- **Pause** → Run section becomes **Debug** → **Quit Debugging** exits
+- **Pause** $\rightarrow$ Run section becomes **Debug** $\rightarrow$ **Quit Debugging** exits
 
 **loops3.m:**
 
@@ -4184,11 +4197,11 @@ function loops3()
 end
 ```
 
-Condition always true (`logical(1)`) → runs forever.
+Condition always true (`logical(1)`) $\rightarrow$ runs forever.
 
-1. **Run** (Editor ribbon) → launch `loops3`.
+1. **Run** (Editor ribbon) $\rightarrow$ launch `loops3`.
 2. **Pause**.
-3. **Quit Debugging** → leaves loop and function.
+3. **Quit Debugging** $\rightarrow$ leaves loop and function.
 
 
 ```matlab
@@ -4204,11 +4217,11 @@ Also useful outside infinite loops. Plan a graceful exit; if code keeps going on
 
 #### Key Terms
 
-branching · condition · conditionals · firstValue · function · infinite loop · lastValue · loop body · loop index · loops · pause
+branching, condition, conditionals, firstValue, function, infinite loop, lastValue, loop body, loop index, loops, pause
 
 #### Key Commands
 
-`for` · `if` · `imread` · `imwrite` · `otherwise` · `switch` · `while`
+`for`, `if`, `imread`, `imwrite`, `otherwise`, `switch`, `while`
 
 ---
 
@@ -4224,7 +4237,7 @@ end
 
 <details><summary>Solution</summary>
 
-Step is negative (-2) but 10 > 1, so counting down from 1 can never reach 10 → colon makes an **empty** array → zero passes.
+Step is negative (-2) but 10 > 1, so counting down from 1 can never reach 10 $\rightarrow$ colon makes an **empty** array $\rightarrow$ zero passes.
 
 ```matlab
 1 : -2 : 10
@@ -4340,7 +4353,7 @@ ans =
   5.7134e+262
 ```
 
-Match. (`n = 0` → loop runs zero times → `result = 1` = 0!, correct.)
+Match. (`n = 0` $\rightarrow$ loop runs zero times $\rightarrow$ `result = 1` = 0!, correct.)
 
 </details>
 
@@ -4399,9 +4412,9 @@ x =
 | Function / operator | What it does | Example |
 |---|---|---|
 | `[a b; c d]` | build matrix; space/comma = next col, `;` = next row | `[1 2 3; 4 5 6]` |
-| `size(A)` | rows, cols | `size(A)` → `2 3` |
-| `diag(v)` | vector → diagonal matrix | `diag(1:4)` |
-| `diag(A)` | matrix → its diagonal as column | `diag(A)` |
+| `size(A)` | rows, cols | `size(A)` $\rightarrow$ `2 3` |
+| `diag(v)` | vector $\rightarrow$ diagonal matrix | `diag(1:4)` |
+| `diag(A)` | matrix $\rightarrow$ its diagonal as column | `diag(A)` |
 | `eye(n)` | n×n identity | `eye(4)` |
 | `magic(n)` | n×n, 1..n², equal row/col sums | `magic(5)` |
 | `rand(n)` / `rand(n,m)` | uniform floats 0–1 | `rand(3,5)` |
@@ -4409,7 +4422,7 @@ x =
 | `randi(max,n)` / `randi(max,n,m)` | ints 1..max | `randi(10,3,5)` |
 | `ones(n)` / `ones(n,m)` | all 1s | `ones(5)` |
 | `zeros(n)` / `zeros(n,m)` | all 0s | `zeros(2,3)` |
-| `rng(seed)` | seed RNG → repeatable "random" | `rng(0)` |
+| `rng(seed)` | seed RNG $\rightarrow$ repeatable "random" | `rng(0)` |
 | `+` `-` | element-wise add/sub (same size or scalar) | `A + B` |
 | `.*` `./` `.^` | element-wise mult/div/power | `A .* B` |
 | `*` | matrix multiplication (inner dims match) | `A * B` |
@@ -4417,16 +4430,16 @@ x =
 | `'` | transpose + complex conjugate | `A'` |
 | `.'` | transpose only | `A.'` |
 | `transpose(A)` | same as `.'` | `transpose(A)` |
-| `<` `<=` `>` `>=` `==` `~=` | element-wise compare → logical matrix | `A <= 5` |
+| `<` `<=` `>` `>=` `==` `~=` | element-wise compare $\rightarrow$ logical matrix | `A <= 5` |
 | `det(A)` | determinant | `det(A)` |
 | `inv(A)` | inverse matrix | `inv(A)` |
-| `sqrt(-2)` | gives imaginary result | `sqrt(-2)` → `0 + 1.4142i` |
+| `sqrt(-2)` | gives imaginary result | `sqrt(-2)` $\rightarrow$ `0 + 1.4142i` |
 | `format short` | 4 decimals display | `format short` |
 | `sum(A,dim)` | sum (1 = down cols, 2 = across rows) — exercises | `sum(D,2)` |
 
 ### 5.1 What Is a Matrix?
 
-- MATLAB's big strength = matrices. **Linear algebra** = interaction/manipulation of matrices to solve problems. Used in engineering (circuits, robotics, signal processing), physics (QM), graphics (reflections, 3D→2D), photography (color correction).
+- MATLAB's big strength = matrices. **Linear algebra** = interaction/manipulation of matrices to solve problems. Used in engineering (circuits, robotics, signal processing), physics (QM), graphics (reflections, 3D$\rightarrow$2D), photography (color correction).
 - **Matrix** = 2-D rectangular array, rows × columns.
 - **Vector** = 1 × N (row) or N × 1 (column).
 - **Scalar** = single value = 1 × 1 to MATLAB.
@@ -4438,7 +4451,7 @@ $$\begin{bmatrix}1 & 2 & 3\\4 & 5 & 6\end{bmatrix}$$
 ```
 
 - `;` = **row separator**. Every row must have the same number of elements.
-- **Square brackets → define** matrices. **Parentheses → use/index** them.
+- **Square brackets $\rightarrow$ define** matrices. **Parentheses $\rightarrow$ use/index** them.
 - Always **row first, then column**.
 - Values in a row can be separated by commas or spaces: `[1,2,3; 4,5,6]` = `[1 2 3; 4 5 6]`.
 
@@ -4457,11 +4470,11 @@ ans =
      2     3
 ```
 
-2 rows, 3 cols → A is 2 × 3.
+2 rows, 3 cols $\rightarrow$ A is 2 × 3.
 
 ### 5.2 Special Matrices: Diagonal, Identity, Magic
 
-**Diagonal matrix** → square; values on the diagonal (upper-left → lower-right), 0 everywhere else.
+**Diagonal matrix** $\rightarrow$ square; values on the diagonal (upper-left $\rightarrow$ lower-right), 0 everywhere else.
 
 ```matlab
 V = [1:4];
@@ -4475,7 +4488,7 @@ A =
      0     0     0     4
 ```
 
-`diag` on a matrix → pulls the diagonal out as a vector:
+`diag` on a matrix $\rightarrow$ pulls the diagonal out as a vector:
 
 ```matlab
 X = diag(A)
@@ -4488,7 +4501,7 @@ X =
      4
 ```
 
-**Identity matrix** → diagonal of 1s, rest 0. Matrix version of the number 1: `A * I = A`.
+**Identity matrix** $\rightarrow$ diagonal of 1s, rest 0. Matrix version of the number 1: `A * I = A`.
 
 ```matlab
 eye(4)
@@ -4501,7 +4514,7 @@ ans =
      0     0     0     1
 ```
 
-**Magic matrix** → N × N, integers 1 … N², every row and column sums to the same value.
+**Magic matrix** $\rightarrow$ N × N, integers 1 to N², every row and column sums to the same value.
 
 ```matlab
 magic(5)
@@ -4515,7 +4528,7 @@ ans =
     11    18    25     2     9
 ```
 
-One number N to a matrix-generation function → square N × N matrix.
+One number N to a matrix-generation function $\rightarrow$ square N × N matrix.
 
 **Matrix math** = any math with at least one matrix:
 
@@ -4523,21 +4536,21 @@ One number N to a matrix-generation function → square N × N matrix.
 - multiply/divide each element by a scalar
 - raise each element to a power
 - add/subtract same-size matrices
-- multiply/divide matrices → **two very different kinds** (array vs matrix)
+- multiply/divide matrices $\rightarrow$ **two very different kinds** (array vs matrix)
 
 ### 5.3 Creating Test Matrices & Random Numbers
 
 | Function | Creates |
 |---|---|
-| `magic(n)` | n × n, numbers 1 … n², equal row/col sums |
+| `magic(n)` | n × n, numbers 1 to n², equal row/col sums |
 | `eye(n)` | n × n zeros with diagonal of 1s |
 | `rand(n)` / `rand(n,m)` | random floats between 0 and 1 |
 | `randn(n)` / `randn(n,m)` | small random floats, mean 0 (neg + pos) |
-| `randi(max,n)` / `randi(max,n,m)` | random integers 1 … max |
+| `randi(max,n)` / `randi(max,n,m)` | random integers 1 to max |
 | `ones(n)` / `ones(n,m)` | all ones |
 | `zeros(n)` / `zeros(n,m)` | all zeros |
 
-**Random numbers** → no such thing as truly random on a computer. **Pseudo-random**: each number based on the one before; first one based on a **seed**. Same seed → same sequence.
+**Random numbers** $\rightarrow$ no such thing as truly random on a computer. **Pseudo-random**: each number based on the one before; first one based on a **seed**. Same seed $\rightarrow$ same sequence.
 
 ```matlab
 randi(10,1,10)
@@ -4552,7 +4565,7 @@ ans =
      6     3     8     3     6     7     9    10     6     2
 ```
 
-(Press **↑** to repeat a command.) Two different outputs. Now seed it:
+(Press the **Up Arrow** key to repeat a command.) Two different outputs. Now seed it:
 
 ```matlab
 rng(0)
@@ -4570,17 +4583,17 @@ ans =
      9    10     2    10     7     1     3     6    10    10
 ```
 
-`rng(0)` resets the **random number generator** → same seed → same sequence. Useful for consistent test data. (`rng(0)` = `rng('default')`, the setting used in these notes.)
+`rng(0)` resets the **random number generator** $\rightarrow$ same seed $\rightarrow$ same sequence. Useful for consistent test data. (`rng(0)` = `rng('default')`, the setting used in these notes.)
 
 ### 5.4 Array Math: Addition & Subtraction
 
-**Array math** → element by element. Arrays must be **same dimensions** (or one is a scalar). Works on 3-D+ arrays too.
+**Array math** $\rightarrow$ element by element. Arrays must be **same dimensions** (or one is a scalar). Works on 3-D+ arrays too.
 
-**Matrix addition** → A(1,1) + B(1,1), A(1,2) + B(1,2), …
+**Matrix addition** $\rightarrow$ A(1,1) + B(1,1), A(1,2) + B(1,2), ...
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}+\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a+h&b+i&c+j\\d+k&e+l&f+m\end{bmatrix}$$
 
-**Matrix subtraction** → same, but order counts: A − B ≠ B − A (not **commutative**).
+**Matrix subtraction** $\rightarrow$ same, but order counts: A − B ≠ B − A (not **commutative**).
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a-h&b-i&c-j\\d-k&e-l&f-m\end{bmatrix}$$
 
@@ -4635,13 +4648,13 @@ $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*\begin{bmatrix}h&i&j\\k&l&m\end{bmat
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a/h&b/i&c/j\\d/k&e/l&f/m\end{bmatrix}$$
 
-Agree in only one dimension (2 × 3 `.*` 1 × 3) → the row is applied to every row:
+Agree in only one dimension (2 × 3 `.*` 1 × 3) $\rightarrow$ the row is applied to every row:
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*\begin{bmatrix}g&h&i\end{bmatrix}=\begin{bmatrix}a g&b h&c i\\d g&e h&f i\end{bmatrix}$$
 
 ### 5.6 Scalar Math Operations
 
-Scalar in an array equation → applied to **every element**.
+Scalar in an array equation $\rightarrow$ applied to **every element**.
 
 $$n+\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}n+a&n+b&n+c\\n+d&n+e&n+f\end{bmatrix}$$
 
@@ -4687,11 +4700,11 @@ ans =
     1.4898    1.4456    1.6463
 ```
 
-**Subtraction** → same, order counts:
+**Subtraction** $\rightarrow$ same, order counts:
 
 $$n-\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}n-a&n-b&n-c\\n-d&n-e&n-f\end{bmatrix}\qquad\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-n=\begin{bmatrix}a-n&b-n&c-n\\d-n&e-n&f-n\end{bmatrix}$$
 
-**Mult/div by scalar** → same result with or without the dot. Use the one that matches your intent.
+**Mult/div by scalar** $\rightarrow$ same result with or without the dot. Use the one that matches your intent.
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.*n=\begin{bmatrix}a n&b n&c n\\d n&e n&f n\end{bmatrix}\qquad\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./n=\begin{bmatrix}a/n&b/n&c/n\\d/n&e/n&f/n\end{bmatrix}$$
 
@@ -4751,7 +4764,7 @@ $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./n=\begin{bmatrix}a&b&c\\d&e&f\end{bm
 
 ### 5.7 Transposition
 
-**Transpose** → rows ↔ columns. Row vector ↔ column vector.
+**Transpose**: rows become columns and columns become rows. A row vector becomes a column vector, and vice versa.
 
 | Operator | Effect |
 |---|---|
@@ -4759,7 +4772,7 @@ $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}./n=\begin{bmatrix}a&b&c\\d&e&f\end{bm
 | `'` | transpose **+ complex conjugate** (flips sign of imaginary part) |
 | `transpose(A)` | same as `.'`, easier to see |
 
-No complex numbers → `'` and `.'` give the same result.
+No complex numbers $\rightarrow$ `'` and `.'` give the same result.
 
 $$A=\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}\qquad A'=\begin{bmatrix}a&d\\b&e\\c&f\end{bmatrix}$$
 
@@ -4791,7 +4804,7 @@ ans =
 
 Colon-built rows must all be the same length, or you get "Dimensions of arrays being concatenated are not consistent." Matrix doesn't have to be square.
 
-**With an imaginary number** (`sqrt(-2)` → `1.4142i`; `i` = imaginary unit):
+**With an imaginary number** (`sqrt(-2)` $\rightarrow$ `1.4142i`; `i` = imaginary unit):
 
 ```matlab
 format short
@@ -4820,7 +4833,7 @@ ans =
   10.0000 + 0.0000i  20.0000 + 0.0000i  30.0000 + 0.0000i
 ```
 
-`'` → `-1.4142i`; `.'` → `+1.4142i`. Not the same operator!
+`'` $\rightarrow$ `-1.4142i`; `.'` $\rightarrow$ `+1.4142i`. Not the same operator!
 
 **Transpose in array multiplication:**
 
@@ -4846,7 +4859,7 @@ B .* A
 Arrays have incompatible sizes for this operation.
 ```
 
-1 × 3 `.*` 3 × 6 → no match. Flip A → 6 × 3:
+1 × 3 `.*` 3 × 6 $\rightarrow$ no match. Flip A $\rightarrow$ 6 × 3:
 
 ```matlab
 B .* A'
@@ -4865,7 +4878,7 @@ Each row of A' multiplied by matching element of B.
 
 ### 5.8 Powers & Logical Operations
 
-**Power** → `.^`, same pattern as other element-wise ops:
+**Power** $\rightarrow$ `.^`, same pattern as other element-wise ops:
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\,2=\begin{bmatrix}a^2&b^2&c^2\\d^2&e^2&f^2\end{bmatrix}$$
 
@@ -4873,13 +4886,13 @@ $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\begin{bmatrix}r&s&t\end{bmatri
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}.\hat{}\begin{bmatrix}g&h&i\\j&k&l\end{bmatrix}=\begin{bmatrix}a^g&b^h&c^i\\d^j&e^k&f^l\end{bmatrix}$$
 
-Scalar raised to an n × m matrix → n × m matrix:
+Scalar raised to an n × m matrix $\rightarrow$ n × m matrix:
 
 $$2\,.\hat{}\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}=\begin{bmatrix}2^a&2^b&2^c\\2^d&2^e&2^f\end{bmatrix}$$
 
 In MATLAB these are `.^` — plain `^` is the matrix power (eigenvalue stuff, not covered).
 
-**Logical operations** (`<` `<=` `>` `>=` `==` `~=`) → element by element; n × m matrix in → n × m logical out.
+**Logical operations** (`<` `<=` `>` `>=` `==` `~=`) $\rightarrow$ element by element; n × m matrix in $\rightarrow$ n × m logical out.
 
 ```matlab
 A = [1 2 3 4 5 6; 3 4 5 6 7 8; 4 5 6 7 8 9]
@@ -4912,17 +4925,17 @@ The list also names `&&` and `||`. Those only work on scalars; element-wise AND/
 ### 5.9 Matrix Multiplication
 
 - No separate matrix versions of `+` / `-`.
-- Matrix `^` exists → linear algebra (eigenvalues/eigenvectors), not covered.
+- Matrix `^` exists $\rightarrow$ linear algebra (eigenvalues/eigenvectors), not covered.
 - **Matrix `*` and `/` are very different from `.*` and `./`.**
 
-**Rule:** # columns in first = # rows in second. Result = combination of multiplication **and** addition. Real power of matrices → solve parallel equations simultaneously, model huge data sets.
+**Rule:** # columns in first = # rows in second. Result = combination of multiplication **and** addition. Real power of matrices $\rightarrow$ solve parallel equations simultaneously, model huge data sets.
 
 ```text
-A * B   →   (3,5) (5,2)
+A * B   ->   (3,5) (5,2)
 ```
 
-- **Inner** dims match (5) → valid. Result size = **outer** dims → (3,2).
-- Not commutative: `B * A` → (5,2)(3,5), inner 2 ≠ 3 → error.
+- **Inner** dims match (5) $\rightarrow$ valid. Result size = **outer** dims $\rightarrow$ (3,2).
+- Not commutative: `B * A` $\rightarrow$ (5,2)(3,5), inner 2 ≠ 3 $\rightarrow$ error.
 
 For A (r,s) and B (t,u):
 
@@ -4933,13 +4946,13 @@ For A (r,s) and B (t,u):
 
 $$R(r,c)=\sum_x A(r,x)\,B(x,c)$$
 
-Element (r,c) of R = sum over x of A(row r, x) × B(x, col c) → row of A "dotted" with column of B.
+Element (r,c) of R = sum over x of A(row r, x) × B(x, col c) $\rightarrow$ row of A "dotted" with column of B.
 
 **Example:**
 
 $$A=\begin{bmatrix}a&b\\c&d\\e&f\end{bmatrix}\qquad B=\begin{bmatrix}g&h\\i&j\end{bmatrix}$$
 
-A cols (2) = B rows (2) → valid; R is (3,2). Picture B above, A to the left, R at the intersection:
+A cols (2) = B rows (2) $\rightarrow$ valid; R is (3,2). Picture B above, A to the left, R at the intersection:
 
 ```text
             B
@@ -4954,12 +4967,12 @@ A cols (2) = B rows (2) → valid; R is (3,2). Picture B above, A to the left, R
 
 | Element | Value | Index form |
 |---|---|---|
-| R(1,1) | (a·g) + (b·i) | A(1,1)·B(1,1) + A(1,2)·B(2,1) |
-| R(1,2) | (a·h) + (b·j) | A(1,1)·B(1,2) + A(1,2)·B(2,2) |
-| R(2,1) | (c·g) + (d·i) | A(2,1)·B(1,1) + A(2,2)·B(2,1) |
-| R(2,2) | (c·h) + (d·j) | A(2,1)·B(1,2) + A(2,2)·B(2,2) |
-| R(3,1) | (e·g) + (f·i) | A(3,1)·B(1,1) + A(3,2)·B(2,1) |
-| R(3,2) | (e·h) + (f·j) | A(3,1)·B(1,2) + A(3,2)·B(2,2) |
+| R(1,1) | $ag + bi$ | $A_{11} B_{11} + A_{12} B_{21}$ |
+| R(1,2) | $ah + bj$ | $A_{11} B_{12} + A_{12} B_{22}$ |
+| R(2,1) | $cg + di$ | $A_{21} B_{11} + A_{22} B_{21}$ |
+| R(2,2) | $ch + dj$ | $A_{21} B_{12} + A_{22} B_{22}$ |
+| R(3,1) | $eg + fi$ | $A_{31} B_{11} + A_{32} B_{21}$ |
+| R(3,2) | $eh + fj$ | $A_{31} B_{12} + A_{32} B_{22}$ |
 
 $$R=\begin{bmatrix}A_{11}B_{11}+A_{12}B_{21} & A_{11}B_{12}+A_{12}B_{22}\\A_{21}B_{11}+A_{22}B_{21} & A_{21}B_{12}+A_{22}B_{22}\\A_{31}B_{11}+A_{32}B_{21} & A_{31}B_{12}+A_{32}B_{22}\end{bmatrix}$$
 
@@ -4979,36 +4992,36 @@ ans =
     89   100
 ```
 
-R(1,1) = 1·7 + 2·9 = 25 ✓.
+$R_{11} = 1 \cdot 7 + 2 \cdot 9 = 25$, which matches.
 
 ### 5.10 Matrix Division & Inverse Matrices
 
 Technically no "matrix division". For `x = B/A`, MATLAB help says:
 
-- A scalar → `B/A` = `B./A`.
-- A square n × n, B has n columns → `x = B/A` solves `x*A = B` (if a solution exists).
-- A rectangular m × n (m ≠ n), B has n columns → least-squares solution of `x*A = B` (beyond scope).
+- A scalar $\rightarrow$ `B/A` = `B./A`.
+- A square n × n, B has n columns $\rightarrow$ `x = B/A` solves `x*A = B` (if a solution exists).
+- A rectangular m × n (m ≠ n), B has n columns $\rightarrow$ least-squares solution of `x*A = B` (beyond scope).
 
-Middle case = the useful one → needs **inverse matrices**.
+Middle case = the useful one $\rightarrow$ needs **inverse matrices**.
 
 $$A \cdot B = C \quad\Rightarrow\quad B = A^{-1} \cdot C$$
 
-Know A and C, want B → multiply by inverse of A (like 3 ÷ 4 = 3 × ¼, but order matters).
+Know A and C, want B $\rightarrow$ multiply by inverse of A (like 3 ÷ 4 = 3 × ¼, but order matters).
 
 - **A⁻¹** = inverse; must be **n × n square**.
-- Definition: A·A⁻¹ = A⁻¹·A = **I** (identity). Shorthand: "cancels out", like 1.
+- Definition: $AA^{-1} = A^{-1}A = I$ (identity). Shorthand: "cancels out", like 1.
 - Built from the **determinant** and the **adjugate**.
 
 **2 × 2 case:**
 
 $$A=\begin{bmatrix}a&b\\c&d\end{bmatrix}$$
 
-- **Determinant** (scalar) = (a·d) − (c·b)
-- **Adjugate** = swap a ↔ d, negate b and c:
+- **Determinant** (scalar) = $ad - cb$
+- **Adjugate** = swap a and d, negate b and c:
 
 $$\operatorname{adj}(A)=\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\qquad A^{-1}=\frac{1}{\det(A)}\,.\!*\,\operatorname{adj}(A)$$
 
-Larger than 2 × 2 → many more steps, beyond scope. MATLAB does it with `inv`.
+Larger than 2 × 2 $\rightarrow$ many more steps, beyond scope. MATLAB does it with `inv`.
 
 | Function | Result |
 |---|---|
@@ -5021,7 +5034,7 @@ Larger than 2 × 2 → many more steps, beyond scope. MATLAB does it with `inv`.
 
 $$\begin{aligned}3x+3y&=16\\2x-5y&=-4\end{aligned}$$
 
-Coefficients → A, right side → B, unknowns → D.
+Coefficients $\rightarrow$ A, right side $\rightarrow$ B, unknowns $\rightarrow$ D.
 
 Single-column variable/solution matrices = column vectors.
 
@@ -5057,7 +5070,7 @@ D =
     2.0952
 ```
 
-x = 3.2381, y = 2.0952 → the intersection point of the two lines. (No solution / lines never cross → MATLAB returns `Inf`. Note: a singular A actually also prints a warning "Matrix is singular to working precision.")
+x = 3.2381, y = 2.0952 $\rightarrow$ the intersection point of the two lines. (No solution / lines never cross $\rightarrow$ MATLAB returns `Inf`. Note: a singular A actually also prints a warning "Matrix is singular to working precision.")
 
 **Check:**
 
@@ -5075,7 +5088,7 @@ ans =
    -4.0000
 ```
 
-Later chapter → `fplot`. Come back and plot both lines to see the intersection.
+Later chapter $\rightarrow$ `fplot`. Come back and plot both lines to see the intersection.
 
 **Example 2: Justice League fundraiser (week 1)**
 
@@ -5105,7 +5118,7 @@ C =
         7700
 ```
 
-A · B = C, B = [heroes; sidekicks; villains]. Inverse + multiply in one step:
+$AB = C$, with B = [heroes; sidekicks; villains]. Inverse + multiply in one step:
 
 ```matlab
 B = inv(A)*C
@@ -5123,11 +5136,11 @@ B =
 
 #### Key Terms
 
-array division · array multiplication · commutative · diagonal matrix · element-by-element · element-by-element logical operation · element-wise division · element-wise multiplication · element-wise power · identity matrix · imaginary number i · magic matrix · matrices · matrix · matrix addition · matrix math · matrix subtraction · pseudo-random · random number · random number generator · row separator · scalar · seed · square matrix · transposition · vector
+array division, array multiplication, commutative, diagonal matrix, element-by-element, element-by-element logical operation, element-wise division, element-wise multiplication, element-wise power, identity matrix, imaginary number i, magic matrix, matrices, matrix, matrix addition, matrix math, matrix subtraction, pseudo-random, random number, random number generator, row separator, scalar, seed, square matrix, transposition, vector
 
 #### Key Commands
 
-`'` · `.*` · `.^` · `./` · `diag` · `eye` · `magic` · `ones` · `rand` · `randi` · `randn` · `rng` · `size` · `transpose` · `zeros`
+`'`, `.*`, `.^`, `./`, `diag`, `eye`, `magic`, `ones`, `rand`, `randi`, `randn`, `rng`, `size`, `transpose`, `zeros`
 
 ---
 
@@ -5180,7 +5193,7 @@ B =
     4.0000
 ```
 
-Same as week 1. ✓
+Same as week 1.
 
 </details>
 
@@ -5206,17 +5219,17 @@ Ainv =
     0.1163    0.1628   -0.0465
 ```
 
-Exact values are fractions over 43 (`format rat` shows them): Ainv = (1/43)·[24 −18 −1; −20 15 8; 5 7 −2].
+Exact values are fractions over 43 (`format rat` shows them): `Ainv = (1/43)*[24 -18 -1; -20 15 8; 5 7 -2]`.
 
-Row 1 of A · column 1 of A⁻¹:
+Row 1 of $A$ times column 1 of $A^{-1}$:
 
 $$\tfrac{1}{43}\big(2\cdot24 + 1\cdot(-20) + 3\cdot5\big) = \tfrac{43}{43} = 1$$
 
-Row 1 of A · column 2 of A⁻¹:
+Row 1 of $A$ times column 2 of $A^{-1}$:
 
 $$\tfrac{1}{43}\big(2\cdot(-18) + 1\cdot15 + 3\cdot7\big) = \tfrac{0}{43} = 0$$
 
-Repeat for all 9 → identity matrix ("1" for matrices). MATLAB check:
+Repeat for all 9 $\rightarrow$ identity matrix ("1" for matrices). MATLAB check:
 
 ```matlab
 A * Ainv
@@ -5260,7 +5273,7 @@ Doctor **$1.5M**, lawyer **$2.0M**, engineer **$0.5M** per year.
 
 <details><summary>Solution</summary>
 
-Multiply each column of A by that profession's fee → `.*` with B transposed to a row.
+Multiply each column of A by that profession's fee $\rightarrow$ `.*` with B transposed to a row.
 
 ```matlab
 D = A .* B'
@@ -5292,7 +5305,7 @@ D =
    27.0000   18.0000   10.0000   55.0000
 ```
 
-Column 4 = city totals → matches the C totals. ✓
+Column 4 = city totals $\rightarrow$ matches the C totals.
 
 </details>
 
@@ -5372,11 +5385,11 @@ Ainv =
    -8.4000    3.8000    6.2000
 ```
 
-Manual A⁻¹·C (each row of A⁻¹ · C):
+Manual $A^{-1}C$ (each row of $A^{-1}$ times $C$):
 
-- potatoes = 2.6·44 − 1.2·48 − 1.8·31 = 114.4 − 57.6 − 55.8 = **1**
-- beets = 10.2·44 − 4.4·48 − 7.6·31 = 448.8 − 211.2 − 235.6 = **2**
-- asparagus = −8.4·44 + 3.8·48 + 6.2·31 = −369.6 + 182.4 + 192.2 = **5**
+- potatoes: $2.6 \cdot 44 - 1.2 \cdot 48 - 1.8 \cdot 31 = 114.4 - 57.6 - 55.8 = 1$
+- beets: $10.2 \cdot 44 - 4.4 \cdot 48 - 7.6 \cdot 31 = 448.8 - 211.2 - 235.6 = 2$
+- asparagus: $-8.4 \cdot 44 + 3.8 \cdot 48 + 6.2 \cdot 31 = -369.6 + 182.4 + 192.2 = 5$
 
 ```matlab
 B = Ainv * C
@@ -5388,7 +5401,7 @@ B =
     5.0000
 ```
 
-Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44 ✓
+Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44, correct.
 
 </details>
 
@@ -5414,16 +5427,16 @@ Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 
 |---|---|---|
 | `%` | comment; MATLAB skips it | `% Variables` |
 | `edit name` | open/create `name.m` | `edit matrixMax` |
-| `function … end` | define function; 1st function name = file name | `function biggie = matrixMax(A)` |
+| `function ... end` | define function; 1st function name = file name | `function biggie = matrixMax(A)` |
 | `[a, b] = f(x)` | receive multiple return values (in order) | `[dim, r, c, mx] = matrix_facts(A)` |
 | `input(prompt)` | ask user for a value | `f = input('Enter force: ');` |
 | `disp(x)` | plain print | `disp('in Newton-meters')` |
-| `fprintf(fmt, …)` | formatted print | `fprintf('r = %d\n', r)` |
-| `rad2deg(r)` | radians → degrees | `rad2deg(0.7854)` → `45.0001` |
-| `sin` / `sind` | sine of radians / degrees | `sind(30)` → `0.5` |
+| `fprintf(fmt, ...)` | formatted print | `fprintf('r = %d\n', r)` |
+| `rad2deg(r)` | radians $\rightarrow$ degrees | `rad2deg(0.7854)` $\rightarrow$ `45.0001` |
+| `sin` / `sind` | sine of radians / degrees | `sind(30)` $\rightarrow$ `0.5` |
 | `size(A, dim)` | rows (1) or cols (2) | `size(A,1)` |
-| `ndims(A)` | number of dimensions | `ndims(A)` → `2` |
-| `max(M)` | max of each column (vector → single max) | `max(M(:))` |
+| `ndims(A)` | number of dimensions | `ndims(A)` $\rightarrow$ `2` |
+| `max(M)` | max of each column (vector $\rightarrow$ single max) | `max(M(:))` |
 | `which name` | path to a function's `.m` file | `which blkdiag` |
 | `global x` | share variable across workspaces | `global b;` |
 | `persistent y` | keep value between calls | `persistent y;` |
@@ -5447,10 +5460,10 @@ No output — MATLAB skips them.
 
 ### 6.2 Scripts
 
-- **Script** = saved list of commands → no retyping. Run by name. Extension `.m` (same as functions). Basically a program.
+- **Script** = saved list of commands $\rightarrow$ no retyping. Run by name. Extension `.m` (same as functions). Basically a program.
 - Can contain loops and conditionals.
-- Since **R2016b** → can contain its own **helper functions** (callable only inside the script).
-- Easy to convert into a function → often very similar.
+- Since **R2016b** $\rightarrow$ can contain its own **helper functions** (callable only inside the script).
+- Easy to convert into a function $\rightarrow$ often very similar.
 - **Runs in the Command Window's scope** (base Workspace): sees existing Workspace variables, adds the ones it creates.
 - Two types: regular scripts (`.m`) and **Live Scripts** (`.mlx`, later tutorial).
 
@@ -5458,9 +5471,9 @@ Loops/conditionals work in the Command Window too, but awkwardly: **Enter** afte
 
 **Script example — torque**
 
-τ = F · d · sin θ → τ (tau) = torque, F = force, d = distance vector from pivot, θ (theta) = angle. No Greek letters, capitals usually mean matrices → `tau = f * d * sin(theta)`.
+$\tau = F \cdot d \cdot \sin\theta$, where $\tau$ (tau) = torque, F = force, d = distance vector from pivot, $\theta$ (theta) = angle. No Greek letters in code, and capitals usually mean matrices, so: `tau = f * d * sin(theta)`.
 
-- Torque normally in **N·m**.
+- Torque normally in **N-m** (newton-meters).
 - Lab assistant gave distance **8.2021 ft** (1 ft = 0.3048 m) and angle **0.7854 rad** (expected degrees). Force = **15 N**.
 - Conversions easy in MATLAB — **must track units** or the result is meaningless.
 
@@ -5477,7 +5490,7 @@ tau =
    26.5166
 ```
 
-No `;` on the `tau` line on purpose → shows the answer (with `;` it's only in the Workspace).
+No `;` on the `tau` line on purpose $\rightarrow$ shows the answer (with `;` it's only in the Workspace).
 Symbolic Math toolbox has `symunit` for tracking/converting units (later tutorial).
 Trig functions come in radian form (`sin`, `cos`, `tan`) and degree form (`sind`, `cosd`, `tand`). Could skip the conversion and use `sin(rads)`. Know your units before picking the function!
 
@@ -5485,11 +5498,11 @@ Trig functions come in radian form (`sin`, `cos`, `tan`) and degree form (`sind`
 
 Turn the last three commands into a script:
 
-1. Press **↑** → show Command History.
+1. Press the **Up Arrow** key to show the Command History.
 2. **Shift**-select the last three commands (2 conversions + torque formula).
-3. Right-click → **Create Script** (Figure 6.1).
+3. Right-click $\rightarrow$ **Create Script** (Figure 6.1).
 
-![Figure 6.1 — Command History → Create Script](media/ch6_fig6-1_create_script.png)
+![Figure 6.1 — Command History $\rightarrow$ Create Script](media/ch6_fig6-1_create_script.png)
 New unnamed, unsaved Editor tab with those commands. Add to the end:
 
 ```matlab
@@ -5498,10 +5511,10 @@ disp('in Newton-meters')
 
 Save to the current folder as **`Torque`**.
 
-> **Book typo:** text shows curly quotes `‘in Newton-meters’`. MATLAB needs straight quotes `'…'`.
+> **Book typo:** text shows curly quotes `‘in Newton-meters’`. MATLAB needs straight quotes `'...'`.
 
-- Name is **case-sensitive** → `torque` ≠ `Torque`.
-- Runs each command in order using `f`, `ft`, `rads` from the Workspace. Not set → error.
+- Name is **case-sensitive** $\rightarrow$ `torque` ≠ `Torque`.
+- Runs each command in order using `f`, `ft`, `rads` from the Workspace. Not set $\rightarrow$ error.
 
 ```matlab
 f = 12.5;
@@ -5524,21 +5537,21 @@ theta = rad2deg(rads);
 tau = f * d * sind(theta)
 disp('in Newton-meters')
 ```
-![Figure 6.2 — Command History → Create Script](media/ch6_fig6-2_create_script.png)
+![Figure 6.2 — Command History $\rightarrow$ Create Script](media/ch6_fig6-2_create_script.png)
 
 **3 more ways to make a script:**
 
-- **New → Script** on the ribbon (save manually to name it)
+- **New $\rightarrow$ Script** on the ribbon (save manually to name it)
 - **Ctrl+N** (save manually to name it)
 - `edit scriptName` (creates a named file)
 
-> Script uses the name of an existing Workspace variable → that variable gets **overwritten**.
+> Script uses the name of an existing Workspace variable $\rightarrow$ that variable gets **overwritten**.
 
-**Comments in scripts** → explain what and why. Not echoed when the script runs; only seen in the Editor.
+**Comments in scripts** $\rightarrow$ explain what and why. Not echoed when the script runs; only seen in the Editor.
 
 ### 6.4 Making a Script Interactive
 
-`input` → prompt the caller for values. Add to the top of `Torque`:
+`input` $\rightarrow$ prompt the caller for values. Add to the top of `Torque`:
 
 ```matlab
 f = input('Enter force in Newtons: ');
@@ -5581,24 +5594,24 @@ Many approaches to torque; this one saves typing.
 **Function** = block of code that answers a question ("square root of this?") or does a task ("plot this"). Full program = many functions, each a focused subtask. Benefits:
 
 - simpler to test small pieces
-- each piece works → build big programs with confidence
+- each piece works $\rightarrow$ build big programs with confidence
 - safer updates: replace only what changes
 - **reuse** in any program
 
 | | Script | Function |
 |---|---|---|
-| Series of commands in `.m` | ✓ | ✓ |
-| Call from Command Window | ✓ | ✓ |
-| Input parameters / return values | ✗ | ✓ |
+| Series of commands in `.m` | yes | yes |
+| Call from Command Window | yes | yes |
+| Input parameters / return values | no | yes |
 | Workspace | base (Command Window) | its own |
 
 "Program" = anything from Excel or iOS to a phone app or a car's fuel controller. "Programming" = "coding", "programmers" = "developers".
 
-**Built-in functions** → already used dozens: `sum`, `length`, `logical`, `int32`, `ceil`, `mod`, `class`, `strcmp`, `ismatrix`, `islogical`, `magic`, `randi`, `struct2cell`, `rng`, …
+**Built-in functions** $\rightarrow$ already used dozens: `sum`, `length`, `logical`, `int32`, `ceil`, `mod`, `class`, `strcmp`, `ismatrix`, `islogical`, `magic`, `randi`, `struct2cell`, `rng`, ...
 
 - Most take an input (`ismatrix(M)`) and return something (logical, matrix, value).
 - Some do a task and return nothing (`rng` sets the seed).
-- Written with the same code elements as yours. Source visible for some: `which blkdiag` → path to its `.m` file → open and read.
+- Written with the same code elements as yours. Source visible for some: `which blkdiag` $\rightarrow$ path to its `.m` file $\rightarrow$ open and read.
 
 ```matlab
 which blkdiag
@@ -5608,7 +5621,7 @@ Prints the full path to `blkdiag.m` inside your MATLAB install folder.
 
 Most languages have a big built-in function library.
 
-**Custom functions** = heart of **procedural programming**. Big problems (engineering, huge data sets) → not solved by typing commands. Real apps = 100,000s of lines in 100s of functions.
+**Custom functions** = heart of **procedural programming**. Big problems (engineering, huge data sets) $\rightarrow$ not solved by typing commands. Real apps = 100,000s of lines in 100s of functions.
 
 Review **4.1 Using the MATLAB Editor** (Chapter 4).
 
@@ -5618,10 +5631,10 @@ Review **4.1 Using the MATLAB Editor** (Chapter 4).
 function [retVar1, retVar2, ...] = functionName (param1, param2, ...)
 ```
 
-- **`function`** keyword → function file, not a script.
-- **Output variable(s)** → one (brackets optional) or bracketed comma list. Optional; none → drop the `=` too. Can be specified as `varargout`.
-- **Function name** → first function in the file **must match the file name**. Same rules as variable names: a–z, A–Z, 0–9, `_`, start with a letter.
-- **Input parameters** → comma list in `( )`. Must be supplied when called. None → parentheses optional. Can be specified as `varargin`.
+- **`function`** keyword $\rightarrow$ function file, not a script.
+- **Output variable(s)** $\rightarrow$ one (brackets optional) or bracketed comma list. Optional; none $\rightarrow$ drop the `=` too. Can be specified as `varargout`.
+- **Function name** $\rightarrow$ first function in the file **must match the file name**. Same rules as variable names: a–z, A–Z, 0–9, `_`, start with a letter.
+- **Input parameters** $\rightarrow$ comma list in `( )`. Must be supplied when called. None $\rightarrow$ parentheses optional. Can be specified as `varargin`.
   
 
 **Examples:**
@@ -5638,7 +5651,7 @@ function [x, y, z] = angry_cat(meow, hiss)
 - `.m` file name = name of its **first** function.
 - Only the first function is callable from the Command Window or other files.
 - A file can hold as many functions as needed.
-- Other functions in the file (**local functions**) → callable only by the first function or each other.
+- Other functions in the file (**local functions**) $\rightarrow$ callable only by the first function or each other.
 - Inputs `( )` and outputs `[ ]` both optional.
 
 Close with `end` on its own line (like loops/branches). Optional if only one function in the file, but good practice.
@@ -5683,7 +5696,7 @@ Function syntax is language-specific; MATLAB's is a bit unusual.
 
 No single "right" algorithm — it's a craft. Time on the algorithm saves time coding.
 
-Alternative → **flowchart** (like the if-elseif-else one in Chapter 4). Good for visual thinkers.
+Alternative $\rightarrow$ **flowchart** (like the if-elseif-else one in Chapter 4). Good for visual thinkers.
 
 **Build it:**
 
@@ -5695,13 +5708,13 @@ Tip: paste the algorithm as comments, write code under each step.
 
 ```text
 function biggie = matrixMax(A)
-         ↑         ↑        ↑
+         ^         ^        ^
   single return  function  input
   value (no [])    name    parameter
 ```
 
 - Input = matrix `A`; output = scalar `biggie`.
-- Editor flags `A` (unused) and `biggie` (never assigned) until the body exists → ignore for now, but watch those warnings later.
+- Editor flags `A` (unused) and `biggie` (never assigned) until the body exists $\rightarrow$ ignore for now, but watch those warnings later.
 
 Parameter = alias for a value. `A` is the name *inside* the function; caller's variable name doesn't matter, just that it's a matrix.
 
@@ -5713,7 +5726,7 @@ function biggie = matrixMax(A)
     biggie = A(1,1);
 ```
 
-- `=` highlighted until you add the `;`. Most function lines end in `;` → suppress output. Leave a few off to see the noise.
+- `=` highlighted until you add the `;`. Most function lines end in `;` $\rightarrow$ suppress output. Leave a few off to see the noise.
 
 **Step 2 — rows/cols** (`size` with dim parameter: 1 = rows, 2 = cols):
 
@@ -5722,8 +5735,8 @@ function biggie = matrixMax(A)
     columns = size(A,2);
 ```
 
-- `*` next to the file name on the tab / title bar → unsaved changes. MATLAB won't run an unsaved file.
-- Click back in the Command Window → MATLAB auto-saves. Or **Save** on the ribbon.
+- `*` next to the file name on the tab / title bar $\rightarrow$ unsaved changes. MATLAB won't run an unsaved file.
+- Click back in the Command Window $\rightarrow$ MATLAB auto-saves. Or **Save** on the ribbon.
 
 **Step 3 — nested `for` loops:**
 
@@ -5735,7 +5748,7 @@ function biggie = matrixMax(A)
     end
 ```
 
-Type the `end`s before the loop bodies → no missing `end`s in big files.
+Type the `end`s before the loop bodies $\rightarrow$ no missing `end`s in big files.
 
 **Step 4 — compare (in-line comment):**
 
@@ -5776,14 +5789,14 @@ ans =
 
 ```text
 matrixMax(T)
-    ↑      ↑
+    ^      ^
 function  input parameter (any variable,
   call    value, or expression)
 ```
 
 Inputs/outputs tracked by **position** in `( )` / `[ ]`. Same as built-ins: `sin(x)`.
 
-**Watch the loops** → add `fprintf` inside the inner loop:
+**Watch the loops** $\rightarrow$ add `fprintf` inside the inner loop:
 
 ```matlab
     % Walk the matrix
@@ -5818,11 +5831,11 @@ ans =
 
 (35 lines total, one per element; middle trimmed here.)
 
-Higher-dimensional array → one more nested loop per extra dimension.
+Higher-dimensional array $\rightarrow$ one more nested loop per extra dimension.
 
 ### 6.8 Return Values
 
-Multiple returns → comma-separated, bracketed list. **Not an array**; values can be different types.
+Multiple returns $\rightarrow$ comma-separated, bracketed list. **Not an array**; values can be different types.
 
 ```text
 function [retVar1, retVar2, ...] = functionName(...)
@@ -5840,7 +5853,7 @@ Caller uses the same format (commas optional):
 [a, b, C] = manyRetVals();
 ```
 
-Fewer outputs requested → received **in order**, rest lost:
+Fewer outputs requested $\rightarrow$ received **in order**, rest lost:
 
 ```matlab
 [a, b] = manyRetVals();    % gets x, y — Z lost
@@ -5849,7 +5862,7 @@ Fewer outputs requested → received **in order**, rest lost:
 
 **Concrete example — `matrix_facts`, created from the ribbon:**
 
-1. **New → Function**  → framework to fill in :
+1. **New $\rightarrow$ Function**  $\rightarrow$ framework to fill in :
 
 
 ```matlab
@@ -5860,11 +5873,11 @@ function [ output_args ] = untitled3( input_args )
 end
 ```
 
-2. Replace `output_args` → `dimensions, rows, columns, maxval` 
-3. Replace `untitled3` → `matrix_facts`.
-4. **Save**  → name `matrix_facts` (file name = first function name).
+2. Replace `output_args` $\rightarrow$ `dimensions, rows, columns, maxval` 
+3. Replace `untitled3` $\rightarrow$ `matrix_facts`.
+4. **Save**  $\rightarrow$ name `matrix_facts` (file name = first function name).
 
-5. Replace `input_args` → `A` 
+5. Replace `input_args` $\rightarrow$ `A` 
 6. Replace template comments with a real description.
 7. Add the body , then call `matrixMax`.
 
@@ -5885,7 +5898,7 @@ function [dimensions, rows, columns, maxval] = matrix_facts(A)
 end
 ```
 
-Calling our own function from another one → `matrixMax` needs to be in the same folder (or on the path). Remove the `fprintf` debug line from `matrixMax` first, or it prints 35 lines.
+Calling our own function from another one $\rightarrow$ `matrixMax` needs to be in the same folder (or on the path). Remove the `fprintf` debug line from `matrixMax` first, or it prints 35 lines.
 
 ```matlab
 clear
@@ -5917,7 +5930,7 @@ Workspace now holds `dim`, `r`, `c`, `mx`.
 
 ### 6.9 Local Functions
 
-**Local function** → callable only within its file (by another function there, or inside a script). Not from other files or the Command Window. Any number per file. Must come **after** the main function (first function = file name).
+**Local function** $\rightarrow$ callable only within its file (by another function there, or inside a script). Not from other files or the Command Window. Any number per file. Must come **after** the main function (first function = file name).
 
 In `matrix_facts.m`, change
 
@@ -5957,9 +5970,9 @@ function max_value = myMax(M)
 end
 ```
 
-- `max(M)` on m × n → row vector of length n = max of each column.
-- `max` on that vector → overall max.
-- Fancier, one call: `max_value = max(M(:));` → `(:)` turns M into one column, `max` works on it directly.
+- `max(M)` on m × n $\rightarrow$ row vector of length n = max of each column.
+- `max` on that vector $\rightarrow$ overall max.
+- Fancier, one call: `max_value = max(M(:));` $\rightarrow$ `(:)` turns M into one column, `max` works on it directly.
 
 ```matlab
 [dim, r, c, mx] = matrix_facts(A)
@@ -5991,7 +6004,7 @@ Same results as before.
 **Scope** = which statements can see/use a variable. Three kinds: **local**, **persistent**, **global**.
 
 - Variable = alias for a memory address.
-- Passing to/returning from a function → the **value** is passed (not the address), copied into memory that function can reach.
+- Passing to/returning from a function $\rightarrow$ the **value** is passed (not the address), copied into memory that function can reach.
 - Address space a set of commands can reach = its scope.
 
 **Rules:**
@@ -6035,7 +6048,7 @@ function scope()
 end
 ```
 
-**Breakpoint** → stops the function at that line; you control the rest by hand. Click the dash next to line **2** → circle appears (gray = unsaved, red = saved). Execution stops **right before** that line.
+**Breakpoint** $\rightarrow$ stops the function at that line; you control the rest by hand. Click the dash next to line **2** $\rightarrow$ circle appears (gray = unsaved, red = saved). Execution stops **right before** that line.
 
 
 ```matlab
@@ -6046,14 +6059,14 @@ K>>
 ```
 
 
-- Green arrow = current line. Prompt changes to `K>>` → you're in the **function's** workspace.
-- Workspace pane is **empty** → base variables not visible here.
+- Green arrow = current line. Prompt changes to `K>>` $\rightarrow$ you're in the **function's** workspace.
+- Workspace pane is **empty** $\rightarrow$ base variables not visible here.
 
 **Debug section** of the ribbon:
 
-1. **Step** → runs `local_var = 20` → appears in the function's Workspace.
-2. **Step** again → `local_var = local_var + 10` → Workspace shows 30.
-3. **Continue** → finishes, back to the Command Window.
+1. **Step** $\rightarrow$ runs `local_var = 20` $\rightarrow$ appears in the function's Workspace.
+2. **Step** again $\rightarrow$ `local_var = local_var + 10` $\rightarrow$ Workspace shows 30.
+3. **Continue** $\rightarrow$ finishes, back to the Command Window.
 
 ```matlab
 local_var
@@ -6065,7 +6078,7 @@ local_var =
 
 Base variables back; `local_var` still **1000**. Function's `local_var` ≠ base `local_var`, despite the same name. That's scope.
 
-**Global scope** → shared across all functions, scripts, and the base workspace. Generally discouraged — often a sign of poor design, confusing errors.
+**Global scope** $\rightarrow$ shared across all functions, scripts, and the base workspace. Generally discouraged — often a sign of poor design, confusing errors.
 
 ```matlab
 global b;
@@ -6078,7 +6091,7 @@ global b;
 b = randi(2000, 13, 22);
 ```
 
-To use it somewhere else → declare again first:
+To use it somewhere else $\rightarrow$ declare again first:
 
 ```matlab
 global b;    % Bring the variable into the function
@@ -6086,15 +6099,15 @@ var1 = b;    % Use the variable
 b = var2;    % Set the variable
 ```
 
-Change global `b` → changes everywhere it's used (any function, Command Window).
+Change global `b` $\rightarrow$ changes everywhere it's used (any function, Command Window).
 
- `b` already exists as a local in the base workspace from the scope demo → `global b` there gives a warning. Run `clear b` first.
+ `b` already exists as a local in the base workspace from the scope demo $\rightarrow$ `global b` there gives a warning. Run `clear b` first.
 
 ### 6.11 Recursion
 
-**Recursive function** = calls itself. Needs a **stop condition** or it spirals forever. Once hit → calls unwind, each returning its value to its caller, until the original caller gets the final result.
+**Recursive function** = calls itself. Needs a **stop condition** or it spirals forever. Once hit $\rightarrow$ calls unwind, each returning its value to its caller, until the original caller gets the final result.
 
-**Factorial** n! = 1 · 2 · 3 · … · n (1! = 1). Example 4!:
+**Factorial**: $n! = 1 \cdot 2 \cdot 3 \cdots n$ (and $1! = 1$). Example 4!:
 
 ```text
 1 * 2 * 3 * 4
@@ -6111,7 +6124,7 @@ So:
 2! = 1! * 2
 ```
 
-Pattern → x! = (x−1)! · x.
+Pattern: $x! = (x-1)! \cdot x$.
 
 **Algorithm:**
 
@@ -6142,13 +6155,13 @@ ans =
     24
 ```
 
-Trace: `recurse(4)` → 4 · `recurse(3)` → 3 · `recurse(2)` → 2 · `recurse(1)` = 1 → back up: 2 → 6 → **24**.
+Trace: `recurse(4)` needs 4 * `recurse(3)`, which needs 3 * `recurse(2)`, which needs 2 * `recurse(1)` = 1. Then it unwinds: 2, then 6, then **24**.
 
-`recurse(0)` or a negative n never reaches 1 → recursion until MATLAB's recursion limit error.
+`recurse(0)` or a negative n never reaches 1 $\rightarrow$ recursion until MATLAB's recursion limit error.
 
 ### 6.12 Persistent Variables
 
-Normally a function's locals vanish when it exits. **`persistent`** → value kept in memory for the next call (until MATLAB restarts, or `clear fthw`).
+Normally a function's locals vanish when it exits. **`persistent`** $\rightarrow$ value kept in memory for the next call (until MATLAB restarts, or `clear fthw`).
 
 **fthw.m** ("factorials the hard way"):
 
@@ -6164,7 +6177,7 @@ function f = fthw(x)
 end
 ```
 
-Call with x = 1, then add 1 each time → manual factorial, no recursion (Figure 6.22):
+Call with x = 1, then add 1 each time $\rightarrow$ manual factorial, no recursion (Figure 6.22):
 
 ```matlab
 fthw(1)
@@ -6196,11 +6209,11 @@ Why do it this way? You wouldn't — demo only. Like globals, persistent variabl
 
 #### Key Terms
 
-algorithm · function definition · functions · global scope · initialize · input value · local functions · local scope · persistent variable · pseudo-code · return value · scope · scripts
+algorithm, function definition, functions, global scope, initialize, input value, local functions, local scope, persistent variable, pseudo-code, return value, scope, scripts
 
 #### Key Commands
 
-`%` · `disp` · `edit` · `end` · `function` · `input` · `size` · `which`
+`%`, `disp`, `edit`, `end`, `function`, `input`, `size`, `which`
 
 ---
 
@@ -6210,7 +6223,7 @@ algorithm · function definition · functions · global scope · initialize · i
 
 <details><summary>Solution</summary>
 
-Uses the values from `terminalVelocityCond2` (Chapter 4.8). Formula assumed: Vt = √(2·m·g / (ρ·A·C)) — matches the book's Neptune result.
+Uses the values from `terminalVelocityCond2` (Chapter 4.8). Formula assumed: $V_t = \sqrt{2mg / (\rho A C)}$ — matches the book's Neptune result.
 
 ```matlab
 function Vt = terminalVelocity(planet)
@@ -6259,7 +6272,7 @@ Neptune matches the book's `1.185869183622224e+04` (shown there in `format long`
 
 <details><summary>Solution</summary>
 
-`>=` instead of `>` → a later equal value also updates the location → **last** occurrence.
+`>=` instead of `>` $\rightarrow$ a later equal value also updates the location $\rightarrow$ **last** occurrence.
 
 ```matlab
 function [biggie, loc] = matrixMax(A)
@@ -6295,7 +6308,7 @@ where =
      2     3
 ```
 
-9 appears at (1,2), (2,1), (2,3) → walking row by row, (2,3) is last.
+9 appears at (1,2), (2,1), (2,3) $\rightarrow$ walking row by row, (2,3) is last.
 
 </details>
 
@@ -6313,7 +6326,7 @@ The function will return the value calculated by the formula *tau = f \* d \* si
 
 ```matlab
 function tau = torque1(f, d, dUnit, theta, aUnit)
-% Torque in N·m. dUnit: 'f' feet / 'm' meters. aUnit: 'r' radians / 'd' degrees
+% Torque in N-m. dUnit: 'f' feet / 'm' meters. aUnit: 'r' radians / 'd' degrees
     if dUnit == 'f'
         d = d * 0.3048;      % feet -> meters
     end
@@ -6353,11 +6366,11 @@ The function will return a column vector with each row being the torque value fo
 
 <details><summary>Solution</summary>
 
-Element-wise → no loop needed.
+Element-wise $\rightarrow$ no loop needed.
 
 ```matlab
 function tau = torque2(M, dUnit, aUnit)
-% M = [force, distance, angle] per row. Returns a column of torques (N·m)
+% M = [force, distance, angle] per row. Returns a column of torques (N-m)
     f = M(:,1);
     d = M(:,2);
     theta = M(:,3);
@@ -6390,9 +6403,9 @@ Both rows match the script runs.
 
 <details><summary>Solution</summary>
 
-Stop condition: 0 or 1 characters → already reversed. Otherwise → last char + reversed(rest).
+Stop condition: 0 or 1 characters $\rightarrow$ already reversed. Otherwise $\rightarrow$ last char + reversed(rest).
 
-`extractBetween` on a char array returns a **cell** (`{'...'}`) → unwrap with `{1}` (or `char(...)`) before recursing.
+`extractBetween` on a char array returns a **cell** (`{'...'}`) $\rightarrow$ unwrap with `{1}` (or `char(...)`) before recursing.
 
 ```matlab
 function out = reversed(s)
@@ -6465,7 +6478,7 @@ p = polyfit((spacebee1(:, 1), (spacebee1(:, 2), 1);
 slope = p(1) = 1.8
 intercept = p(2) = 32
 ```
-### 3c. Anonymous function → next 4 points
+### 3c. Anonymous function for the next 4 points
 ```matlab
 f = @(x) p(1)*x + p(2)
 values = [f(101) f(102) f(103) f(104)]
@@ -6477,7 +6490,7 @@ values = 1×4
 
 The boss offers to call his connection, Paige-Page Thompson, who works with large Capital One data. You tell him it isn't necessary, because you know how to manipulate arrays to add a column of **Kelvin** temperatures (K = °C + 273.15).
 
-### 4a. Build the Kelvin column (273.15 → 373.15)
+### 4a. Build the Kelvin column (273.15 to 373.15)
 
 ```matlab
 spacebee2 = (273.15:373.15)'
@@ -6517,21 +6530,32 @@ $$P = 4a\int_0^{\pi/2}\sqrt{1-k^2\sin^2\theta}\;d\theta,\qquad k=\frac{\sqrt{a^2
 **Template (given):**
 
 ```matlab
-function [trapzApprox, numIntegrate] = PlanetDistance(a,b,points)
-    trapzApprox=TrapzPlanet(a,b,points);
+function [trapzApprox, numIntegrate] = PlanetDistance(a,b,nPoints)
+    trapzApprox=TrapzPlanet(a,b,nPoints);
     numIntegrate=IntegratePlanet(a,b);
+    fprintf("Trapezoid integration %f", numIntegrate);
+    fprintf("Numeric integration %f", numIntegrate);
 end
 
-function trapzApprox=TrapzPlanet(a,b,points)
-    % Your code goes here
+function trapzApprox=TrapzPlanet(a,b,nPoints)
+
+    k = sqrt(a^2 - b^2)/a;
+    x = linspace(0, pi/2, nPoints);
+    y = sqrt(1 - (k^2)*sin(x).^2);
+    trapzApprox = 4*a*trapz(x, y);
 end
 
 function numIntegrate=IntegratePlanet(a,b)
-    % Your code goes here
+
+    k = sqrt(a^2 - b^2)/a;
+    fun1 = @(x) sqrt(1 - (k^2)*sin(x).^2);
+    xmin =0;
+    xmax = pi/2;
+    numIntegrate = integral(fun1,xmin,xmax)*4*a;
 end
 ```
 
-**Your job → write the bodies of two local functions:**
+**Your job $\rightarrow$ write the bodies of two local functions:**
 
 | Local function | Must use | Inputs | Does |
 |---|---|---|---|
@@ -6556,13 +6580,50 @@ numIntegrate =
 
 **Auto-grader checks:**
 
-1. `PlanetDistance(a,b,10)` → `trapzApprox = 1.8074e+10` (even with only 10 points)
-2. `PlanetDistance(a,b,10)` → `numIntegrate = 1.8074e+10`
+1. `PlanetDistance(a,b,10)` $\rightarrow$ `trapzApprox = 1.8074e+10` (even with only 10 points)
+2. `PlanetDistance(a,b,10)` $\rightarrow$ `numIntegrate = 1.8074e+10`
 3. `PlanetDistance.m` actually calls both `trapz` and `integral`
 
 **Things to get right:**
 
-- θ goes from **0 to π/2** (radians → use `sin`, not `sind`).
+- θ goes from **0 to π/2** (radians $\rightarrow$ use `sin`, not `sind`).
 - Don't forget the **4a** in front of the integral.
 - Element-wise ops (`.^`, `.*`) inside the integrand — `integral` passes in an array.
-- `trapz` needs **x and y arrays**; `integral` needs a **function handle** `@(theta) …` + limits.
+- `trapz` needs **x and y arrays**; `integral` needs a **function handle** `@(theta) ...` + limits.
+
+## SDC Chapter 7 — Debugging & Error Handling
+
+### Objectives
+
+1. Know the difference between syntactic and semantic errors.
+2. Recognize and fix syntactic errors based on MATLAB's visual feedback and suggestions.
+3. Set a breakpoint to enter the debugger.
+4. Manually execute a function using the Step and other buttons on the Debug toolbar, or their keyboard equivalents.
+5. Find problems in your code using both the MATLAB debugging functionality and common manual practices.
+6. Demonstrate good programming practices for input verification and standardization.
+7. Use the try-catch construction to avoid program crashes.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `dbstep` | run current line (= **Step**) | `dbstep` |
+| `dbstep n` | run next n lines (toolbar can't) | `dbstep 5` |
+| `dbstep in` / `dbstep out` | = **Step In** / **Step Out** | `dbstep in` |
+| `dbquit` | exit debugger (= **Quit Debugging**) | `dbquit` |
+| `lower` / `upper` | standardize text case | `planet = lower(planet);` |
+| `ischar` / `isstring` | is char array / string? | `ischar('Mars')` $\rightarrow$ `1` |
+| `isscalar` | is 1×1? | `isscalar([1 2])` $\rightarrow$ `0` |
+| `return` | exit function now | `return;` |
+| `switch ... otherwise` | catch-all case | `otherwise disp('Invalid')` |
+| `try ... catch ... end` | run code; on error $\rightarrow$ catch block | see 7.8 |
+| `%%` | code section (run independently) | `%% Load data` |
+| `%{ ... %}` | block comment | see 7.9 |
+| **Ctrl+R** / **Ctrl+T** | comment / uncomment selected lines | — |
+| **Ctrl+C** | abort running code (= Quit Debugging) | — |
+
+### 7.1 Syntactic Errors
+
+- Debug = find where code went wrong. **Debugger** $\rightarrow$ control execution by hand, watch from inside.
+- **Error handling** = code that gracefully handles (or prevents) likely trouble spots.
+- **Syntactic error** = broke syntax rules (e.g. `#` in a var name). Easiest $\rightarrow$ MATLAB flags them as you type.
