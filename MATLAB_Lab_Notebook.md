@@ -4593,7 +4593,8 @@ ans =
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}+\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a+h&b+i&c+j\\d+k&e+l&f+m\end{bmatrix}$$
 
-**Matrix subtraction** $\rightarrow$ same, but order counts: A − B ≠ B − A (not **commutative**).
+**Matrix subtraction** $\rightarrow$ same, but order counts: A − B $
+eq$ B − A (not **commutative**).
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a-h&b-i&c-j\\d-k&e-l&f-m\end{bmatrix}$$
 
@@ -4935,7 +4936,8 @@ A * B   ->   (3,5) (5,2)
 ```
 
 - **Inner** dims match (5) $\rightarrow$ valid. Result size = **outer** dims $\rightarrow$ (3,2).
-- Not commutative: `B * A` $\rightarrow$ (5,2)(3,5), inner 2 ≠ 3 $\rightarrow$ error.
+- Not commutative: `B * A` $\rightarrow$ (5,2)(3,5), inner 2 $
+eq$ 3 $\rightarrow$ error.
 
 For A (r,s) and B (t,u):
 
@@ -5000,7 +5002,8 @@ Technically no "matrix division". For `x = B/A`, MATLAB help says:
 
 - A scalar $\rightarrow$ `B/A` = `B./A`.
 - A square n × n, B has n columns $\rightarrow$ `x = B/A` solves `x*A = B` (if a solution exists).
-- A rectangular m × n (m ≠ n), B has n columns $\rightarrow$ least-squares solution of `x*A = B` (beyond scope).
+- A rectangular m × n (m $
+eq$ n), B has n columns $\rightarrow$ least-squares solution of `x*A = B` (beyond scope).
 
 Middle case = the useful one $\rightarrow$ needs **inverse matrices**.
 
@@ -5513,7 +5516,8 @@ Save to the current folder as **`Torque`**.
 
 > **Book typo:** text shows curly quotes `‘in Newton-meters’`. MATLAB needs straight quotes `'...'`.
 
-- Name is **case-sensitive** $\rightarrow$ `torque` ≠ `Torque`.
+- Name is **case-sensitive** $\rightarrow$ `torque` $
+eq$ `Torque`.
 - Runs each command in order using `f`, `ft`, `rads` from the Workspace. Not set $\rightarrow$ error.
 
 ```matlab
@@ -6076,7 +6080,8 @@ local_var =
         1000
 ```
 
-Base variables back; `local_var` still **1000**. Function's `local_var` ≠ base `local_var`, despite the same name. That's scope.
+Base variables back; `local_var` still **1000**. Function's `local_var` $
+eq$ base `local_var`, despite the same name. That's scope.
 
 **Global scope** $\rightarrow$ shared across all functions, scripts, and the base workspace. Generally discouraged — often a sign of poor design, confusing errors.
 
@@ -6649,9 +6654,9 @@ Did you mean:
 >> cos(sin(0.45))
 ```
 
-- Arrow → where `)` should go. "Did you mean" $\rightarrow$  press **Enter** to accept. Often right.
-- **↑** → Command History. Failed command has a **red dash**
-- - Right-click that History line → **Create Script**.
+- Arrow $\rightarrow$ where `)` should go. "Did you mean" $\rightarrow$  press **Enter** to accept. Often right.
+- **$\uparrow$** $\rightarrow$ Command History. Failed command has a **red dash**
+- - Right-click that History line $\rightarrow$ **Create Script**.
 - Editor: no inline message $\rightarrow$  **red squiggle** under the error. Hover $\rightarrow$  tooltip : `Invalid syntax at end of line. Possibly, a ')' is missing.`
 
 **Error/warning alley** (right edge of Editor):
@@ -6681,7 +6686,7 @@ function x = addSeven(num)
 end
 ```
 
-- `addSeven(3)` → 10 (correct, by accident). Any other input → wrong. Legit code  $\rightarrow$ returns last `x`.
+- `addSeven(3)` $\rightarrow$ 10 (correct, by accident). Any other input $\rightarrow$ wrong. Legit code $\rightarrow$ returns last `x`.
 
 #### Key Terms
 
@@ -6705,7 +6710,8 @@ area = pi*((dia/2)^2)  % Cross-sectional area of the falling object,
 ```
 
 - Underlined line # = link  $\rightarrow$ jumps to that line.
-- Defined as `diam`, used as `dia` (cut-and-paste slip). `diam` had a squiggle  $\rightarrow$ hover: value never used → alarm bell.
+- Defined as `diam`, used as `dia` (cut-and-paste slip). `diam` had a squiggle  $\rightarrow$ hover: value never used 
+$\rightarrow$ alarm bell.
 
 ```matlab
 dia = 2.5;          % Diameter of the sphere, in cm
@@ -6714,8 +6720,8 @@ dia = 2.5;          % Diameter of the sphere, in cm
 - Rename a var  $\rightarrow$ MATLAB highlights all instances; rename again $\rightarrow$  offers to change all $\rightarrow$  no missed spots.
 
 Can drag-and-drop var names from Workspace $\rightarrow$ Editor/Command Window. Fast, no typos.
-**Error 2 — missing `;`** : `=` highlighted yellow + squiggle. Hover $\rightarrow$ `Terminate statement with semicolon to suppress output (in functions).` → **Details** (long explanation) / **Fix** (adds `;`).
-- Warnings OK to ignore with good reason. Not here → add `;`.
+**Error 2 — missing `;`** : `=` highlighted yellow + squiggle. Hover $\rightarrow$ `Terminate statement with semicolon to suppress output (in functions).` $\rightarrow$ **Details** (long explanation) / **Fix** (adds `;`).
+- Warnings OK to ignore with good reason. Not here $\rightarrow$ add `;`.
 
 **Error 3 — case-sensitive return var:**
 
@@ -6735,7 +6741,8 @@ Output argument "Vt" (and maybe others) not assigned during call to "terminalVel
 ⚠ Line 45: The value assigned to variable 'vt' might be unused.
 ```
 
-- `Vt` ≠ `vt` (case-sensitive). Change `vt` $\rightarrow$ `Vt` in the last assignment.
+- `Vt` $
+eq$ `vt` (case-sensitive). Change `vt` $\rightarrow$ `Vt` in the last assignment.
 
 ```matlab
 v = terminalVelocityDebug('Mars')
@@ -6788,4 +6795,411 @@ function Vt = terminalVelocityDebug(planet)      % line 6
 - Workspace  $\rightarrow$ function's workspace (not base)
 - **Run** toolbar  $\rightarrow$ **Debug** toolbar
 
+### 7.5 Debug Mode & the Debug Toolbar
+
+**Command Window in debug mode** $\rightarrow$ `K>>`, scope = function workspace. Otherwise normal: make vars, run eqs, change values, check types, call other functions.
+
+| Button | Key | Does |
+|---|---|---|
+| **Continue** | F5 | run until next breakpoint or exit |
+| **Step** | F10 | run current line $\rightarrow$ next line |
+| **Step In** | F11 | line calls a function $\rightarrow$ step into it. (Step $\rightarrow$ runs it normally) |
+| **Step Out** | Shift+F11 | finish called function $\rightarrow$ back to caller, pause on the call line (already executed) |
+| **Run to Cursor** | — | run up to clicked line. Non-executable $\rightarrow$ next executable. Breakpoint in between 
+$\rightarrow$ stops there |
+| **Function Call Stack** | — | view workspace of any running function / base |
+| **Quit Debugging** | Shift+F5 | abort 
+$\rightarrow$ Command Window + base workspace. **Ctrl+C** same $\rightarrow$ escape infinite loops |
+
+**db commands** (scriptable):
+
+| Command | = |
+|---|---|
+| `dbquit` | Quit Debugging |
+| `dbstep` | Step |
+| `dbstep n` | Step n lines (no toolbar equivalent) |
+| `dbstep in` | Step In |
+| `dbstep out` | Step Out |
+
+More 
+$\rightarrow$ Help topic **Debugging**.
+
+#### Key Terms
+
+debugger $\cdot$ debug mode
+
+#### Key Commands
+
+`dbquit` $\cdot$ `dbstep` $\cdot$ `dbstep in` $\cdot$ `dbstep out`
+
+### 7.6 Walking a Function
+
+**Good input — Jupiter:**
+
+1. Breakpoint at **line 8** (`dia = 2.5`).
+2. Call:
+
+```matlab
+terminalVelocityDebug('Jupiter')
+```
+4. **Step** 
+$\rightarrow$ `dia` appears.
+5. Click in line 12 (`C = 0.47`) 
+$\rightarrow$ **Run to Cursor** 
+$\rightarrow$ lines 9–11 run (`area`, `mass`).
+6. **Step** 
+$\rightarrow$ `C` defined. Comments skipped (not executable) 
+$\rightarrow$ arrow at `switch`.
+7. **Step** 
+$\rightarrow$ first case (Mercury). **Step** 
+$\rightarrow$ Venus… 
+$\rightarrow$ each `case` tested vs `planet` (like an `if-elseif` chain).
+8. Step to **line 34** (`case 'Jupiter'`) $
+$\rightarrow$ Step into it 
+$\rightarrow$ `gravity`, `atmosphericDensity` set 
+$\rightarrow$ next Step leaves `switch` (only one case runs).
+9. At end 
+$\rightarrow$ **Continue** (or Step ×2) 
+$\rightarrow$ back to Command Window.
+
+> **Note:** Some languages need an explicit exit (`break`) per case, else **fall-through** into next cases. MATLAB doesn't.
+
+**Bad input — Pluto:**
+
+1. `terminalVelocityDebug('Pluto')` 
+$\rightarrow$ pauses at line 8.
+2. Click line 8 breakpoint 
+$\rightarrow$ removed. Add one at **line 18** (`switch`). Breakpoints can change mid-debug.
+3. Step through 
+$\rightarrow$ no case matches 
+$\rightarrow$ `gravity`, `atmosphericDensity` never in Workspace.
+4. Step at `Vt =` line 
+$\rightarrow$ error + exit. Already know why 
+$\rightarrow$ **Quit Debugging**.
+
+### 7.7 Error Handling: Standardizing & Verifying Input
+
+- Proactive handling = hallmark of good programming.
+- Weak spot = **input parameter**. MATLAB is **type-flexible** 
+$\rightarrow$ accepts char, number, matrix, struct… Can't control input; can control handling.
+
+> **Note:** Strongly-typed languages (C#) 
+$\rightarrow$ param types declared; wrong type = error.
+
+**Verify input** (top of function):
+
+```matlab
+if x < 10 || x > 20
+    disp('Invalid input, must be between 10 and 20');
+    return;   % No point in continuing, so exit the function
+end
+```
+
+```matlab
+if ~isscalar(x)
+    disp('Invalid input, scalar value required');
+    return;
+end
+```
+
+```matlab
+if ~ischar(planet)
+    disp('Invalid input, character array required');
+    return;
+end
+```
+
+**Standardize input** — case problem:
+
+```matlab
+terminalVelocityDebug('mars')
+```
+
+$\rightarrow$ error; `'mars'` $\neq$ `'Mars'`. Fix 
+$\rightarrow$ add right after the `function` line:
+
+```matlab
+% Standardize input
+planet = lower(planet);
+```
+
+…and make all `case` strings lower case.
+
+- `lower` ignores non-text (won't crash on a number matrix). Extra-safe version:
+
+```matlab
+if ischar(planet) || isstring(planet)
+    % Standardize text input
+    planet = lower(planet);
+end
+```
+
+- Case doesn't affect result $rightarrow$ fixing input > aborting.
+
+**Test:** breakpoint at `switch`, then:
+
+```matlab
+terminalVelocityDebug('NepTunE')
+```
+
+- Workspace: `planet` = `'neptune'`. **Continue** 
+$\rightarrow$
+
+```matlab
+ans =
+
+   1.1859e+04
+```
+
+
+**Unassigned vars when no case matches 
+$\rightarrow$ 2 fixes:**
+
+1. **Default values before `switch`** 
+$\rightarrow$ defined regardless of flow. Good when the default means something (counter = 0) or is an obvious absurd flag (age = 999; here −1).
+2. **Better 
+$\rightarrow$ `otherwise` block** :
+
+```matlab
+    case 'uranus'
+        gravity = 887;
+        atmosphericDensity = 0.00042;
+    otherwise
+        disp('Invalid input, not a planet in our solar system')
+        return;
+end
+```
+
+- Any input $\neq$ 8 planets 
+$\rightarrow$ message + exit before the calc.
+
+#### Key Terms
+
+input verification $\cdot$ standardization $\cdot$ type-flexible
+
+#### Key Commands
+
+`lower` $\cdot$ `upper` $\cdot$ `return`
+
+### 7.8 Try/Catch Blocks
+
+```matlab
+terminalVelocityDebug('mercury')
+
+ans =
+
+   Inf
+```
+
+- Mercury $
+$\rightarrow$ ρ = 0 
+$\rightarrow$ divide by 0 
+$\rightarrow$ MATLAB returns `Inf` (many languages crash instead).
+- **try/catch** 
+$\rightarrow$ fail gracefully:
+
+```matlab
+try
+    % Code that could generate an error
+catch
+    % Code to handle the error, if one occurs
+end
+```
+
+- No error $\rightarrow$ `catch` skipped. Error $\rightarrow$ `catch` runs.
+- Catch code = anything: message with var values + exit; `if-elseif` responding per error; assign a new value + continue.
+- Invented example (pretend ÷0 crashes) $\rightarrow$ wrap the Vt line:
+
+```matlab
+try
+    Vt = sqrt((2 * mass * gravity) / (atmosphericDensity * C * area));
+catch
+    disp("Error - function terminated");
+    return;
+end
+```
+
+> **Note :** ÷0 doesn't throw in MATLAB $\rightarrow$ this `catch` never runs for Mercury. Real check: `if isinf(Vt)`. To see *which* error: `catch ME` $\rightarrow$ `disp(ME.message)` / `ME.identifier`.
+
+- Capturing specific errors $\rightarrow$ MATLAB help.
+
+#### Key Commands
+
+`try/catch`
+
+### 7.9 Manual Debugging Techniques
+
+Debugging = art. General tricks:
+
+**Comment out problem lines** — two extra comment formats:
+
+| Format | Use |
+|---|---|
+| `%% Title` | starts a **section**; sections run independently |
+| `%{` … `%}` | block comment; each marker on its own line |
+
+```matlab
+x = x + 77;
+%{
+    z = cos(88.4);
+    A = magic(3);
+%}
+plot(x);
+```
+
+- Select lines $\rightarrow$ **Ctrl+R** comment / **Ctrl+T** uncomment.
+
+> **Tip:** All shortcuts $\rightarrow$ **Home $\rightarrow$ Preferences $\rightarrow$ Keyboard $\rightarrow$ Shortcuts**. Pros use shortcuts.
+
+**Remove semicolons** (temporarily) $\rightarrow$ see each line's output.
+
+**Hover to see a value** $\rightarrow$ paused: hover a var name $\rightarrow$ type + value. Value = at the **paused** line, not the hovered line.
+
+**Enter your own values** $\rightarrow$ `K>>` = function workspace. Breakpoint after a calc $\rightarrow$ assign the correct value in Command Window $\rightarrow$ continue.
+
+**Pause running code** $\rightarrow$ no breakpoints $\rightarrow$ **Run** button becomes **Pause** while running $\rightarrow$ instant breakpoint; Debug toolbar appears.
+
+Try it — add at top of `terminalVelocityDebug`:
+
+```matlab
+while 1
+    x = 1;
+end
+```
+
+- Run $\rightarrow$ hangs. **Pause** $\rightarrow$ green arrow at current line $\rightarrow$ **Quit Debugging**. (Or **Ctrl+C**.)
+
+#### Key Commands
+
+`%%` $\cdot$ `%{ %}` $\cdot$ **Ctrl+R** $\cdot$ **Ctrl+T**
+
+### 7.10 Testing Your Code
+
+- Don't test with 2 easy values. Push boundaries, bad input, edge cases — "seedy waterfront bar in a pirate town".
+- Make it fail $\rightarrow$ fix $\rightarrow$ fail again.
+- Each function must be solid $\rightarrow$ whole program solid.
+
+---
+
+#### Key Terms
+
+debug $\cdot$ debugger $\cdot$ error handling $\cdot$ semantic error $\cdot$ syntax
+
+#### Key Commands 
+
+`%%` $\cdot$ `%{ %}` $\cdot$ `[Ctrl]+[R]` $\cdot$ `[Ctrl]+[T]` $\cdot$ `dbquit` $\cdot$ `dbstep` $\cdot$ `dbstep in` $\cdot$ `dbstep out` $\cdot$ `lower` $\cdot$ `return` $\cdot$ `try/catch` $\cdot$ `upper`
+
+---
+
+## SDC Chapter 7 — Exercises
+
+**Exercise 7.1** — Write a function with a single input parameter that is a 3 x 4 matrix that contains either the twelve signs of the Chinese zodiac, the twelve signs of the western zodiac, or a mix of the two, as strings (double-quotes). Write code in the function that verifies that the matrix doesn't contain any strings outside of the expected set and that it contains no duplicate elements.
+
+<details><summary>Solution</summary>
+
+Checks: string type $\rightarrow$ 3×4 size $\rightarrow$ all members of the allowed set (`ismember`) $\rightarrow$ no duplicates (`unique` count = 12). `lower` $\rightarrow$ case-insensitive.
+
+```matlab
+function ok = checkZodiac(Z)
+% Verifies a 3x4 string matrix of zodiac signs: valid names, no duplicates
+    chinese = ["rat" "ox" "tiger" "rabbit" "dragon" "snake" ...
+               "horse" "goat" "monkey" "rooster" "dog" "pig"];
+    western = ["aries" "taurus" "gemini" "cancer" "leo" "virgo" ...
+               "libra" "scorpio" "sagittarius" "capricorn" "aquarius" "pisces"];
+    allowed = [chinese western];
+    ok = false;
+
+    if ~isstring(Z)
+        disp('Invalid input, string matrix required');
+        return;
+    end
+    if ~isequal(size(Z), [3 4])
+        disp('Invalid input, must be 3 x 4');
+        return;
+    end
+
+    Z = lower(Z);                           % standardize
+    bad = Z(~ismember(Z, allowed));
+    if ~isempty(bad)
+        disp("Unknown sign(s): " + strjoin(bad(:)', ", "));
+        return;
+    end
+    if numel(unique(Z)) < numel(Z)
+        disp('Duplicate signs found');
+        return;
+    end
+    ok = true;
+end
+```
+
+```matlab
+Z = ["Rat" "Ox" "Tiger" "Rabbit"; "Leo" "Virgo" "Libra" "Scorpio"; "Dog" "Pig" "Aries" "Pisces"];
+checkZodiac(Z)
+Z(3,4) = "Rat";
+checkZodiac(Z)
+Z(3,4) = "Unicorn";
+checkZodiac(Z)
+
+ans =
+
+  logical
+
+   1
+
+Duplicate signs found
+
+ans =
+
+  logical
+
+   0
+
+Unknown sign(s): unicorn
+
+ans =
+
+  logical
+
+   0
+```
+
+Output computed (logic checked in Python), not run in MATLAB.
+
+</details>
+
+**Exercise 7.2** — Open the data file, terminalDebugging.m. Use the debugging skills you have learned to debug and run this code.
+
+<details><summary>Solution</summary>
+
+`terminalDebugging.m` isn't in the photos — can't give its exact fixes. Checklist (= this chapter, in order):
+
+1. Alley box red/yellow? $\rightarrow$ fix every squiggle/dash first (missing `)`, `;`, unused vars).
+2. Run with a known-good input (`'Mars'` $\rightarrow$ `3.2447e+04`).
+3. Runtime error $\rightarrow$ click the line link $\rightarrow$ check spelling/case of every var on that line (`dia`/`diam`, `Vt`/`vt`).
+4. Output not assigned $\rightarrow$ breakpoint at the top, **Step** $\rightarrow$ find the branch/loop that skips the assignment.
+5. Add `lower(planet)` + `otherwise` + input checks (7.7).
+6. Test edge cases: `'mercury'` (`Inf`), `'Pluto'`, `'NepTunE'`, `5`.
+
+</details>
+
+**Exercise 7.3** — Open the file secretMessage.m included in the download. Be sure that the secretMessage.dat file is also in the same directory. Run the function by entering the following command in the Command Window:
+
+```matlab
+secretMessage('6')
+```
+
+The function should fail to run. Using the techniques learned in this chapter, track down the function's many flaws until running the function reveals the encoded text.
+
+Two hints: the text begins "Four score…" and even the function call given above is suspect.
+
+<details><summary>Solution</summary>
+
+Files not present$\rightarrow$ approach only:
+
+- Call is suspect: `'6'` is a **char** (`double('6')` = 54), not the number 6 $\rightarrow$ try `secretMessage(6)`. Or add input standardization: `if ischar(n), n = str2double(n); end`.
+- Breakpoint at the first line $\rightarrow$ **Step** $\rightarrow$ watch Workspace after the `.dat` load (file in current folder? right size/type?).
+- Known plaintext "Four score…" $\rightarrow$ compare the first decoded chars with `'Four'` $\rightarrow$ tells you if the shift/key/index is off by one or wrong sign.
+- Remove `;` on the decode line temporarily $\rightarrow$ see partial output each pass.
+
+</details>
 
