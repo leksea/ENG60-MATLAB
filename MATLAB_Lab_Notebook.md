@@ -82,7 +82,7 @@
   - [6.11 Recursion](#611-recursion)
   - [6.12 Persistent Variables](#612-persistent-variables)
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
-- [Midterm Example](#sdc-midterm)
+- [Midterm Example](#sdc-midterm-example)
 - [Numerical Integration](#sdc-numerical-integration)
 - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
   - [7.1 Syntactic Errors](#71-syntactic-errors)
@@ -96,7 +96,20 @@
   - [7.9 Manual Debugging Techniques](#79-manual-debugging-techniques)
   - [7.10 Testing Your Code](#710-testing-your-code)
 - [SDC Chapter 7 — Exercises](#sdc-chapter-7--exercises)
-
+- [SDC Chapter 8 — Importing & Exporting Data](#sdc-chapter-8--importing--exporting-data)
+  - [8.1 Navigating the File System](#81-navigating-the-file-system)
+  - [8.2 File System Functions](#82-file-system-functions)
+  - [8.3 Working with .mat Files](#83-working-with-mat-files)
+  - [8.4 Importing Delimited Text: readmatrix](#84-importing-delimited-text-readmatrix)
+  - [8.5 Import Options: detectImportOptions](#85-import-options-detectimportoptions)
+  - [8.6 readmatrix with Excel Spreadsheets](#86-readmatrix-with-excel-spreadsheets)
+  - [8.7 Name/Value Pairs](#87-namevalue-pairs)
+  - [8.8 readvars & readcell](#88-readvars--readcell)
+  - [8.9 The Import Data Tool](#89-the-import-data-tool)
+  - [8.10 Exporting: writematrix & writecell](#810-exporting-writematrix--writecell)
+  - [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose)
+- [SDC Chapter 8 — Exercises](#sdc-chapter-8--exercises)
+- [Midterm](#sdc-actual-midterm) 
 ---
 
 
@@ -7203,3 +7216,95 @@ Files not present$\rightarrow$ approach only:
 
 </details>
 
+## SDC Chapter 8 — Importing & Exporting Data
+
+### Objectives
+
+1. Understand the Windows file system hierarchy of files and folders.
+2. Navigate the file system through the command prompt.
+3. Copy and move files and folders from the command prompt.
+4. Understand the difference between absolute and relative paths and construct a relative path to a file.
+5. Use wildcards in a path to refer to multiple files or folders.
+6. Save variables to and load variables from a .mat file.
+7. Use functions to import data from an Excel spreadsheet and a delimited text file.
+8. Use the MATLAB import tool to import data from an external file.
+9. Use functions to export data to an Excel spreadsheet, a comma-separated value file, and a text file.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `pwd` | current (working) folder | `curr_dir = pwd` |
+| `path` | list search path folders | `path` |
+| `cd` | change folder | `cd ..` |
+| `ls` / `dir` | list folder contents (char array / struct array) | `files = dir` |
+| `mkdir` / `rmdir` | make / remove (empty) folder | `mkdir('..\NewFolder')` |
+| `delete` | delete file(s) (not folders) | `delete('testfile*')` |
+| `movefile` | move / rename | `movefile('a.m','b.m')` |
+| `copyfile` | copy | `copyfile('*.txt','..\Matlab2')` |
+| `which` | full path of a file on the search path | `which pathdef.m` |
+| `uigetdir` / `uigetfile` | folder / file picker dialog $\rightarrow$ path | `p = uigetdir` |
+| `type` | show text file contents | `type ImportExample1.txt` |
+| `whos` | list vars + size/type | `whos -file vars.mat` |
+| `save` / `load` | write / read `.mat` | `save vars.mat a c` |
+| `readmatrix` | file $\rightarrow$ numeric matrix | `M = readmatrix('f.txt')` |
+| `detectImportOptions` | import-options object to tweak | `opts = detectImportOptions(f)` |
+| `readvars` | file $\rightarrow$ one column vector per output | `[x,y] = readvars(f)` |
+| `readcell` | file $\rightarrow$ cell array (mixed types) | `C = readcell(f)` |
+| `writematrix` | matrix $\rightarrow$ .txt/.csv/.dat/.xlsx | `writematrix(M,'out.xlsx')` |
+| `writecell` | cell array $\rightarrow$ file | `writecell(C,'out.csv')` |
+| `fopen` / `fclose` | open / close file $\rightarrow$ fileID | `fid = fopen('a.txt','wt+')` |
+| `fprintf` | formatted text $\rightarrow$ file or screen | `fprintf(fid,'%d\n',x)` |
+| `isnan` | NaN test (skip bad imports) | `M(~isnan(M))` |
+| `exist` | name already used? (0 = free) | `exist sine` |
+| `fullfile` | Create a system-specific path | fullfile(`Users`, `alexandrayakovleva`, `Documents`, `MATLAB`)|
+| `filesep` | Use system-specific separator | '\' or '/'|
+
+
+### 8.1 Navigating the File System
+
+- Files live in **folders** (= **directories**). Top = **root**. Location = **path**: `\Users\alexandrayakovleva\Documents\MATLAB\`.
+
+**Where am I?**
+
+- **Current Folder** = **working directory**. Path shown in bar above the Current Folder panel
+
+```matlab
+curr_dir = pwd
+
+curr_dir =
+
+    '\Users\alexandrayakovleva\Documents\MATLAB\'
+```
+
+(Your path will differ.)
+
+- Calling a function/script $\rightarrow$ MATLAB looks in current folder, then the **search path**. `path` $\rightarrow$ full list.
+- Not on path $\rightarrow$ `cd` there, or call with full path.
+
+**Absolute vs relative paths:**
+
+| Type | Example | Note |
+|---|---|---|
+| absolute | `'\Users\alexandrayakovleva\Documents\MATLAB\'` | from root |
+| absolute, same drive | `~\Documents\MATLAB\` | Use ~ to drop User folder|
+| relative | `'..\..\Music'` | from current folder |
+
+- `..` = parent folder (every folder except root has one). `.` = current folder (rarely used).
+- From `'\Users\alexandrayakovleva\Documents\MATLAB\`: `ls ..\..\Music` $\rightarrow$ 1st `..` = Documents
+- Relative paths $\rightarrow$ good inside apps (internal folder structure moves with the app).
+- Paths **case-sensitive**.
+
+> **Tip:** `\` or `/` both work; can even mix them (don't).
+
+#### Key Terms
+
+file, folder, directory, path, absolute path, relative path, working directory
+
+#### Key Commands
+
+`pwd`, `path`
+
+### 8.2 File System Functions
+
+- Mouse: Current Folder panel $\rightarrow$ **Up One Level** / **Browse for Folder** . In code $\rightarrow$ functions only.
