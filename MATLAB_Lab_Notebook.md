@@ -7308,3 +7308,294 @@ file, folder, directory, path, absolute path, relative path, working directory
 ### 8.2 File System Functions
 
 - Mouse: Current Folder panel $\rightarrow$ **Up One Level** / **Browse for Folder** . In code $\rightarrow$ functions only.
+
+<a name="sdc-actual-midterm"></a>
+## Midterm
+
+> **Status:** completed, `midterm_ay.m` -- all 7 parts run and verified below.
+
+### Scenario
+
+MAX 8 Bearing 373 $\rightarrow$ 2 crashes. Only 2 AoA (Angle of Attack) sensors (L/R) drove MCAS. Discrepancy btwn the two $\rightarrow$ confusion which one governs.
+
+Task: write a 3rd sensor in MATLAB, compare vs the other two devices' equations, flag sensor failure.
+
+*(Handout credits: programming created by William Slagle)*
+
+---
+
+### (1) Log History
+
+```matlab
+diary('midterm_ay_log.txt')
+diary on
+```
+
+$\boxtimes$ Check (1)
+
+---
+
+### (2) Third Sensor $\rightarrow$ MATLAB
+
+**LEFT SIDE SENSOR** -- TI-84 Plus CE:
+
+![TI-84 result for left sensor](media/matlab_midterm_ti84.png)
+
+```
+[A]*([B]+[C])
+[40 56]
+[60 84]
+
+[A]*[B]+[A]*[C]
+[40 56]
+[60 84]
+```
+
+**RIGHT SIDE SENSOR** -- Python / NumPy:
+
+![NumPy A, B, C definitions](media/matlab_midterm_numpy_ABC.png)
+
+![NumPy A*(B+C) vs A*B+A*C result](media/matlab_midterm_numpy_result.png)
+
+```
+A = numpy.array([[2,6],[3,9]])
+B = numpy.array([[1,2],[3,4]])
+C = numpy.array([[-5,5],[5,3]])
+
+A * (B + C)
+array([[-8, 42],
+       [24, 63]])
+
+A*B + A*C
+array([[-8, 42],
+       [24, 63]])
+```
+
+**THIRD SENSOR** -- MATLAB code:
+
+```matlab
+A = [2 6; 3 9];
+B = [1 2; 3 4];
+C = [-5 5; 5 3];
+
+% true matrix multiplication -- MATLAB's default *
+A*(B+C)
+A*B + A*C
+
+% elementwise multiplication -- MATLAB's .*
+A.*(B+C)
+A.*B + A.*C
+```
+
+**My run:**
+
+```
+ans =
+
+    40    56
+    60    84
+
+
+ans =
+
+    40    56
+    60    84
+
+
+ans =
+
+    -8    42
+    24    63
+
+
+ans =
+
+    -8    42
+    24    63
+```
+
+$\boxtimes$ Check (2) -- MATLAB sensor matches: LEFT (`*`, matrix mult) and RIGHT (`.*`, elementwise), one eq each.
+
+> Plugging *same* A, B, C into MATLAB: `*` (true matrix mult) $\rightarrow$ `[40 56; 60 84]`, exactly the TI-84's number. `.*` (elementwise) $\rightarrow$ `[-8 42; 24 63]`, exactly NumPy's number (NumPy's `*` on arrays is elementwise by default, not `@`/matmul). So the "discrepancy" between LEFT and RIGHT isn't a sensor fault -- it's two different definitions of "multiply," same underlying data.
+
+---
+
+### (3) Altitude Vector D
+
+```matlab
+D = 0:1000:30000;
+disp(D)
+```
+
+**My run** (31 elements, 0 to 30000 ft):
+
+```
+  Columns 1 through 13
+
+      0    1000    2000    3000    4000    5000    6000    7000    8000    9000   10000   11000   12000
+
+  Columns 14 through 26
+
+  13000   14000   15000   16000   17000   18000   19000   20000   21000   22000   23000   24000   25000
+
+  Columns 27 through 31
+
+  26000   27000   28000   29000   30000
+```
+
+$\boxtimes$ Check (3)
+
+---
+
+### (4) falt Function File
+
+Book code has an Octave-ism -- `endfunction` isn't valid MATLAB, swapped for `end`:
+
+```matlab
+function temptable = falt(tinitial,inc,tfinal)
+	% FALT : function to convert temperature from altitude
+	% call syntax:
+	% temptable = falt(tinitial,inc,tfinal);
+	%--------------------
+
+	A = (tinitial:inc:tfinal)';   % column vector A
+	F = 105 - (3.5*(A/1000));     % corresponding F
+	temptable = [A F];            % 2-column matrix of A & F
+end
+```
+
+```matlab
+temptable = falt(0,1000,30000);
+disp(round(temptable,1))
+```
+
+**My run** -- values were right but `disp()` printed this instead:
+
+```
+1.0e+04 *
+
+    0    0.0105
+    0.1000    0.0101
+    0.2000    0.0098
+    ...
+    3.0000    0
+```
+
+> **`disp` uses one shared scale factor** `temptable` contains a large integer column (altitude, up to 30000) and a decimal column (F, e.g. 101.5). `disp()`/`format short` converts second column to match the first column (`101.5` down to `0.0101*1e4 = 101`) on screen
+> **Fix:** print with `fprintf` so each column gets its own fixed format instead of a shared exponent:
+> ```matlab
+> temptable(:,2) = round(temptable(:,2),1);
+> fprintf('%8.0f %8.1f\n', temptable.')
+> ```
+
+**Correctly formatted output** (first 5 and last 3 of 31 rows):
+
+```
+       0   105.0
+    1000   101.5
+    2000    98.0
+    3000    94.5
+    4000    91.0
+     ...
+   28000     7.0
+   29000     3.5
+   30000     0.0
+```
+
+$\boxtimes$ Check (4)
+
+---
+
+### (5) Stats on Fahrenheit Column
+
+```matlab
+Fcol = temptable(:,2);
+Fmin = min(Fcol)
+Fmax = max(Fcol)
+Frange = range(Fcol)
+Fmean = mean(Fcol)
+Fmedian = median(Fcol)
+```
+
+**My run** (matches expected exactly):
+
+```
+Fmin =
+
+     0
+
+
+Fmax =
+
+   105
+
+
+Frange =
+
+   105
+
+
+Fmean =
+
+   52.5000
+
+
+Fmedian =
+
+   52.5000
+```
+
+$\boxtimes$ Check (5)
+
+---
+
+### (6) Add Celsius Column
+
+$^\circ C = (F-32) \cdot 5/9$
+
+```matlab
+Ccol = round((Fcol - 32) * 5/9, 2);
+temptable = [temptable Ccol];
+fprintf('%8.0f %8.1f %8.2f\n', temptable.')
+```
+
+> **Same `disp` behaviour** Switched to `fprintf` for the same reason.
+
+**Corrected output** (first 6 rows):
+
+```
+       0   105.0   40.56
+    1000   101.5   38.61
+    2000    98.0   36.67
+    3000    94.5   34.72
+    4000    91.0   32.78
+    5000    87.5   30.83
+```
+
+$\boxtimes$ Check (6)
+
+---
+
+### (7) Plot
+
+```matlab
+plot(D, Fcol, D, Ccol, 'LineWidth', 1.5)
+title('Altitude vs Temperature', 'FontSize', 25)
+xlabel('Altitude (feet)', 'FontAngle', 'italic', 'FontSize', 20)
+ylabel('Temperature (degrees)', 'FontAngle', 'italic', 'FontSize', 20)
+legend({'Fahrenheit','Celsius'}, 'FontAngle', 'italic', 'FontSize', 10, 'Box', 'off')
+grid on;
+```
+
+![My Altitude vs Temperature plot](media/matlab_midterm_plot_actual.png)
+
+Both lines slope down left $\rightarrow$ right as expected: Fahrenheit 105 at 0 ft $\rightarrow$ 0 at 30,000 ft; Celsius ~40.6 at 0 ft $\rightarrow$ ~-17.8 at 30,000 ft.
+
+$\boxtimes$ Check (7)
+
+---
+
+```matlab
+diary off
+```
+
