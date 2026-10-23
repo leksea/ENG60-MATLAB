@@ -6667,6 +6667,8 @@ Did you mean:
 >> cos(sin(0.45))
 ```
 
+![Figure 7.1 — Error Indication in Matlab](media/ch7_errors.png)
+
 - Arrow $\rightarrow$ where `)` should go. "Did you mean" $\rightarrow$  press **Enter** to accept. Often right.
 - **$\uparrow$** $\rightarrow$ Command History. Failed command has a **red dash**
 - - Right-click that History line $\rightarrow$ **Create Script**.
@@ -6833,6 +6835,9 @@ $\rightarrow$ Command Window + base workspace. **Ctrl+C** same $\rightarrow$ esc
 | `dbstep n` | Step n lines (no toolbar equivalent) |
 | `dbstep in` | Step In |
 | `dbstep out` | Step Out |
+
+![Figure 7.1 — Debugging in Matlab](media/ch7_debug_1.png)
+![Figure 7.2 — Debugging in Matlab](media/ch7_debug_2.png)
 
 More 
 $\rightarrow$ Help topic **Debugging**.
@@ -7176,15 +7181,13 @@ ans =
    0
 ```
 
-Output computed (logic checked in Python), not run in MATLAB.
-
 </details>
 
 **Exercise 7.2** — Open the data file, terminalDebugging.m. Use the debugging skills you have learned to debug and run this code.
 
 <details><summary>Solution</summary>
 
-`terminalDebugging.m` isn't in the photos — can't give its exact fixes. Checklist (= this chapter, in order):
+`terminalDebugging.m` is not available. Approach:
 
 1. Alley box red/yellow? $\rightarrow$ fix every squiggle/dash first (missing `)`, `;`, unused vars).
 2. Run with a known-good input (`'Mars'` $\rightarrow$ `3.2447e+04`).
@@ -7210,9 +7213,8 @@ Two hints: the text begins "Four score…" and even the function call given abov
 Files not present$\rightarrow$ approach only:
 
 - Call is suspect: `'6'` is a **char** (`double('6')` = 54), not the number 6 $\rightarrow$ try `secretMessage(6)`. Or add input standardization: `if ischar(n), n = str2double(n); end`.
-- Breakpoint at the first line $\rightarrow$ **Step** $\rightarrow$ watch Workspace after the `.dat` load (file in current folder? right size/type?).
-- Known plaintext "Four score…" $\rightarrow$ compare the first decoded chars with `'Four'` $\rightarrow$ tells you if the shift/key/index is off by one or wrong sign.
-- Remove `;` on the decode line temporarily $\rightarrow$ see partial output each pass.
+- Breakpoint at the first line $\rightarrow$ **Step** $\rightarrow$ watch Workspace after each step;
+- Remove `;` on the suspicious lines temporarily $\rightarrow$ see partial output each pass.
 
 </details>
 
@@ -7263,7 +7265,7 @@ Files not present$\rightarrow$ approach only:
 
 ### 8.1 Navigating the File System
 
-- Files live in **folders** (= **directories**). Top = **root**. Location = **path**: `\Users\alexandrayakovleva\Documents\MATLAB\`.
+- Files live in **folders** (= **directories**). Top = **root**. Location = **path**: `'/Users/alexandrayakovleva/Documents/MATLAB/'`.
 
 **Where am I?**
 
@@ -7274,10 +7276,10 @@ curr_dir = pwd
 
 curr_dir =
 
-    '\Users\alexandrayakovleva\Documents\MATLAB\'
+    '/Users/alexandrayakovleva/Documents/MATLAB/'
 ```
 
-(Your path will differ.)
+![Figure 8.1 — Path in Matlab](media/ch8_path_1.png)
 
 - Calling a function/script $\rightarrow$ MATLAB looks in current folder, then the **search path**. `path` $\rightarrow$ full list.
 - Not on path $\rightarrow$ `cd` there, or call with full path.
@@ -7286,12 +7288,12 @@ curr_dir =
 
 | Type | Example | Note |
 |---|---|---|
-| absolute | `'\Users\alexandrayakovleva\Documents\MATLAB\'` | from root |
-| absolute, same drive | `~\Documents\MATLAB\` | Use ~ to drop User folder|
-| relative | `'..\..\Music'` | from current folder |
+| absolute | `'/Users/alexandrayakovleva/Documents/MATLAB/'` | from root |
+| absolute, same drive | `~/Documents/MATLAB/` | Use ~ to drop User folder|
+| relative | `'../../Music'` | from current folder |
 
 - `..` = parent folder (every folder except root has one). `.` = current folder (rarely used).
-- From `'\Users\alexandrayakovleva\Documents\MATLAB\`: `ls ..\..\Music` $\rightarrow$ 1st `..` = Documents
+- From `'/Users/alexandrayakovleva/Documents/MATLAB/`: `ls ../../Music` $\rightarrow$ 1st `..` = Documents
 - Relative paths $\rightarrow$ good inside apps (internal folder structure moves with the app).
 - Paths **case-sensitive**.
 
@@ -7308,6 +7310,1083 @@ file, folder, directory, path, absolute path, relative path, working directory
 ### 8.2 File System Functions
 
 - Mouse: Current Folder panel $\rightarrow$ **Up One Level** / **Browse for Folder** . In code $\rightarrow$ functions only.
+**Two call forms:**
+
+| Form | Syntax |
+|---|---|
+| command | `someFunction parameters` |
+| function | `retVal = someFunction(parameters)` $\rightarrow$ **parens required when assigning** |
+
+**Wildcards** $\rightarrow$ `*` = anything:
+
+```matlab
+copyfile('*', '~/Documents/Matlab2')   % everything in current folder (files + folders)
+copyfile('*.txt', '../Matlab2')                      % all .txt -> sibling folder Matlab2
+```
+
+**`cd`**
+
+- `cd path` $\rightarrow$ absolute or relative; **no wildcards**; spaces $\rightarrow$ single quotes; no file names.
+
+```matlab
+cd /Users/alexandrayakovleva
+cd ..
+```
+
+$\rightarrow$ now in `/Users`. Path in a variable $\rightarrow$ `cd(pathVar)`.
+
+> **Tip:** Unlike Windows `cd..`, MATLAB needs the **space**: `cd ..`
+
+**`ls` / `dir`**
+
+- `ls` (current), `ls folderName`, `ls path`. Assigning $\rightarrow$ parens:
+
+```matlab
+contents = ls('~/Matlab/Week7')
+files = ls
+```
+
+- Result = **char array**, one name per row, padded with spaces to the longest name.
+
+> **Tip:** `ls` = lower-case L + s.
+
+- `dir` = same display; assigned $\rightarrow$ **struct array**:
+
+| Field | Type | Holds |
+|---|---|---|
+| `name` | char | item name |
+| `folder` | char | absolute path of containing folder |
+| `date` | char | last modified |
+| `bytes` | double | size |
+| `isdir` | logical | 1 folder / 0 file |
+| `datenum` | double | date as a number |
+
+**`mkdir` / `rmdir` / `delete`**
+
+- `mkdir folderName`, `mkdir path\folderName`, `mkdir path folderName` (separate params $\rightarrow$ flexible in code). Spaces $\rightarrow$ quotes.
+- Returns `[status, msg, msgID]` $\rightarrow$ status 1 = OK / 0 = fail; msg = error text; msgID $\rightarrow$ usable in try/catch.
+
+```matlab
+status = mkdir('../NewFolder')
+
+status =
+
+  logical
+
+   1
+```
+
+```matlab
+[status, msg, error] = mkdir('../NewFolder?')
+```
+
+- `?` invalid in Windows names $\rightarrow$ fails $\rightarrow$ `status` = 0 + message + ID (exact text OS/version-dependent).
+
+- `rmdir folderName` $\rightarrow$ deletes **empty** folder only. Same 3 outputs.
+
+```matlab
+[status, msg, error] = rmdir('../NewFolder')
+```
+
+- `delete fileName` $\rightarrow$ file name/path, wildcards OK, **not folders**. Recycle bin vs permanent $\rightarrow$ **Preferences $\rightarrow$ General $\rightarrow$ Deleting files**, or `recycle('on')`.
+
+**`movefile source destination`** (optionally renames). Source $\rightarrow$ wildcards OK (`*.mat`); destination $\rightarrow$ no wildcards; omitted $\rightarrow$ current folder.
+
+| Source $\rightarrow$ destination | Result |
+|---|---|
+| file $\rightarrow$ folder | moved into folder |
+| file $\rightarrow$ path + file name | moved + renamed |
+| folder $\rightarrow$ existing folder | moved inside it |
+| folder $\rightarrow$ new folder name | moved + renamed |
+
+- Rename = same folder / no folder info. Returns `[status, msg, msgID]`.
+- **`copyfile`** = `movefile` (minus renaming) but keeps the original.
+
+**Walkthrough:**
+
+```matlab
+home = ' /MATLAB Drive'
+cd(home)                 % Start from the default working directory
+pwd                      % Assure yourself you're in the right place
+ls                       % List the files in this directory
+edit testfile1           % Make some files to play with
+edit testfile2
+edit testfile3.txt
+mkdir ..\matlab2         % Create a new sibling directory
+cd ..
+pwd                      % Where you are now
+ls                       % Notice that matlab2 exists here
+cd matlab2               % Move into that directory
+ls                       % Nothing here yet
+copyfile('..\matlab\testfile*.m')          % Copy files to this folder
+ls                       % And there they are
+movefile('testfile1.m', 'testfile4.m')     % Rename a file
+dir                      % Verify the name change
+cd(home)
+pwd                      % And you're back
+%rmdir('..\matlab2')     % Can't do it - the directory isn't empty
+delete('..\matlab2\*.*') % Delete the copied files
+rmdir('..\matlab2')      % Works now
+delete('testfile*')      % Clean up
+```
+
+**Other functions:**
+
+| Function | Does |
+|---|---|
+| `which` | searches path $\rightarrow$ absolute path. `which pathdef.m` (= file holding the search-path list) |
+| `uigetdir` / `uigetfile` | standard pick dialog $\rightarrow$ returns path |
+| `type` | print file contents; fine for text & `.m`, gibberish for `.mat` |
+| `whos` | vars + types/sizes: `whos`, `whos -file matlab.mat`, `whos global` |
+
+> **Tip:** `which` $\rightarrow$ find the source `.m` of built-in functions.
+
+#### Key Terms
+
+wildcard, source, destination
+
+#### Key Commands
+
+`cd`, `ls`, `dir`, `mkdir`, `rmdir`, `delete`, `movefile`, `copyfile`, `which`, `uigetdir`, `uigetfile`, `type`, `whos`
+
+### 8.3 Working with .mat Files
+
+- Exit MATLAB $\rightarrow$ Workspace gone. `save` $\rightarrow$ keep it.
+- `save` (no name) $\rightarrow$ `matlab.mat` in current folder, **overwrites** silently. `load` (no name) $\rightarrow$ looks for `matlab.mat`.
+
+```matlab
+clear      % Start with an empty Workspace
+a = 1
+b = 2
+save
+
+a =
+
+     1
+
+
+b =
+
+     2
+
+Saving to:  /MATLAB Drive/matlab.mat
+```
+
+```matlab
+clear
+load
+
+Loading from: matlab.mat
+```
+
+```matlab
+delete matlab.mat
+load
+```
+
+```text
+Error using load
+Unable to find file or directory 'matlab.mat'.
+```
+
+(Error wording version-dependent.)
+
+```matlab
+a = 1; b = 2; save
+c = 3
+save
+
+c =
+
+     3
+
+Saving to: /MATLAB Drive/matlab.mat
+```
+
+- 2nd `save` $\rightarrow$ overwrote `matlab.mat`, no warning $\rightarrow$ catastrophic if it was last session's work. Use names:
+
+```matlab
+d = 4
+save vars.mat
+
+d =
+
+     4
+```
+
+- Save a **function's** workspace $\rightarrow$ breakpoint $\rightarrow$ `save` at `K>>` $\rightarrow$ later `load` into base.
+- `load` **adds** to Workspace; same name $\rightarrow$ **overwritten silently**:
+
+```matlab
+d = 1
+load vars.mat
+d
+
+d =
+
+     1
+
+
+d =
+
+     4
+```
+
+- `.mat` = binary, not human-readable (`type vars.mat` $\rightarrow$ gibberish). Peek: `whos -file vars.mat`.
+
+**Load / save only some vars:**
+
+```matlab
+clear
+load vars.mat a c
+```
+
+$\rightarrow$ Workspace = `a` (1), `c` (3) only.
+
+```matlab
+b = 2
+d = 6
+save vars2.mat c d
+clear
+load vars2
+
+b =
+
+     2
+
+
+d =
+
+     6
+```
+
+$\rightarrow$ Workspace = `c` (3), `d` (6). `b` not saved.
+
+> **Tip:** Double-click a `.mat` in Current Folder $\rightarrow$ loads it. `.mat` extension optional in `save`, `load`, `whos`.
+
+#### Key Commands
+
+`save`, `load`, `whos`
+
+### 8.4 Importing Delimited Text: readmatrix
+
+- External data: spreadsheet, database, text, binary; local/network/streaming. Here $\rightarrow$ text + Excel.
+- **Text file** = only characters, human-readable (Notepad `.txt` yes; Word doc no).
+- Text import hard: delimiter? line lengths? line breaks? layout? MATLAB auto-detects a lot.
+- **CSV** = comma-separated values. Extension `.csv` optional; still plain text (so is `.dat`).
+- Row in file $\leftrightarrow$ row in matrix; item $\leftrightarrow$ column.
+
+> **Tip:** Everything is 1s and 0s; **binary file** = non-text, no spreadsheet/delimited structure.
+
+**R2019a** $\rightarrow$ `readmatrix`, `readvars`, `readcell`.
+
+> **Warning:** `xlsread`, `csvread`, `dlmread` $\rightarrow$ not recommended (still work). Use the new ones.
+
+**`readmatrix`** $\rightarrow$ replaces `csvread` / `dlmread` (and `xlsread` for single-type sheets).
+
+| Form | Use |
+|---|---|
+| `readmatrix(file)` | type from extension |
+| `readmatrix(file, opts)` | custom import options |
+| `readmatrix(___, Name, Value)` | name/value pairs |
+
+- **Numbers only.** File in cwd, or relative/absolute/network/cloud path. Text extensions: `.txt`, `.csv`, `.dat`.
+- Makes its own decisions $\rightarrow$ sometimes surprising.
+
+Go to `/MATLAB Drive/`. Double-click `midterm_ay_log.txt` $\rightarrow$ comma-delimited integers.
+
+```matlab
+readmatrix  midterm_ay_log.txt
+```
+
+$\rightarrow$ `ans` = matrix, one row per text line. (Data files not in photos $\rightarrow$ no output shown.)
+
+Both work for my data:
+
+```matlab
+M = readmatrix midterm_ay_log.txt
+M = readmatrix('midterm_ay_log.txt')
+```
+
+![Figure 8.2 — Import in Matlab](media/ch8_import_data_view.png)
+
+
+
+**Example files — what readmatrix does:**
+
+| File | Content | Result |
+|---|---|---|
+| `ImportExample2.txt` | one row shorter | short row padded with `NaN` |
+| `ImportExample2.csv` | rows 1–2: 4 cols, rows 3–4: 3 cols | **only last 2 rows imported** (!) |
+| `ImportExample2` (no ext.) | 2 matches | picked `.txt` $\rightarrow$ unpredictable $\rightarrow$ **always give the extension** |
+| `ImportExample3.txt` | one decimal value | all shown at that precision (all `double` anyway) |
+| `ImportExample4.dat` | letters + numbers | non-numbers $\rightarrow$ `NaN` $\rightarrow$ skip with `isnan` |
+| `ImportExample5.dat` | letters incl. `i`, `j` | `i`/`j` read as √−1 $\rightarrow$ whole matrix **complex** |
+| `ImportExample6.txt` | rows of characters | nothing useful — numbers only |
+| `ImportExample7.txt` | tab-separated | yes (also if renamed `.csv`) |
+| `ImportExample8.txt` / `9.csv` | other delimiters | try them |
+| `ImportExample10.txt` | `2^5` in a cell | `NaN` — calculation, not a number |
+
+- Default delimiters (any of `.txt`/`.csv`/`.dat`): **comma, tab, space, semicolon**.
+- Double-click `.csv`/`.dat` $\rightarrow$ opens Import Data Tool (8.9); `.txt` $\rightarrow$ Editor.
+
+> **Tip:** Examples are small $\rightarrow$ no `;`. Real data $\rightarrow$ add `;`.
+
+> **Tip:** Don't use `i` or `j` as variables/loop counters $\rightarrow$ overwrite √−1 in that scope. Old habit; skip it.
+
+> **Tip:** `exist name` $\rightarrow$ `0` = name free.
+
+```matlab
+2^5
+
+ans =
+
+    32
+```
+
+#### Key Terms
+
+comma-separated text, csv file, delimited text
+
+#### Key Commands
+
+`readmatrix`
+
+### 8.5 Import Options: detectImportOptions
+
+- `opts = detectImportOptions(file)` $\rightarrow$ object with editable properties. Also used by `readtable`, `readcell`.
+- No changes $\rightarrow$ `readmatrix(f, opts)` = `readmatrix(f)`.
+- Text $\rightarrow$ `DelimitedTextImportOptions` or `FixedWidthImportOptions`.
+
+```matlab
+>> opts = detectImportOptions('midterm_ay_log.txt')
+```
+
+```text
+opts = 
+
+  DelimitedTextImportOptions with properties:
+
+   Format Properties:
+                    Delimiter: {'\t'  ' '}
+                   Whitespace: '\b'
+                   LineEnding: {'\n'  '\r'  '\r\n'}
+                 CommentStyle: {}
+    ConsecutiveDelimitersRule: 'join'
+        LeadingDelimitersRule: 'ignore'
+       TrailingDelimitersRule: 'ignore'
+                EmptyLineRule: 'skip'
+                     Encoding: 'UTF-8'
+
+   Replacement Properties:
+                  MissingRule: 'fill'
+              ImportErrorRule: 'fill'
+             ExtraColumnsRule: 'addvars'
+
+   Variable Import Properties: Set types by name using setvartype
+                VariableNames: {'ans', 'x_', 'Var3' ... and 10 more}
+                VariableTypes: {'double', 'double', 'double' ... and 10 more}
+        SelectedVariableNames: {'ans', 'x_', 'Var3' ... and 10 more}
+              VariableOptions: Show all 13 VariableOptions 
+	Access VariableOptions sub-properties using setvaropts/getvaropts
+           VariableNamingRule: 'modify'
+
+   Location Properties:
+                    DataLines: [4 Inf]
+            VariableNamesLine: 2
+               RowNamesColumn: 0
+            VariableUnitsLine: 0
+     VariableDescriptionsLine: 0 
+	To display a preview of the table, use preview
+```
+
+(Property list/encoding vary by version.)
+
+**Key properties:**
+
+| Property | Meaning |
+|---|---|
+| `Delimiter` | delimiter char(s); cell array for several |
+| `Whitespace` | chars treated as whitespace |
+| `LineEnding` | chars ending a line $\rightarrow$ new row |
+| `ConsecutiveDelimitersRule` | `'split'` (empty value between) / `'join'` (treat as one) / `'error'` |
+| `EmptyLineRule` | `'skip'` / `'read'` / `'error'` |
+| `MissingRule` | short row: `'fill'` (default, `FillValue` = NaN) / `'omitrow'` / `'error'` ... |
+| `VariableOptions` | per-column (= per-variable) name, type, fill value $\rightarrow$ `getvaropts` / `setvaropts` |
+| `VariableNames` | column names (linked to VariableOptions) |
+| `SelectedVariableNames` | columns to import (subset of VariableNames) |
+| `DataLines` | lines to import: start, range, or several ranges |
+
+**Messy file — `ImportExample11.txt`:** line 1 = column titles, one line with consecutive commas, one empty line, one short row, one line using colons.
+
+```matlab
+readmatrix midterm_ay_log.txt
+
+ans = 1338×13
+1.0e+04
+         NaN        NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0040     0.0056     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0060     0.0084     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+         NaN        NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0040     0.0056     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0060     0.0084     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+         NaN        NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+     -0.0008     0.0042     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0024     0.0063     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+         NaN        NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+     -0.0008     0.0042     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0024     0.0063     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      1.0000        NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+           0     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0000     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0000     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0000     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0000     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0001     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0002     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+      0.0002     0.0000     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN
+     ⋮
+     Display all 1338 rows and 13 columns
+
+```
+
+
+- Title line skipped, `,,` $\rightarrow$ NaN, empty line skipped, short row padded, colon line $\rightarrow$ all NaN.
+
+```matlab
+opts = detectImportOptions('midterm_ay_log.txt')
+```
+
+Relevant lines:
+
+```text
+   Format Properties:
+                    Delimiter: {'\t'  ' '}
+                   Whitespace: '\b'
+                   LineEnding: {'\n'  '\r'  '\r\n'}
+                 CommentStyle: {}
+    ConsecutiveDelimitersRule: 'join'
+        LeadingDelimitersRule: 'ignore'
+       TrailingDelimitersRule: 'ignore'
+                EmptyLineRule: 'skip'
+                     Encoding: 'UTF-8'
+```
+
+**BOOK EXAMPLES (no file available) Add colon delimiter:**
+
+```matlab
+opts.Delimiter = {',' ':'}
+readmatrix('ImportExample11.txt', opts)
+
+ans =
+
+     1     2   NaN     4     5
+     6     7     8     9    10
+    11    12    13   NaN   NaN
+    14    15    16    17    18
+    19    20    21    22    23
+    24    25    26    27    28
+```
+
+
+```matlab
+opts.ConsecutiveDelimitersRule = 'join'
+readmatrix('importexample11.txt', opts)
+
+ans =
+
+     1     2     4     5   NaN
+     6     7     8     9    10
+    11    12    13   NaN   NaN
+    14    15    16    17    18
+    19    20    21    22    23
+    24    25    26    27    28
+```
+
+$\rightarrow$ 4, 5 in the right columns; row 1 now one short $\rightarrow$ NaN at end.
+
+**Only complete rows:**
+
+- Logical way $\rightarrow$ `opts.MissingRule = 'omitrow'`.
+
+> **Book error:** book calls it property `MissingData`, value `'omitrows'`. Actual: **`MissingRule`** = **`'omitrow'`**.
+
+- Manual way $\rightarrow$ `DataLines` (line #s = **original file**, not the matrix; title = line 1):
+
+```matlab
+opts.DataLines = [3 3; 5 7]
+readmatrix('importexample11.txt', opts)
+
+ans =
+
+     6     7     8     9    10
+    14    15    16    17    18
+    19    20    21    22    23
+    24    25    26    27    28
+```
+
+**Only columns 2–3** (headers `Duck`, `Cat`; DataLines still set):
+
+```matlab
+opts.SelectedVariableNames = {'Duck', 'Cat'}
+readmatrix('ImportExample11.txt', opts)
+
+ans =
+
+     7     8
+    15    16
+    20    21
+    25    26
+```
+
+#### Key Commands
+
+`detectImportOptions`
+
+### 8.6 readmatrix with Excel Spreadsheets
+
+- Sheet = grid = matrix; multiple sheets $\rightarrow$ 3-D. Strong Excel support.
+- `readmatrix` $\rightarrow$ when sheet (or the part imported) is **one data type**. Mixed $\rightarrow$ `readcell`.
+- `detectImportOptions` on Excel $\rightarrow$ **`SpreadsheetImportOptions`**.
+
+**`IOExample.xlsx`** — groceries × 4 stores:
+
+- row 1 = column names (A1 blank), col A = row names (A1 blank), `x` = store doesn't sell it.
+
+Double-click $\rightarrow$ Import Data Tool $\rightarrow$ close.
+
+```matlab
+readmatrix('IOExample.xlsx')
+```
+
+$\rightarrow$ row 1 omitted (var names); column A **not** omitted $\rightarrow$ all NaN; `x` $\rightarrow$ NaN.
+
+```matlab
+opts = detectImportOptions('IOExample.xlsx')
+```
+
+Figure 8.4 (Command Window text):
+
+```text
+opts =
+
+  SpreadsheetImportOptions with properties:
+
+   Sheet Properties:
+                       Sheet: ''
+
+   Replacement Properties:
+                 MissingRule: 'fill'
+             ImportErrorRule: 'fill'
+
+   Variable Import Properties: Set types by name using setvartype
+               VariableNames: {'Var1', 'Store_1', 'Store_2' ... and 2 more}
+               VariableTypes: {'char', 'double', 'double' ... and 2 more}
+       SelectedVariableNames: {'Var1', 'Store_1', 'Store_2' ... and 2 more}
+             VariableOptions: Show all 5 VariableOptions
+	Access VariableOptions sub-properties using setvaropts/getvaropts
+
+   Range Properties:
+                   DataRange: 'A2' (Start Cell)
+          VariableNamesRange: 'A1'
+               RowNamesRange: ''
+          VariableUnitsRange: ''
+   VariableDescriptionsRange: ''
+	To display a preview of the table, use preview
+```
+
+
+| Property | Meaning |
+|---|---|
+| `Sheet` | sheet number (1-based) or name; `''` = first |
+| `DataRange` | `'A2'` (start $\rightarrow$ end), `'A2:Y344'` block, ranges array, `'2:344'` rows |
+| `VariableNamesRange` / `RowNamesRange` | cells holding column / row titles |
+
+```matlab
+readmatrix('IOExample.xlsx', opts)
+```
+
+```text
+Error using readmatrix
+Selected variables in the import options must have the same data type.
+```
+
+```matlab
+opts.VariableTypes
+```
+
+$\rightarrow$ col 1 `'char'` (row names), col 5 `'char'` (mostly `x`). Force all double:
+
+```matlab
+opts.VariableTypes(1) = {'double'}
+opts.VariableTypes(5) = {'double'}
+opts.VariableTypes
+readmatrix('IOExample.xlsx', opts)
+```
+
+$\rightarrow$ same as no-opts call $\rightarrow$ `readmatrix` default ≠ `detectImportOptions` defaults.
+
+**Rows 4–7 only:**
+
+```matlab
+opts.DataRange = '4:7'
+readmatrix('IOExample.xlsx', opts)
+```
+
+- `DataRange` width must = number of variables $\rightarrow$ whole rows only here. Block $\rightarrow$ name/value `Range` (8.7).
+
+> **Tip:** Full import format list $\rightarrow$ Help: "Supported File Formats for Import and Export".
+
+### 8.7 Name/Value Pairs
+
+`readmatrix(file, Name, Value, Name, Value, ...)`, help template `readmatrix(___, Name, Value)` $\rightarrow$ `___` = file or file + opts. Overlap with opts $\rightarrow$ some pairs ignored.
+
+| Name | Used with |
+|---|---|
+| `OutputType`, `FileType`, `Range`, `NumHeaderLines`, `TreatAsMissing`, `ExpectedNumVariables` | text & spreadsheet |
+| `Delimiter`, `CommentStyle`, `LineEnding`, `DateLocale`, `Encoding`, `Whitespace`, `DecimalSeparator`, `ThousandsSeparator`, `TrimNonNumeric`, `ConsecutiveDelimitersRule`, `LeadingDelimitersRule` | text only |
+| `Sheet`, `UseExcel` | spreadsheet only |
+
+Block from Sheet2:
+
+```matlab
+M = readmatrix('IOExample.xlsx', 'Sheet', 'Sheet2', 'Range', 'B2:E8')
+```
+
+$\rightarrow$ 7×4 numeric (data file not in photos).
+
+#### Key Terms
+
+name/value pair
+
+#### Key Commands
+
+`range`
+
+### 8.8 readvars & readcell
+
+**`readvars`** $\rightarrow$ same 3 forms; output = separate **n×1 column vectors**, one per column, each one type. List as many outputs as needed $\rightarrow$ filled in column order.
+
+```matlab
+[items, store1prices] = readvars('IOExample.xlsx');
+```
+
+$\rightarrow$ `items` (names), `store1prices`. Double-click in Workspace to inspect.
+
+Rows 2–10 of columns 1, 3, 5:
+
+```matlab
+opts = detectImportOptions('IOExample.xlsx')
+opts.SelectedVariableNames = [1 3 5];
+opts.DataRange = '2:10';
+[items, Store2, Store4] = readvars('IOExample.xlsx', opts);
+```
+
+**`readcell`** $\rightarrow$ like `readmatrix` but output = **cell array** $\rightarrow$ each cell any type. Same 3 parameter forms.
+
+> **Book typo:** "As with readmatrix and *readcell*..." $\rightarrow$ should be readmatrix and **readvars**.
+
+```matlab
+c = readcell('MixedDataExample.csv')
+```
+
+- Unquoted text $\rightarrow$ still text (`i` stays the char `'i'`, not √−1).
+- `,,` $\rightarrow$ `<missing>` cell.
+
+> **Tip:** *data* = plural, *datum* = singular.
+
+#### Key Commands
+
+`readvars`, `readcell`
+
+### 8.9 The Import Data Tool
+
+- Interactive: pick data visually $\rightarrow$ **writes the code for you** $\rightarrow$ learning tool; paste into your functions.
+- Open: **Home $\rightarrow$ Import Data** (Figure 8.2), or right-click file in Current Folder $\rightarrow$ **Import Data...** (Figure 8.6).
+
+![Figure 8.2 — Data Import Tab ](media/ch8_import_data.png)
+
+**Import tab options** 
+
+
+| Option | Meaning |
+|---|---|
+| **Range** | type a range / pick previous; grid selection updates it |
+| **Variable Names Row** | row with column headers (Table / Column vectors only) |
+| **Output Type** | Table (default), Column vectors, Numeric Matrix, String Array, Cell Array |
+| **Text Options** | text $\rightarrow$ string (`"..."`) or char array (`'...'`) |
+| **Unimportable Cells** | blue = OK, yellow = unimportable $\rightarrow$ replace with NaN (default) / exclude rows / exclude columns. N/A for String/Cell Array |
+
+**Import Selection** dropdown:
+
+- **Import Data** $\rightarrow$ vars in Workspace.
+- **Generate Script / Generate Function** $\rightarrow$ heavily commented import code $\rightarrow$ save + run; compare with yours.
+
+#### Key Commands
+
+(Import Data Tool — ribbon only)
+
+### 8.10 Exporting: writematrix & writecell
+
+R2019a. **`writematrix`** replaces `csvwrite`, `dlmwrite` (+ `xlswrite` for single-type). Homogeneous data. No return value.
+
+> **Tip:** `xlswrite`, `csvwrite`, `dlmwrite` $\rightarrow$ not recommended. Data not in a matrix $\rightarrow$ convert first (e.g. `cell2mat`).
+
+| Form | Writes |
+|---|---|
+| `writematrix(M)` | `M.txt`, comma-delimited, current folder (can't $\rightarrow$ `matrix.txt`) |
+| `writematrix(M, file)` | named file; format from extension |
+| `writematrix(___, Name, Value)` | options |
+
+- Exists $\rightarrow$ **overwritten, no confirmation**. Missing $\rightarrow$ created. Folder in path missing $\rightarrow$ **fails** (can't make folders).
+- Extensions: `.txt` `.csv` `.dat` (all comma-delimited), `.xls` `.xlsm` `.xlsx` `.xlsb`. None $\rightarrow$ comma-delimited `.txt`.
+- Spreadsheet $\rightarrow$ `NaN` written as empty cells.
+
+```matlab
+Goals = readmatrix('ImportExample7.txt')
+writematrix(Goals)
+```
+
+$\rightarrow$ `Goals.txt`: tab-delimited in $\rightarrow$ comma-delimited out, same data.
+
+```matlab
+Goals = readmatrix('ImportExample7.txt')
+writematrix(Goals, '../goals.xlsx')
+writematrix(Goals, '../goals.dat')
+```
+
+**Name/value for writematrix:**
+
+| Name | Value |
+|---|---|
+| `FileType` | `'text'` / `'spreadsheet'` (spreadsheet $\rightarrow$ `.xls`, not `.xlsx`) |
+| `DateLocale` | `xx_YY`, e.g. `en_US` |
+| `Delimiter` | `'comma'` `'space'` `'tab'` `'semi'` `'bar'` or single chars |
+| `QuoteStrings` | `true`/`false` (delimited text) |
+| `Encoding` | see `detectImportOptions` help |
+| `Sheet` | number or name (spreadsheet) |
+| `Range` | upper-left cell, or corner:corner (spreadsheet) |
+| `UseExcel` | `true`/`false` (spreadsheet) |
+
+Insert into an existing sheet:
+
+```matlab
+M = readmatrix('ImportExample1.txt')
+writematrix(M, 'IOExample.xlsx', 'Sheet', 'New Sheet', 'Range', 'D4')
+```
+
+- Warning: sheet didn't exist $\rightarrow$ added. Sheet **number** riskier: sheet 5 in a 2-sheet file $\rightarrow$ blank sheets 3, 4.
+- Existing file $\rightarrow$ data added at that spot; can overwrite cells **silently**. File open in Excel $\rightarrow$ can't write.
+- `'D4'` $\rightarrow$ whole matrix written. `'D4:G8'` + bigger matrix $\rightarrow$ **truncated, no error**.
+
+**`writecell`** $\rightarrow$ same, source = cell array: `writecell(C)` $\rightarrow$ `C.txt`, `writecell(C, file)`, `writecell(___, Name, Value)` (same pairs).
+
+#### Key Commands
+
+`writematrix`, `writecell`
+
+### 8.11 Exporting Formatted Text: fopen, fprintf, fclose
+
+Lower-level text export.
+
+**Open:**
+
+```text
+fileID = fopen('filename', 'permission')
+```
+
+- `fileID` ≥ 3 (0 = stdin, 1 = stdout/screen, 2 = stderr). **−1 = failed** $\rightarrow$ always check `fileID > 0`.
+
+| Permission | Meaning |
+|---|---|
+| `'rt'` | read only (default) |
+| `'wt'` | write; erases existing content |
+| `'at'` | write; append to end |
+| `'rt+'` | read & write; no new file if missing |
+| `'wt+'` | read & write; erases content; creates if missing |
+| `'at+'` | read & write; append; creates if missing |
+
+```matlab
+fileID = fopen('MyNewFile.txt', 'wt+')
+
+fileID =
+
+     3
+```
+
+> **Book note:** book shows `4`. Number = next free ID $\rightarrow$ `3` in a fresh session with nothing else open.
+
+**Write:**
+
+```text
+fprintf(fileID, 'format specifier', var1, var2, ...)
+```
+
+- Format specifier = literal text + placeholders.
+
+```matlab
+name = 'Ada';
+fprintf('My name is %s.\n', name);
+
+My name is Ada.
+```
+
+(`name` not defined in book $\rightarrow$ set here.)
+
+| Specifier | Type |
+|---|---|
+| `%s` | string |
+| `%d` / `%i` | signed integer |
+| `%u` | unsigned integer |
+| `%f` | floating-point |
+
+- `%.2f` $\rightarrow$ 2 digits **right** of the decimal point.
+
+> **Book error:** says "two digits to the left of the decimal point".
+
+```matlab
+fprintf('%.2f\n', pi)
+
+3.14
+```
+
+- `\n` = newline (one char) $\rightarrow$ almost every format string ends with it.
+
+**Escapes:**
+
+```matlab
+fprintf('This isn't a good place for a quote');
+```
+
+$\rightarrow$ **error**: MATLAB sees `'This isn'`, then stray text + an unmatched `'`. (Book doesn't show the message; exact text varies by version.)
+
+```matlab
+fprintf('This isn''t a good place for a quote\n');
+
+This isn't a good place for a quote
+```
+
+(`\n` added here; book's version has none $\rightarrow$ prompt lands on the same line.)
+
+| Write | Get |
+|---|---|
+| `''` (two single quotes) | `'` |
+| `%%` | `%` |
+| `\n` | newline |
+| `\t` | tab |
+| `\\` | `\` |
+
+- `''` and `%%` = unusual (doubling); normally escape with `\`.
+
+
+> **Tip:** Test output first $\rightarrow$ `fileID = 1` = Command Window.
+
+- Output format must be known to you + recipient (standard or agreed layout, column headers).
+
+**Close** — vital: open files $\rightarrow$ locked, **memory leaks**, crashes. Open $\rightarrow$ read/write $\rightarrow$ close immediately.
+
+> **Tip:** Memory leak = resources not released after use $\rightarrow$ piles up $\rightarrow$ out of memory/storage $\rightarrow$ crash.
+
+- `fclose(fileID)` $\rightarrow$ returns 0 OK, −1 fail.
+
+```matlab
+ids = fopen('all')
+
+ids =
+
+     3
+```
+
+(Empty `[]` if none open. Loop over it calling `fclose`.)
+
+```matlab
+fclose(fileID)
+
+ans =
+
+     0
+```
+
+```matlab
+fclose('all')
+
+ans =
+
+     0
+```
+
+#### Key Terms
+
+permission
+
+#### Key Commands
+
+`fopen`, `fprintf`, `fclose`
+
+---
+
+#### Key Terms (book list)
+
+path, absolute path, relative path, file, folder, directory, working directory, wildcard, source, destination, comma-separated text, delimited text, csv file, name/value pair, permission
+
+#### Key Commands (book list)
+
+`cd`, `copyfile`, `delete`, `detectImportOptions`, `dir`, `fclose`, `fopen`, `fprintf`, `load`, `ls`, `mkdir`, `movefile`, `path`, `pwd`, `range`, `readcell`, `readmatrix`, `readvars`, `rmdir`, `type`, `uigetdir`, `uigetfile`, `which`, `whos`, `writecell`, `writematrix`
+
+---
+
+## SDC Chapter 8 — Exercises
+
+**Exercise 8.1** — Use any function that retrieves a path, then split that path into separate individual folder names using MATLAB string functions.
+
+<details><summary>Solution</summary>
+
+```matlab
+p = pwd
+folders = strsplit(p, filesep)
+
+p =
+
+    '\Users\alexandrayakovleva\Documents\MATLAB'
+
+
+folders =
+
+  1×4 cell array
+
+    {'Users'}    {'alexandrayakovleva'}    {'Documents'}    {'MATLAB'}
+```
+
+`filesep` = `\` on Windows, `/` on Mac/Linux $\rightarrow$ portable. 
+
+</details>
+
+**Exercise 8.2** — Assign the results of the path function to a matrix variable. Export that matrix to a plain text file using fprintf. Import the matrix back into MATLAB using the backslash as a delimiter.
+
+<details><summary>Solution</summary>
+
+`path` = one long char row, folders joined by `pathsep` (`;` on Windows) $\rightarrow$ one folder per line in the file $\rightarrow$ re-import splitting each line on `\`.
+
+```matlab
+p = path;                              % char row vector
+fid = fopen('mypath.txt', 'wt');
+if fid > 0
+    fprintf(fid, '%s\n', strrep(p, pathsep, newline));   % one folder per line
+    fclose(fid);
+end
+C = readcell('mypath.txt', 'Delimiter', '\');
+size(C)
+```
+
+- `C` = cell array, row = one path entry, columns = folder names; shorter paths padded with `<missing>`.
+
+</details>
+
+**Exercise 8.3** — Create a script to list the files in your work folder. Assign the list to a variable, and sort the list alphabetically
+
+<details><summary>Solution</summary>
+
+**listFiles.m:**
+
+```matlab
+% List files (not folders) in the current folder, sorted A-Z
+d = dir;
+d = d(~[d.isdir]);          % drop folders, '.' and '..'
+names = sort({d.name})'     % column cell array, alphabetical
+```
+
+- `sort` on a cell array of char $\rightarrow$ alphabetical; **case-sensitive** (capitals first). Case-insensitive: `[~, i] = sort(lower({d.name})); names = {d(i).name}'`.
+
+</details>
+
+**Exercise 8.4** — Import the data in HeatTreatData.xlsx in two ways, first as a single matrix M, then as column vectors V1 and V2. Save those variables for use in the next exercise.
+
+<details><summary>Solution</summary>
+
+```matlab
+M = readmatrix('HeatTreatData.xlsx');
+[V1, V2] = readvars('HeatTreatData.xlsx');
+save heattreat.mat M V1 V2
+whos M V1 V2
+```
+
+- Assumed 2 numeric columns. More columns $\rightarrow$ `readvars` fills V1, V2 from the first two; rest ignored.
+- Header row $\rightarrow$ skipped automatically if detected as variable names.
+
+</details>
+
+**Exercise 8.5** — Export the numeric content of matrix M created in the previous exercise to a new spreadsheet. Exclude the export of rows that contain NaN, either through a customized opts object or name/value pairs. You will also use this spreadsheet in the next exercise.
+
+<details><summary>Solution</summary>
+
+`writematrix` has no omit option $\rightarrow$ drop NaN rows via opts on the import, then write.
+
+```matlab
+opts = detectImportOptions('HeatTreatData.xlsx');
+opts.MissingRule = 'omitrow';        % empty cells -> drop row
+opts.ImportErrorRule = 'omitrow';    % text in a numeric cell -> drop row
+M = readmatrix('HeatTreatData.xlsx', opts);
+M = M(~any(isnan(M), 2), :);
+writematrix(M, 'HeatTreatClean.xlsx', 'Sheet', 1)
+```
+
+</details>
+
+**Exercise 8.6** — Export the numeric content of vectors V1 and V2 to the same spreadsheet created in the previous exercise. Export the two vectors to the 2nd sheet in the spreadsheet, placing them side-by-side. Use a customized opts object or name/value pairs as necessary. When this exercise is complete, sheets 1 and 2 in the spreadsheet should have identical content.
+
+<details><summary>Solution</summary>
+
+Same NaN rule as 8.5, or the sheets won't match.
+
+```matlab
+V = [V1 V2];
+V = V(~any(isnan(V), 2), :);         % same rows as sheet 1
+writematrix(V(:,1), 'HeatTreatClean.xlsx', 'Sheet', 2, 'Range', 'A1')
+writematrix(V(:,2), 'HeatTreatClean.xlsx', 'Sheet', 2, 'Range', 'B1')
+
+isequal(readmatrix('HeatTreatClean.xlsx', 'Sheet', 1), ...
+        readmatrix('HeatTreatClean.xlsx', 'Sheet', 2))
+
+ans =
+
+  logical
+
+   1
+```
+
+(`writematrix(V, ..., 'Sheet', 2)` in one call also works; two calls = "side-by-side" via `Range`.) `1` assumes M had only those 2 columns.
+
+</details>
+
+**Exercise 8.7** — Import the Mortality-1.xlsx file using the readcell function. Delete everything except the columns that contain the country names and the numeric data. Retain the associated column headers. Export the resulting cell array to a new spreadsheet.
+
+<details><summary>Solution</summary>
+
+
+```matlab
+C = readcell('Mortality-1.xlsx');
+hdr  = C(1,:);
+body = C(2:end,:);
+
+isNum  = all(cellfun(@(x) isnumeric(x) || ismissing(x), body), 1);   % numeric columns
+isCtry = contains(string(hdr), "country", 'IgnoreCase', true);        % country-name column
+
+keep = isNum | isCtry;
+out  = C(:, keep);                  % keeps header row too
+writecell(out, 'MortalityClean.xlsx')
+```
+
+</details>
 
 <a name="sdc-actual-midterm"></a>
 ## Midterm
