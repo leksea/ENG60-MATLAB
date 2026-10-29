@@ -10,8 +10,8 @@
 
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
-- [SDC Chapter 1 - About MATLAB](#sdc-chapter-1--intro-matlab)
-- [SDC Chapter 1 — Exercises](#sdc-chapter-1--exercises)
+- [SDC Chapter 1 - About MATLAB](#sdc-chapter-1)
+- [SDC Chapter 1 — Exercises](#sdc-chapter-1-exercises)
 - [Week 2 — Lab 2](#week-2--lab-2)
   - [Arrays (Chapter 2)](#arrays-chapter-2)
   - [Polynomial Roots](#polynomial-roots)
@@ -84,9 +84,9 @@
   - [6.11 Recursion](#611-recursion)
   - [6.12 Persistent Variables](#612-persistent-variables)
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
-- [Object-Oriented Programming in Matlab](#oop-matlab)
-- [Midterm Example](#sdc-midterm-example)
-- [Numerical Integration](#sdc-numerical-integration)
+- [Object-Oriented Programming in Matlab](#object-oriented-programming-in-matlab)
+- [Midterm Example](#midterm-example)
+- [Numerical Integration](#numerical-integration)
 - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
   - [7.1 Syntactic Errors](#71-syntactic-errors)
   - [7.2 Semantic Errors](#72-semantic-errors)
@@ -112,7 +112,7 @@
   - [8.10 Exporting: writematrix & writecell](#810-exporting-writematrix--writecell)
   - [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose)
 - [SDC Chapter 8 — Exercises](#sdc-chapter-8--exercises)
-- [Midterm](#sdc-actual-midterm) 
+- [Midterm](#midterm) 
 ---
 
 
