@@ -10,6 +10,8 @@
 
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
+- [SDC Chapter 1 - About MATLAB](#sdc-chapter-1--intro-matlab)
+- [SDC Chapter 1 — Exercises](#sdc-chapter-1--exercises)
 - [Week 2 — Lab 2](#week-2--lab-2)
   - [Arrays (Chapter 2)](#arrays-chapter-2)
   - [Polynomial Roots](#polynomial-roots)
@@ -82,6 +84,7 @@
   - [6.11 Recursion](#611-recursion)
   - [6.12 Persistent Variables](#612-persistent-variables)
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
+- [Object-Oriented Programming in Matlab](#oop-matlab)
 - [Midterm Example](#sdc-midterm-example)
 - [Numerical Integration](#sdc-numerical-integration)
 - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
@@ -264,7 +267,12 @@ ans =
 ```
 
 ---
+## SDC Chapter 1
 
+
+## SDC Chapter 1 Exercises
+
+--
 ## Week 2 — Lab 2
 
 ### T1-1 (repeated, parts c & d)
@@ -639,8 +647,6 @@ HorizontalDistance =
 ---
 
 ## SDC Chapter 2 — Operators, Variables & Data Types
-
-*Self-directed coursework notes*
 
 ### Chapter 2 Objectives
 
@@ -5420,7 +5426,7 @@ B =
 Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44, correct.
 
 </details>
-
+---
 ## SDC Chapter 6 — Functions & Scripts
 
 ### Objectives
@@ -6450,6 +6456,11 @@ ans =
 
 </details>
 
+---
+
+## Object-Oriented Programming in Matlab 
+
+---
 ## Midterm Example
 An ambitious boss wants to be a Nobel Laureate for all of the prizes (chemistry, physics, peace, literature, economics and physiology or medicine). His start-up company, Kudos, is hosting job interviews and testing YOU for data-handling skills. It's time to qualify your half-semester skills of MATLAB.
 
@@ -6538,6 +6549,7 @@ axis equal
 ```
 ![C vs F vs K plot](media/midterm_spacebee_plot.png)
 
+---
 ## Numerical Integration
 
 **Assignment: "Distance planet travels in an orbit"** (last 3 pages of the PDF)
