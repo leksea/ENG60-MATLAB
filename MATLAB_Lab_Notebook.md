@@ -7205,6 +7205,152 @@ numIntegrate =
 - Don't forget the **4a** in front of the integral.
 - Element-wise ops (`.^`, `.*`) inside the integrand — `integral` passes in an array.
 - `trapz` needs **x and y arrays**; `integral` needs a **function handle** `@(theta) ...` + limits.
+---
+
+## OOP — Object-Oriented Programming
+
+### Objectives
+
+1. Group related data and operations into objects.
+2. Create objects from a class and call their methods.
+3. Write a `classdef` file with `properties` and `methods` blocks.
+4. Use property attributes (`Access`, `Constant`, `Dependent`) and get-access methods.
+5. Write constructors, ordinary methods and static methods.
+6. Overload built-in operators like `+`.
+7. Write mutators, accessors, set/get-access methods and private helpers.
+8. Explain the difference between a value class and a handle class.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `classdef Name ... end` | begins / ends a class definition (file `Name.m`) | `classdef photoFrame` |
+| `classdef Name < handle` | makes it a handle class | `classdef BallDrop < handle` |
+| `properties ... end` | block of data fields | `properties (Access = private)` |
+| `methods ... end` | block of functions | `methods (Static)` |
+| `obj = Name(args)` | constructor call, creates an object | `frame1 = photoFrame(3, 10)` |
+| `obj.Method()` | call a method (dot form) | `frame1.CalcArea()` |
+| `Method(obj)` | call a method (function form) | `CalcArea(frame1)` |
+| `Name.StaticMethod()` | call a static method, no object needed | `photoFrame.convertInToCm(10)` |
+| `get.prop(obj)` | get-access method, runs when `prop` is read | `get.frameArea(obj)` |
+| `set.prop(obj, v)` | set-access method, runs when `prop` is assigned | `set.game1Score(obj, s)` |
+| `nargin` | number of inputs the caller passed | `if nargin == 2` |
+| `plus`, `minus`, `lt`, `gt`, `eq` | methods to define to overload `+ - < > ==` | `function obj = plus(obj1, obj2)` |
+| `floor`, `mod` | used to normalize minutes to hours + minutes | `mod(totalMinutes, 60)` |
+| `rectangle('Position', p, 'Curvature', c)` | draws a box; curvature `[1 1]` makes a circle | `rectangle('Position', [x y d d], 'Curvature', [1 1])` |
+| `clf`, `pause(t)` | clear figure, wait `t` seconds (animation) | `pause(.03)` |
+
+### 1.1 Objects: Introduction
+
+- Big program = hundreds of variables + functions, which gets confusing. Need a higher-level way to organize.
+- Real world: an oven is made of wood, metal, plastic... but we think of it as one **object** with a few operations (open door, set temperature, set timer).
+
+- Same idea in code. Runner program: an object `runnerInfo` that supports setting distance, setting time, computing speed.
+
+Flat list of names is confusing:
+
+```text
+distRun
+timeRun
+GetSpeed()
+PrintRunnerStats()
+numSpectators
+ticketPriceNormal
+numStudents
+ticketPriceStudent
+CalculateRevenue()
+```
+Grouped into two objects, much clearer:
+| `runnerInfo` | `crowdInfo` |
+|---|---|
+| `distRun` | `numSpectators` |
+| `timeRun` | `ticketPriceNormal` |
+| `GetSpeed()` | `numStudents` |
+| `PrintRunnerStats()` | `ticketPriceStudent` |
+| | `CalculateRevenue()` |
+
+- **Object-oriented programming (OOP)**: program = collection of objects. More understandable, manageable, and more likely to run correctly.
+- **Object** = data + the operations performed on that data.
+- Naming convention in the reading: lowercase first letter = variable (`carStickerPrice`), uppercase + `()` = function (`DecreaseStickerPrice()`).
+
+#### Key Terms
+
+object, object-oriented programming
+
+### 1.2 Classes: Using a Class
+| Term | Meaning |
+|---|---|
+| **encapsulation** | data + operations in one object, with limits on outside access to the internals |
+| **class** | template with the properties and methods common to many objects |
+| **property** | named field that stores data |
+| **method** | function that operates on the properties |
+| **interface** | how a user interacts with the object (call methods, don't touch properties directly) |
+| **constructor** | special method that creates an object; **same name as the class** |
+| **instance** | one specific object of a class |
+### 1.3 Defining a Class
+- One class per file; file name = class name (`photoFrame.m`).
+- Built from blocks, each closed by `end`:
+
+| Keyword | Holds |
+|---|---|
+| `classdef` | starts the class definition, followed by the class name |
+| `properties` | data; can set defaults, access, visibility, storage |
+| `methods` | functions; can set signatures, definitions, access |
+
+- Class **members** = the properties and methods.
+### 1.4 Class Properties
+**Property attributes** = characteristics of a property: access permission, visibility, storage. Set per `properties` block, so use several blocks for different attributes.
+**Access levels** (default `public`):
+
+| Level | Accessible from |
+|---|---|
+| `public` | anywhere the object is visible |
+| `protected` | the class and its subclasses |
+| `private` | class members only (not subclasses) |
+| `immutable` | value can be set only in the constructor |
+
+#### Key Terms
+
+dependent property, get-access method, property attribute, stored property
+
+#### Key Commands
+
+`Access`, `Constant`, `Dependent`, `Hidden`, `GetAccess`, `SetAccess`
+### 1.5 Class Methods
+**Constructor**
+
+- Same name as the class. Creates an instance with property values from the inputs, then returns it.
+### 1.6 Class Example: Seat Reservation System
+### 1.7 Operator Overloading
+- **Operator overloading** = define built-in operators (`+`, `-`, ...) for your own objects.
+- Each operator has a matching MATLAB function. Define a method with that name in the class.
+### 1.8 Mutators, Accessors & Private Helpers
+| Method type | Does |
+|---|---|
+| **mutator** | may change ("mutate") properties |
+| **accessor** | reads properties, doesn't change them |
+| **setter** | mutator for one property |
+| **getter** | accessor for one property |
+
+#### Key Terms
+
+accessor, getter, mutator, private helper method, set-access method, setter
+
+#### Key Commands
+
+`get.propertyName`, `set.propertyName`, `methods (Static, Access = private)`
+
+### 1.9 Handle Classes
+| | Value class | Handle class |
+|---|---|---|
+| Constructor returns | the object | a **handle** (reference) to the object |
+| `b = a` / passing to a method | copies the object | copies the handle; both point to **one** object |
+| Change through one variable | the other is unaffected | seen through every variable |
+| Default? | yes (most MATLAB classes) | add `< handle` after the class name |
+
+### 1.10 Handle Class Example: Ball Drop
+
+---
 
 ## SDC Chapter 7 — Debugging & Error Handling
 
