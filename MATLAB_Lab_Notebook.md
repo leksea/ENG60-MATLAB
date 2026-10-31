@@ -10,7 +10,18 @@
 
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
-- [SDC Chapter 1 - About MATLAB](#sdc-chapter-1)
+- [SDC Chapter 1 — Intro MATLAB](#sdc-chapter-1--intro-matlab)
+  - [1.1 The MATLAB Screen](#11-the-matlab-screen)
+  - [1.2 Entering Commands](#12-entering-commands)
+  - [1.3 Preferences & Number Format](#13-preferences--number-format)
+  - [1.4 Using Help](#14-using-help)
+  - [1.5 Clearing the Command Window & Workspace](#15-clearing-the-command-window--workspace)
+  - [1.6 Unit Conversion Example: Loading a File](#16-unit-conversion-example-loading-a-file)
+  - [1.7 A First Look at Variables](#17-a-first-look-at-variables)
+  - [1.8 Saving a Variable & Command History](#18-saving-a-variable--command-history)
+  - [1.9 Built-in Statistical Functions](#19-built-in-statistical-functions)
+  - [1.10 Terminal Velocity Example: Creating a Script](#110-terminal-velocity-example-creating-a-script)
+  - [1.11 Running a Script, Saving & Closing](#111-running-a-script-saving--closing)
 - [SDC Chapter 1 — Exercises](#sdc-chapter-1-exercises)
 - [Week 2 — Lab 2](#week-2--lab-2)
   - [Arrays (Chapter 2)](#arrays-chapter-2)
@@ -267,12 +278,575 @@ ans =
 ```
 
 ---
-## SDC Chapter 1
+## SDC Chapter 1 — Intro MATLAB
+
+### Objectives
+
+1. Identify parts of the MATLAB screen.
+2. Enter a math expression.
+3. Clear the Workspace and Command Window.
+4. Work with variables.
+5. Use the Help command.
+6. Save and load Workspace variables.
+7. Show the command history.
+8. Use a built in function.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `>>` | command prompt; type here, press **Enter** | `126 + 328` |
+| `ans` | auto-made variable for an unassigned result | `ans = 454` |
+| `+ - * / ^` | add, subtract, multiply, divide, power | `532 - 33.9123456` |
+| `format style` | set display digits (`short`, `long`, `shortE`, `longG`, `bank`, `rat`, ...) | `format long` |
+| `format compact` / `loose` | line spacing in the Command Window | `format compact` |
+| `help name` | help text in the Command Window | `help format` |
+| `clc` | clear the Command Window | `clc` |
+| `clear` | clear all Workspace variables | `clear` |
+| `load('file.mat')` | load variables from a `.mat` file | `load('bearingdata.mat')` |
+| `save('file', 'var')` | save a variable to `file.mat` | `save('bearingdata_grams', 'data_grams')` |
+| `min` / `max` | smallest / largest element | `min(data_grams)` |
+| `bounds` | smallest and largest, two outputs | `[s, l] = bounds(data_grams)` |
+| `mean` / `median` / `mode` | average / middle / most frequent value | `mean(data_grams)` |
+| `std` / `var` | standard deviation / variance | `std(data_grams)` |
+| `corrcoef` / `cov` | correlation coefficients / covariance | `cov(x, y)` |
+| `edit name` | open or create `name.m` in the Editor | `edit terminal_velocity` |
+| `%` | comment; not executed | `% Vt = terminal velocity` |
+| `;` | suppress display of a line's result | `dia = 2.5;` |
+| `pi`, `sqrt` | built-in constant and square root | `sqrt(2*mass*gravity)` |
+| `disp(x)` | print a value or text | `disp('cm/s units')` |
+
+### 1.1 The MATLAB Screen
+
+![Figure 1.1 — The MATLAB Application Desktop](media/ch1_matlab_screen.png)
+
+| Part | Where | Does |
+|---|---|---|
+| Title bar | very top | window controls (close, minimize, maximize) at upper right |
+| Quick-access toolbar | below title bar | help icons + search box |
+| Ribbon | below that | tabs **HOME**, **PLOTS**, **APPS**; HOME shown by default |
+| Command Window | center | type commands at the `>>` prompt |
+| Workspace | right (default) | variables and functions in use |
+| Current Folder | left | current folder, access files |
+
+> **Tip:** screen looks different $\rightarrow$ your settings aren't the defaults.
+> **Tip:** resize/rearrange panels by dragging their borders.
+
+### 1.2 Entering Commands
+
+- Type at the `>>` prompt, press **Enter** to see the result.
+
+```matlab
+126 + 328
+
+ans =
+
+   454
+```
+![Figure 1.2 — The Command Window](media/ch1_command_window.png)
+
+- No variable named $\rightarrow$ MATLAB makes **`ans`** and shows it in the Workspace.
+
+```matlab
+532 - 33.9123456
+
+ans =
+
+  498.0877
+```
+
+- Real value `498.0876544` is stored with 16 digits. **short** format only *shows* 4 decimals.
+- More digits $\rightarrow$ change the display format (prompt or Preferences). Storing more accuracy can slow big calculations.
+
+**Arithmetic operators:**
+
+| Operator | Meaning |
+|---|---|
+| `+` | addition (plus) |
+| `-` | subtraction (minus) |
+| `*` | multiplication (times) |
+| `/` | division (divide) |
+| `^` | power |
+
+> **Tip:** order of math operations: exponentiate, multiply, divide, add, subtract. Use parentheses to group.
+
+#### Key Terms
+
+`>>`, `ans`, arithmetic operators, command prompt, Command Window, variable, Workspace
+
+### 1.3 Preferences & Number Format
+
+**Preferences** dialog $\rightarrow$ default behaviors.
+
+1. **HOME** tab $\rightarrow$ **Preferences**.
+2. Left list $\rightarrow$ **Command Window** (Figure 1.3).
+3. **Numeric format** drop-down $\rightarrow$ **long**.
+4. **Apply** $\rightarrow$ **OK**.
+
+![Figure 1.3 — The Preferences Dialog Box](media/ch1_home_settings.png)
+
+![Numeric format drop-down](media/ch1_numeric_settings.png)
+
+```matlab11/3
+
+ans =
+
+   0.333333333333333
+```
+
+- Then set **Numeric format** back to **short** before continuing.
+
+**Same thing from the prompt:**
+
+```matlab
+format long
+```
+
+- Options: `short`, `long`, `shortE`, `longE`, `shortG`, `longG`, `shortEng`, `longEng`, `+`, `bank`, `hex`, `rat`.
+- **Numeric display** `compact` / `loose` $\rightarrow$ line spacing in the Command Window. Compact often useful.
+
+#### Key Commands
+
+`format style`
+
+### 1.4 Using Help
+
+- Commands must be typed **exactly**. Help = invaluable for looking up formats.
+- **Help** menu (Figure 1.4): Documentation, Examples, Support Web Site, Community, Request Support, Learn MATLAB, Licensing...
+
+1. Click the **Help** icon (`?`) $\rightarrow$ Help window. Search box upper right.
+2. Type `format` into the search box (Figure 1.5).
+3. Click **fx format - Set Command Window output display format**.
+4. Scroll down for the full list of options (Figure 1.6).
+5. Click **X** to close.
+
+![Figure 1.4 — Help Browser Search Box](media/ch1_help.png)
 
 
-## SDC Chapter 1 Exercises
+**Help from the prompt:**
 
---
+```matlab
+help
+```
+
+- Prints a list of topics in the Command Window. Scroll up to see the top (Figure 1.7).
+- Click **matlab\general - General purpose commands** $\rightarrow$ look over the list.
+
+#### Key Commands
+
+`help`
+
+### 1.5 Clearing the Command Window & Workspace
+
+```matlab
+clc
+```
+
+- Command Window now blank. Workspace variables stay.
+
+```matlab
+clear
+```
+
+- Workspace now blank.
+- Both also on the ribbon: **Clear Commands** and **Clear Workspace** (down triangle $\rightarrow$ more options).
+
+#### Key Commands
+
+`clc`, `clear`
+
+### 1.6 Unit Conversion Example: Loading a File
+
+- Units matter. Christopher Columbus misjudged Earth's size (European vs Arabic miles). **Mars Climate Orbiter** was lost: US customary data where NASA specified SI.
+
+**Task:** chromium steel ball, nominal diameter 25 mm. Sample weights stored in **ounces** in `bearingdata.mat`. Convert to grams and check the average.
+
+| Information | |
+|---|---|
+| Ball bearing diameter | 25 mm |
+| Material | AISI 52100 chromium steel |
+| Desired weight (each) | 66.9500 g $\pm$ 0.12 |
+
+> **Book typo:** the book calls the file `ballbearing_data.mat` in this paragraph. The file used everywhere else is `bearingdata.mat`.
+
+**Loading a file:**
+
+1. Current Folder toolbar $\rightarrow$ click the small **sideways arrow** (turns downward) to expand the folders list.
+2. Select **datafiles-matlab** $\rightarrow$ current folder, or use **Browse for folder**.
+3. Double-click **bearingdata.mat**.
+
+![Figure 1.5 — Browsing to a Folder](media/ch1_files.png)
+
+- Double-click runs `load` for you (Figure 1.5). Same as typing:
+
+```matlab
+load('bearingdata.mat')
+```
+
+- General form: `load('filename.ext')`. Extension `.mat` for data, `.m` for scripts.
+- Variable **`data`** now in the Workspace (100×1 double).
+
+> **Tip:** the file name goes in **single quotes** inside the parentheses.
+
+> **Book typo:** the book says "the variable named *Data* is now loaded". MATLAB is case-sensitive; the variable is `data` (lower case), as the Workspace in Figure 1.5 shows.
+
+### 1.7 A First Look at Variables
+
+- **Variable** = named storage location for a value.
+- Names: start with a letter; letters, numbers, `_` allowed. Pick descriptive names.
+- **Case-sensitive:** `Kwh2` $\neq$ `kwh2`. `kwh2` OK; `2kwh` not allowed.
+- Can't use keywords as names. Avoid built-in function names too (allowed, but causes trouble).
+
+**MATLAB keywords:**
+
+`break`, `case`, `catch`, `classdef`, `continue`, `else`, `elseif`, `end`, `for`, `function`, `global`, `if`, `otherwise`, `parfor`, `persistent`, `return`, `spmd`, `switch`, `try`, `while`
+
+- `data` is an **array** of 100 elements in one column. All MATLAB variables are arrays/matrices.
+- **Matrix** = rectangular grid of elements. Single value = matrix with one row, one column.
+- MATLAB = **MAT**rix **LAB**oratory.
+
+**Viewing the data:**
+
+```matlab
+data
+```
+
+- Prints 100 numbers in ounces, last ones `2.3633`, `2.3637`, `2.3629`.
+- 1 oz (weight at standard gravity, $9.81\ \text{m/s}^2$) has a mass of 28.35 g.
+
+```matlab
+data_grams = data * 28.35
+```
+
+- 100 values, now ending `66.9987`, `67.0122`, `66.9887`.
+
+> **Note:** 1 ounce $\approx$ 0.278 N. Gram = mass; newton and ounce = weight (force). Mass is the same on the Moon, weight isn't.
+
+> **Note:** `bearingdata.mat` isn't in the photos, so these outputs are the book's, not re-run.
+
+#### Key Terms
+
+array, matrix (matrices), variable
+
+### 1.8 Saving a Variable & Command History
+
+- Not saved $\rightarrow$ gone when you clear the Workspace.
+
+```matlab
+save('bearingdata_grams', 'data_grams')
+```
+
+- General form: `save('filename.ext', 'variable')`. `.mat` added automatically.
+- New file appears in Current Folder (Figure 1.5).
+
+
+> **Tip:** simpler command form (no parentheses or quotes) works only at the `>>` prompt, not inside scripts/functions:
+> ```matlab
+> save bearingdata_grams data_grams
+> ```
+
+> **Tip:** can't save? You may not have write access to `datafiles-matlab` (network, read-only). Use **Browse for folder** $\rightarrow$ pick `MyWork` or another folder you can write to, then repeat the save.
+
+**Command history:**
+
+- Press the **Up Arrow** key $\rightarrow$ list of earlier commands above the prompt (Figure 1.6).
+- Up/down to pick one $\rightarrow$ it appears at the prompt $\rightarrow$ edit $\rightarrow$ **Enter**. Great for fixing typos.
+
+![Figure 1.6 — Command History](media/ch1_history.png)
+
+> **Tip:** MATLAB Online: Up Arrow still scrolls previous commands, but no history window.
+
+#### Key Commands
+
+`load`, `save`
+
+### 1.9 Built-in Statistical Functions
+
+| Function | Returns |
+|---|---|
+| `min` | smallest element |
+| `max` | largest element |
+| `bounds` | smallest and largest elements |
+| `mean` | average |
+| `median` | middle value |
+| `mode` | most frequent value |
+| `std` | standard deviation |
+| `var` | variance |
+| `corrcoef` | correlation coefficients |
+| `cov` | covariance |
+
+```matlab
+min(data_grams)
+
+ans =
+
+   66.9075
+```
+
+- Up Arrow $\rightarrow$ edit `min` to `max` $\rightarrow$ Enter.
+
+```matlab
+max(data_grams)
+mean(data_grams)
+median(data_grams)
+
+ans =
+
+   67.0477
+
+
+ans =
+
+   66.9709
+
+
+ans =
+
+   66.9721
+```
+
+```matlab
+[smallest, largest] = bounds(data_grams)
+
+smallest =
+
+   66.9075
+
+
+largest =
+
+   67.0477
+```
+
+- `bounds` returns two outputs: first $\rightarrow$ first name left of `=`, second $\rightarrow$ second. Both appear in the Workspace.
+
+- Mean = total / count. Median = middle of the sorted values; even count $\rightarrow$ average of the two middle values.
+- Mean 66.9709 g vs target 66.95 $\pm$ 0.12 g $\rightarrow$ within spec. Range 66.9075 to 67.0477 also inside 66.83 to 67.07.
+
+**On your own:** `clear` and `clc`.
+
+#### Key Commands
+
+`min`, `max`, `bounds`, `mean`, `median`
+
+### 1.10 Terminal Velocity Example: Creating a Script
+
+- Drop a steel ball from a plane. Air resistance (drag) grows with speed. **Terminal velocity** = highest speed reached, when drag balances gravity.
+
+$$V_t = \sqrt{\frac{2mg}{\rho C A}} \tag{1}$$
+
+| Symbol | Meaning |
+|---|---|
+| $V_t$ | terminal velocity |
+| $m$ | mass of the falling object |
+| $g$ | gravity, about $9.81\ \text{m/s}^2$ |
+| $\rho$ | density of the medium (air $\approx 1.225\ \text{kg/m}^3$) |
+| $A$ | cross-sectional area, perpendicular to motion (circle for a sphere) |
+| $C$ | drag coefficient, about 0.47 for a sphere |
+
+> **Note:** air density changes with altitude and temperature. ISA at sea level, 15 °C: about 0.001225 g/cm³.
+
+**Scripts** = stored commands to run again. Two kinds: scripts and Live Scripts. This chapter uses a plain script.
+
+1. Set **MyWork** as the current folder.
+2. Create the file:
+
+```matlab
+edit terminal_velocity
+```
+
+3. Prompt: file doesn't exist, create it? $\rightarrow$ **Yes**. File made in the current folder, `.m` extension.
+
+![Figure 1.7 — Command History](media/ch1_editor.png)
+
+> **Tip:** also **HOME** $\rightarrow$ **New** $\rightarrow$ **Script**. Then save it with a name.
+> **Note:** `edit` with an existing file name opens that file, so it's easy to overwrite one by accident.
+
+4. Editor opens
+5. Enter:
+
+**terminal_velocity.m:**
+
+```matlab
+% program to calculate terminal velocity
+% Vt = terminal velocity
+% dia = diameter of sphere (in cm)
+% mass = mass of the falling object (65.4710 grams)
+% gravity = acceleration due to gravity (about 981 cm/s^2)
+% airDensity = density of the medium (0.001225 g/cm^3.)
+% area = cross-sectional area of the object (in cm^2),
+%        which for a sphere is pi*radius^2
+% C = drag coefficient (about 0.47 for a sphere)
+
+dia = 2.5;
+area = pi*((dia/2)^2);
+mass = 65.4710;
+gravity = 981;
+airDensity = 0.001225;
+C = 0.47;
+Vt = sqrt((2*mass*gravity)/(airDensity*C*area))
+disp 'cm/s units'
+```
+
+> **Tip:** `%` = comment, not executed. `;` = hide that line's result. `pi`, `sqrt` = built-in functions.
+
+- Colors help: comments green, etc. Change in **Preferences** (Figure 1.3). Close Preferences when done.
+
+> **Note:** color blind? Choose your own colors instead of default green (comments) and red (warnings).
+
+6. Click **Save**.
+
+**Code Analyzer:** context menu at the upper right of the Editor $\rightarrow$ **Show Code Analyzer Report** #### Key Terms
+
+comment, script, suppress display
+
+#### Key Commands
+
+`edit`, `%`, `;`, `disp`
+
+### 1.6 Running a Script, Saving & Closing
+![Figure 1.8 — Run Icon on the Editor Tab](media/ch1_editor_script.png)
+
+- Run: **Editor** tab $\rightarrow$ **Run**, or type the name:
+
+```matlab
+terminal_velocity
+
+Vt =
+
+   6.7417e+03
+
+cm/s units
+```
+---
+
+#### Key Terms (book list)
+
+`>>`, `%`, `;`, `ans`, array, arithmetic operators, command prompt, Command Window, comment, matrix (matrices), script, suppress display, variable, Workspace
+
+#### Key Commands (book list)
+
+`clear`, `clc`, `format style`, `help`
+
+---
+
+## SDC Chapter 1 — Exercises
+
+**Exercise 1.1** — A climbing carabiner is rated to have a closed gate strength of 20 kN (kiloNewton) and open gate strength of 6 kN. Use MATLAB to calculate the rating for the carabiner in lbf (pounds force). 1 kN = 224.809 lbf.
+
+<details><summary>Solution</summary>
+
+```matlab
+closedGate = 20 * 224.809
+openGate = 6 * 224.809
+
+closedGate =
+
+   4.4962e+03
+
+
+openGate =
+
+   1.3489e+03
+```
+
+Closed gate **4496.18 lbf**, open gate **1348.85 lbf**. (`format short` switches to e-notation for non-integers this size; `format shortG` shows `4496.2` and `1348.9`.)
+
+</details>
+
+**Exercise 1.2** — Use the data file **bearingdata.mat** to convert the values stored in the file from ounces to kilograms. One ounce equals 0.0283495 kg. Show the values to 16 significant digits.
+
+<details><summary>Solution</summary>
+
+```matlab
+load('bearingdata.mat')
+format long
+data_kg = data * 0.0283495
+format short
+```
+
+- `format long` $\rightarrow$ 16 significant digits for values like these (about 0.067 kg).
+- File not in the photos, so no output shown. Check: last value $2.3629 \times 0.0283495 \approx 0.06699$ kg, matching the gram values ($\approx 66.99$ g).
+
+</details>
+
+**Exercise 1.3** — Use MATLAB to calculate the following:
+a. 654.23 + 345.73
+b. 597.64533 - 0.83455
+c. 3984566 / 5.5
+d. 343490999 / 2 * 34.6540
+
+<details><summary>Solution</summary>
+
+```matlab
+654.23 + 345.73
+597.64533 - 0.83455
+3984566 / 5.5
+343490999 / 2 * 34.6540
+
+ans =
+
+  999.9600
+
+
+ans =
+
+  596.8108
+
+
+ans =
+
+   7.2447e+05
+
+
+ans =
+
+   5.9517e+09
+```
+
+- c = 724466.5455; d = 5951668539.673. (d: `/` and `*` same precedence, left to right $\rightarrow$ $(343490999/2) \times 34.654$.)
+- Computed in Python; MATLAB display assumed `format short`.
+
+</details>
+
+**Exercise 1.4** — Modify the terminal_velocity script you created previously to calculate the terminal velocity if the 25 mm spherical object of mass 65.4710 was falling towards Mars and not Earth. The gravity of Mars is 3.711 m/s². The atmospheric density at the surface of Mars is estimated to be .020 kg/m³. Notice that these units for the density and gravity of Mars are in m (meters) units not mm (millimeters).
+
+<details><summary>Solution</summary>
+
+Script works in cm and g, so convert:
+
+- gravity: $3.711\ \text{m/s}^2 \times 100 = 371.1\ \text{cm/s}^2$
+- density: $0.020\ \text{kg/m}^3 \times \frac{1000\ \text{g}}{10^6\ \text{cm}^3} = 0.000020\ \text{g/cm}^3$
+
+**terminal_velocity_mars.m:**
+
+```matlab
+% terminal velocity of the 2.5 cm steel ball on Mars (cgs units)
+dia = 2.5;
+area = pi*((dia/2)^2);
+mass = 65.4710;
+gravity = 371.1;          % 3.711 m/s^2 -> cm/s^2
+airDensity = 0.000020;    % 0.020 kg/m^3 -> g/cm^3
+C = 0.47;
+Vt = sqrt((2*mass*gravity)/(airDensity*C*area))
+disp 'cm/s units'
+```
+
+```matlab
+terminal_velocity_mars
+
+Vt =
+
+   3.2452e+04
+
+cm/s units
+```
+
+**32,452 cm/s** (324.5 m/s), about 4.8× Earth's. Thin air beats weak gravity.
+
+</details>
+
+---
 ## Week 2 — Lab 2
 
 ### T1-1 (repeated, parts c & d)
