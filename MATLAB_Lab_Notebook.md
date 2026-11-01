@@ -106,7 +106,7 @@
   - [1.8 Mutators, Accessors & Private Helpers](#18-mutators-accessors--private-helpers)
   - [1.9 Handle Classes](#19-handle-classes)
   - [1.10 Handle Class Example: Ball Drop](#110-handle-class-example-ball-drop)
-- [[Object-Oriented Programming in Matlab — Exercises](object-oriented-programming-in-matlab--exercises)
+- [Object-Oriented Programming in Matlab — Exercises](object-oriented-programming-in-matlab--exercises)
 - [Midterm Example](#midterm-example)
 - [Numerical Integration](#numerical-integration)
 - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
@@ -7363,6 +7363,7 @@ class definition, members
 
 `classdef`, `properties`, `methods`, `end`
 ### 1.4 Class Properties
+#### Property attributes
 **Property attributes** = characteristics of a property: access permission, visibility, storage. Set per `properties` block, so use several blocks for different attributes.
 **Access levels** (default `public`):
 
@@ -7373,6 +7374,98 @@ class definition, members
 | `private` | class members only (not subclasses) |
 | `immutable` | value can be set only in the constructor |
 
+#### Subset of property attributes:
+
+| Attribute | Values | Description |
+|---|---|---|
+| `Access` | `public`, `protected`, `private` | get and set access |
+| `Constant` | `false`, `true` | `true` $\rightarrow$ value can't be changed |
+| `Dependent` | `false`, `true` | `true` $\rightarrow$ value not stored in the object |
+| `GetAccess` | `public`, `protected`, `private` | read access |
+| `Hidden` | `false`, `true` | `true` $\rightarrow$ not shown in property lists |
+| `SetAccess` | `public`, `protected`, `private`, `immutable` | write access |
+
+> **Note:** attributes default to `false` and `public`. A property with no default value starts as `[]` (empty double).
+
+#### Stored vs dependent properties:**
+
+| Type | Stored in memory? | Value comes from |
+|---|---|---|
+| **stored** | yes | assignment / default |
+| **dependent** | no | calculated each time it's read, by a **get-access method** |
+
+- Get-access method: in a `methods` block, named `get.propertyName(obj)`. MATLAB calls it automatically when the property is read.
+- Users read a public dependent property as `obj.propertyName` or `obj.propertyName()`, **without** `get`.
+
+**photoFrameModified.m:**
+
+```matlab
+classdef photoFrameModified
+    properties (Access = private)        % Stored properties
+        frameWidth = 3;
+        frameHeight = 10;
+        quantityOrdered = 1;
+    end
+    properties (Constant, Access = private)
+        inchToCmFactor = 2.54;
+    end
+    properties (Dependent)               % Dependent property
+        frameArea;
+    end
+
+    methods
+        % Get method for frameArea property
+        function area = get.frameArea(obj)
+            area = obj.frameWidth * obj.frameHeight;
+        end
+
+        % Change frame dimensions
+        function obj = SetFrameDimensions(obj, width, height)
+            obj.frameWidth = width;
+            obj.frameHeight = height;
+        end
+
+        % Display property values
+        function ShowFields(obj)
+            fprintf('Width = %d, Height = %d, Area = %d\n', ...
+                    obj.frameWidth, obj.frameHeight, obj.frameArea);
+        end
+    end
+end
+```
+```matlab
+frame1 = photoFrameModified;
+frame1.ShowFields()
+frame1 = frame1.SetFrameDimensions(5, 20);
+frame1.ShowFields()
+
+Width = 3, Height = 10, Area = 30
+Width = 5, Height = 20, Area = 100
+```
+
+```matlab
+frame1.get.frameArea()      % incorrect syntax to get the frameArea
+```
+
+```text
+Unrecognized method, property, or field 'get' for class 'photoFrameModified'.
+```
+
+```matlab
+frame1.frameArea()
+frame1.frameArea
+
+ans =
+
+   100
+
+
+ans =
+
+   100
+```
+- Dependent benefits: saves memory (not stored) and always consistent with the properties it's calculated from.
+- Get-access methods are only needed for `Dependent` properties.
 #### Key Terms
 
 dependent property, get-access method, property attribute, stored property
@@ -7381,10 +7474,104 @@ dependent property, get-access method, property attribute, stored property
 
 `Access`, `Constant`, `Dependent`, `Hidden`, `GetAccess`, `SetAccess`
 ### 1.5 Class Methods
-**Constructor**
 
+#### Constructor
 - Same name as the class. Creates an instance with property values from the inputs, then returns it.
+- **NO OVERLOADING**: One constructor per class. None defined $\rightarrow$ default constructor (no inputs) sets properties to `[]` or their block defaults.
+- Called as `e1 = employeeInfo()`, **not** `e1.employeeInfo()` (e1 doesn't exist yet).
+
+#### Ordinary methods & method attributes
+
+- **Ordinary method** = works on one specific instance. The object must be passed explicitly (`obj` first).
+- A value-class method can't change its input, so it returns a new object/value.
+- **Method attributes** = access, visibility, implementation. Several `methods` blocks $\rightarrow$ different attributes.
+
+**Example**
+
+
+```matlab
+classdef photoFrame
+    properties (Access = private)
+        frameWidth;
+        frameHeight;
+    end
+```
+1. Constructor = same name as the class, creates an object.
+
+```matlab
+    methods
+        % Constructor
+        function obj = photoFrame(width, height)
+            % Create, return photoFrame object (code not shown)
+        end
+```
+2. `obj` = first argument of an ordinary method, e.g. `SetFrameDimensions(obj, width, height)`.
+3. Methods can access private members.
+4. Multiple `methods` blocks $\rightarrow$ customize access, visibility, implementation.
+
+```matlab
+        % Change frame dimensions
+        function obj = SetFrameDimensions(obj, width, height)
+            % Assign user values to frameWidth and frameHeight
+            % (code not shown)
+        end
+
+        % Display property values
+        function ShowFields(obj)
+            fprintf('Width = %d, Height = %d\n', ...
+                    obj.frameWidth, obj.frameHeight);    % methods can access private members
+        end
+    end
+    methods (Access = private, Hidden = true)
+        function CalculateFrameCost(obj)
+            % Calculate cost based on dimensions (code not shown)
+        end
+    end
+end
+```
+- Method `Access` defaults to `public` $\rightarrow$ callable anywhere the object is visible; that's the interface.
+**Subset of method attributes:**
+
+| Attribute | Values | Description |
+|---|---|---|
+| `Access` | `public`, `protected`, `private` | who can call it |
+| `Hidden` | `false`, `true` | `true` $\rightarrow$ not shown in method lists |
+| `Static` | `false`, `true` | `true` $\rightarrow$ doesn't need an object |
+
+#### Static methods
+- Related to the class, but don't work on a specific instance. Ex: `convertInToCm()` converts units but doesn't touch the properties.
+
+```matlab
+classdef photoFrame
+    properties (Access = private)
+        frameWidth;
+        frameHeight;
+    end
+...
+    methods (Static)        % Static method
+        % Converts input argument from inches to cm
+        function sizeCm = convertInToCm(sizeInches)
+            sizeCm = sizeInches * 2.54;
+        end
+    end
+
+```
+- Call with `ClassName.MethodName()`, no object needed:
+
+```matlab
+x = photoFrame.convertInToCm(10)
+```
+
+#### Key Terms
+
+constructor, method attribute, ordinary method, static method
+
+#### Key Commands
+
+`nargin`, `methods (Static)`, `methods (Access = private)`
+
 ### 1.6 Class Example: Seat Reservation System
+
 ### 1.7 Operator Overloading
 - **Operator overloading** = define built-in operators (`+`, `-`, ...) for your own objects.
 - Each operator has a matching MATLAB function. Define a method with that name in the class.
