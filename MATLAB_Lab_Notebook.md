@@ -816,7 +816,6 @@ ans =
 ```
 
 - c = 724466.5455; d = 5951668539.673. (d: `/` and `*` same precedence, left to right $\rightarrow$ $(343490999/2) \times 34.654$.)
-- Computed in Python; MATLAB display assumed `format short`.
 
 </details>
 
@@ -7287,6 +7286,24 @@ object, object-oriented programming
 | **interface** | how a user interacts with the object (call methods, don't touch properties directly) |
 | **constructor** | special method that creates an object; **same name as the class** |
 | **instance** | one specific object of a class |
+
+```matlab
+% Call constructor to create frame1 object
+frame1 = photoFrame(3, 10);
+% Call method to calculate frame1's area
+areaFrame1 = frame1.CalcArea()
+```
+**Two ways to call a method** :
+
+```matlab
+areaFrame1 = frame1.CalcArea();     % dot notation
+areaFrame1 = CalcArea(frame1);      % function syntax: object is the first argument
+```
+- Objects of one class share the **same** properties and methods, but each **instance** is different.
+#### Key Terms
+
+class, constructor, encapsulation, instance, interface, method, property
+
 ### 1.3 Defining a Class
 - One class per file; file name = class name (`photoFrame.m`).
 - Built from blocks, each closed by `end`:
@@ -7298,6 +7315,53 @@ object, object-oriented programming
 | `methods` | functions; can set signatures, definitions, access |
 
 - Class **members** = the properties and methods.
+#### Example : implementation of datatype photoFrame
+**photoFrame.m:**
+
+```matlab
+classdef photoFrame
+
+    properties
+        frameWidth;      % Width of a frame
+        frameHeight;     % Height of a frame
+    end
+
+    methods
+        % Constructor
+        function obj = photoFrame(width, height)
+            if nargin == 2
+                obj.frameWidth = width;
+                obj.frameHeight = height;
+            else
+                obj.frameWidth = [];
+                obj.frameHeight = [];
+            end
+        end
+
+        % Calculate frame area
+        function area = CalcArea(obj)
+            area = obj.frameWidth * obj.frameHeight;
+        end
+
+        % Display property values
+        function ShowFields(obj)
+            fprintf('Width = %d, Height = %d\n', ...
+                    obj.frameWidth, obj.frameHeight);
+        end
+    end
+end
+```
+1. **Define class:** `photoFrame.m` holds the code; `classdef` and the final `end` are the boundaries.
+2. **Define properties:** from `properties` to its `end`. Property names; types, defaults, access optional.
+3. **Define methods:** from `methods` to its `end`. Each method = `function ... end`.
+
+#### Key Terms
+
+class definition, members
+
+#### Key Commands
+
+`classdef`, `properties`, `methods`, `end`
 ### 1.4 Class Properties
 **Property attributes** = characteristics of a property: access permission, visibility, storage. Set per `properties` block, so use several blocks for different attributes.
 **Access levels** (default `public`):
