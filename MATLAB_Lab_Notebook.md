@@ -7239,6 +7239,15 @@ numIntegrate =
 | `rectangle('Position', p, 'Curvature', c)` | draws a box; curvature `[1 1]` makes a circle | `rectangle('Position', [x y d d], 'Curvature', [1 1])` |
 | `clf`, `pause(t)` | clear figure, wait `t` seconds (animation) | `pause(.03)` |
 
+
+#### Key Terms (all)
+
+accessor, class, class definition, constructor, dependent property, encapsulation, get-access method, getter, handle class, instance, interface, members, method, method attribute, mutator, object, object-oriented programming, operator overloading, ordinary method, private helper method, property, property attribute, set-access method, setter, static method, stored property, value class
+
+#### Key Commands (all)
+
+`classdef`, `properties`, `methods`, `end`, `nargin`, `Access`, `Constant`, `Dependent`, `Hidden`, `Static`, `get.propertyName`, `set.propertyName`, `plus`, `minus`, `lt`, `gt`, `eq`, `< handle`, `rectangle`, `clf`, `pause`
+
 ### 1.1 Objects: Introduction
 
 - Big program = hundreds of variables + functions, which gets confusing. Need a higher-level way to organize.
@@ -7572,9 +7581,252 @@ constructor, method attribute, ordinary method, static method
 
 ### 1.6 Class Example: Seat Reservation System
 
+**Implement two classes:**
+
+- `seat` class = one seat: first name, last name, amount paid. Methods: check empty, reserve, print.
+- `eventInfo` class = venue, date, and an **array of `seat` objects**. Methods: reserve a seat, print venue info.
+- Main script stays clean: menu + calls to `eventInfo` methods.
+**seat.m:**
+
+```matlab
+classdef seat
+    properties (Access = private)
+        firstName;
+        lastName;
+        amountPaid;
+    end
+
+    methods
+        % Constructor
+        function obj = seat()
+            obj.firstName = 'empty';
+            obj.lastName = 'empty';
+            obj.amountPaid = 0;
+        end
+
+        % Checks if a seat is empty
+        function isEmpty = CheckSeatEmpty(obj)
+            isEmpty = strcmp(obj.firstName, 'empty');
+        end
+
+        % Reserve seat
+        function obj = ReserveSeat(obj, userFirstName, userLastName, ticketPrice)
+            obj.firstName = userFirstName;
+            obj.lastName = userLastName;
+            obj.amountPaid = ticketPrice;
+        end
+
+        % Prints seat information
+        function PrintSeat(seat)
+            if strcmp(seat.firstName, 'empty')
+                fprintf('empty\n')
+            else
+                fprintf('%s %s, Paid: %d\n', seat.firstName, seat.lastName, seat.amountPaid)
+            end
+        end
+    end
+end
+```
+**eventInfo.m:**
+
+```matlab
+classdef eventInfo
+    properties (Access = private)
+        venueName;
+        showDate;
+        allSeats = seat;
+    end
+
+    methods
+        % Constructor
+        function obj = eventInfo(location, date, numberSeats)
+            if nargin == 3
+                obj.venueName = location;
+                obj.showDate = date;
+                obj.allSeats(1:numberSeats) = seat();    % Array of seats
+            else
+                obj.venueName = [];
+                obj.showDate = [];
+                obj.allSeats(1) = [];
+            end
+        end
+
+        % Reserve seat in venue
+        function obj = ReserveSeat(obj)
+            seatNumber = input('Enter seat number: ');   % Get seat number
+
+            % If empty, reserve seat
+            if obj.allSeats(seatNumber).CheckSeatEmpty()
+                name1 = input('Enter first name:  ', 's');
+                name2 = input('Enter last name:  ', 's');
+                cost = input('Enter amount paid:  ');
+
+                obj.allSeats(seatNumber) = obj.allSeats(seatNumber).ReserveSeat(name1, name2, cost);
+
+            % If not empty, display error
+            else
+                fprintf('Error: Seat %d is not empty.\n', seatNumber)
+            end
+        end
+
+        % Print all venue information
+        function PrintVenueInfo(obj)
+            fprintf('Venue location: %s\n', obj.venueName);
+            fprintf('Event date: %s\n', obj.showDate);
+
+            for i = 1:length(obj.allSeats)
+                fprintf('%d: ', i);
+                obj.allSeats(i).PrintSeat();
+            end
+        end
+    end
+end
+```
+**Main script:**
+
+```matlab
+% Assign default menu value
+userKey = 'go';
+
+% Create an instance of class eventInfo
+ticketSystem = eventInfo('Symphony Hall', '05-May-2003', 5);
+
+% Continue to prompt user for menu selection while not quit
+while ~strcmp(userKey, 'q')
+    userKey = input('Enter command (p/r/q): ', 's');
+
+    if strcmp(userKey, 'p')                  % Print venue info
+        ticketSystem.PrintVenueInfo();
+
+    elseif strcmp(userKey, 'r')              % Reserve a seat
+        ticketSystem = ticketSystem.ReserveSeat();
+
+    elseif strcmp(userKey, 'q')              % Quit
+        disp('Quitting.');
+
+    else
+        disp('Invalid command.');            % User did not type p, r, or q
+    end
+
+end
+```
+Session (user input after each prompt):
+
+```text
+Enter command (p/r/q): p
+Venue location: Symphony Hall
+Event date: 05-May-2003
+1: empty
+2: empty
+3: empty
+4: empty
+5: empty
+Enter command (p/r/q): r
+Enter seat number: 1
+Enter first name:  John
+Enter last name:  Doe
+Enter amount paid:  1000
+Enter command (p/r/q): r
+Enter seat number: 2
+Enter first name:  Susie
+Enter last name:  Doe
+Enter amount paid:  1250
+Enter command (p/r/q): r
+Enter seat number: 2
+Error: Seat 2 is not empty.
+Enter command (p/r/q): r
+Enter seat number: 5
+Enter first name:  Peter
+Enter last name:  Principle
+Enter amount paid:  500
+Enter command (p/r/q): p
+Venue location: Symphony Hall
+Event date: 05-May-2003
+1: John Doe, Paid: 1000
+2: Susie Doe, Paid: 1250
+3: empty
+4: empty
+5: Peter Principle, Paid: 500
+Enter command (p/r/q): q
+Quitting.
+```
+
+- `ticketSystem = ticketSystem.ReserveSeat();` $\rightarrow$ must reassign: `eventInfo` is a value class, so the method returns the changed copy.
+- Methods aren't copied per object; only properties are. Each object calls its class's methods.
+
 ### 1.7 Operator Overloading
 - **Operator overloading** = define built-in operators (`+`, `-`, ...) for your own objects.
 - Each operator has a matching MATLAB function. Define a method with that name in the class.
+
+**Subset of operator methods:**
+
+| Operator | Method to define | Example use |
+|---|---|---|
+| `+` | `plus(a, b)` | `a + b` |
+| `-` | `minus(a, b)` | `a - b` |
+| `<` | `lt(a, b)` | `a < b` |
+| `>` | `gt(a, b)` | `a > b` |
+| `==` | `eq(a, b)` | `a == b` |
+
+
+**Example tripDetails.m:**
+```matlab
+classdef tripDetails
+    properties (Access = private)
+        tripHours;
+        tripMinutes;
+    end
+
+    methods
+        % Constructor
+        function obj = tripDetails(travelHrs, travelMins)
+            if nargin == 2
+                obj.tripHours = travelHrs;
+                obj.tripMinutes = travelMins;
+            else
+                obj.tripHours = [];
+                obj.tripMinutes = [];
+            end
+        end
+
+        % Print trip hours and minutes
+        function printTripDetails(obj)
+            fprintf('Trip duration: %d hours, %d min\n', ...
+                    obj.tripHours, obj.tripMinutes);
+        end
+```
+**Overloading the +opertator**
+```matlab
+        % Overloads the + operator
+        function obj = plus(obj1, obj2)
+            totalMinutes = (obj1.tripHours * 60) + obj1.tripMinutes + ...
+                           (obj2.tripHours * 60) + obj2.tripMinutes;
+
+            obj = tripDetails(floor(totalMinutes/60), mod(totalMinutes, 60));
+        end
+    end
+end
+```
+```matlab
+t1 = tripDetails(3, 22);
+t1.printTripDetails();
+t2 = tripDetails(2, 50);
+t2.printTripDetails();
+t3 = t1 + t2;
+t3.printTripDetails();
+
+Trip duration: 3 hours, 22 min
+Trip duration: 2 hours, 50 min
+Trip duration: 6 hours, 12 min
+```
+#### Key Terms
+
+operator overloading
+
+#### Key Commands
+
+`plus`, `minus`, `lt`, `gt`, `eq`
+
 ### 1.8 Mutators, Accessors & Private Helpers
 | Method type | Does |
 |---|---|
@@ -7582,6 +7834,189 @@ constructor, method attribute, ordinary method, static method
 | **accessor** | reads properties, doesn't change them |
 | **setter** | mutator for one property |
 | **getter** | accessor for one property |
+
+**GameInfo.m (version 1):**
+
+```matlab
+classdef GameInfo
+    properties (Access = private)
+        game1Score;
+        game2Score;
+    end
+
+    methods
+        % Mutator methods
+        function obj = SetGame1Score(obj, gameScore)
+            obj.game1Score = gameScore;
+        end
+
+        function obj = SetGame2Score(obj, gameScore)
+            obj.game2Score = gameScore;
+        end
+
+        % Accessor methods
+        function gameScore = GetGame1Score(obj)
+            gameScore = obj.game1Score;
+        end
+
+        function gameScore = GetGame2Score(obj)
+            gameScore = obj.game2Score;
+        end
+
+        function returnValue = FindHighScore(obj)
+            returnValue = max(obj.game1Score, obj.game2Score);
+        end
+    end
+end
+```
+
+**Main script:**
+
+```matlab
+cardGame = GameInfo;
+
+cardGame = cardGame.SetGame1Score(88);
+cardGame = cardGame.SetGame2Score(135);
+
+fprintf('Game 1: %d\n', cardGame.GetGame1Score);
+fprintf('Game 2: %d\n', cardGame.GetGame2Score);
+fprintf('Highest score: %d\n', cardGame.FindHighScore);
+
+Game 1: 88
+Game 2: 135
+Highest score: 135
+```
+
+**Property access methods: `set` and `get`**
+
+- **get-access method** `get.propertyName(obj)`: runs automatically when the property is **read**. Main use: computing a `Dependent` property. Can also trigger events / update other properties.
+- **set-access method** `set.propertyName(obj, value)`: runs automatically when the property is **assigned**. Use for error and type checking.
+- Never call them directly. MATLAB calls them.
+
+**GameInfo.m (version 2, scores bounded 0 to 100):**
+
+```matlab
+classdef GameInfo
+    properties (Access = private)
+        game1Score;
+        game2Score;
+    end
+
+    properties (Dependent, Access = private)
+        highScore;
+    end
+
+    methods
+        % Public mutator and accessor methods
+        function obj = SetGame1Score(obj, gameScore)
+            obj.game1Score = gameScore;
+        end
+
+        function obj = SetGame2Score(obj, gameScore)
+            obj.game2Score = gameScore;
+        end
+
+        function gameScore = GetGame1Score(obj)
+            gameScore = obj.game1Score;
+        end
+
+        function gameScore = GetGame2Score(obj)
+            gameScore = obj.game2Score;
+        end
+
+        function returnValue = FindHighScore(obj)
+            returnValue = obj.highScore;
+        end
+    end
+
+    methods
+        % The set and get methods are automatically called
+        % when a property is accessed
+        function obj = set.game1Score(obj, gameScore)
+            if (gameScore < 0)
+                obj.game1Score = 0;
+            elseif (gameScore > 100)
+                obj.game1Score = 100;
+            else
+                obj.game1Score = gameScore;
+            end
+        end
+
+        function obj = set.game2Score(obj, gameScore)
+            if (gameScore < 0)
+                obj.game2Score = 0;
+            elseif (gameScore > 100)
+                obj.game2Score = 100;
+            else
+                obj.game2Score = gameScore;
+            end
+        end
+
+        function highScore = get.highScore(obj)
+            highScore = max(obj.game1Score, obj.game2Score);
+        end
+    end
+end
+```
+
+Same main script:
+
+```text
+Game 1: 88
+Game 2: 100
+Highest score: 100
+```
+
+- `SetGame2Score(135)` assigns `game2Score` $\rightarrow$ MATLAB calls `set.game2Score` $\rightarrow$ 135 is over 100 $\rightarrow$ stored as 100.
+- `FindHighScore()` reads `highScore` $\rightarrow$ MATLAB calls `get.highScore` $\rightarrow$ max of the two scores.
+
+
+
+**Private helper methods**
+
+- **Private helper** = private method that helps the public methods; avoids repeated code.
+- `CheckSetValue()` does the 0 to 100 check once for both setters. `Static` too, since it doesn't need an object.
+
+```matlab
+classdef GameInfo
+    properties (Access = private)
+        game1Score;
+        game2Score;
+    end
+
+    methods
+        % Public mutator and accessor methods
+        % ...
+    end
+
+    methods
+        % The set and get methods are automatically called
+        % when a property is accessed
+        function obj = set.game1Score(obj, gameScore)
+            obj.game1Score = obj.CheckSetValue(gameScore);
+        end
+
+        function obj = set.game2Score(obj, gameScore)
+            obj.game2Score = obj.CheckSetValue(gameScore);
+        end
+
+        % ...
+    end
+
+    methods (Static, Access = private)
+        % Helper method
+        function boundedScore = CheckSetValue(gameScore)
+            if (gameScore < 0)
+                boundedScore = 0;
+            elseif (gameScore > 100)
+                boundedScore = 100;
+            else
+                boundedScore = gameScore;
+            end
+        end
+    end
+end
+```
 
 #### Key Terms
 
@@ -7592,6 +8027,7 @@ accessor, getter, mutator, private helper method, set-access method, setter
 `get.propertyName`, `set.propertyName`, `methods (Static, Access = private)`
 
 ### 1.9 Handle Classes
+
 | | Value class | Handle class |
 |---|---|---|
 | Constructor returns | the object | a **handle** (reference) to the object |
@@ -7599,10 +8035,552 @@ accessor, getter, mutator, private helper method, set-access method, setter
 | Change through one variable | the other is unaffected | seen through every variable |
 | Default? | yes (most MATLAB classes) | add `< handle` after the class name |
 
+1. Value constructor returns an object; `tripB = tripA` makes an independent copy.
+2. Changing `tripA` doesn't change `tripB`.
+3. Handle constructor returns a handle; `tripB = tripA` copies the handle.
+4. Both variables refer to the same data, so a change through either one changes both.
+
+
+```matlab
+tripA = tripDetails(1, 30);      % value class
+tripB = tripA;
+
+tripA.tripHours = 5;
+
+tripA.printTripDetails();
+tripB.printTripDetails();
+
+Trip duration: 5 hours, 30 min
+Trip duration: 1 hours, 30 min
+```
+**Handle (similar to pointer in C++)**
+```matlab
+tripA = tripDetailH(1, 30);      % handle class
+tripB = tripA;
+
+tripA.tripHours = 5;
+
+tripA.printTripDetails();
+tripB.printTripDetails();
+
+Trip duration: 5 hours, 30 min
+Trip duration: 5 hours, 30 min
+```
+
+#### Key Terms
+
+handle, handle class, value class
+
+#### Key Commands
+
+`< handle`
+
 ### 1.10 Handle Class Example: Ball Drop
 
----
+- `BallDrop` (handle class) = one ball: random start x, falling speed, radius, color.
+- `MoveBall()` moves it down; stops when it hits the floor. `PlotBall()` redraws it.
+- Handle classes are common in animation: pass a reference, don't copy the object every frame.
 
+**BallDrop.m:**
+
+```matlab
+classdef BallDrop < handle
+    properties (Access = private)
+        xPos;               % Starting ball position, x-coordinate
+        yPos;               % Starting ball position, y-coordinate
+        yVelocity;          % Ball falling velocity, y component
+        ballRadius;         % Ball radius
+        ballColor;          % Ball color
+    end
+
+    properties (Constant)
+        minyVelocity = -10; % Minimum y velocity
+    end
+
+    methods
+        % Constructor
+        function obj = BallDrop()
+            % Assign randomized starting location
+            obj.xPos = 18 * rand(1) - 9;              % -9 < random number < 9
+            obj.yPos = 9;                             % Starts at the top
+
+            % Assign random falling velocity of ball
+            obj.yVelocity = -0.5 * rand(1) - 0.1;     % -0.6 < random number < -0.1
+
+            % Assign random ball radius and color
+            obj.ballRadius = rand(1) * .9;            % 0 < random number < 0.9
+            obj.ballColor = [randi(2) - 1, ...
+                             randi(2) - 1, randi(2) - 1];   % R, G, B is 0 or 1
+        end
+
+        % Moves ball instance from top of screen to bottom
+        function MoveBall(obj)
+            obj.yPos = obj.yPos + obj.yVelocity;
+
+            % If ball hits bottom, then stops falling
+            if ((obj.yPos - 1 * obj.ballRadius) <= obj.minyVelocity)
+                obj.yVelocity = 0;
+                obj.yPos = -10 + obj.ballRadius;
+            end
+        end
+
+        % Creates a rounded rectangle (i.e. ball) on 2-D line plot
+        function PlotBall(obj)
+            ballSize = obj.ballRadius * 2;
+            pos = [obj.xPos, obj.yPos, ballSize, ballSize];   % Specifies location and size
+            curv = [1, 1];                                     % Adds curvature to the sides of the rectangle
+            rectangle('Position', pos, 'Curvature', curv, 'FaceColor', obj.ballColor);
+        end
+    end
+end
+```
+**Main script:**
+
+```matlab
+% The main script creates a 100 balls and
+% an animation that drops the balls onto a surface.
+rng('default')                  % added so your balls match the figures
+
+numberBalls = 100;              % Defines number of balls
+figure(1);                      % Creates a figure window
+
+for b = 1:numberBalls           % Create 100 instances of BallDrop
+    balls(b) = BallDrop;
+end
+
+for j = 1:200
+    hold on;                    % Clear balls in the
+    clf;                        % current graph
+    finish = false;
+
+    for b = 1:numberBalls       % Re-position each ball to a lower
+        balls(b).MoveBall;      % y position (i.e. make ball fall)
+        balls(b).PlotBall;
+    end
+
+    axis([-12, 12, -12, 12]);   % Sets graphics
+    rectangle('Position', [-11, -11, 22, 22]);
+    set(gca, 'visible', 'off', 'DataAspectRatio', [1, 1, 1]);
+    pause(.03)                  % Pause before next iteration of loop
+end
+```
+
+
+---
+## Object-Oriented Programming in Matlab — Exercises
+
+**Exercise 1.1** — carOnLot is an object in a used-car inventory program. Which of the following variables and functions should be included in carOnLot? A lowercase first letter indicates a variable name, while uppercase and an ending () indicate a function.
+
+1) carStickerPrice
+2) todaysTemperature
+3) daysOnLot
+4) origPurchasePrice
+5) numSalespeople
+6) IncrementCarDaysOnLot()
+7) DecreaseStickerPrice()
+8) DetermineTopSalesperson()
+
+<details><summary>Solution</summary>
+
+| Item | In `carOnLot`? | Why |
+|---|---|---|
+| `carStickerPrice` | yes | a car has a sticker price |
+| `todaysTemperature` | no | the weather isn't part of a car |
+| `daysOnLot` | yes | days on the lot is a feature of the car |
+| `origPurchasePrice` | yes | each car was bought for some price |
+| `numSalespeople` | no | not a feature of a car |
+| `IncrementCarDaysOnLot()` | yes | operates on a car |
+| `DecreaseStickerPrice()` | yes | operates on a car |
+| `DetermineTopSalesperson()` | no | belongs on a salesperson object |
+
+</details>
+
+**Exercise 1.2** — 1) frame1 is a(n) _____. 2) frameWidth is a(n) ___. 3) CalcArea is a(n) _____. 4) Objects defined by the same class can have different properties and methods. 5) Objects defined by the same class can hold different values in the object's properties.
+
+<details><summary>Solution</summary>
+
+1. **object**: `frame1` is an instance of class `photoFrame`.
+2. **property**: `frameWidth` stores data.
+3. **method**: `CalcArea` doesn't store data; it operates on `frameWidth` and `frameHeight`.
+4. **False**: every `photoFrame` object has the same two properties and three methods.
+5. **True**: the values differ (`frame1` is 3 × 10, `frame2` is 20 × 7).
+
+</details>
+**Exercise 1.3** — What does each statement do? `officeFrame = photoFrame(24, 36)`, `officeFrame = officeFrame.SetHeight(40)`, and what value does `officeFrame.CalcArea()` return?
+
+<details><summary>Solution</summary>
+
+- `photoFrame(24, 36)` calls the constructor $\rightarrow$ object `officeFrame` of class `photoFrame`.
+- `SetHeight(40)` uses dot notation $\rightarrow$ sets `frameHeight` to 40.
+- `CalcArea()` returns `frameHeight * frameWidth`.
+
+
+```matlab
+officeFrame.CalcArea()
+
+ans =
+
+   960
+```
+
+</details>
+
+**Exercise 1.4** — Fill in the placeholders in the `employeeData` class definition. 1) Placeholder_A. 2) Placeholder_B, to define the property currentSalary. 3) Placeholder_C terminates the property block? 4) Placeholder_D defines the constructor method with the arguments name and currentSalary. 5) Placeholder_E, to assign currentSalary the value of newSalary. (Hint: Use dot notation)
+
+<details><summary>Solution</summary>
+
+The reading's code for this question isn't in the PDF, so the skeleton below is rebuilt from the answers.
+
+```matlab
+classdef employeeData                                  % A: classdef
+    properties
+        name;
+        currentSalary;                                 % B: currentSalary;
+    end                                                % C: end
+
+    methods
+        function obj = employeeData(name, currentSalary)   % D: constructor
+            obj.name = name;
+            obj.currentSalary = currentSalary;
+        end
+
+        function obj = SetSalary(obj, newSalary)
+            obj.currentSalary = newSalary;             % E: obj.currentSalary
+        end
+    end
+end
+```
+
+- A: the definition begins with `classdef` + class name.
+- B: each property on its own line.
+- C: a property block ends with `end`.
+- D: constructor = same name as the class; returns the new object.
+- E: the method gets `obj` explicitly; dot notation reaches its property.
+
+</details>
+**Exercise 1.5** — The following properties' access attribute value is _____. Is it public, protected, or private?
+
+```matlab
+properties
+    model = 'GT40';
+    year = 1966;
+end
+```
+
+<details><summary>Solution</summary>
+
+**public**: `Access` isn't specified, so it defaults to public.
+
+</details>
+
+**Exercise 1.6** — The following properties can be accessed _____. Is it anywhere class is visible, only by class members or no one?
+
+```matlab
+properties (Access = private)
+    model = 'GT40';
+    year = 1966;
+end
+```
+
+<details><summary>Solution</summary>
+
+**Only by class members.** Users have to go through the class methods.
+
+</details>
+
+**Exercise 1.7** — milesToKilometers can be accessed _____. Is it anywhere the class is visible or only by members?
+
+```matlab
+properties (Constant)
+    milesToKilometers = 1.60934;
+end
+```
+
+<details><summary>Solution</summary>
+
+**Anywhere the class is visible.** `Access` defaults to public.
+
+</details>
+**Exercise 1.8** — milesToKilometers can be assigned a new value by _____. Is it anywhere the class is visible, class methods only, or no code?
+
+<details><summary>Solution</summary>
+
+**No code.** `Constant` means it can't be changed after initialization; every instance has `milesToKilometers = 1.60934`.
+
+</details>
+
+**Exercise 1.9** — tankCapacity has default value _____. Is it [], 0, or 16.5?
+
+```matlab
+properties (Access = protected)
+    mpg = 16.5;
+    tankCapacity;
+end
+```
+
+<details><summary>Solution</summary>
+
+**`[]`**: no default given, so it's an empty double.
+
+</details>
+
+**Exercise 1.10** — For the photoFrameModified class of the example above... 1) quantityOrdered is a _____ property. 2) frameArea is a _____ property. 3) The new property framePerimeter, calculated as (2 * frameWidth + 2 * frameHeight) should be defined as a _____ property. 4) A get-access method must be defined for the property quantityOrdered. True or False?
+
+<details><summary>Solution</summary>
+
+1. **Stored**: it has a default of 1, not calculated from anything.
+2. **Dependent**: calculated from `frameWidth` and `frameHeight`.
+3. **Dependent**: it depends on other properties; saves memory and stays consistent.
+4. **False**: get-access methods are only needed for `Dependent` properties.
+
+</details>
+
+**Exercise 1.11** — True or False? 1) A constructor has the same name as the class. 2) A class definition must define a constructor method. 3) A constructor is called using dot notation. Ex: e1.employeeInfo() creates an object named e1, which is an instance of class employeeInfo. 4) Good practice is to explicitly define a default constructor for a class. 5) Good practice is a constructor that explicitly tests the number of arguments provided in the call.
+
+<details><summary>Solution</summary>
+
+1. **True.**
+2. **False**: there's a default constructor (no inputs) that sets properties to `[]` or their defaults. Writing one overrides it.
+3. **False**: `e1` doesn't exist yet, so `e1.employeeInfo()` gives an "Unable to resolve the name" error. Use `e1 = employeeInfo()`.
+4. **True**: it should initialize each property.
+5. **True**: wrong input count $\rightarrow$ set properties to empty and/or show an error.
+
+</details>
+
+
+**Exercise 1.12** — Which code snippet best fills the blank _____, per the description? 1) The ResetSalary method is accessible only by the object's members. Is it: methods, methods (Access = public), or methods (Access = private)?
+
+```matlab
+_____
+    function obj = ResetSalary(obj)
+        % Re-assign an object's relevant salary
+        % properties to default values
+    end
+end
+```
+
+<details><summary>Solution</summary>
+
+**`methods (Access = private)`**: a private method is accessible only by members of the object.
+
+</details>
+
+**Exercise 1.13** — The OvertimePay method calculates a paycheck based on the object's hoursWorked property and an argument hourlyRate. Is it: obj, or obj, hourlyRate or hourlyRate?
+
+```matlab
+function otPay = OvertimePay(______)
+    otPay = (obj.hoursWorked - 40) * 1.5 * hourlyRate;
+end
+```
+
+<details><summary>Solution</summary>
+
+**`obj, hourlyRate`**: the method reads `obj.hoursWorked`, so the object is passed explicitly; `hourlyRate` comes from the caller.
+
+</details>
+**Exercise 1.14** — employeeData class constructor. Is it: employeeData( ), or obj = employeeData( ), or employeeData( obj) ?
+
+```matlab
+function ______
+    % Creates and returns an employeeData object
+end
+```
+
+<details><summary>Solution</summary>
+
+**`obj = employeeData()`**: the constructor creates, then returns, an instance.
+
+</details>
+---
+**Exercise 1.15** — CheckBounds() is a method that returns true if all property values are within a predefined range. CheckBounds() should be defined as a(n) ____ method. Is it: ordinary or static?
+
+<details><summary>Solution</summary>
+
+**ordinary**: it works on the property values of one instance.
+
+</details>
+**Exercise 1.16** — RoundValue() rounds any numeric input to the nearest ten. Ordinary or static?
+
+<details><summary>Solution</summary>
+
+**static**: it doesn't operate on an instance; any number passed in gets rounded.
+
+> **Book typo:** this question repeats the `CheckBounds()` text from 22.15, but its answer is about `RoundValue()`. The question here is rewritten to match the answer.
+
+</details>
+**Exercise 1.17** — RemoveSpaces() is a method that returns an input character vector with all whitespace removed from the character vector. RemoveSpaces() should be defined as a(n) ____ method.
+
+<details><summary>Solution</summary>
+
+**static**: it works on any character vector passed in, not on an instance.
+</details>
+
+**Exercise 1.18** — True or False? 4) ConvertToEuros(ticketAmount) is a Static method of class parkingTicket and can be called by `fine = parkingTicket.ConvertToEuros(125);` 5) ticket2250 is an instance of class parkingTicket. TimeNow() is a Static method of class parkingTicket and can be called by `fine = ticket2250.TimeNow();` 6) GetTicketDate() is an ordinary method of class parkingTicket and can be called by `fine = parkingTicket.GetTicketDate();`
+
+<details><summary>Solution</summary>
+
+4. **True**: a static method is called with class name + method name.
+5. **True**: a static method can also be called from an instance.
+6. **False**: an ordinary method needs an instance. Create e.g. `cityTicket` first, then `fine = cityTicket.GetTicketDate();`.
+
+> **Book typo:** the reading's answer to 6 says "then the Static method can be called by `cityTicket.GetTicketDate()`". `GetTicketDate` is the ordinary method.
+
+</details>
+
+**Exercise 1.19** — Refer to the above seat reservation example. True or False? 1) ticketSystem contains one object of type seat. 2) The seat class defines 7 methods. 3) The statement obj.allSeats(1:numberSeats) = seat(); allocates numberOfSeats × 4 member methods. 4) Before a seat can be reserved, the main script first checks if the seat object is empty.
+
+<details><summary>Solution</summary>
+
+1. **False**: `eventInfo('Symphony Hall', '05-May-2003', 5)` creates an array of 5 seat objects.
+2. **False**: 4 methods: the constructor `seat`, `CheckSeatEmpty`, `ReserveSeat`, `PrintSeat`.
+3. **False**: methods aren't allocated per object; only properties are. Objects call their class's methods.
+4. **False**: `ticketSystem.ReserveSeat` checks the seat; the main script only handles commands.
+
+</details>
+
+**Exercise 1.20** — flightA and flightB are objects of the class tripDetails. Write a statement that uses the overloaded + operator to assign totalFlightTime with flightA and flightB's combined trip duration.
+
+<details><summary>Solution</summary>
+
+```matlab
+totalFlightTime = flightA + flightB;
+```
+
+MATLAB sees two `tripDetails` objects and calls the class's `plus`.
+
+</details>
+**Exercise 1.21** — Given the following code snippet, what is the value of weeklyDrive.tripHours?
+
+```matlab
+mondayDrive = tripDetails(4, 15);
+weddayDrive = tripDetails(6, 34);
+weeklyDrive = mondayDrive + weddayDrive;
+```
+
+<details><summary>Solution</summary>
+
+**10**: 4 h 15 min + 6 h 34 min = 10 h 49 min.
+
+> **Note:** `tripHours` is private in the 22.7 class, so `weeklyDrive.tripHours` can't actually be read from outside. Use `weeklyDrive.printTripDetails()` to see it.
+
+</details>
+**Exercise 1.22** — Given the following code snippet, what is the value of weekendDrive.tripMinutes?
+
+```matlab
+saturdayDrive = tripDetails(1, 45);
+sundayDrive = tripDetails(1, 30);
+weekendDrive = saturdayDrive + sundayDrive;
+```
+
+<details><summary>Solution</summary>
+
+**15**: 1 h 45 min + 1 h 30 min = 3 h 15 min. `mod(totalMinutes, 60)` keeps minutes under 60.
+
+</details>
+**Exercise 1.23** — Complete the method definition to overload the == operator.
+
+```matlab
+function obj = ____(obj1, obj2)
+```
+
+<details><summary>Solution</summary>
+
+**`eq`**: define a method named after the operator's MATLAB function.
+
+</details>
+
+**Exercise 1.24** — 1) A mutator should not change the private properties. True or False. 2) An accessor should not change the private properties. True or False. 3) The SetGame1Score method is a(n) _____. 4) The FindHighScore method is a(n) _____.
+
+<details><summary>Solution</summary>
+
+1. **False**: a mutator changes ("mutates") properties.
+2. **True**: an accessor reads a property and returns a value or does an action.
+3. **mutator**: it assigns `game1Score`.
+4. **accessor**: it reads `game1Score` and `game2Score` and returns the higher one.
+
+</details>
+
+**Exercise 1.25** — True or False? 1) The set.game2Score() method is automatically called when game2Score's value is accessed. 2) The get.highScore() method is automatically called when highScore's value is accessed. 3) The get-access and set-access methods are built-in methods defined by MATLAB for error checking and formatting property values. 4) userName is a new property added to gameInfo's class definition. userName's get-access method is defined by `function obj = set.userName()`. 5) Good practice is for a user to explicitly call a property's get-access method before assigning a value to the property.
+
+<details><summary>Solution</summary>
+
+1. **False**: set runs when the value is **assigned**, not read.
+2. **True**: get runs when the value is read.
+3. **False**: you write them; MATLAB just calls them automatically when they exist.
+4. **False**: a get-access method is `get.userName(obj)`; `set.userName` is the set-access method.
+5. **False**: calling them directly is an error; MATLAB calls them for you.
+
+</details>
+**Exercise 1.26** — True or False? 1) A private helper method can be called from the main script. 2) A private helper method typically helps a class's other methods carry out their tasks. 3) A private helper method may not call another private helper method. 4) In MATLAB, a helper method will by default be private.
+
+<details><summary>Solution</summary>
+
+1. **False**: only the class's own methods can call it.
+2. **True**: leads to cleaner code.
+3. **False**: other methods in the class can call it, including other private helpers.
+4. **False**: methods default to public; write `Access = private`.
+**Exercise 1.27** — Given the class type for tripDetails, what is each property's numeric value after executing:
+
+```matlab
+tripA = tripDetails(3, 27);
+tripB = tripA;
+
+tripA.tripHours = 1;
+tripB.tripMinutes = 48;
+```
+
+1) Value class: tripB.tripHours. 2) Handle class: tripB.tripHours. 3) Value class: tripA.tripMinutes. 4) Handle class: tripA.tripMinutes. 5) Handle class: tripB.tripMinutes.
+
+<details><summary>Solution</summary>
+
+| Question | Answer | Why |
+|---|---|---|
+| value, `tripB.tripHours` | **3** | `tripB` is a separate copy |
+| handle, `tripB.tripHours` | **1** | same object as `tripA` |
+| value, `tripA.tripMinutes` | **27** | `tripA` is a separate copy |
+| handle, `tripA.tripMinutes` | **48** | same object as `tripB` |
+| handle, `tripB.tripMinutes` | **48** | assigned directly |
+
+</details>
+**Exercise 1.28** — Handle class definition. True or False? 1) The addTravelDelay() method definition includes (obj) as an input parameter because the method accesses an object's property values. 2) The addTravelDelay() method returns an object because the tripHours and tripMinutes properties are modified. 3) The statement tripA.addTravelDelay(2, 5) has no impact on tripA's properties because the addTravelDelay() method doesn't return the modified object.
+
+<details><summary>Solution</summary>
+
+1. **True**: `hrsDelay` and `minDelay` are added to the object's properties.
+2. **False**: it's `function addTravelDelay(...)`, not `function obj = addTravelDelay(...)`; nothing is returned.
+3. **False**: 1 h 30 min before, 3 h 35 min after. The method and caller share the same object.
+
+</details>
+**Exercise 1.29** — Is each class a handle or value class? 4) `classdef employeeData` (define properties, define methods, end). 5) `classdef photoFrame < handle` (define properties, define methods, end).
+
+<details><summary>Solution</summary>
+
+4. **value**: user-defined classes are value classes by default.
+5. **handle**: `< handle` after the class name.
+
+</details>
+**Exercise 1.30** — Ball drop simulation. True or False? 1) The main script creates 100 instances of class BallDrop. 2) Each instance of the class BallDrop is assigned with the same yVelocity value. 3) BallColor is specified by an RGB vector consisting of three entries, where each entry is a random real number in the interval between 0 and 1.
+
+<details><summary>Solution</summary>
+
+1. **True**: the first `for` loop runs 100 times, one `BallDrop` each.
+2. **False**: each constructor call picks a random `yVelocity` between -0.6 and -0.1, so balls fall at different rates.
+3. **False**: `randi(2) - 1` is an integer, either 0 or 1.
+
+```matlab
+rng('default')
+c = [randi(2) - 1, randi(2) - 1, randi(2) - 1]
+
+c =
+
+     1     1     0
+```
+
+(First three draws of the default stream. Computed in Python with MATLAB's generator, not run in MATLAB.)
+
+</details>
+
+---
 ## SDC Chapter 7 — Debugging & Error Handling
 
 ### Objectives
