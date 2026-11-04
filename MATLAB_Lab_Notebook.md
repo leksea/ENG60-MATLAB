@@ -10697,13 +10697,215 @@ diary off
 | `clc` | clear Command Window | `clc` |
 
 ---
+
 ### 9.1 2D Plots and the Plot Window
+
+- `plot(X,Y)` $\rightarrow$ 2-D plot of X versus Y.
+- X, Y vectors or matrices, equal length. Both matrices $\rightarrow$ same size, columns of Y vs columns of X. Matrix/vector mix $\rightarrow$ later tutorial.
+- Plots use actual values, not equations (symbolic later).
+
+```matlab
+x = 1:10;
+y = x/2
+
+y =
+
+    0.5000    1.0000    1.5000    2.0000    2.5000    3.0000    3.5000    4.0000    4.5000    5.0000
+plot(x,y)
+```
+
+```matlab
+x = 0:10;
+y = x/2;
+plot(x,y)
+```
+
+![Figure 9.1 — Plot window, x = 1:10](media/ch9_plot_xy.png)
+
+- Opens separate plot window with own menu bar. All plot types also available as typed commands in scripts/functions.
+- x on **horizontal axis**, y on **vertical axis**. Graph starts at x = 1, not 0,0 (0,0 not a data point).
+- Drag window borders to resize $\rightarrow$ axes **scaling** changes. Equal axis scale shows true slope but may hide values. Scaling can exaggerate or hide differences, be fair with your own graphs.
+  
+**Toolbar:** New Figure, Open File, Save Figure, Zoom, Pan, Rotate 3D, Data Cursor, Brush/Select Data, Link Plot, Edit Plot, Insert Colorbar, Insert Legend, Hide Plot Tools, Show Plot Tools and Dock Figure.
+![Figure 9.2 — Plot window tool buttons](media/ch9_plot_toolbar.png)
+
+- Click **Show Plot Tools and Dock Figure** $\rightarrow$ Figure Palette (left), Plot Browser (right), Property Editor (bottom).
+
+#### Key Terms
+
+2-D plot, plot window, horizontal axis, vertical axis, scaling
+
+#### Key Commands
+
+`plot(x,y)`
+
+---
+
 ### 9.2 Data Cursor, Arrows, Titles
+
+- **Data Cursor** (toolbar): click on line near x = 5 $\rightarrow$ shows X, Y of point.
+- If cursor doesn't snap to data points: right-click graph, **Selection Style > Mouse Position** (gives in-between values like X: 5.096, Y: 2.548). **Selection Style > Snap to Nearest Data Vertex** snaps back to real data points.
+
+> **Tip:** if the data cursor isn't snapping, the setting was changed earlier. Use Snap to Nearest Data Vertex.
+
+- **Text Arrow** (left toolbar): drag arrow to point, type `Point A` in the box at the tail.
+
+> **Tip:** arrow off target $\rightarrow$ click it to show grips, drag a grip.
+
+- Titles/labels: Plot Browser, click **Axes (no title)**. Property Editor opens. Add title `Fish Caught per Worms Used`, X label `Worms Used`, Y label `Fish Caught`.
+
+> **Tip:** tabs at bottom center select X, Y, or Z Axis. Font tab changes label font and size.
+> 
+![Figure 9.3 — Data point identified with the data cursor](media/ch9_data_cursor.png)
+
 ### 9.3 Saving Figures and Graphics Help
+
+
+- **File > Save As**, expand **Save as type**.
+- `.fig` $\rightarrow$ reopen and edit in MATLAB. `.pdf`, `.jpg`, `.png`, etc. $\rightarrow$ slides, reports.
+- On your own: save as `WormsVFish.fig` and `WormsVFish.pdf`.
+- **Help > Graphics Help**: Plotting Tools, Annotating Graphs, Printing and Exporting. Help window lists plot types (2D and 3D). Like `plot(x,y)`, all usable from command line or GUI. Click a type name to see it.
+
+![Figure 9.4 — Save As type options](media/ch9_save_as.png)
+
+#### Key Terms
+
+.fig
+
+---
+
 ### 9.4 Plots Tab, Multiple Series, Generate Code
+- Close help and figure windows. Clear Command Window and Workspace.
+
+```matlab
+x = 1:10;
+y = sin(x);
+```
+
+- **PLOTS** tab: buttons gray until variables are selected. Click `x`, Shift-click `y` in Workspace.
+- **swap arrow** switches which variable is on which axis (keep x first). Then click **plot**.
+
+> **Tip:** plot options are context sensitive. Click arrow at right of plot types to expand. Hover icons to see names.
+
+- 10 points $\rightarrow$ jagged, not a smooth sine. `plot(x,y)` joins points with straight lines. More points $\rightarrow$ smooth. (`fplot(f)` later.)
+
+```matlab
+x = 1:0.01:10;
+y = sin(x);
+z = cos(x);
+```
+
+- Select `x`, `y` $\rightarrow$ plot. Select `x`, `y`, `z` $\rightarrow$ **Plot as multiple series versus the first input**.
+
+> **Tip:** "Plot as multiple series" is like plot but x is also plotted versus x, giving an extra straight line.
+
+**Plot from command line:** clicking the plot button runs these commands. Copy the code to reuse in scripts:
+
+```matlab
+plot(x,y,'DisplayName','y'); hold on; plot(x,z,'DisplayName','z'); hold off;
+```
+
+> **Tip:** `hold on` adds plots instead of overwriting. `hold off` goes back to overwrite.
+
+**Generate Code:** **Insert Legend**, then **File > Generate Code...** $\rightarrow$ code in Editor:
+
+```matlab
+% Create figure
+figure1 = figure;
+
+% Create axes
+axes1 = axes('Parent',figure1);
+hold(axes1,'on');
+
+% Create multiple lines using matrix input to plot
+plot1 = plot(X1,YMatrix1);
+set(plot1(1),'DisplayName','y');
+set(plot1(2),'DisplayName','z');
+box(axes1,'on');
+
+% Create legend
+legend(axes1,'show');
+```
+
+![Figure 9.5 — Plots tab](media/ch9_plots_tab.png)
+
+#### Key Commands
+
+`hold on`, `hold off`
+
+---
+
 ### 9.5 Bar Charts
+- **Bar charts** = horizontal/vertical bars for categories. Good for quantities, trends, change over time.
+
+![Figure 9.6 — Bar plot](media/ch9_bar_plot.png)
+#### Key Terms
+
+bar charts
+
+---
 ### 9.6 Pie Charts
+
+- **Pie charts** = circle split by relative size of categories in a whole. Ex: budget by activity, returns by defect type.
+**If you're asking yourself "should it be a pie chart -- it shouldn't". DOn't use pie charts unless absolutely nesseccary.**
+- Import `25andUp-Education5971S.xlsx`: Output Type **Column vectors**, name columns `Labels` and `Percentage`. **Text Options > Cell Array of Character Vectors** (needed for automatic pie labels). 7 categories, from Less than 9th grade to Graduate or professional degree.
+```matlab
+pie(Percentage)
+```
+
+- `explode` = logical vector, 1 = pull slice out. Explode slice 3 of 7:
+
+```matlab
+explode = [0 0 1 0 0 0 0]
+
+explode =
+
+     0     0     1     0     0     0     0
+
+
+pie(Percentage, explode, Labels)
+```
+![Figure 9.7 — Pie with legend](media/ch9_pie_example.png)
+
+#### Key Terms
+
+pie charts, exploded pie chart  
+
 ### 9.7 3D Surface, Colormap, Viewpoint, Colorbar
+**Data**
+
+- Open `volcano.mat` $\rightarrow$ `VolcanoSpectralData` in Workspace. Double-click to view (don't edit). Can also use Import Wizard.
+- Matrix of seismometer readings from a volcano in Guatemala: every minute for 24 hours (1440 values) from 128 channels, 1 to 20 Hz ground velocity, already filtered and transformed.
+
+**Surf and mesh**
+
+- **Plots** tab, select `VolcanoSpectralData`, click **Surf** $\rightarrow$ 3D surface. Click **Mesh** $\rightarrow$ 3D mesh (looks better). Easy to try options. Improve color and view direction next.
+
+**Colormap**
+
+- **Show Plot Tools and Dock Figure**, expand **Colormap**, click **Jet**. Not enough variation, so click **Custom**.
+- **Colormap Editor** (starts with Jet settings): markers under the color bar set colors, drag to set blend.
+- Double-click left marker $\rightarrow$ Select Marker Color: pick medium blue, **OK**. Drag markers for turquoise, green, yellow, orange, red to the left. **Apply**. Repeat until contrast works, then **OK**.
+
+**3D viewpoint**
+
+- **Rotate 3D** button = toggle (click on, click off). Drag in plot to rotate and see spikes.
+- Right-click plot: **Go to Y-Z view** (also X-Y, X-Z), **Reset to Original View**.
+- On your own: rotate as desired, click Rotate 3D again to turn off.
+
+**Colorbar and labels**
+
+- **Insert Colorbar** $\rightarrow$ bar beside plot, large. Use **Selection** button, drag corners to resize.
+- Plot Browser, **Axis (no title)**: Title `Spectral Data 8/23/2015`, X `Station Number`, Y `Measurement Time (minutes)`, Z `Spectral Reading`. Drag labels with selection arrow to reposition.
+- **File > Save** for `.jpg` etc. **File > Save As** for `.fig`. **File > Generate Code** to see the code.
+
+**Wrap-up**
+
+- GUI plotting = fast exploring. Generate the code and reuse it for similar graphs. Each GUI change is also issued in the Command Window, so Command History can be edited into code.
+- Daily volcano data $\rightarrow$ automating the plot saves time. Events stand out vs rows of numbers.
+
+![Figure 9.8 — Finished 3D_graph with labels](media/ch9_3d_plot.png)
+
 ---
 ## SDC Chapter 9 — Exercises
 ---
