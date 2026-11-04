@@ -10666,4 +10666,60 @@ $\boxtimes$ Check (7)
 ```matlab
 diary off
 ```
+---
+
+## SDC Chapter 9 — Plotting and Data Visualization
+
+### Objectives
+
+1. Use MATLAB to graph functions.
+2. Add labels to graphs.
+3. Add multiple lines to graphs.
+4. Use symbols for graph data.
+5. Add a legend to a graph.
+6. Create graphs of 3D data.
+7. Add a colorbar.
+8. Save graphs for use in reports and other documents.
+9. Generate code from a graph in the figure window.
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `plot(x,y)` | 2-D line plot, y vs x | `plot(x,y)` |
+| `hold on` / `hold off` | add to same axes / back to overwrite | `hold on` |
+| `bar` | bar chart (Plots tab) | `bar(ComputerUseinthousands)` |
+| `pie(p,explode,labels)` | pie chart, pulled-out slices, labels | `pie(Percentage,explode,Labels)` |
+| `legend(labels,...)` | legend, location, orientation | `legend(Labels,'Location','eastoutside','Orientation','vertical')` |
+| `replace(str,old,new)` | swap text, e.g. kill spaces | `replace(Labels," ","")` |
+| `char` | string data to character data | `char(Labels)` |
+| `surf`, `mesh` | 3D surface / mesh of a matrix (Plots tab) | select matrix, click Surf |
+| `clc` | clear Command Window | `clc` |
+
+---
+### 9.1 2D Plots and the Plot Window
+### 9.2 Data Cursor, Arrows, Titles
+### 9.3 Saving Figures and Graphics Help
+### 9.4 Plots Tab, Multiple Series, Generate Code
+### 9.5 Bar Charts
+### 9.6 Pie Charts
+### 9.7 3D Surface, Colormap, Viewpoint, Colorbar
+---
+## SDC Chapter 9 — Exercises
+---
+## Hands-On — Trend Analysis and Forecasting (Week 9)
+
+> **Sources:** `Trend Analysis.docx` (Lincoln University BA 301, Ch. 6), `FORECASTING.docx`, `Stats Sheet.docx`, `Linear Regression2.xlsx` (my sheet), `Cause&Effect.pdf` (Data 8, Berkeley).
+>
+### H.1 Forecasting and Trend Projection
+### H.2 Least-Squares Regression
+### H.3 Worked Example: Johnson's Engine Plant
+### H.4 Stats by Hand and by Excel
+### H.5 My Linear Regression Spreadsheet
+### H.6 Cause and Effect
+---
+## Hands-On — Exercises
+**Home Task 1 — Clothing Store Sales Forecast**
+**Home Task 2 — Stock Price Trend**
+---
 
