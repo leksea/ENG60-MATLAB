@@ -732,7 +732,7 @@ comment, script, suppress display
 
 `edit`, `%`, `;`, `disp`
 
-### 1.6 Running a Script, Saving & Closing
+### 1.11 Running a Script, Saving & Closing
 ![Figure 1.8 — Run Icon on the Editor Tab](media/ch1_editor_script.png)
 
 - Run: **Editor** tab $\rightarrow$ **Run**, or type the name:
@@ -8949,7 +8949,7 @@ Did you mean:
 >> cos(sin(0.45))
 ```
 
-![Figure 7.1 — Error Indication in Matlab](media/ch7_errors.png)
+![Figure 7.1 — Error Indication in Matlab](media/ch_7_errors.png)
 
 - Arrow $\rightarrow$ where `)` should go. "Did you mean" $\rightarrow$  press **Enter** to accept. Often right.
 - **$\uparrow$** $\rightarrow$ Command History. Failed command has a **red dash**
@@ -10667,6 +10667,8 @@ keep = isNum | isCtry;
 out  = C(:, keep);                  % keeps header row too
 writecell(out, 'MortalityClean.xlsx')
 ```
+</details>
+
 ---
 
 ## SDC Chapter 9 — Plotting and Data Visualization
