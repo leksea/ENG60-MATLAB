@@ -152,6 +152,28 @@
   - [H.5 My Linear Regression Spreadsheet](#h5-my-linear-regression-spreadsheet)
   - [H.6 Cause and Effect](#h6-cause-and-effect)
 - [Hands-On — Exercises](#hands-on--exercises)
+- [Pratap Chapter 1 — Introduction](#pratap-chapter-1--introduction)
+  - [1.1 What MATLAB Is, Symbolic Math, Platforms](#11-what-matlab-is-symbolic-math-platforms)
+  - [1.2 Using This Book and the MATLAB Windows](#12-using-this-book-and-the-matlab-windows)
+  - [1.3 Help, Input-Output, Output Formats](#13-help-input-output-output-formats)
+  - [1.4 File Types and Platform Dependence](#14-file-types-and-platform-dependence)
+  - [1.5 General Commands to Remember](#15-general-commands-to-remember)
+  - [1.6 Visit This Again: Common Beginner Problems](#16-visit-this-again-common-beginner-problems)
+- [Pratap Chapter 2 — Tutorial Lessons](#pratap-chapter-2--tutorial-lessons)
+  - [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session)
+  - [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers)
+  - [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots)
+  - [2.4 Lesson 4: Script Files](#24-lesson-4-script-files)
+  - [2.5 Lesson 5: Function Files](#25-lesson-5-function-files)
+  - [2.6 Lesson 6: Arrays and Matrices](#26-lesson-6-arrays-and-matrices)
+  - [2.7 Lesson 7: Anonymous Functions](#27-lesson-7-anonymous-functions)
+  - [2.8 Lesson 8: Symbolic Computation](#28-lesson-8-symbolic-computation)
+  - [2.9 Lesson 9: Importing and Exporting Data](#29-lesson-9-importing-and-exporting-data)
+  - [2.10 Lesson 10: Files and Directories](#210-lesson-10-files-and-directories)
+  - [2.11 Lesson 11: Publishing Reports](#211-lesson-11-publishing-reports)
+- [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises)
+- [HW HO Week 10](#hw-ho-week-10)
+
 ---
 
 
@@ -11396,4 +11418,48 @@ grid on
 </details>
 
 ---
+
+## Pratap Chapter 1 — Introduction
+
+### 1.1 What MATLAB Is, Symbolic Math, Platforms
+### 1.2 Using This Book and the MATLAB Windows
+### 1.3 Help, Input-Output, Output Formats
+### 1.4 File Types and Platform Dependence
+### 1.5 General Commands to Remember
+### 1.6 Visit This Again: Common Beginner Problems
+
+
+> **Source:** Rudra Pratap, *Getting Started with MATLAB*, Ch. 1
+
+---
+
+## Pratap Chapter 2 — Tutorial Lessons
+
+> **Source:** Rudra Pratap, *Getting Started with MATLAB*, Ch. 2
+
+### Objectives
+
+1. Launch MATLAB, do simple calculations, quit.
+2. Create and work with arrays and vectors.
+3. Plot, label, and print simple graphs.
+4. Write and run a script file.
+5. Write and run a function file.
+6. Work with matrices, anonymous functions, symbolic math.
+7. Save, load, import data. Navigate files and directories. Publish reports.
+
+### 2.1 Lesson 1: A Minimum MATLAB Session
+### 2.2 Lesson 2: Arrays of Numbers
+### 2.3 Lesson 3: Simple Plots
+### 2.4 Lesson 4: Script Files
+### 2.5 Lesson 5: Function Files
+### 2.6 Lesson 6: Arrays and Matrices
+### 2.7 Lesson 7: Anonymous Functions
+### 2.8 Lesson 8: Symbolic Computation
+### 2.9 Lesson 9: Importing and Exporting Data
+### 2.10 Lesson 10: Files and Directories
+### 2.11 Lesson 11: Publishing Reports
+
+---
+
+## Pratap Chapter 2 — Exercises
 
