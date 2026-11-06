@@ -11166,11 +11166,234 @@ grid on
 ![Figure H.2 — Sales forecast: points, regression line (red), error band (green dashed), 2020 forecast (red triangle)](media/trnd_sales_forecast.png) 
  
 ### H.4 Stats by Hand and by Excel
+#### Key Terms
+
+regression line, least squares, forecast error, forecasted value
+
+---
+
+### H.4 Stats by Hand and by Excel
+
+n = 7, n - 1 = 6.
+
+| # | X | Y | X-MeanX | (X-MeanX)^2 | Y-MeanY | (Y-MeanY)^2 | product |
+|---|---|---|---|---|---|---|---|
+| 1 | 30.8 | 60.4 | -0.386 | 0.149 | -8.87 | 78.702 | 3.42 |
+| 2 | 31.7 | 75.2 | 0.514 | 0.264 | 5.93 | 35.148 | 3.05 |
+| 3 | 30.1 | 60.0 | -1.086 | 1.179 | -9.27 | 85.959 | 10.07 |
+| 4 | 31.6 | 72.8 | 0.414 | 0.172 | 3.53 | 12.451 | 1.46 |
+| 5 | 30.3 | 61.2 | -0.886 | 0.784 | -8.07 | 65.148 | 7.15 |
+| 6 | 31.7 | 74.1 | 0.514 | 0.264 | 4.83 | 23.315 | 2.48 |
+| 7 | 32.1 | 81.2 | 0.914 | 0.836 | 11.93 | 142.291 | 10.91 |
+| Sum | 218.3 | 484.9 | 0 | 3.65 | 0 | 443.01 | 38.54 |
+
+- By hand: $\bar{X}$ = 31.186, $\bar{Y}$ = 69.3, $S_X = \sqrt{3.65/6} = 0.780$, $S_Y = \sqrt{443.01/6} = 8.59$, $S_{XY} = 38.54/6 = 6.42$, $r_{XY} = S_{XY}/(S_X S_Y) = 0.959$.
+- Excel (X in A5:A11, Y in B5:B11): `=COUNT(A5:A11)`, `=AVERAGE(A5:A11)`, `=STDEV.S(A5:A11)`, `=COVARIANCE.S(A5:A11,B5:B11)`, `=CORREL(A5:A11,B5:B11)` $\rightarrow$ 7, 31.2, 0.78, 6.42, 0.96.
+
+```matlab
+X = [30.8 31.7 30.1 31.6 30.3 31.7 32.1];
+Y = [60.4 75.2 60.0 72.8 61.2 74.1 81.2];
+mean(X)
+mean(Y)
+std(X)
+std(Y)
+C = cov(X,Y)
+R = corrcoef(X,Y)
+
+ans =
+
+   31.1857
+
+
+ans =
+
+   69.2714
+
+
+ans =
+
+    0.7798
+
+
+ans =
+
+    8.5928
+
+
+C =
+
+    0.6081    6.4229
+    6.4229   73.8357
+
+
+R =
+
+    1.0000    0.9585
+    0.9585    1.0000
+```
+
 ### H.5 My Linear Regression Spreadsheet
+- Row 6 formulas, rows 6 to 12 = 2013 to 2019, `B16` = mean X, `C16` = mean Y: D `=B6-$B$16`, E `=C6-$C$16`, F `=D6^2`, G `=D6*E6`, b (I) `=$G$15/$F$15`, a (H) `=$C$16-($I$15*$B$16)`, $\hat{Y}$ (J) `=H6+I6*B6`, error (K) `=(C6-J6)^2`. Row 15 `=SUM`, row 16 `=AVERAGE`, row 13 = 2020 forecast.
+- **Block 2** (5 points): 2013 to 2017 sales 23, 27, 27, 32, 30 $\rightarrow$ b = 1.9, a = -3800.7, 2018 forecast = 33.5. Squared errors sum 10.7, divide by n-1 = 4 gives 2.675, root 1.6355. **Forecast:** $33.5 \pm 1.64$. Column L = `Y+Err` (upper band).
+
+```matlab
+x = 2013:2017;
+y = [23 27 27 32 30];
+p = polyfit(x,y,1);
+fprintf('b = %.4f, a = %.2f\n', p(1), p(2))
+SSE = sum((y - polyval(p,x)).^2)
+err = sqrt(SSE/(numel(x)-1))
+f2018 = polyval(p,2018)
+
+b = 1.9000, a = -3800.70
+
+SSE =
+
+   10.7000
+
+
+err =
+
+    1.6355
+
+
+f2018 =
+
+   33.5000
+```
+
 ### H.6 Cause and Effect
+- **Key to causality:** groups similar apart from the treatment $\rightarrow$ outcome difference is due to the treatment.
+- **Confounding factors** = systematic differences other than the treatment (common in observational studies).
+- **Randomize:** assign to treatment/control at random $\rightarrow$ **randomized controlled experiment**. Random is not haphazard.
 ---
 ## Hands-On — Exercises
+
 **Home Task 1 — Clothing Store Sales Forecast**
+
+Situation: John Crowne clothing store has the following sales by year:
+
+| Year | 2010 | 2011 | 2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Sale ($K) | 1,273 | 1,332 | 1,412 | 1,498 | 1,609 | 1,819 | 1,714 | 1,729 | 1,811 | 1,892 |
+
+Question:
+
+- What was the estimated sale for 2020?
+- What is the error of the sale estimate?
+- What is the average annual growth rate?
+
+<details><summary>Answer</summary>
+
+```matlab
+clear all
+x = 2010:2019;
+y = [1273 1332 1412 1498 1609 1819 1714 1729 1811 1892];
+n = numel(x);
+
+% least-squares regression line: Yhat = a + b*X
+Xbar = mean(x);
+Ybar = mean(y);
+b = sum((x-Xbar).*(y-Ybar)) / sum((x-Xbar).^2)   % slope, $K per year
+a = Ybar - b*Xbar                                % intercept
+
+% 1. estimated sale for 2020
+y2020 = a + b*2020                               % 1987.8
+
+% 2. error of the estimate (lecture formula, divide by n-1)
+yhat = a + b*x;
+SSE = sum((y - yhat).^2)                         % 39631.4
+err = sqrt(SSE/(n-1))                            % 66.36
+fprintf('Forecast 2020: %.1f +/- %.1f ($K)\n', y2020, err)
+
+% 3. average annual growth rate
+growth_cagr = ((y(end)/y(1))^(1/(n-1)) - 1)*100  % 4.50 % per year
+growth_mean = mean(diff(y)./y(1:end-1))*100      % 4.61 % per year
+
+% plot
+xx = 2010:2020;
+yline = a + b*xx;
+plot(x, y, 'd')
+hold on
+plot(xx, yline, 'r-')
+plot(xx, yline + err, 'g--')
+plot(xx, yline - err, 'g--')
+plot(2020, y2020, 'r^')
+hold off
+xlabel('Year')
+ylabel('Sale, $K')
+title('John Crowne Clothing Store: Sales Forecast')
+legend('Data', 'Regression line', '+/- error', '', 'Forecast 2020', 'Location', 'northwest')
+grid on
+```
+
+* 2020 estimate: about $1,987.8K, with slope b = 68.89 $K per year.
+* Error: $\varepsilon$ = 66.36, so the forecast is 1987.8 $\pm$ 66.4 ($K).
+* Average annual growth rate (assuming compound growth from 2010 to 2019): about 4.5% per year
+
+![Figure H.3 — Sales forecast: points, regression line (red), error band (green dashed), 2020 forecast (red triangle)](media/trnd_e1.png) 
+
+</details>
+
 **Home Task 2 — Stock Price Trend**
+
+Situation: Tesla Motors, Inc. showed the following monthly stock prices in 2019:
+
+| End of Month | Dec 2018 | Jan | Feb | Mar | Apr | May | June | July | Aug | Sep | Oct | Nov | Dec |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Price | 150.43 | 181.41 | 244.81 | 208.45 | 207.89 | 207.77 | 240.06 | 223.30 | 269.70 | 242.68 | 241.70 | 244.52 | 222.41 |
+
+Question:
+
+- What is the average stock price trend in 2019?
+- To answer this question calculate and draw a trend line as a regression line for the stock price in 2019.
+
+<details><summary>Answer</summary>
+
+```matlab
+clear all
+price = [150.43 181.41 244.81 208.45 207.89 207.77 240.06 223.30 269.70 242.68 241.70 244.52 222.41];
+t = 0:12;                      % month index: 0 = Dec 2018, 1 = Jan 2019, ..., 12 = Dec 2019
+n = numel(t);
+
+% least-squares trend line: Yhat = a + b*t
+tbar = mean(t);
+pbar = mean(price);
+b = sum((t-tbar).*(price-pbar)) / sum((t-tbar).^2)   % slope, $ per month (5.37)
+a = pbar - b*tbar                                    % intercept (189.73)
+
+% trend line values and error (n-1, as in the lecture)
+yhat = a + b*t;
+SSE = sum((price - yhat).^2)                         % 6558.6
+err = sqrt(SSE/(n-1))                                % 23.38
+
+fprintf('Trend: %.2f $/month (%.2f %% of the average price per month)\n', b, b/pbar*100)
+fprintf('Rise over the year: %.2f $\n', b*(n-1))
+
+% plot
+plot(t, price, 'o-')
+hold on
+plot(t, yhat, 'r-', 'LineWidth', 1.5)
+plot(t, yhat + err, 'g--')
+plot(t, yhat - err, 'g--')
+hold off
+set(gca, 'XTick', 0:12, 'XTickLabel', {'Dec18','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'})
+xlabel('End of month')
+ylabel('Tesla stock price, $')
+title('Tesla (TSLA) 2019: Price Trend')
+legend('Monthly price', 'Regression (trend) line', '+/- error', '', 'Location', 'northwest')
+grid on
+```
+
+![Figure H.4 — TSLA forecast: points, regression line (red), error band (green dashed)](media/trnd_e2.png) 
+
+
+* Trend: the price rises on average by about $5.37 per month. That is roughly $64 over the 12 months, or about 2.4% of the average price per month.
+* Trend line: $\hat{P} = 189.73 + 5.37\,t$, with $t$ = months since Dec 2018.
+* Error: $\varepsilon$ = 23.38 ($ per month).
+* Average price: about $221.93 across the 13 points.
+
+</details>
+
 ---
 
