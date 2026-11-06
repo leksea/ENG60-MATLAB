@@ -172,7 +172,7 @@
   - [2.10 Lesson 10: Files and Directories](#210-lesson-10-files-and-directories)
   - [2.11 Lesson 11: Publishing Reports](#211-lesson-11-publishing-reports)
 - [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises)
-- [HO HW Week 10](#ho-hw-week-10)
+- [HW HO Week 10](#hw-ho-week-10)
 
 ---
 
@@ -11463,7 +11463,7 @@ grid on
 
 ## Pratap Chapter 2 — Exercises
 
-## HW HO Week10
+## HW HO Week 10
 
 **B737 Intercept**
 
