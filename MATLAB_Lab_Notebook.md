@@ -7059,9 +7059,6 @@ ans =
 
 ---
 
-## Object-Oriented Programming in Matlab 
-
----
 ## Midterm Example
 An ambitious boss wants to be a Nobel Laureate for all of the prizes (chemistry, physics, peace, literature, economics and physiology or medicine). His start-up company, Kudos, is hosting job interviews and testing YOU for data-handling skills. It's time to qualify your half-semester skills of MATLAB.
 
@@ -7229,8 +7226,8 @@ numIntegrate =
    1.8074e+10
 ```
 ---
-## Object-Oriented Programming
 
+## Object-Oriented Programming in Matlab 
 ### Objectives
 
 1. Group related data and operations into objects.
