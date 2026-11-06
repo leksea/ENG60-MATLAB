@@ -10990,10 +10990,180 @@ ylabel('Value from Mortality-1.xlsx')
 ## Hands-On — Trend Analysis and Forecasting (Week 9)
 
 > **Sources:** `Trend Analysis.docx` (Lincoln University BA 301, Ch. 6), `FORECASTING.docx`, `Stats Sheet.docx`, `Linear Regression2.xlsx` (my sheet), `Cause&Effect.pdf` (Data 8, Berkeley).
->
+### Goals
+
+1. Project a trend and make a forecast.
+2. Fit a regression line by least squares, by hand and in MATLAB.
+3. Estimate forecast error.
+4. Mean, std dev, covariance, correlation: hand, Excel, MATLAB.
+5. Tell association from causation.
+
+### Summary of functions used in this chapter
+
+| MATLAB | Excel | What it does |
+|---|---|---|
+| `numel(v)` | `COUNT` | n |
+| `mean(v)` | `AVERAGE` | average |
+| `std(v)` | `STDEV.S` | sample std dev (n-1) |
+| `cov(X,Y)` | `COVARIANCE.S` | 2x2 matrix, $S_{XY}$ = `C(1,2)` |
+| `corrcoef(X,Y)` | `CORREL` | 2x2 matrix, $r_{XY}$ = `R(1,2)` |
+| `polyfit(x,y,1)` | `SLOPE`, `INTERCEPT` | `[b a]` of best-fit line |
+| `polyval(p,x)` | `FORECAST.LINEAR` | evaluate line at x |
+| `sum`, `sqrt` | `SUM`, `SQRT` | totals, root |
+| `plot`, `hold on`, `legend`, `xlabel`, `title` | chart | scatter + line |
+| `fprintf` | | print with own format |
+
+---
 ### H.1 Forecasting and Trend Projection
+- Forecasting objective = predict demand (and product mix). Key management activity.
+- **Data sources:** expert opinions, surveys, market experiments (real consumer behavior), **trend projection** (future follows historical pattern).
+
+> **Note:** no single source is perfect. Combine them.
+
+Sample quarterly sales (millions), periods 1 to 12 = 2017:I to 2019:IV:
+
+| Period | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Sales | 300 | 305 | 315 | 340 | 346 | 352 | 364 | 390 | 397 | 404 | 418 | 445 |
+
+```matlab
+t = 1:12;
+S = [300 305 315 340 346 352 364 390 397 404 418 445];
+p = polyfit(t,S,1);
+plot(t,S,'o')
+hold on
+plot(t,polyval(p,t),'-')
+plot(13:14,polyval(p,13:14),'--')
+hold off
+xlabel('Period number')
+ylabel('Sales per quarter (millions)')
+title('Trend projection')
+```
+
+![Figure H.1 — Quarterly sales, trend line, dashed projection](media/trnd_projection_1.png)
+
+- **Curve fitting:** graphic (by eye) or statistical:
+  - constant rate of change (linear): $S_t = S_0 + b \cdot t$
+  - constant percentage rate (exponential): $S_t = S_0 (1+g)^t$
+
 ### H.2 Least-Squares Regression
+- Regression line $\hat{Y} = a + bX$. Squared error $SqrError = \sum (Y_k - \hat{Y}_k)^2$.
+- Set $\partial/\partial a = 0$ and $\partial/\partial b = 0$ $\rightarrow$
+
+$$b = \frac{\sum (X_k - \bar{X})(Y_k - \bar{Y})}{\sum (X_k - \bar{X})^2} \qquad a = \bar{Y} - b\bar{X}$$
+
+- Shortcuts: $\sum (X_k - \bar{X})^2 = \sum X_k^2 - n\bar{X}^2$, $\sum (X_k - \bar{X})(Y_k - \bar{Y}) = \sum X_k Y_k - n\bar{X}\bar{Y}$
+- **Forecast error** and **forecast**:
+
+$$\varepsilon = \sqrt{\frac{SqrError}{n-1}} \qquad Y = \hat{Y} \pm \varepsilon$$
+
 ### H.3 Worked Example: Johnson's Engine Plant
+
+- Forecast 2020 sales from 7 years of sales, assuming linear growth.
+| Year X | Sales Y ($M) | $X_k - \bar{X}$ | $Y_k - \bar{Y}$ | $(X_k - \bar{X})^2$ | product | $\hat{Y}_k$ | $(Y_k - \hat{Y}_k)^2$ |
+|---|---|---|---|---|---|---|---|
+| 2013 | 23 | -3 | -10.71 | 9 | 32.14 | 21.29 | 2.94 |
+| 2014 | 18 | -2 | -15.71 | 4 | 31.43 | 25.43 | 55.18 |
+| 2015 | 35 | -1 | 1.29 | 1 | -1.29 | 29.57 | 29.47 |
+| 2016 | 39 | 0 | 5.29 | 0 | 0.00 | 33.71 | 27.94 |
+| 2017 | 35 | 1 | 1.29 | 1 | 1.29 | 37.86 | 8.16 |
+| 2018 | 37 | 2 | 3.29 | 4 | 6.57 | 42.00 | 25 |
+| 2019 | 49 | 3 | 15.29 | 9 | 45.88 | 46.14 | 8.16 |
+| 2020 | forecast | | | | | 50.29 | |
+| Sum: 14,112 | 236 | 0 | 0 | 28 | 116 | | 156.86 |
+| Mean: 2016 | 33.71 | 0 | 0 | 4 | 16.57 | | |
+
+- $b = 116/28 = 4.14$, $a = 33.71 - 4.14 \cdot 2016 = -8318$
+- $\hat{Y}_{2020} = -8318 + 4.14 \cdot 2020 = 50.29$
+- $\varepsilon = \sqrt{156.86/6} = 5.11$
+- **Forecast:** $Y_{2020} = 50.29 \pm 5.11$ ($M)
+```matlab
+x = 2013:2019;
+y = [23 18 35 39 35 37 49];
+n = numel(x);
+Xbar = mean(x)
+Ybar = mean(y)
+b = sum((x-Xbar).*(y-Ybar))/sum((x-Xbar).^2)
+a = Ybar - b*Xbar
+
+Xbar =
+
+        2016
+
+
+Ybar =
+
+   33.7143
+
+
+b =
+
+    4.1429
+
+
+a =
+
+  -8.3183e+03
+```
+
+```matlab
+yhat = a + b*x
+SSE = sum((y - yhat).^2)
+err = sqrt(SSE/(n-1))
+y2020 = a + b*2020
+
+yhat =
+
+   21.2857   25.4286   29.5714   33.7143   37.8571   42.0000   46.1429
+
+
+SSE =
+
+  156.8571
+
+
+err =
+
+    5.1130
+
+
+y2020 =
+
+   50.2857
+```
+**Shortcut (linreg = first degree polyfit ):**
+
+```matlab
+p = polyfit(x,y,1)
+
+p =
+
+   1.0e+03 *
+
+    0.0041   -8.3183
+```
+
+**Plot with error band:**
+
+```matlab
+xx = 2013:2021;
+yline = a + b*xx;
+
+plot(x, y, 'd')
+hold on
+plot(xx, yline, 'r-')
+plot(xx, yline + err, 'g--')
+plot(xx, yline - err, 'g--')
+plot(2020, y2020, 'r^')
+hold off
+xlabel('Year')
+ylabel('Sales, $M')
+title('Sales Forecast')
+legend('Data', 'Regression line', '+/- error', '', 'Forecast 2020', 'Location', 'northwest')
+grid on
+```
+![Figure H.2 — Sales forecast: points, regression line (red), error band (green dashed), 2020 forecast (red triangle)](media/trnd_sales_forecast.png) 
+ 
 ### H.4 Stats by Hand and by Excel
 ### H.5 My Linear Regression Spreadsheet
 ### H.6 Cause and Effect
