@@ -10667,8 +10667,7 @@ keep = isNum | isCtry;
 out  = C(:, keep);                  % keeps header row too
 writecell(out, 'MortalityClean.xlsx')
 ```
-
-
+---
 ## SDC Chapter 9 — Plotting and Data Visualization
 
 ### Objectives
