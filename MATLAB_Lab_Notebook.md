@@ -10906,7 +10906,84 @@ pie charts, exploded pie chart
 ![Figure 9.8 — Finished 3D_graph with labels](media/ch9_3d_plot.png)
 
 ---
+
 ## SDC Chapter 9 — Exercises
+
+![Figure 9.9 — Exercises](media/ch9_e.png)
+
+
+**Exercise 9.1** — Graph the equation y = x^2 from x = -3 to x = +3. Use a step of .1 between values in that interval.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = -3:0.1:3;
+y = x.^2;
+plot(x,y)
+```
+
+- `.^` = elementwise square. Parabola, vertex (0,0), y = 9 at both ends.
+
+</details>
+
+**Exercise 9.2** — Create a graph of y = 2x - x^2 over the interval x = -2 to x = +4. Determine what step to use to show a smooth curve.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = -2:0.01:4;
+y = 2*x - x.^2;
+plot(x,y)
+```
+
+- Step 0.01 looks smooth. 0.1 is already OK, 1 is jagged.
+- Peak (1,1), y = -8 at both ends.
+
+</details>
+
+**Exercise 9.3** — Create a graph of y = sqrt (x - 1).
+
+<details><summary>Solution</summary>
+
+```matlab
+x = 1:0.01:10;
+y = sqrt(x - 1);
+plot(x,y)
+```
+
+- Start at x = 1: for x < 1 `sqrt` is complex and `plot` draws only the real part. Interval is my choice.
+
+</details>
+
+**Exercise 9.4** — Create a graph of y = x^3 - 12 x.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = -4:0.01:4;
+y = x.^3 - 12*x;
+plot(x,y)
+```
+
+</details>
+
+**Exercise 9.5** — Create a graph of the mortality data for Finland for the years in the data set provided in *Mortality-1.xlsx*
+<details><summary>Solution</summary>
+
+File not available. Solution: 
+1. Home, **Import Data**, open `Mortality-1.xlsx`.
+2. Select only the 16 numeric cells in the Finland row, **Import Selection**.
+
+```matlab
+years = 2000:2015;
+finland = finland(:)';        % name from the Import Tool, make it a row
+plot(years, finland)
+title('Mortality data for Finland')
+xlabel('Year')
+ylabel('Value from Mortality-1.xlsx')
+```
+
+</details>
 
 ---
 
