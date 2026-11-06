@@ -11060,6 +11060,7 @@ $$\varepsilon = \sqrt{\frac{SqrError}{n-1}} \qquad Y = \hat{Y} \pm \varepsilon$$
 ### H.3 Worked Example: Johnson's Engine Plant
 
 - Forecast 2020 sales from 7 years of sales, assuming linear growth.
+
 | Year X | Sales Y ($M) | $X_k - \bar{X}$ | $Y_k - \bar{Y}$ | $(X_k - \bar{X})^2$ | product | $\hat{Y}_k$ | $(Y_k - \hat{Y}_k)^2$ |
 |---|---|---|---|---|---|---|---|
 | 2013 | 23 | -3 | -10.71 | 9 | 32.14 | 21.29 | 2.94 |
