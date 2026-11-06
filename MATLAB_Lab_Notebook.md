@@ -10668,6 +10668,7 @@ out  = C(:, keep);                  % keeps header row too
 writecell(out, 'MortalityClean.xlsx')
 ```
 ---
+
 ## SDC Chapter 9 — Plotting and Data Visualization
 
 ### Objectives
@@ -10696,7 +10697,6 @@ writecell(out, 'MortalityClean.xlsx')
 | `surf`, `mesh` | 3D surface / mesh of a matrix (Plots tab) | select matrix, click Surf |
 | `clc` | clear Command Window | `clc` |
 
----
 
 ### 9.1 2D Plots and the Plot Window
 
@@ -10739,7 +10739,6 @@ plot(x,y)
 
 `plot(x,y)`
 
----
 
 ### 9.2 Data Cursor, Arrows, Titles
 
@@ -10755,11 +10754,10 @@ plot(x,y)
 - Titles/labels: Plot Browser, click **Axes (no title)**. Property Editor opens. Add title `Fish Caught per Worms Used`, X label `Worms Used`, Y label `Fish Caught`.
 
 > **Tip:** tabs at bottom center select X, Y, or Z Axis. Font tab changes label font and size.
-> 
+
 ![Figure 9.3 — Data point identified with the data cursor](media/ch9_data_cursor.png)
 
 ### 9.3 Saving Figures and Graphics Help
-
 
 - **File > Save As**, expand **Save as type**.
 - `.fig` $\rightarrow$ reopen and edit in MATLAB. `.pdf`, `.jpg`, `.png`, etc. $\rightarrow$ slides, reports.
@@ -10771,8 +10769,6 @@ plot(x,y)
 #### Key Terms
 
 .fig
-
----
 
 ### 9.4 Plots Tab, Multiple Series, Generate Code
 - Close help and figure windows. Clear Command Window and Workspace.
@@ -10844,6 +10840,7 @@ legend(axes1,'show');
 bar charts
 
 ---
+
 ### 9.6 Pie Charts
 
 - **Pie charts** = circle split by relative size of categories in a whole. Ex: budget by activity, returns by defect type.
@@ -10908,7 +10905,9 @@ pie charts, exploded pie chart
 
 ---
 ## SDC Chapter 9 — Exercises
+
 ---
+
 ## Hands-On — Trend Analysis and Forecasting (Week 9)
 
 > **Sources:** `Trend Analysis.docx` (Lincoln University BA 301, Ch. 6), `FORECASTING.docx`, `Stats Sheet.docx`, `Linear Regression2.xlsx` (my sheet), `Cause&Effect.pdf` (Data 8, Berkeley).
