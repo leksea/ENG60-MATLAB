@@ -11420,16 +11420,123 @@ grid on
 ---
 
 ## Pratap Chapter 1 — Introduction
+> **Source:** Rudra Pratap, *Getting Started with MATLAB*, Ch. 1
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `help topic` | list functions for a topic | `help format` |
+| `helpwin`, `helpdesk` | interactive help window / web help | `helpwin` |
+| `lookfor string` | search help text for a keyword | `lookfor unit` |
+| `demo` | run the demo program | `demo` |
+| `format type` | control display of numbers | `format long` |
+| `more on` | paged output | `more on` |
+| `size`, `length` | dimensions of array / vector | `size(A)` |
+| `who`, `whos` | list workspace variables (`whos` adds size) | `whos` |
+| `clear`, `clear x y z`, `clear all` | remove variables / all variables and functions | `clear all` |
+| `clc`, `home`, `clf` | clear Command Window / scroll to top / clear figure | `clc` |
+| `pwd`, `cd`, `dir`, `ls` | show / change / list directory | `cd ..` |
+| `path`, `editpath` | get, set, edit MATLAB search path | `path` |
+| `mkdir`, `copyfile` | make directory, copy file | `mkdir lesson10dir` |
+| `what` | list M-, Mat-, Mex-files in folder | `what` |
+| `clock`, `date`, `computer`, `ver`, `bench` | system info | `date` |
+| `Ctrl-C`, `quit`, `exit` | abort command / quit MATLAB | `quit` |
+| `save`, `load` | write / read Mat-file | `load xydata` |
+| `saveas`, `open`, `pcode` | save figure / open fig-file / compile M-file to P-file | `pcode myfile` |
+| `;` | suppress output | `x = 5;` |
+| `!cmd` | run operating system command | `!vi myprogram.m` |
+
+---
 
 ### 1.1 What MATLAB Is, Symbolic Math, Platforms
+- MATLAB = **MATrix LABoratory**. Software for high-performance numerical computation and visualization. Interactive environment, hundreds of built-in functions, own programming language.
+- Basic building block = **matrix**. Fundamental data type = **array**. Scalars, vectors, real and complex matrices are special cases. No dimension declaration.
+- Built-in functions optimized for vector and matrix operations. **Vectorized** commands run much faster in MATLAB.
+- **Toolboxes** = optional collections of special functions (Signal Processing, Statistics, Control System, Neural Networks, Image Processing, Optimization, Symbolic Math, and 50+ more).
+- Own functions you write behave like built-in ones.
+
+**Symbolic calculations?**
+
+- MATLAB = primarily **numerical** package. Symbolic algebra via Symbolic Math Toolbox
+- **Vectorization** = operation done on a whole list at once, not item by item. Ex: `y = sin(theta)` for 100 values of theta.
+- **Symbolic algebra** = computing with symbols, not numbers. Ex: `(x+y)^2` gives `x^2 + 2xy + y^2`.
+
 ### 1.2 Using This Book and the MATLAB Windows
+
+**Desktop panes:**
+
+| Pane | What it does |
+|---|---|
+| Command window | main window, MATLAB prompt `>>`. All commands typed here, including running your programs |
+| Current Directory | files in current folder, left of Command window. Right-click a file: run, rename, delete, etc. Linked to the current-directory box above |
+| (File) Details | details of selected file (variables in a Mat-file, M-file titles, cell headings) |
+| Workspace | all variables so far with type and size. Click a variable, right-click for options (plotting etc.) |
+| Command History | all commands from all sessions. Double-click to run. Select several and right-click to make an M-file |
+
 ### 1.3 Help, Input-Output, Output Formats
+
+**On-line help**
+
+- `help`, `helpwin`, `helpdesk`, `lookfor` outputs help page.
+- `demo` runs a demonstration program with a tutorial.
+
+
 ### 1.4 File Types and Platform Dependence
+
+**File types** (five main kinds):
+
+| Type | Extension | What it is |
+|---|---|---|
+| **M-files** | `.m` | standard ASCII text. **Script files** and **function files** (Sections 4.1, 4.2). Most programs you write. All built-in functions are M-files, most precompiled |
+| **Mat-files** | `.mat` | binary data files made by `save`, read only by MATLAB. Load with `load` (Section 3.7) |
+| **Fig-files** | `.fig` | binary figure files, reopen as figures. Made by File > Save As or `saveas`. Open with `open filename.fig` |
+| **P-files** | `.p` | compiled M-files, run directly. Made with `pcode`. Share the P-file, not the source |
+| **Mex-files** | `.mex` | MATLAB-callable Fortran, C, Java programs. Not covered here |
+
 ### 1.5 General Commands to Remember
+
+
+| Group | Command | What it does |
+|---|---|---|
+| **On-line help** | `help` | lists topics with help |
+| | `helpwin` | opens the interactive help window |
+| | `helpdesk` | opens web browser-based help |
+| | `help topic` | help on topic |
+| | `lookfor string` | lists help topics containing string |
+| | `demo` | runs the demo program |
+| **Workspace** | `who` | lists variables in workspace |
+| | `whos` | lists variables with size |
+| | `what` | lists M-, Mat-, Mex-files on disk |
+| | `clear` | clears workspace, all variables removed |
+| | `clear x y z` | clears only x, y, z |
+| | `clear all` | clears all variables and functions |
+| | `mlock fun` | locks function so `clear` cannot remove it |
+| | `munlock fun` | unlocks it |
+| | `clc` | clears Command window, cursor to top |
+| | `home` | scrolls Command window to put cursor on top |
+| | `clf` | clears figure window |
+| **Directory** | `pwd` | shows current working directory |
+| | `cd` | changes working directory |
+| | `dir` | lists contents of current directory |
+| | `ls` | same as `dir` |
+| | `path` | gets or sets MATLAB search path |
+| | `editpath` | modifies search path |
+| | `copyfile` | copies a file |
+| | `mkdir` | creates a directory |
+| **General** | `computer` | computer type |
+| | `clock` | wall clock time and date as a vector |
+| | `date` | date as a string |
+| | `more` | paged output by screen size |
+| | `ver` | license and MATLAB version |
+| | `bench` | benchmark your computer running MATLAB |
+| **Termination** | `Ctrl-C` | local abort, kills the current command |
+| | `quit` | quits MATLAB |
+| | `exit` | same as `quit` |
+
 ### 1.6 Visit This Again: Common Beginner Problems
 
 
-> **Source:** Rudra Pratap, *Getting Started with MATLAB*, Ch. 1
 
 ---
 
