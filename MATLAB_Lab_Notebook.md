@@ -11554,9 +11554,152 @@ grid on
 6. Work with matrices, anonymous functions, symbolic math.
 7. Save, load, import data. Navigate files and directories. Publish reports.
 
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `+ - * / ^` | add, subtract, multiply, divide, power | `2^5/(2^5-1)` |
+| `;` | suppress output | `y = 2^2;` |
+| `sin`, `cos`, `tan`, `acos`, `exp`, `log`, `log10`, `sqrt` | math functions | `acos(-1)` |
+| `format short e`, `format long` | display format | `format long` |
+| `.*`, `./`, `.^` | term-by-term operations | `x.*z` |
+| `linspace(a,b,n)` | n points equally spaced from a to b | `linspace(0,10,5)` |
+| `plot`, `axis('equal')`, `xlabel`, `ylabel`, `title`, `print` | 2-D plot and finish | `plot(x,y)` |
+| `plot3`, `semilogx`, `semilogy`, `loglog`, `hold on`, `legend` | 3-D, log scales, overlay | `semilogx(x,y)` |
+| `input`, `disp`, `date`, `clock`, `fix`, `int2str`, `num2str` | script and output helpers | `r = input('Enter r: ')` |
+| `who`, `whos`, `type`, `lookfor`, `help` | inspect workspace, file, help | `type circle.m` |
+| `function` | start a function file | `function [x,y] = circlefn(r)` |
+| `A(i,j)`, `A(2:3,:)`, `A(:,2) = []`, `A'` | index, submatrix, delete, transpose | `B = A(2:3,1:3)` |
+| `zeros`, `eye`, `ones`, `size` | build and size matrices | `eye(3)` |
+| `@(x)` | anonymous function handle | `f = @(x) x.^2` |
+| `fplot`, `quad`, `fzero` | plot, integrate, find zero of a function | `quad(g,0,1)` |
+| `syms`, `sym`, `expand`, `factor`, `simplify`, `subs`, `diff`, `int`, `solve`, `pretty`, `dsolve` | symbolic math | `expand((x+y)^3)` |
+| `save`, `load`, `clear all` | Mat-file save and load | `save xydata x y f` |
+| `xlsread`, `cell2mat`, `char`, `bar` | read Excel, convert, bar graph | `[A,txt,raw] = xlsread('TempData.xls')` |
+| `pwd`, `dir`, `ls`, `mkdir`, `cd`, `what`, `copyfile` | directories and files | `cd lesson10dir` |
+| `publish`, `%%` | publish script as HTML or Word | `publish('spiralplot','html')` |
+
 ### 2.1 Lesson 1: A Minimum MATLAB Session
+
+- Operators: `+` add, `-` subtract, `*` multiply, `/` divide, `^` power.
+- Unassigned result goes in default variable `ans`. Assign with `x = ...`. `;` suppresses screen output but MATLAB remembers it (type `y` to recall).
+- Functions used: `sin`, `cos`, `log` (natural log), `format`, `quit`.
+  
+```matlab
+2 + 2
+x = 2 + 2
+y = 2^2 + log(pi)*sin(x);
+y
+theta = acos(-1)
+format short e
+theta
+format long
+theta
+
+ans =
+
+     4
+
+
+x =
+
+     4
+
+
+y =
+
+    3.1337
+
+
+theta =
+
+    3.1416
+
+
+theta =
+
+   3.1416e+00
+
+
+theta =
+
+   3.141592653589793
+```
+
+
 ### 2.2 Lesson 2: Arrays of Numbers
+
+- Array operations: `.*` term-by-term multiply, `./` divide, `.^` exponent.
+- Same-size vectors add. Row plus column vector gives an error. Scalar times vector needs no dot.
+
+
+```matlab
+>> x = [1 2 3]
+y = [2; 1; 5]
+z = [2 1 0];
+a = x + z
+
+
+x =
+
+     1     2     3
+
+
+y =
+
+     2
+     1
+     5
+
+
+a =
+
+     3     3     3
+
+>> b = x + y
+
+
+b = 3×3
+     3     4     5
+     2     3     4
+     6     7     8
+
+```
+
+> **Note:** the book's error is old MATLAB. Since R2016b a row plus a column vector does not error, it expands to a 3x3 matrix (implicit expansion). Use `x + y'` for a same-shape sum.
+
+```matlab
+a = x.*z
+b = 2*a
+x = linspace(0,10,5)
+y = sin(x);
+z = sqrt(x).*y
+
+a =
+
+     2     2     0
+
+
+b =
+
+     4     4     0
+
+
+x =
+
+         0    2.5000    5.0000    7.5000   10.0000
+
+
+z =
+
+         0    0.9463   -2.1442    2.5688   -1.7203
+```
+
+
 ### 2.3 Lesson 3: Simple Plots
+- Draw a unit circle with the parametric equations $x = \cos\theta$, $y = \sin\theta$, $0 \le \theta \le 2\pi$.
+
+
 ### 2.4 Lesson 4: Script Files
 ### 2.5 Lesson 5: Function Files
 ### 2.6 Lesson 6: Arrays and Matrices
