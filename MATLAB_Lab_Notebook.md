@@ -11699,19 +11699,609 @@ z =
 ### 2.3 Lesson 3: Simple Plots
 - Draw a unit circle with the parametric equations $x = \cos\theta$, $y = \sin\theta$, $0 \le \theta \le 2\pi$.
 
+```matlab
+theta = linspace(0,2*pi,100);
+x = cos(theta);
+y = sin(theta);
+plot(x,y)
+axis('equal');
+xlabel('x')
+ylabel('y')
+title('Circle of unit radius')
+print
+```
+
+![Figure 2.1 — Circle Plot](media/2_unit_circle.png)
 
 ### 2.4 Lesson 4: Script Files
+- Steps: new file (**File > New > Blank M-File**), type, **Save As...** `circle.m` in the current working folder, then run.
+
+```matlab
+% CIRCLE - A script file to draw a unit circle
+% File written by Rudra Pratap. Last modified 5/28/98
+% --------------------------
+theta=linspace(0,2*pi,100);     % create vector theta
+x=cos(theta);                   % generate x-coordinates
+y=sin(theta);                   % generate y-coordinates
+plot(x,y);                      % plot the circle
+axis('equal');                  % set equal scale on axes
+title('Circle of unit radius')  % put a title
+```
+
+```matlab
+help circle
+circle
+
+ CIRCLE - A script file to draw a unit circle
+ File written by Rudra Pratap. Last modified 6/28/98.
+ --------------------------
+```
+
 ### 2.5 Lesson 5: Function Files
+
+- Edit `circle.m` into `circlefn.m` (save as `circlefn.m`, the name matches the function).
+
+```matlab
+function [x,y] = circlefn(r);
+% CIRCLEFN - Function to draw a circle of radius r.
+% File written by Rudra Pratap on 9/17/94. Last modified 7/1/98
+% Call syntax:   [x,y] = circlefn(r);  or just:  circlefn(r);
+% Input:         r = specified radius
+% Output:        [x,y] = the x- and y-coordinates of data points
+theta=linspace(0,2*pi,100);        % create vector theta
+x = r*cos(theta);                  % generate x-coordinates
+y = r*sin(theta);                  % generate y-coordinates
+plot(x,y);                         % plot the circle
+axis('equal');                     % set equal scale on axes
+title(['Circle of radius r =',num2str(r)])
+```
+
+```matlab
+R = 5;
+[x,y] = circlefn(R);
+[cx,cy] = circlefn(2.5);
+circlefn(1);
+circlefn(R^2/(R+5*sin(R)));
+```
+
+
 ### 2.6 Lesson 6: Arrays and Matrices
+
+
+
+```matlab
+A = [1 2 3; 4 5 6; 7 8 8]
+
+A =
+
+     1     2     3
+     4     5     6
+     7     8     8
+```
+- Rows separated by `;`, columns by spaces or commas. `A(i,j)` reads and sets an element. Ranges pick a submatrix. `:` alone = all rows or columns. Setting a row or column to `[]` deletes it.
+
+```matlab
+A(2,3)
+A(3,3) = 9
+B = A(2:3,1:3)
+B = A(2:3,:)
+B(:,2) = []
+
+ans =
+
+     6
+
+
+A =
+
+     1     2     3
+     4     5     6
+     7     8     9
+
+
+B =
+
+     4     5     6
+     7     8     9
+
+
+B =
+
+     4     5     6
+     7     8     9
+
+
+B =
+
+     4     6
+     7     9
+```
+- `'` transposes. Row times column of same length = **inner product** (scalar). Column times row = **outer product** (matrix). `A*x` = matrix times vector. `A^2` = `A*A`. Dot before `* ^ /` = element-by-element (**array operation**).
+  
+```matlab
+A = [1 2 3; 4 5 6; 7 8 9];
+x = A(1,:)'
+x'*x
+x*x'
+A*x
+A^2
+A.^2
+
+x =
+
+     1
+     2
+     3
+
+
+ans =
+
+    14
+
+
+ans =
+
+     1     2     3
+     2     4     6
+     3     6     9
+
+
+ans =
+
+    14
+    32
+    50
+
+
+ans =
+
+    30    36    42
+    66    81    96
+   102   126   150
+
+
+ans =
+
+     1     4     9
+    16    25    36
+    49    64    81
+```
+
 ### 2.7 Lesson 7: Anonymous Functions
+
+- **Anonymous function** = function of one or more variables made on the command line (no file). Handy when you evaluate $f(x) = x^3 - 32x^2 + (x^2 - 22)x + 100$ at many $x$, plot it, or find zeros.
+- Syntax: `fn_name = @(list of input variables) function_expression`. `@` assigns a **function handle**.
+- Lives in the workspace while the session lasts. Any number of inputs. Must be **vectorized** (array operators) to take an array. Can be input to other functions.
+
+```matlab
+f = @(x) x^3 - 3*x^2 + x*log(x-1) + 100
+f(0)
+f(1)
+values = [f(0) f(1) f(2) f(10)]
+
+f =
+
+  function_handle with value:
+
+    @(x)x^3-3*x^2+x*log(x-1)+100
+
+
+ans =
+
+   100
+
+
+ans =
+
+  -Inf
+
+
+values =
+
+  100.0000       -Inf   96.0000  821.9722
+```
+
+
+```matlab
+x = [0 1 2 10];
+f(x)
+
+Incorrect dimensions for raising a matrix to a power. Check that the matrix is square and the power is a scalar. To perform elementwise matrix powers, use '.^'.
+```
+
+- f is not vectorized, so an array input errors. Redefine with array operators:
+
+```matlab
+f = @(x) x.^3 - 3*x.^2 + x.*log(x-1) + 100;
+f(x)
+x = linspace(-10,10);
+plot(x,f(x))
+
+g = @(a,x) a(4)*x.^3 + a(3)*x.^2 + a(2)*x + a(1);
+a = [-1 2 1 -1];
+fplot(g(a),[-2 2])
+
+Not enough input arguments.
+```
+
+```matlab
+g = @(x) a(4)*x.^3 + a(3)*x.^2 + a(2)*x + a(1);
+fplot(g,[-2 2])
+g_integral = quad(g,0,1)
+
+g_integral =
+
+    0.0833
+```
+
 ### 2.8 Lesson 8: Symbolic Computation
+
+- Declare variables symbolic first: `x = sym('x'); y = sym('y')` or `syms x y` (shortcut for several at once). `syms x y real` restricts them to real. See Chapter 8.
+- Three basic skills: (i) algebra: multiply, divide, expand, factor, simplify. (ii) calculus: differentiate, integrate. (iii) solve equations (algebraic and differential).
+
+```matlab
+syms x y
+f = (x+y)^3
+expand(f)
+factor(ans)
+z = sin(x+y);
+expand(z)
+subs(z, y, pi-x)
+diff(z,x)
+z_xx = diff(z,x,2)
+int(z,x,0,pi/2)
+
+f =
+
+(x + y)^3
+
+
+ans =
+
+x^3 + 3*x^2*y + 3*x*y^2 + y^3
+
+
+ans =
+
+(x + y)^3
+
+
+ans =
+
+cos(x)*sin(y) + cos(y)*sin(x)
+
+
+ans =
+
+0
+
+
+ans =
+
+cos(x + y)
+
+
+z_xx =
+
+-sin(x + y)
+
+
+ans =
+
+cos(y) + sin(y)
+```
+
+- `solve` two simultaneous equations $ax + by - 3 = 0$, $-x + 2ay - 5 = 0$ for $x, y$. `subs(expr1)` puts the found values back to check. `simplify` reduces it to 0. `pretty` prints a readable form.
+  
+```matlab
+syms a b x y
+expr1 = a*x + b*y - 3;
+expr2 = -x + 2*a*y - 5;
+[x,y] = solve(expr1, expr2)
+subs(expr1)
+simplify(ans)
+pretty(subs(expr2))
+
+x =
+
+(6*a - 5*b)/(2*a^2 + b)
+
+
+y =
+
+(5*a + 3)/(2*a^2 + b)
+
+
+ans =
+
+(b*(5*a + 3))/(2*a^2 + b) + (a*(6*a - 5*b))/(2*a^2 + b) - 3
+
+
+ans =
+
+0
+```
+
 ### 2.9 Lesson 9: Importing and Exporting Data
+```matlab
+theta = linspace(0,2*pi,201);
+r = sqrt(abs(2*sin(4*theta)));
+x = r.*cos(theta);
+y = r.*sin(theta);
+f = char('sqrt(abs(2*sin(4*theta)))');
+save xydata x y f
+whos
+clear all
+whos
+load xydata
+whos
+plot(x,y), axis('square');
+f
+clear all
+load xydata x y
+whos
+clear all
+size(x)
+
+ans =
+
+     1   201
+```
+
+- `save xydata x y f` writes a binary Mat-file `xydata.mat`. `load xydata` reads all variables back, `load xydata x y` only those. Or select the file in the Current Directory pane and double-click a variable in the data browser to load it.
+- `f = char('...')` stores the formula as text.
+
+**M-file with data** (`TempData.m`):
+
+```matlab
+% TempData: Script file containing data on monthly maximum temperature
+Sl_No = [1:12]';
+Month = char('January','February','March','April','May','June',...
+   'July','August','September','October','November','December');
+Ave_Tmax = [22 25 30 34 36 30 29 27 24 23 21 20]';
+```
+
+```matlab
+clear all
+TempData
+whos
+Month
+
+  Name         Size            Bytes  Class     Attributes
+
+  Ave_Tmax    12x1                96  double
+  Month       12x9               216  char
+  Sl_No       12x1                96  double
+```
+
+**Excel file** (`TempData.xls`: header row, column 1 numbers, column 2 text, column 3 numbers):
+- `raw` = 13 by 3 **cell** (header row plus 12 data rows). `cell2mat` turns numeric cells into arrays. `char` turns text cells into a text array. Then `sn` and `T` are normal arrays for `bar`.
+- Import wizard: `uiimport`, or **File > Import Data**.
+
+```matlab
+[A,txt,raw] = xlsread('TempData.xls');
+raw
+sn = cell2mat(raw(2:13,1));
+months = char(raw{2:13,2});
+T = cell2mat(raw(2:13,3));
+bar(sn,T)
+```
 ### 2.10 Lesson 10: Files and Directories
+
+- Commands: `pwd`, `dir`, `ls`, `cd`, `what`, `mkdir`, `copyfile`.
+- Any file you save goes to the current directory by default. M-files in another directory are not found unless you `cd` there or add the folder to the **path** (variable holding full paths of all folders MATLAB can access). Also `rmdir`, `movefile`, `which`.
+
 ### 2.11 Lesson 11: Publishing Reports
+- A **cell** = set of commands. `%%` starts a new cell. Text on a `%%` line is the section title. Plain `%` lines are comments or text.
+
+```matlab
+%% Publishing Reports - A Simple Example
+%% A Spiral Plot
+% Let us plot a spiral given by
+% r(t) = exp(-theta/10), 0<=theta<=10*pi
+
+%% Create vectors theta and r
+theta = linspace(0,10*pi,200);   % 200 linearly spaced points between 0 and 10*pi
+r = exp(-theta/10);              % compute r
+
+%% Now plot theta vs r using polar plot
+polar(theta,r)
+```
+
+- Save as `spiralplot.m` in the current directory.
+
+```matlab
+publish('spiralplot','html')
+cd html; open spiralplot.html
+```
+
+- `publish` to HTML, then open the file. Gives a colorful HTML page with the code and the spiral. Also `publish` to Word (on a PC, see on-line help).
+- From the Editor: **File > Publish**, or the publish icon next to the printer icon.
+- Cell buttons in the editor toolbar: show cell titles, insert cell divider, cell execution buttons.
 
 ---
 
 ## Pratap Chapter 2 — Exercises
+
+
+**Exercise 1.1** — **Arithmetic operations:** Compute the following quantities:
+
+- $\dfrac{2^5}{2^5-1}$ and compare with $\left(1-\dfrac{1}{2^5}\right)^{-1}$.
+- $3\dfrac{\sqrt{5}-1}{(\sqrt{5}+1)^2} - 1$. The square root $\sqrt{x}$ can be calculated with the command `sqrt(x)` or `x^0.5`.
+- Area $= \pi r^2$ with $r = \pi^{\frac{1}{3}} - 1$. ($\pi$ is `pi` in MATLAB.)
+
+<details><summary>Solution</summary>
+
+```matlab
+2^5/(2^5-1)
+(1-1/2^5)^-1
+3*(sqrt(5)-1)/(sqrt(5)+1)^2 - 1
+area = pi*(pi^(1/3)-1)^2
+
+ans =
+
+    1.0323
+
+
+ans =
+
+    1.0323
+
+
+ans =
+
+   -0.6459
+
+
+area =
+
+    0.6781
+```
+
+- Same value 1.0323 both ways. Outputs computed, not run in MATLAB.
+
+</details>
+**Exercise 1.2** — **Exponential and logarithms:** The mathematical quantities $e^x$, $\ln x$, and $\log x$ are calculated with `exp(x)`, `log(x)`, and `log10(x)`, respectively. Calculate the following quantities:
+
+- $e^3$, $\ln(e^3)$, $\log_{10}(e^3)$, and $\log_{10}(10^5)$.
+- $e^{\pi\sqrt{163}}$.
+- Solve $3^x = 17$ for $x$ and check the result. (The solution is $x = \dfrac{\ln 17}{\ln 3}$. You can verify the result by direct substitution.)
+
+<details><summary>Solution</summary>
+
+```matlab
+exp(3)
+log(exp(3))
+log10(exp(3))
+log10(10^5)
+exp(pi*sqrt(163))
+x = log(17)/log(3)
+3^x
+
+ans =
+
+   20.0855
+
+
+ans =
+
+     3
+
+
+ans =
+
+    1.3029
+
+
+ans =
+
+     5
+
+
+ans =
+
+   2.6254e+17
+
+
+x =
+
+    2.5789
+
+
+ans =
+
+    17.0000
+```
+
+- `3^x` returns 17 (may display 17.0000 from rounding). Computed.
+
+</details>
+**Exercise 1.3** — **Trigonometry:** The basic MATLAB trigonometric functions are `sin`, `cos`, `tan`, `cot`, `sec`, and `csc`. The inverses, e.g., arcsin, arctan, etc., are calculated with `asin`, `atan`, etc. The same is true for hyperbolic functions. The inverse function `atan2` takes two arguments, $y$ and $x$, and gives the four-quadrant inverse tangent. The argument of these functions must be in radians. Calculate the following quantities:
+
+- $\sin\dfrac{\pi}{6}$, $\cos\pi$, and $\tan\dfrac{\pi}{2}$.
+- $\sin^2\dfrac{\pi}{6} + \cos^2\dfrac{\pi}{6}$. (Typing `sin^2(x)` for $\sin^2 x$ will produce an error).
+- $y = \cosh^2 x - \sinh^2 x$, with $x = 32\pi$.
+
+<details><summary>Solution</summary>
+
+```matlab
+sin(pi/6)
+cos(pi)
+tan(pi/2)
+(sin(pi/6))^2 + (cos(pi/6))^2
+x = 32*pi; y = (cosh(x))^2 - (sinh(x))^2
+
+ans =
+
+    0.5000
+
+
+ans =
+
+    -1
+
+
+ans =
+
+   1.6331e+16
+
+
+ans =
+
+     1
+
+
+y =
+
+     0
+```
+
+- $\tan(\pi/2)$ is huge (not Inf) because pi is not exact. $\cosh^2 - \sinh^2 = 1$ in math, but at $32\pi$ both terms are about $10^{87}$ so floating point gives 0 (book answer 0). Computed in Python, the last value may differ slightly by MATLAB version.
+
+</details>
+**Exercise 1.4** — **Complex numbers:** MATLAB recognizes the letters $i$ and $j$ as the imaginary number $\sqrt{-1}$. A complex number $2 + 5i$ may be input as `2+5i` or `2+5*i` in MATLAB. The former case is always interpreted as a complex number, whereas the latter is taken as complex only if `i` has not been assigned any local value. The same is true for $j$. This kind of context dependence, for better or worse, pervades MATLAB. Compute the following quantities:
+
+- $\dfrac{1+3i}{1-3i}$. Can you check the result by hand calculation?
+- $e^{i\frac{\pi}{4}}$. Check the Euler's Formula $e^{ix} = \cos x + i\sin x$ by computing the right-hand side too, i.e., compute $\cos(\pi/4) + i\sin(\pi/4)$.
+- Execute the commands `exp(pi/2*i)` and `exp(pi/2i)`. Can you explain the difference between the two results?
+
+<details><summary>Solution</summary>
+
+```matlab
+(1+3i)/(1-3i)
+exp(i*pi/4)
+cos(pi/4) + i*sin(pi/4)
+exp(pi/2*i)
+exp(pi/2i)
+
+ans =
+
+  -0.8000 + 0.6000i
+
+
+ans =
+
+   0.7071 + 0.7071i
+
+
+ans =
+
+   0.7071 + 0.7071i
+
+
+ans =
+
+   0.0000 + 1.0000i
+
+
+ans =
+
+   0.0000 - 1.0000i
+```
+
+- By hand: multiply top and bottom by $1+3i$: $(1+3i)^2/10 = (-8+6i)/10$.
+- `exp(pi/2*i)` = $e^{i\pi/2} = i$. `pi/2i` = $\pi/(2i)$ = $-i\pi/2$, so `exp(pi/2i)` = $e^{-i\pi/2} = -i$.
+</details>
 
 ## HW HO Week 10
 
