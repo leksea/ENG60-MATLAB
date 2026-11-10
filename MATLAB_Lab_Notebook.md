@@ -11285,9 +11285,12 @@ f2018 =
 ```
 
 ### H.6 Cause and Effect
+
 - **Key to causality:** groups similar apart from the treatment $\rightarrow$ outcome difference is due to the treatment.
 - **Confounding factors** = systematic differences other than the treatment (common in observational studies).
 - **Randomize:** assign to treatment/control at random $\rightarrow$ **randomized controlled experiment**. Random is not haphazard.
+
+
 ---
 ## Hands-On — Exercises
 
