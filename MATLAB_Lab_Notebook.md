@@ -1,13 +1,26 @@
+## Cover
+
+<div align="center">
+
 # MATLAB Lab Notebook
 
-**Course:** ENGR60 — Programming & Problem-Solving in MATLAB
-**Name:** Alexandra Yakovleva
-**Started:** September 7 4, 2026
+### ENGR 60 - Engineering Computation with MATLAB
+
+$$e^{i\pi} + 1 = 0 \qquad \int_0^1 x^2\,dx = \tfrac{1}{3} \qquad A\mathbf{x}=\mathbf{b}$$
+
+**Alexandra Yakovleva**
+
+West Valley College - Fall 2026
+
+SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
+
+</div>
 
 ---
 
 ## Table of Contents
-
+- [Syllabus](#syllabus)
+- [Grading Rubric](#grading-rubric)
 - [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab)
 - [Week 1 — Lab 1](#week-1--lab-1)
 - [SDC Chapter 1 — Intro MATLAB](#sdc-chapter-1--intro-matlab)
@@ -175,6 +188,517 @@
 - [HW HO Week 10](#hw-ho-week-10)
 
 ---
+## Syllabus
+### Instructor & Contact
+- **Instructor:** Thomas J. Sanford, P.E.
+- **Faculty page:** https://www.westvalley.edu/faculty/sanford_t.html
+- **Phone:** 408-741-4608
+- **Email:** Use Canvas email
+- **Student hours (Zoom):** M & W 7:00–7:45 am; T & Th 6:55–7:45 am
+- **Format:** Online, asynchronous (no formal meetings)
+
+### Course Overview
+Uses MATLAB to teach computer-based problem solving for science and engineering: procedural programming, numerical analysis, and data structures, with applications from engineering, physics, and math.
+
+**Learning outcome:** Solve engineering problems in MATLAB using a symbolic language to deliver a correct solution.
+
+### Required Materials
+- *An Engineer's Introduction to Programming with MATLAB 2019*, Lockhart & Tilleson (ISBN 978-1-63057-292-1)
+- Software, one of:
+  - MATLAB
+  - GNU Octave (free; PC versions work best)
+  - College remote server: https://vdi.westvalley.edu (user: `firstname.lastname`, password: student ID)
+
+### Weekly Workflow
+- Read the chapter, then complete labs, notes, and quizzes.
+- Week runs **Monday → Saturday 11 pm**.
+- **Notebook:** Record all weekly work in a notebook. See the Notebook checksheet for due dates; student samples are provided.
+
+### Grading
+| Component | Weight |
+|---|---|
+| Labs, quizzes, notebook, homework | 50% |
+| Exams (Midterm 25%, Final 25%) | 50% |
+
+| Points | Grade |
+|---|---|
+| 90–100 | A |
+| 80–89 | B |
+| 70–79 | C |
+| 60–69 | D |
+| ≤59 | F |
+
+### Key Course Policies
+- **Late work:** 10% deduction; 50% deduction after answers are revealed.
+- **Attendance:** Random roll checks; regular engagement is expected.
+- Study all required chapters for tests, regardless of lecture pace.
+- No video/audio recording without written instructor permission.
+- **Problems:** First talk to the instructor, describe the issue in writing, then schedule an appointment.
+- Syllabus may change during the semester; check often.
+
+### College Policies (summary)
+- **Attendance drops:** Instructors may drop students who miss the first class, any class in the first three weeks, or more than 10% of total hours.
+- **Drops/withdrawals:** Your responsibility. Know the last day to drop with a W; instructors must issue a grade to anyone still enrolled after it.
+- **Academic dishonesty:** Includes cheating, plagiarism, helping others cheat, or giving false information to college staff.
+- **Nondiscrimination:** Services and programs are provided without regard to protected characteristics.
+
+### Support
+- **Disability accommodations:** Contact the instructor privately and/or register with DESP (LS building; (408) 741-2010 voice, (408) 741-2658 TTY; westvalley.edu/desp).
+- **Student services:** westvalley.edu/services (includes Student Needs Office and Food Pantry)
+- **Emergency info:** westvalley.edu/emergency
+
+
+# Notebook Grading Sheet - ENGR 60 (with links into the notebook)
+
+Links are in-page anchors: paste this section into `MATLAB_Lab_Notebook.md` and they jump to the matching heading. 5 pts per line unless noted; chapter header 20 pts; handout 100 pts. "SDC Book" and "Pratap Book" are the page numbers printed on the sheet.
+
+## Handouts (100 pts each)
+
+| Handout | Pts | Source | Notebook link |
+|---|---|---|---|
+| Home Mortgage (Lab #3) | 100 | Canvas HO | [Home Loan Assignment](#home-loan-assignment) |
+| Forecasting - Trend Line HO | 100 | Canvas HO | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
+| Great Bike Race HO | 100 | Canvas HO | [HW HO Week 10 (Moto Race)](#hw-ho-week-10) |
+| B737 Max 8 HO | 100 | Canvas HO | [HW HO Week 10](#hw-ho-week-10) |
+| Sample Midterm | 100 | Canvas HO | [Midterm Example](#midterm-example) |
+| Midterm | 5 | Canvas HO | [Midterm](#midterm) |
+| Sample Final (extra credit Wk14) | 100 | Canvas HO | - |
+| Object-Oriented Prog | 100 | Canvas HO | [Object-Oriented Programming in Matlab](#object-oriented-programming-in-matlab) |
+| Numerical Integration | 100 | Canvas HO | [Numerical Integration](#numerical-integration) |
+
+## Column 1 - SDC chapters
+
+### Front matter
+
+| Item | Pts | Notebook link |
+|---|---|---|
+| Cover | 5 | [Cover](#cover) |
+| Table of Contents | 5 | [Table of Contents](#table-of-contents) |
+| Syllabus | 5 | [Syllabus](#syllabus) |
+| Week 0 |  |  |
+| Procure Book - SDC - Pratap |  | [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab) |
+| Procure Software - Matlab - GNU Octave |  | [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab) |
+| Access Remote - Download Horizon |  | [Lesson 1 Slides: About MATLAB](#lesson-1-slides-about-matlab) |
+| Pg: GS-1- GS-6    Getting Started (SDC) |  |  |
+
+### Week 1 - Chapter 1 - Topics (20 pts) - [SDC Chapter 1 — Intro MATLAB](#sdc-chapter-1--intro-matlab)
+
+**Chapter 1 - Introduction - Inputs** (Ch.1 -20 input - 4 exercises)
+
+Topics: SDC Ch1 - Intro Load; Load Bearing data  Save; Running the Script Vt; Converting Values
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>>126+328` | 5 | P.2 | [1.2 Entering Commands](#12-entering-commands) |
+| `>> 532*33.9123456` | 5 | P.2 | [1.2 Entering Commands](#12-entering-commands) |
+| `>>1/3` | 5 | P.3 | [1.3 Preferences & Number Format](#13-preferences--number-format) |
+| `>> help` | 5 | P.4 | [1.4 Using Help](#14-using-help) |
+| matlab/general (in help) | 5 | P.5 | [1.4 Using Help](#14-using-help) |
+| `>>clc` | 5 | P.5 | [1.5 Clearing the Command Window & Workspace](#15-clearing-the-command-window--workspace) |
+| `>>clear` | 5 | P.5 | [1.5 Clearing the Command Window & Workspace](#15-clearing-the-command-window--workspace) |
+| Load ('filename.ext') | 5 | P.7 | [1.6 Unit Conversion Example: Loading a File](#16-unit-conversion-example-loading-a-file) |
+| `>>load ('bearingdata.mat')` | 5 | P.6 | [1.6 Unit Conversion Example: Loading a File](#16-unit-conversion-example-loading-a-file) |
+| `>>data` | 5 | P.7 | [1.6 Unit Conversion Example: Loading a File](#16-unit-conversion-example-loading-a-file) |
+| `>>data_grams = data*28.35` | 5 | P.7 | [1.6 Unit Conversion Example: Loading a File](#16-unit-conversion-example-loading-a-file) |
+| `>>save ('bearingdata_grams', 'data_grams')` | 5 |  | [1.8 Saving a Variable & Command History](#18-saving-a-variable--command-history) |
+| up arrow | 5 | P.8 | [1.8 Saving a Variable & Command History](#18-saving-a-variable--command-history) |
+| `>>min (data_grams)` | 5 | P.9 | [1.9 Built-in Statistical Functions](#19-built-in-statistical-functions) |
+| `>>edit terminal_velocity` | 5 | P.10 | [1.10 Terminal Velocity Example: Creating a Script](#110-terminal-velocity-example-creating-a-script) |
+| `>> airDensity = 0.001225` | 5 | P.11 | [1.10 Terminal Velocity Example: Creating a Script](#110-terminal-velocity-example-creating-a-script) |
+| save script file | 5 | P.12 | [1.10 Terminal Velocity Example: Creating a Script](#110-terminal-velocity-example-creating-a-script) |
+| Run or Type script name | 5 | P.13 | [1.11 Running a Script, Saving & Closing](#111-running-a-script-saving--closing) |
+| `Vt = 67.4174` | 5 | P.13 | [1.11 Running a Script, Saving & Closing](#111-running-a-script-saving--closing) |
+| **SDC End of Chapter Exercises1 #1 - 4** |  | P.14 |  |
+| #1 Carabiner conversion | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
+| #2 16 significant digits | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
+| #3 Calculation | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
+| #4 Vt\_(Mars) modified | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
+
+### SDC Ch 2 - Program Basics (20 pts) - [SDC Chapter 2 — Operators, Variables & Data Types](#sdc-chapter-2--operators-variables--data-types)
+
+**Chapter 2 - Operators & Variables** (Ch.2 - 24 inputs - 8 exercises)
+
+Topics: Arithmetic/Relational; Logical-Variable Naming; Storing Numeric Values; Constants/Numerical Func; Strings/Char; Import Genetic Data
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> x = 3; x==3;` | 5 | P.16 | [2.1 Operators](#21-operators) |
+| `>>-(x==3)` | 5 | P17 | [2.1 Operators](#21-operators) |
+| `>>x=1;y=logial(1); class(x)` | 5 | P.18 | [2.2 Variables & Precedence](#22-variables--precedence) |
+| `>>islogical(x) islogical(y)` | 5 | P.18 | [2.2 Variables & Precedence](#22-variables--precedence) |
+| `>>3+2*6   (3+2)*6` | 5 | P.19 | [2.2 Variables & Precedence](#22-variables--precedence) |
+| `>>a=5 A=15 a+3 A+3` | 5 | P.20 | [2.2 Variables & Precedence](#22-variables--precedence) |
+| `>>x=666  class(x)` | 5 | P.21 | [2.3 Variable Naming & Classes](#23-variable-naming--classes) |
+| `>>x=int8(666);  class(x)` | 5 | P.21 | [2.3 Variable Naming & Classes](#23-variable-naming--classes) |
+| `>> 3/0  inf-inflkll` | 5 | P.22 | [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types) |
+| `>>format long  pi  pi+7` | 5 | P.22 | [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types) |
+| `>>x=128+2; y=int8(128)+2` | 5 | P.22 | [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types) |
+| `>>ceil(3,4) . . .` | 5 | P.23 | [2.5 Numerical Functions & Rounding](#25-numerical-functions--rounding) |
+| `>>x=win8(255)` | 5 | P.24 | [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types) |
+| Array Basics explained | 5 | P.24 | [2.4 Integer & Floating-Point Types](#24-integer--floating-point-types) |
+| `>>st = 'Carpe diem'` | 5 | P.25 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>sc = 'This is a char'` | 5 | P. 26 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>charArray = 'This is...` | 5 | P.27 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>lsletter(charArray)` | 5 | P.28 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>upper(stringArray)` | 5 | P.28 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>insertBefore(text1, strfind(text1, 'seven'), 'fifty-'` |  |  | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `index = strfind(text1,'seven')` | 5 | P.29 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| `>>x=3  >>class(x)` | 5 | P.29 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+| data types conflict | 5 | P.30 | [2.6 Strings & Character Arrays](#26-strings--character-arrays) |
+|  | 5 | P.31 | [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files) |
+|  | 5 | P.35 | [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files) |
+| **Exercises2 #1 - 8** |  | P.36 |  |
+| `#1 5+2*8/2-(3*2*10)/-1` | 5 | P.36 | [Ex 2.1](#21) |
+| `#2 z=-(x<y\|\|-(y<x)&&islogical(x))` | 5 | P.37 | [Ex 2.2](#22) |
+| `#3 x=55+uint32(-22)+pi` | 5 | P.37 | [Ex 2.3](#23) |
+| #4 int8(ceil(1271)) | 5 | P.37 | [Ex 2.4](#24) |
+| `#5  x = 'small kittens'` | 5 | P.37 | [Ex 2.5](#25) |
+| #6 A thru H Datatypes | 5 | P.38 | [Ex 2.6](#26) |
+| #7  8' x 11' | 5 | P.38 | [Ex 2.7](#27) |
+| #8  Garbage Calculations | 5 | P.38 | [Ex 2.8](#28) |
+| **Lab #1-2** |  |  |  |
+| T1-1 (a,b) | 5 |  | [T1-1](#t1-1--use-matlab-to-compute-the-following) |
+| Cylinder 20% increase | 5 |  | [Cylinder](#cylinder-problem) |
+| T1-2 (x+y; xy; x/y) | 5 |  | [T1-2](#t1-2-test-your-understanding) |
+| 5 sin(u) u(7) length(w) | 5 |  | [5 sin](#t1-2-test-your-understanding) |
+| T3-1 25th Element | 5 |  | [T3-1](#t3-1-25th-element) |
+| Polynomial Roots | 5 |  | [Polynomial Roots](#polynomial-roots) |
+| T3-2 Polynomia x^3..290 | 5 |  | [T3-2](#t3-2-polynomial-290--11x--6x²--x³) |
+| `Plot y=sin(2*x)` | 5 |  | [Plot y=sin](#plotting-with-matlab-chapter-5) |
+| `T3-3 Plot s=2sin(3t+2)` | 5 |  | [T3-3](#t3-3-plot-s--2sin3t2--sqrt-5t1-for-0-le-t-le-5) |
+| `T3-4 y=4sqrt(6x_1)` | 5 |  | [T3-4](#t3-4-y--4-sqrt-6x1-and-z--5e03x--2x-for-0-le-x-le-15) |
+| Plot Rocket Height | 5 |  | [Plot Rocket](#narrative--projectile-motion) |
+| Script SampleSQRT | 5 |  | [Script](#script-files) |
+| Script PopTable | 5 |  | [Script](#script-files) |
+| Script A/g per Game | 5 |  | [Script](#script-files) |
+
+### SDC Ch 3 - (20 pts) - [SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables](#sdc-chapter-3--programming-basics-arrays-structures--tables)
+
+**Chapter 3 - Arrays, Structures & Tables** (Ch. 3 - 127 inputs-6 exercises)
+
+Topics: Array Types; Strings as Matrices; : ; randi() magic(); Cell Arrays - Structures; Tables
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> isscalar(57)` | 5 | P. 39 | [3.1 Arrays, Matrices, Vectors & Scalars](#31-arrays-matrices-vectors--scalars) |
+| `>> A=randi(10,2)` | 5 | P. 40 | [3.2 Growing Arrays & the Empty Array](#32-growing-arrays--the-empty-array) |
+| `>> A=[]   >>isempty(A)` | 5 | P. 40 | [3.2 Growing Arrays & the Empty Array](#32-growing-arrays--the-empty-array) |
+| `>> size(aScalar)  string; vector;` | 5 | P. 41 | [3.3 Matrix Basics & Size](#33-matrix-basics--size) |
+| `>> string2 == 'b'` | 5 | P.42 | [3.4 Strings as Matrices](#34-strings-as-matrices) |
+| `>> 1:5  >> 1:2:5  >>1:2:6` | 5 | P. 43-46 | [3.5 The Colon Operator](#35-the-colon-operator) |
+| `>> a=cell(4)  >>b=cell(4,5)` | 5 | P.47-48 | [3.8 Cell Arrays](#38-cell-arrays) |
+| `>>rocket = struct` | 5 | P.49-50 | [3.9 Structures](#39-structures) |
+| `>>table([1;2;3],[4,5,6],[7,8,9])` | 5 | P.52 | [3.11 Creating Tables](#311-creating-tables) |
+| `>>Var1 = [1;2;3];` | 5 | P.53-54 | [3.12 Table Properties](#312-table-properties) |
+| `>>planets={'Mercury';'Venus'; . . .` | 5 | P.55 | [3.13 Accessing & Adding Table Data](#313-accessing--adding-table-data) |
+| `>>mars-planetary_data(4,:)` | 5 | P.57 | [3.13 Accessing & Adding Table Data](#313-accessing--adding-table-data) |
+| `>>planet_structure=table2struct.` | 5 | P.58-59 | [3.14 Table Conversion Functions](#314-table-conversion-functions) |
+| **Exercises3 #1 - 6** |  |  |  |
+| #1 1x10 array first 5 odd | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #2  6x6 array with randi() | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #3 8x8 array w/new arrays | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #4 structure called 'student' | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #5 structure callled 'house' | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #6 table of house | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+
+### SDC Ch 4 - Programming (20 pts) - [SDC Chapter 4 — Looping & Conditionals](#sdc-chapter-4--looping--conditionals)
+
+**Chapter 4 - Looping and Conditionals** (Ch.4 - 70 inputs - 5 exercises)
+
+Topics: While Loops - 4 hr Video (Hr 1 Vectors); For Loops; If - Else Conditionals; If - Else - If Swith-Case; Editor TerminalVelocity; Image File - Pretty; 1 hr Hour of Power; Home Loan Assignment; Exiting Stopping a Loop
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> edit loops` | 5 | P.64 | [4.3 while Loops](#43-while-loops) |
+| Enter Figure 4.4 | 5 | P.66 | [4.3 while Loops](#43-while-loops) |
+| `>>loops  x=1  x=2  x=3...` | 5 | P.67 | [4.3 while Loops](#43-while-loops) |
+| `while count <1000000` | 5 | P.68 | [4.3 while Loops](#43-while-loops) |
+| `>> index = 1:4` | 5 | P.69 | [4.4 for Loops](#44-for-loops) |
+| `>> edit forloops` | 5 | P.70 | [4.4 for Loops](#44-for-loops) |
+| `>> for i =1 : 0.3 : 3` | 5 | P.71 | [4.5 Step Values & Index Arrays](#45-step-values--index-arrays) |
+| `>> edit branches` | 5 | P.73 | [4.6 if & if-else Statements](#46-if--if-else-statements) |
+| switch planet | 5 | P.75 | [4.7 if-elseif-else & switch Statements](#47-if-elseif-else--switch-statements) |
+| Terminal Velocity script | 5 | P.76 | [4.8 Terminal Velocity with Conditionals](#48-terminal-velocity-with-conditionals) |
+| `>> edit negative` | 5 | P.77-78 | [4.9 Loops & Conditionals: Make a Negative](#49-loops--conditionals-make-a-negative) |
+| `if x ==6 break` | 5 | P.79 | [4.10 Exiting a Loop](#410-exiting-a-loop) |
+| `if x ==6 continue` | 5 | P.80 | [4.10 Exiting a Loop](#410-exiting-a-loop) |
+| **Exercises4  #1 - 5** |  |  |  |
+| `#1 x = 1: -2: 10` | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+| `#2 while x <=10` | 5 | P82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+| `#3 else villain = 'Dracula'` | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+| #4 script for factorial | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+| #5 code an infinite loop | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+
+### SDC Ch 5 - Matrices (20 pts) - [SDC Chapter 5 — Matrices](#sdc-chapter-5--matrices)
+
+**Chapter 5- Matrices** (Ch.5 - 41 inputs - 10 exercises)
+
+Topics: Size, diag, eye, magic; Scalar math -  .*   ./; Randi(i,i,i) & Transposition; Exponents, Logical ops; Sample Midterm Problem
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> A = [1 2 3; 4 5 6]` | 5 | P.84 | [5.2 Special Matrices: Diagonal, Identity, Magic](#52-special-matrices-diagonal-identity-magic) |
+| `>> magic(5)` | 5 | P.85 | [5.2 Special Matrices: Diagonal, Identity, Magic](#52-special-matrices-diagonal-identity-magic) |
+| `>>randi (10,1,10)` | 5 | P.86 | [5.3 Creating Test Matrices & Random Numbers](#53-creating-test-matrices--random-numbers) |
+| `>>A = randi(10,3,5)` | 5 | P.87 | [5.4 Array Math: Addition & Subtraction](#54-array-math-addition--subtraction) |
+| `>> A = ones(5); >> A + 6` | 5 | P.88 | [5.6 Scalar Math Operations](#56-scalar-math-operations) |
+| `>> A = magic(3)  >> n =5  A/n` | 5 | P.89-90 | [5.6 Scalar Math Operations](#56-scalar-math-operations) |
+| `>> A=[1:2:6; 3:5:15; 10:10:30]` | 5 | P.91 | [5.7 Transposition](#57-transposition) |
+| `>> A'  >> A.'  not the same` | 5 | P.92 | [5.7 Transposition](#57-transposition) |
+| `>> B = A <=5` | 5 | P.93 | [5.8 Powers & Logical Operations](#58-powers--logical-operations) |
+| `>> C = inv(A)` | 5 | P.99 | [5.10 Matrix Division & Inverse Matrices](#510-matrix-division--inverse-matrices) |
+| heroes, sidekick, villain example | 5 | P.100 | [5.11 Examples: Solving Linear Systems](#511-examples-solving-linear-systems) |
+| **Exercises5  #1 - 10** |  | P.102 |  |
+| `#1 A.*A` | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #2 heroes, sidekick, villain | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| `#3  3x3 matrix A*A^-1` | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #4 doctor; lawyer; engineer | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #5 fees charged in cities | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #6 sum function | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #7 sum columns | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #8 reduce by half | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #9 after tax income | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| #10 potatoe, beet, asparagus | 5 |  | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+
+### SDC Ch 6 - Funct'n, Script (20 pts) - [SDC Chapter 6 — Functions & Scripts](#sdc-chapter-6--functions--scripts)
+
+**Chapter 6 - Functions and Scripts** (Ch.6 - 52 inputs - 5 exercises)
+
+Topics: Functions Built-in; Function - Format; Function Algorithm Code; Scope - Recursion
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| Script - Interactive |  | XXXXXX | [SDC Chapter 6 — Functions & Scripts](#sdc-chapter-6--functions--scripts) |
+| `>>tau=f*d*sind(theta)` | 5 | P.106 | [6.2 Scripts](#62-scripts) |
+| `>>f=12.5 ft=4  rads=.52` | 5 | P.107 | [6.2 Scripts](#62-scripts) |
+| `>> f=input('Enter F Newtons')` | 5 | P.108 | [6.4 Making a Script Interactive](#64-making-a-script-interactive) |
+| `>> edit matrixMax` | 5 | P.112 | [6.6 Function File Format](#66-function-file-format) |
+| write function biggie | 5 | P.113-14 | [6.7 From Algorithm to Code](#67-from-algorithm-to-code) |
+| matrix\_facts.m | 5 | P.116-18 | [6.8 Return Values](#68-return-values) |
+| `maxval = myMax(A);` | 5 | P.119 | [6.9 Local Functions](#69-local-functions) |
+| write local function | 5 | P.120 | [6.9 Local Functions](#69-local-functions) |
+| `>>local_var = 1000` | 5 | P.121 | [6.10 Variable Scope](#610-variable-scope) |
+|  |  | P.124-5 | [6.11 Recursion](#611-recursion) |
+| **Exercises6  #1 - 5** |  |  |  |
+| #1 Terminal velocity | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+| #2 Modify matrixMax | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+| #3 function torque1 | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+| #4 function torque2 | 5 | P.127 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+| #5 write recursive funct. | 5 | P.127 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+
+### SDC Ch 7 - Debugging (20 pts) - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
+
+**Chapter 7- Debugging and Error Handling** (Ch.7 - 9 inputs - 3 exercises)
+
+Topics: Break Points; Error Handle - Comments
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| Debugger |  | XXXXXX | [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling) |
+| `>> cos(sin(0.45)` | 5 | P.129 | [7.1 Syntactic Errors](#71-syntactic-errors) |
+| `>>terminalVelocityDegug('Mars')` | 5 | P.132 | [7.3 Using the Debugger: Fixing the Obvious Errors](#73-using-the-debugger-fixing-the-obvious-errors) |
+| `>>terminalVelocityDegug('Pluto')` | 5 | P.134 | [7.4 Breakpoints](#74-breakpoints) |
+| `set breakpoint at line 8(dia=25)` | 5 | P.136 | [7.5 Debug Mode & the Debug Toolbar](#75-debug-mode--the-debug-toolbar) |
+| Click Step Button | 5 | P.137-8 | [7.6 Walking a Function](#76-walking-a-function) |
+| `planet = lower(planet)` | 5 | P.139 | [7.7 Error Handling: Standardizing & Verifying Input](#77-error-handling-standardizing--verifying-input) |
+| `case 'Uranus'    gravity = . . .` | 5 | P.140 | [7.7 Error Handling: Standardizing & Verifying Input](#77-error-handling-standardizing--verifying-input) |
+| `Vt = sqrt((2*...)  disp("Error...` | 5 | P.141 | [7.8 Try/Catch Blocks](#78-trycatch-blocks) |
+| `while 1   x = 1` | 5 | P.142 | [7.9 Manual Debugging Techniques](#79-manual-debugging-techniques) |
+| **Exercises7  #1 - 3** |  |  |  |
+| #1 function w/ 12 zodiac signs | 5 | P.144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
+| #2 debug terminalDebugging.m | 5 | P. 144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
+| #3 secretMessage.m | 5 | P.144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
+
+### Chap 8 -Import/Export (20 pts) - [SDC Chapter 8 — Importing & Exporting Data](#sdc-chapter-8--importing--exporting-data)
+
+**Chapter 8 - Importing and Exporting Data** (Ch.8 - 100 inputs - 7 exercises)
+
+Topics: ls mkdir * path; importing - exporting
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>>curr_dir = pwd` | 5 | P.145 | [8.1 Navigating the File System](#81-navigating-the-file-system) |
+| `>> path` | 5 | P.146 | [8.1 Navigating the File System](#81-navigating-the-file-system) |
+| `>> cd\users\public` | 5 | P.147 | [8.1 Navigating the File System](#81-navigating-the-file-system) |
+| `files = ls` | 5 | P.148 | [8.2 File System Functions](#82-file-system-functions) |
+| `>>[status, msg, error' = mkdir('..` | 5 | P.149 | [8.2 File System Functions](#82-file-system-functions) |
+| `>>cd(home)` | 5 | P.150-1 | [8.2 File System Functions](#82-file-system-functions) |
+| `>>which pathdef.m` | 5 | P.151 | [8.2 File System Functions](#82-file-system-functions) |
+| `>> clear    >>load` | 5 | P.152-4 | [8.3 Working with .mat Files](#83-working-with-mat-files) |
+| `>> readmatrix ImportExample1` | 5 | P.155 | [8.4 Importing Delimited Text: readmatrix](#84-importing-delimited-text-readmatrix) |
+| `>>readmatrix('Import...)` | 5 | P.156 | [8.4 Importing Delimited Text: readmatrix](#84-importing-delimited-text-readmatrix) |
+| `>>M=readmatrix('Import...)` | 5 | P.157-8 | [8.5 Import Options: detectImportOptions](#85-import-options-detectimportoptions) |
+| `>>readmatrix('IOExample.xlsx')` | 5 | P.164-5 | [8.6 readmatrix with Excel Spreadsheets](#86-readmatrix-with-excel-spreadsheets) |
+| `>> [items, Store2, Store4]=` | 5 | P.166-7 | [8.8 readvars & readcell](#88-readvars--readcell) |
+| `>>c=readcell('MixedDataExa..` | 5 | P.168 | [8.8 readvars & readcell](#88-readvars--readcell) |
+| `>>writematrix(Goals)` | 5 | P.171-2 | [8.10 Exporting: writematrix & writecell](#810-exporting-writematrix--writecell) |
+| `>> fprintf('My name is %s.\n',` | 5 | P.174-5 | [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose) |
+| `>>fclose('all')` | 5 | P.175-6 | [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose) |
+| **Exercises8  #1 - 7** |  |  |  |
+| #1 split to separate folders | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #2 Export/Import | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #3 script to list files | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #4 import HeatTreatData | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #5 Export M to spreadsht | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #6 Export V1, V2 | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #7 Import Mortality-1.xlsx | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+
+### Chap 9 - Plotting & Data (20 pts) - [SDC Chapter 9 — Plotting and Data Visualization](#sdc-chapter-9--plotting-and-data-visualization)
+
+**Chapter 9 - Plotting and Data Visualization** (Ch.9 - 8 inputs - 5 exercises)
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> x=1:10; y=x/2;  plot(x,y)` | 5 | P.179 | [9.1 2D Plots and the Plot Window](#91-2d-plots-and-the-plot-window) |
+| `>> x=0:10;              plot(x,y)` | 5 | P.180 | [9.1 2D Plots and the Plot Window](#91-2d-plots-and-the-plot-window) |
+| `>> label(x)` | 5 | P.183 | [9.2 Data Cursor, Arrows, Titles](#92-data-cursor-arrows-titles) |
+| `>> x=1:0.01:10; y=sin(x) z=cos(x)` | 5 | P.187 | [9.4 Plots Tab, Multiple Series, Generate Code](#94-plots-tab-multiple-series-generate-code) |
+| set(plot1(1),DisplayName','y'); | 5 | P.188 | [9.4 Plots Tab, Multiple Series, Generate Code](#94-plots-tab-multiple-series-generate-code) |
+|  |  | P.188-92 | [9.4 Plots Tab, Multiple Series, Generate Code](#94-plots-tab-multiple-series-generate-code) |
+| `>>pie(Percentages, explode, Labels)` | 5 | P.193-95 | [9.6 Pie Charts](#96-pie-charts) |
+| VolcanoSpectralData | 5 | P.195 | [9.6 Pie Charts](#96-pie-charts) |
+| **Exercises9 #1 - 5** |  |  |  |
+| `#1 Graph y=X^2 from X=-3 to 3` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+| `#2 Graph y=2X-X^2` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+| `#3 Graph y=sqrt(x-1)` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+| `#4 Graph y=x^3-12x` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+| #5 Graph Mortality-1.xlsx | 5 | P202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+
+### Chap 10 - Tools (20 pts) - [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9)
+
+**Chapter 10 - Matlab Toolboxes: Curve Fitting** (Ch.10 - 2 projects - 5 exercises)
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| If using Octave - Do in Excel |  | P.203-18 | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
+| Also do Canvas HO "Forcasting" |  |  | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
+| **Exercises10  #1 - 5** |  |  |  |
+| #1  USPopulationData.xlsx | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+| #2 Curve fit equation for growth | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+| #3 Compare Equation for 2016 | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+| #4 Projected 2043 population | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+| #5 HeatTreatData.xlsx | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+
+### Chap 11 - Symbolic Math (20 pts)
+
+**Chapter 11 - Symbolic Math** (Ch.11 - 6 inputs - 5 exercises)
+
+| Item | Pts | SDC Book | Notebook link |
+|---|---|---|---|
+| `>> syms x; f(x) = sin(x); fplot(f)` | 5 | P.221 | - |
+| `>> fplot (sin(x), '-.b')` | 5 | P.222 | - |
+| Live Editor | 5 | P.223-30 | - |
+| `>>syms x;  p1 = .0008579` | 5 | P.230-31 | - |
+| load ratecurve.m | 5 | P.232-33 | - |
+| `>> terminal_velocitySymUnits` | 5 | P.233-36 | - |
+| **Exercises11  #1 - 5** |  |  |  |
+| #1 GT 585/hr or 350/hr? | 5 | P.238 | - |
+| #2 script to convert density | 5 | P.238 | - |
+| #3  sin(x) asin(x) sin(h) | 5 | P.239 | - |
+| #4 simplify expressions | 5 | P.239 | - |
+| #5 Explain w/sketch | 5 | P.239 | - |
+
+
+**Pratap  Tutorial 1**
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 1. compare; sqrt; pi | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
+| 2. Exponents & Log (a,b,c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
+| 3. Trig (a, b, c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
+| 4. Complex No. (a,b,c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
+
+**Pratap  Tutorial 2** - pg 25
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 1. Equation of Line | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+| 2. Vectors (a,b,c) | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+| 3. Points on Circle | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+| 4. Geometric Series | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+| 5. Matrices & Vectors | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+
+**Pratap Tutorial 3** - pg 29
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 1. Simple Sin Plot | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 2. Line Styles | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 3. Decay Sin Plot | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 4 Space Curve | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 5. On-line Help | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 6. Log scale Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 7. Overlay Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 8. 9. Own Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+
+**Pratap Tutorial 4** - pg 33
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 1. Center of Circle | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 2. Change radius of Circle | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 3. Variables in workspace | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 4. Contents of file "type" | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 5. H1 line | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 6. Just for Fun script file | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| Bearing.mat CANVAS | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| Your Own Project | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+
+**Pratap Tutorial 5** - end of Ch2
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 1. On-line help | 5 | prob pg 37 | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 2. Convert temperature | 5 | ans pg 38 | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 3.Calculate Factorials | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 4. Cross-Product | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 5.Sum Geo series | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 6. Interest Calculation | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+
+**Ch. 3 Matrix Input** - Matrix  manipulation - p41 (65)
+
+| Item | Pts | Pratap Book | Notebook link |
+|---|---|---|---|
+| 3.1.1 Input & Continuation | 5 | p45 Fig 3.1 | - |
+| 3.1.2 Indexing/Subscript | 5 | p.44 | - |
+| 3.1.2 Dimension | 5 | p46 (66) | - |
+| 3.1.3 Matrix manipulation | 5 | p47 | - |
+| Transpose - Initiialization | 5 | p.48 (69) | - |
+| Appending - Deleting | 5 | p.49 (70) | - |
+| Utility - Special | 5 | p.50 | - |
+| Utility Matrix example | 5 | p.51 Fig 3.2 | - |
+| 3.1.4 Creating Vecors | 5 | p52 (72) | - |
+| 3.2.1 Matrix  & Array Op | 5 | p53 (73) | - |
+| 3.2.2 Relational Ops | 5 | p54 (74) | - |
+| `Matrix transpose, .*  .^` | 5 | p55 Fig 3.3 | - |
+| 3.2.3 Logical Ops | 5 | p56  (74) | - |
+| 3.2.4 Trig Functions | 5 | p57 (75) | - |
+| exponent & complex func | 5 | p58 (76) | - |
+| round off functions | 5 | p59 (77) | - |
+| 3.2.5 Matrix functions | 5 | p59 (77) | - |
+| 3.2.6 Character strings | 5 | p59 (77) | - |
+| Matrix function vs Array | 5 | p60 Fig 3.4 | - |
+| Manipulating char strings | 5 | p61 (79) | - |
+| 3.3.2 Eval function | 5 | p.62-63(80) | - |
+| 3.3 Functions and Help | 5 | p64 | - |
+| determinant help,  eig | 5 | p66-69 | - |
+| 3.4 Saving Loading Data | 5 |  | - |
+| 3.4.1 Loading mat files | 5 |  | - |
+| 3.4.2 Recording w/diary | 5 | p70 | - |
+| 3.5 Plotting | 5 | p71-73 | - |
+| Pratap Ch. 4 | 5 |  | - |
+| Pratap Ch. 5 | 5 |  | - |
+
+**Pratap Ch. 6 (extra credit)**
+
+## Totals
+
+| Column | Points |
+|---|---|
+| Column One | 1260 |
+| Column Two | 805 |
+| Column Three | 300 |
+| **Grand Total** | **2365** |
 
 
 ## Lesson 1 Slides: About MATLAB
