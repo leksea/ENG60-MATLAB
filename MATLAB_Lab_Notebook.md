@@ -185,7 +185,108 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
   - [2.10 Lesson 10: Files and Directories](#210-lesson-10-files-and-directories)
   - [2.11 Lesson 11: Publishing Reports](#211-lesson-11-publishing-reports)
 - [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises)
+  - [Tutorial 1 Exercises: A Minimum MATLAB Session](#tutorial-1-exercises-a-minimum-matlab-session)
+    - [Exercise 1.1: Arithmetic operations](#ex-1-1)
+    - [Exercise 1.2: Exponential and logarithms](#ex-1-2)
+    - [Exercise 1.3: Trigonometry](#ex-1-3)
+    - [Exercise 1.4: Complex numbers](#ex-1-4)
+  - [Tutorial 2 Exercises: Arrays of Numbers](#tutorial-2-exercises-arrays-of-numbers)
+    - [Exercise 2.1: Equation of a straight line](#ex-2-1)
+    - [Exercise 2.2: Multiply, divide, and exponentiate vectors](#ex-2-2)
+    - [Exercise 2.3: Points on a circle](#ex-2-3)
+    - [Exercise 2.4: The geometric series](#ex-2-4)
+    - [Exercise 2.5: Matrices and vectors](#ex-2-5)
+  - [Tutorial 3 Exercises: Simple Plots](#tutorial-3-exercises-simple-plots)
+    - [Exercise 3.1: A simple sine plot](#ex-3-1)
+    - [Exercise 3.2: Line styles](#ex-3-2)
+    - [Exercise 3.3: An exponentially decaying sine plot](#ex-3-3)
+    - [Exercise 3.4: Space curve](#ex-3-4)
+    - [Exercise 3.5: On-line help](#ex-3-5)
+    - [Exercise 3.6: Log-scale plots](#ex-3-6)
+    - [Exercise 3.7: Overlay plots](#ex-3-7)
+    - [Exercise 3.8: Fancy plots](#ex-3-8)
+    - [Exercise 3.9: A very difficult plot](#ex-3-9)
+  - [Tutorial 4 Exercises: Script Files](#tutorial-4-exercises-script-files)
+    - [Exercise 4.1: Show the center of the circle](#ex-4-1)
+    - [Exercise 4.2: Change the radius of the circle](#ex-4-2)
+    - [Exercise 4.3: Variables in the workspace](#ex-4-3)
+    - [Exercise 4.4: Contents of the file](#ex-4-4)
+    - [Exercise 4.5: H1 line](#ex-4-5)
+    - [Exercise 4.6: Just for fun](#ex-4-6)
+  - [Tutorial 5 Exercises: Function Files](#tutorial-5-exercises-function-files)
+    - [Exercise 5.1: On-line help](#ex-5-1)
+    - [Exercise 5.2: Convert temperature](#ex-5-2)
+    - [Exercise 5.3: Calculate factorials](#ex-5-3)
+    - [Exercise 5.4: Compute the cross product](#ex-5-4)
+    - [Exercise 5.5: Sum a geometric series](#ex-5-5)
+    - [Exercise 5.6: Calculate the interest on your money](#ex-5-6)
 - [HW HO Week 10](#hw-ho-week-10)
+- [Pratap Chapter 3 — Interactive Computation](#pratap-chapter-3--interactive-computation)
+  - [3.1 Matrices and Vectors](#31-matrices-and-vectors)
+    - [3.1.1 Input](#311-input)
+    - [3.1.2 Indexing](#312-indexing)
+    - [3.1.3 Manipulation](#313-manipulation)
+    - [Utility matrices](#utility-matrices)
+    - [3.1.4 Creating Vectors](#314-creating-vectors)
+  - [3.2 Matrix and Array Operations](#32-matrix-and-array-operations)
+    - [3.2.1 Arithmetic operations](#321-arithmetic-operations)
+    - [3.2.2 Relational operations](#322-relational-operations)
+    - [3.2.3 Logical operations](#323-logical-operations)
+    - [3.2.4 Elementary math functions](#324-elementary-math-functions)
+    - [3.2.5 Matrix functions](#325-matrix-functions)
+    - [3.2.6 Character strings](#326-character-strings)
+  - [3.3 Using Built-in Functions and On-line Help](#33-using-built-in-functions-and-on-line-help)
+  - [3.4 Saving and Loading Data](#34-saving-and-loading-data)
+  - [3.5 Plotting simple graphs](#35-plotting-simple-graphs)
+- [Pratap Chapter 3 — Exercises](#pratap-chapter-3--exercises)
+- [Pratap Chapter 4 — Programming in MATLAB: Scripts and Functions](#pratap-chapter-4--programming-in-matlab-scripts-and-functions)
+  - [4.1 Script Files](#41-script-files)
+    - [Cautions](#cautions)
+  - [4.2 Function Files](#42-function-files)
+    - [4.2.1 Executing a function](#421-executing-a-function)
+    - [4.2.2 More on functions](#422-more-on-functions)
+    - [Writing good functions](#writing-good-functions)
+  - [4.3 Language-Specific Features](#43-language-specific-features)
+    - [4.3.1 Comments and on-line help](#431-comments-and-on-line-help)
+    - [4.3.2 Continuation](#432-continuation)
+    - [4.3.3 Global variables](#433-global-variables)
+    - [4.3.4 Loops, branches, and control flow](#434-loops-branches-and-control-flow)
+    - [4.3.5 Interactive input](#435-interactive-input)
+    - [4.3.6 Recursion](#436-recursion)
+    - [4.3.7 Input/output](#437-inputoutput)
+  - [4.4 Advanced Data Objects](#44-advanced-data-objects)
+    - [4.4.1 Multidimensional matrices](#441-multidimensional-matrices)
+    - [4.4.2 Structures](#442-structures)
+    - [4.4.3 Cell arrays](#443-cell-arrays)
+- [Pratap Chapter 4 — Grey Scans](#pratap-chapter-5--grey-scans)
+- [Pratap Chapter 5 — Applications](#pratap-chapter-5--applications)
+  - [5.1 Linear Algebra](#51-linear-algebra)
+    - [5.1.1 Solving a linear system](#511-solving-a-linear-system)
+    - [5.1.2 Gaussian elimination](#512-gaussian-elimination)
+    - [5.1.3 Eigenvalues and eigenvectors](#513-eigenvalues-and-eigenvectors)
+    - [5.1.4 Other factorizations and 5.1.5 Sparse matrices](#514-other-factorizations-and-515-sparse-matrices)
+  - [5.2 Curve Fitting and Interpolation](#52-curve-fitting-and-interpolation)
+    - [5.2.1 Polynomial curve fitting on the fly (Basic Fitting)](#521-polynomial-curve-fitting-on-the-fly-basic-fitting)
+    - [5.2.2 Do it yourself: polynomial fits](#522-do-it-yourself-polynomial-fits)
+    - [5.2.3 Least squares curve fitting](#523-least-squares-curve-fitting)
+    - [5.2.4 General nonlinear fits](#524-general-nonlinear-fits)
+    - [5.2.5 Interpolation](#525-interpolation)
+  - [5.3 Data Analysis and Statistics](#53-data-analysis-and-statistics)
+  - [5.4 Numerical Integration (Quadrature)](#54-numerical-integration-quadrature)
+  - [5.5 Ordinary Differential Equations](#55-ordinary-differential-equations)
+    - [5.5.1 Example 1: xdot = x + t, x(0) = 0, 0 <= t <= 2](#551-example-1-xdot--x--t-x0--0-0--t--2)
+    - [5.5.2 Example 2: nonlinear pendulum](#552-example-2-nonlinear-pendulum)
+    - [5.5.3 ode23 versus ode45](#553-ode23-versus-ode45)
+    - [5.5.4 Specifying tolerance](#554-specifying-tolerance)
+  - [5.6 Nonlinear Algebraic Equations](#56-nonlinear-algebraic-equations)
+    - [5.6.1 Roots of polynomials](#561-roots-of-polynomials)
+  - [5.7 Advanced Topics](#57-advanced-topics)
+- [Pratap Chapter 5 — Exercises](#pratap-chapter-5--exercises)
+- [Final Practice — Infectious World War Z and Bacteria Growth](#final-practice--infectious-world-war-z-and-bacteria-growth)
+  - [Final exam learning outcomes](#final-exam-learning-outcomes)
+  - [Part 1: Infectious World War Z](#part-1-infectious-world-war-z)
+  - [Part 2: Bacteria Growth and Interpretation](#part-2-bacteria-growth-and-interpretation)
+
 
 ---
 ## Syllabus
@@ -9141,9 +9242,6 @@ c =
      1     1     0
 ```
 
-(First three draws of the default stream. Computed in Python with MATLAB's generator, not run in MATLAB.)
-
-</details>
 </details>
 
 <a name="midterm"></a>
@@ -12649,7 +12747,7 @@ cd html; open spiralplot.html
 ---
 
 ## Pratap Chapter 2 — Exercises
-
+### Tutorial 1 Exercises: A Minimum MATLAB Session
 
 **Exercise 1.1** — **Arithmetic operations:** Compute the following quantities:
 
@@ -12783,8 +12881,7 @@ y =
      0
 ```
 
-- $\tan(\pi/2)$ is huge (not Inf) because pi is not exact. $\cosh^2 - \sinh^2 = 1$ in math, but at $32\pi$ both terms are about $10^{87}$ so floating point gives 0 (book answer 0). Computed in Python, the last value may differ slightly by MATLAB version.
-
+- $\tan(\pi/2)$ is huge (not Inf) because pi is not exact.
 </details>
 **Exercise 1.4** — **Complex numbers:** MATLAB recognizes the letters $i$ and $j$ as the imaginary number $\sqrt{-1}$. A complex number $2 + 5i$ may be input as `2+5i` or `2+5*i` in MATLAB. The former case is always interpreted as a complex number, whereas the latter is taken as complex only if `i` has not been assigned any local value. The same is true for $j$. This kind of context dependence, for better or worse, pervades MATLAB. Compute the following quantities:
 
@@ -12828,6 +12925,715 @@ ans =
 
 - By hand: multiply top and bottom by $1+3i$: $(1+3i)^2/10 = (-8+6i)/10$.
 - `exp(pi/2*i)` = $e^{i\pi/2} = i$. `pi/2i` = $\pi/(2i)$ = $-i\pi/2$, so `exp(pi/2i)` = $e^{-i\pi/2} = -i$.
+</details>
+
+### Tutorial 2 Exercises: Arrays of Numbers
+
+**Exercise 2.1** — **Equation of a straight line:** The equation of a straight line is $y = mx + c$, where $m$ and $c$ are constants. Compute the $y$-coordinates of a line with slope $m = 0.5$ and the intercept $c = -2$ at the following $x$-coordinates: $x = 0, \; 1.5, \; 3, \; 4, \; 5, \; 7, \; 9, \; 10$. [Note: Your command should not involve any array operators because your calculation involves multiplication of a vector with a scalar $m$ and then addition of another scalar $c$.]
+
+<details><summary>Solution</summary>
+
+```matlab
+x = [0 1.5 3 4 5 7 9 10];
+y = 0.5*x - 2
+
+y =
+
+   -2.0000   -1.2500   -0.5000         0    0.5000    1.5000    2.5000    3.0000
+```
+
+- Scalar times vector needs no dot. Outputs computed, not run in MATLAB.
+
+</details>
+
+**Exercise 2.2** — **Multiply, divide, and exponentiate vectors:** Create a vector $t$ with 10 elements: 1, 2, 3, ..., 10. Now compute the following quantities:
+
+- $x = t\sin(t)$.
+- $y = \dfrac{t-1}{t+1}$.
+- $z = \dfrac{\sin(t^2)}{t^2}$.
+
+<details><summary>Solution</summary>
+
+```matlab
+t = 1:10;
+x = t.*sin(t)
+y = (t-1)./(t+1)
+z = sin(t.^2)./(t.^2)
+
+x =
+
+ Columns 1 through 8
+
+    0.8415    1.8186    0.4234   -3.0272   -4.7946   -1.6765    4.5989    7.9149
+
+ Columns 9 and 10
+
+    3.7091   -5.4402
+
+y =
+
+ Columns 1 through 8
+
+         0    0.3333    0.5000    0.6000    0.6667    0.7143    0.7500    0.7778
+
+ Columns 9 and 10
+
+    0.8000    0.8182
+
+z =
+
+ Columns 1 through 8
+
+    0.8415   -0.1892    0.0458   -0.0180   -0.0053   -0.0275   -0.0195    0.0144
+
+ Columns 9 and 10
+
+   -0.0078   -0.0051
+```
+
+- `.*` and `./` between two vectors, `.^` for the square. Without the dots: Matrix dimensions must agree / inner dimension error.
+
+</details>
+
+**Exercise 2.3** — **Points on a circle:** All points with coordinates $x = r\cos\theta$ and $y = r\sin\theta$, where $r$ is a constant, lie on a circle with radius $r$, i.e., they satisfy the equation $x^2 + y^2 = r^2$. Create a column vector for $\theta$ with the values $0, \pi/4, \pi/2, 3\pi/4, \pi$, and $5\pi/4$. Take $r = 2$ and compute the column vectors $x$ and $y$. Now check that $x$ and $y$ indeed satisfy the equation of a circle, by computing the radius $r = \sqrt{(x^2 + y^2)}$. [To calculate $r$ you will need the array operator `.^` for squaring $x$ and $y$. Of course, you could compute $x^2$ by `x.*x` also.]
+
+<details><summary>Solution</summary>
+
+```matlab
+theta = [0; pi/4; pi/2; 3*pi/4; pi; 5*pi/4];
+r = 2;
+x = r*cos(theta);
+y = r*sin(theta);
+x.^2 + y.^2
+sqrt(x.^2 + y.^2)
+
+ans =
+
+     4
+     4
+     4
+     4
+     4
+     4
+
+ans =
+
+     2
+     2
+     2
+     2
+     2
+     2
+```
+
+- Radius 2 for every point, so $x^2+y^2 = 4$. Tiny roundoff such as $\cos(\pi/2) = 6\times10^{-17}$ is invisible after squaring and adding.
+
+</details>
+
+**Exercise 2.4** — **The geometric series:** This is funky! You know how to compute $x^n$ element by element for a vector $x$ and a scalar exponent $n$. How about computing $n^x$, and what does it mean? The result, again, is a vector with elements $n^{x_1}$, $n^{x_2}$, $n^{x_3}$, etc. The sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ approaches the limit $\dfrac{1}{1-r}$ for $r < 1$ as $n \to \infty$. Create a vector $n$ of 11 elements from 0 to 10. Take $r = 0.5$ and create another vector $x = [r^0 \; r^1 \; r^2 \; \cdots \; r^n]$ with the `x=r.^n` command. Now take the sum of this vector with the command `s=sum(x)` ($s$ is the sum of the actual series). Calculate the limit $\dfrac{1}{1-r}$ and compare the computed sum $s$. Repeat the procedure taking $n$ from 0 to 50 and then from 0 to 100.
+
+<details><summary>Solution</summary>
+
+```matlab
+r = 0.5;
+n = 0:10; x = r.^n; s1 = sum(x)
+n = 0:50; x = r.^n; s2 = sum(x)
+n = 0:100; x = r.^n; s3 = sum(x)
+limit = 1/(1-r)
+
+s1 =
+
+    1.9990
+
+s2 =
+
+    2.0000
+
+s3 =
+
+     2
+
+limit =
+
+     2
+```
+
+- Exact partial sum is $2 - 2^{-n}$: 1.9990 for $n=10$. For $n=50$ the missing piece is $2^{-50}$, below display precision, so 2.0000 (not exactly 2). At $n=100$ it is below machine precision and the sum equals 2.
+- `r.^n` is a scalar raised to a vector. `n.^r` would be the other way round (each element to the power 0.5).
+
+</details>
+
+**Exercise 2.5** — **Matrices and vectors:** Go to Fig. 3.1 on page 67 and reproduce the results. Now create a vector and a matrix with the following commands: `v=0:0.2:12;` and `M=[sin(v); cos(v)];` (see Section 3.1.4 on page 72 for use of ":" in creating vectors). Find the sizes of $v$ and $M$ using the `size` command. Extract the first 10 elements of each row of the matrix and display them as column vectors.
+
+<details><summary>Solution</summary>
+
+```matlab
+v = 0:0.2:12;
+M = [sin(v); cos(v)];
+size(v)
+size(M)
+M(:,1:10)'
+
+ans =
+
+     1    61
+
+ans =
+
+     2    61
+
+ans =
+
+         0    1.0000
+    0.1987    0.9801
+    0.3894    0.9211
+    0.5646    0.8253
+    0.7174    0.6967
+    0.8415    0.5403
+    0.9320    0.3624
+    0.9854    0.1700
+    0.9996   -0.0292
+    0.9738   -0.2272
+```
+
+- $v$ is $1\times 61$, $M$ is $2\times 61$. `M(:,1:10)` picks the first 10 columns (first 10 elements of each row). The transpose `'` turns the two rows into two column vectors, a $10\times 2$ matrix.
+- Fig. 3.1 (page 45) is a screen listing of matrix commands: retype it in MATLAB.
+
+</details>
+
+### Tutorial 3 Exercises: Simple Plots
+
+**Exercise 3.1** — **A simple sine plot:** Plot $y = \sin x$, $0 \le x \le 2\pi$, taking 100 linearly spaced points in the given interval. Label the axes and put "Plot created by *yourname*" in the title.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = linspace(0,2*pi,100);
+plot(x,sin(x))
+xlabel('x'), ylabel('sin(x)')
+title('Plot created by Alexandra Yakovleva')
+```
+
+- Plot: one full sine period, from 0 up to 1, down to -1, back to 0.
+
+</details>
+
+**Exercise 3.2** — **Line styles:** Make the same plot as in Exercise 1, but rather than displaying the graph as a curve, show the unconnected data points. To display the data points with small circles, use `plot(x,y,'o')`. [Hint: You may look into Section 6.1 on page 175 if you wish.] Now combine the two plots with the command `plot(x,y,x,y,'o')` to show the line through the data points as well as the distinct data points.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = linspace(0,2*pi,100);
+y = sin(x);
+plot(x,y,'o')
+xlabel('x'), ylabel('sin(x)')
+figure
+plot(x,y,x,y,'o')
+xlabel('x'), ylabel('sin(x)')
+```
+
+- Plot: first figure is only circles, second is the curve with circles on top. With 100 points the circles overlap into a thick line.
+
+</details>
+
+**Exercise 3.3** — **An exponentially decaying sine plot:** Plot $y = e^{-0.4x}\sin x$, $0 \le x \le 4\pi$, taking 10, 50, and 100 points in the interval. [Be careful about computing $y$. You need array multiplication between `exp(-0.4*x)` and `sin(x)`. See Section 3.2.1 on page 73 for more discussion on array operations.]
+
+<details><summary>Solution</summary>
+
+```matlab
+for N = [10 50 100]
+    x = linspace(0,4*pi,N);
+    y = exp(-0.4*x).*sin(x);
+    figure
+    plot(x,y)
+    title(['N = ' num2str(N) ' points'])
+end
+```
+
+- Plot: three damped waves. 10 points look jagged and miss the peaks, 50 and 100 look smooth and almost identical.
+
+</details>
+
+**Exercise 3.4** — **Space curve:** Use the command `plot3(x,y,z)` to plot the circular helix $x(t) = \sin t$, $y(t) = \cos t$, $z(t) = t$, $0 \le t \le 20$.
+
+<details><summary>Solution</summary>
+
+```matlab
+t = linspace(0,20,100);
+plot3(sin(t),cos(t),t)
+grid on
+xlabel('x'), ylabel('y'), zlabel('z')
+```
+
+- Plot: a spring winding up the $z$-axis, about 3 turns ($20/2\pi \approx 3.2$).
+
+</details>
+
+**Exercise 3.5** — **On-line help:** Type `help plot` on the MATLAB prompt and hit return. If too much text flashes by the screen, type `more on`, hit return, and then type `help plot` again. This should give you paged screen output. Read through the on-line help. To move to the next page of the screen output, simply press the spacebar.
+
+<details><summary>Solution</summary>
+
+```matlab
+more on
+help plot
+```
+
+- No answer to give (book: "You should not be looking for answer here"). `more off` turns paging back off.
+
+</details>
+
+**Exercise 3.6** — **Log-scale plots:** The plot commands `semilogx`, `semilogy`, and `loglog` plot the $x$-values, the $y$-values, and both $x$- and $y$-values on a $\log_{10}$ scale, respectively. Create a vector `x=0:10:1000`. Plot $x$ vs. $x^3$ using the three log-scale plot commands. [Hint: First, compute `y=x.^3` and then use `semilogx(x,y)`, etc.]
+
+<details><summary>Solution</summary>
+
+```matlab
+x = 0:10:1000;
+y = x.^3;
+semilogx(x,y)
+figure, semilogy(x,y)
+figure, loglog(x,y)
+```
+
+- Plot: `semilogx` is a curve bending up, `semilogy` is a gently bending line, `loglog` is a straight line with slope 3.
+- The point $x = 0$ cannot be shown on a log axis, so it is dropped.
+
+</details>
+
+**Exercise 3.7** — **Overlay plots:** Plot $y = \cos x$ and $z = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24}$ for $0 \le x \le \pi$ on the same plot. You might like to read Section 6.1.5 on page 179 to learn how to plot multiple curves on the same graph. [Hint: You can use `plot(x,y,x,z,'--')` or you can plot the first curve, use the `hold on` command, and then plot the second curve on top of the first one.]
+
+<details><summary>Solution</summary>
+
+```matlab
+x = linspace(0,pi,100);
+y = cos(x);
+z = 1 - x.^2/2 + x.^4/24;
+plot(x,y,x,z,'--')
+legend('cos(x)','z')
+
+% same thing with hold on
+figure
+plot(x,y)
+hold on
+plot(x,z,'--')
+hold off
+```
+
+- Plot: $z$ is the Taylor polynomial of $\cos x$. The curves coincide near 0 and drift apart toward $\pi$ ($\cos\pi = -1$, $z(\pi) = 0.1239$).
+- Legend can be dragged with the mouse (page 147).
+
+</details>
+
+**Exercise 3.8** — **Fancy plots:** Go to Section 6.1.6 and look at the examples of specialized 2-D plots given there. Reproduce any of the plots you like.
+
+<details><summary>Solution</summary>
+
+```matlab
+x = 1:5;
+h = [3 7 4 9 2];
+subplot(2,2,1), bar(x,h), title('bar')
+subplot(2,2,2), stairs(x,h), title('stairs')
+subplot(2,2,3), stem(x,h), title('stem')
+subplot(2,2,4), pie(h), title('pie')
+```
+
+- Plot: four panels, same data shown as bars, steps, stems, pie slices. I chose these, not the specific book examples (pages 155-158 not in the scans).
+
+</details>
+
+**Exercise 3.9** — **A very difficult plot:** Use your knowledge of *splines* and *interpolation* to draw a lizard (just kidding).
+
+<details><summary>Solution</summary>
+
+```matlab
+figure, axis([0 10 0 10]), hold on
+[px,py] = ginput(15);              % click the outline of your lizard, Enter to stop
+t  = 1:numel(px);
+tt = linspace(1,numel(px),400);
+plot(spline(t,px,tt), spline(t,py,tt))
+axis equal
+```
+
+- Optional (just kidding). `ginput` collects the clicked control points, `spline` interpolates a smooth curve through them (cubic spline for each coordinate against the point index).
+
+</details>
+
+### Tutorial 4 Exercises: Script Files
+
+**Exercise 4.1** — **Show the center of the circle:** Modify the script file `circle.m` to show the center of the circle on the plot, too. Show the center point with a "+". (Hint: See Exercises 2 and 7 of Lesson 3.)
+
+<details><summary>Solution</summary>
+
+```matlab
+% CIRCLE - script file to draw a unit circle with its center marked
+% File written by Alexandra Yakovleva
+% -----------------------------------
+theta = linspace(0,2*pi,100);   % create vector theta
+x = cos(theta);                 % generate x-coordinates
+y = sin(theta);                 % generate y-coordinates
+plot(x,y,0,0,'+');              % plot the circle and its center
+axis('equal');                  % set equal scale on axes
+title('Circle of unit radius')  % put a title
+```
+
+- Only change: `plot(x,y)` becomes `plot(x,y,0,0,'+')`. Two data sets in one `plot` call, the second is the single point (0,0).
+- Plot: unit circle with a + in the middle.
+
+</details>
+
+**Exercise 4.2** — **Change the radius of the circle:** Modify the script file `circle.m` to draw a circle of arbitrary radius $r$ as follows:
+
+- Include the following command in the script file before the first executable line (`theta=...`) to ask the user to input ($r$) on the screen: `r = input('Enter the radius of the circle:  ')`
+- Modify the $x$- and $y$-coordinate calculations appropriately.
+- Save and execute the file. When asked, enter a value for the radius and press return.
+
+<details><summary>Solution</summary>
+
+```matlab
+% CIRCLE - script file to draw a unit circle
+% File written by Alexandra Yakovleva
+% -----------------------------------
+r = input('Enter the radius of the circle: ');
+theta = linspace(0,2*pi,100);   % create vector theta
+x = r*cos(theta);               % generate x-coordinates
+y = r*sin(theta);               % generate y-coordinates
+plot(x,y,0,0,'+');              % plot the circle and its center
+axis('equal');                  % set equal scale on axes
+title('Circle of given radius r')
+
+circle
+
+Enter the radius of the circle: 3
+```
+
+- `r` multiplies both coordinates. `input` pauses the script and waits for a typed number.
+- Plot: circle of radius 3 (axes go from -3 to 3).
+
+</details>
+
+**Exercise 4.3** — **Variables in the workspace:** All variables created by a script file are left in the global workspace. You can get information about them and access them, too:
+
+- Type `who` to see the variables present in your workspace. You should see the variables `r`, `theta`, `x`, and `y` in the list.
+- Type `whos` to get more information about the variables and the workspace.
+- Type `[theta' x' y']` to see the values of $\theta$, $x$, and $y$ listed as three columns. All three variables are row vectors. Typing a single right quote (') after their names transposes them and makes them column vectors.
+
+<details><summary>Solution</summary>
+
+```matlab
+circle
+who
+whos
+ans = [theta' x' y'];
+ans(1:5,:)
+
+Your variables are:
+
+r      theta  x      y      
+
+  Name       Size            Bytes  Class     Attributes
+
+  r          1x1                 8  double              
+  theta      1x100             800  double              
+  x          1x100             800  double              
+  y          1x100             800  double              
+
+ans =
+
+         0    1.0000         0
+    0.0635    0.9980    0.0634
+    0.1269    0.9920    0.1266
+    0.1904    0.9819    0.1893
+    0.2539    0.9679    0.2511
+```
+
+- Shown for `r = 1`. `[theta' x' y']` is 100 rows, so only the first 5 rows are shown here. 100 doubles = 800 bytes, 1 double = 8 bytes.
+
+</details>
+
+**Exercise 4.4** — **Contents of the file:** You can see the contents of an M-file without opening the file with an editor. The contents are displayed by the `type` command. To see the contents of `circle.m`, type `type circle.m`.
+
+<details><summary>Solution</summary>
+
+```matlab
+type circle.m
+```
+
+- Prints the file text in the Command Window (the same lines as the script above). `type` works for any M-file on the path.
+
+</details>
+
+**Exercise 4.5** — **H1 line:** The first commented line before any executable statement in a script file is called the *H1 line*. It is this line that is searched by the `lookfor` command. Because the `lookfor` command is used to look for M-files with keywords in their description, you should put keywords in the H1 line of all M-files you create. Type `lookfor unit` to see what MATLAB comes up with. Does it list the script file you just created?
+
+<details><summary>Solution</summary>
+
+```matlab
+lookfor unit
+
+circle        - CIRCLE - script file to draw a unit circle
+(plus many built-in functions with 'unit' in their H1 line)
+```
+
+- Yes: the H1 line of `circle.m` contains the word `unit`. If the H1 line said only "draws a circle", `lookfor unit` would not find it. Search is slow on first run because MATLAB reads all H1 lines.
+- Exact list depends on installed toolboxes.
+
+</details>
+
+**Exercise 4.6** — **Just for fun:** Write a script file that, when executed, greets you, displays the date and time, and curses your favorite TA or professor. [The commands you need are `disp`, `date`, `clock`, and possibly `fix`. See the on-line help on these commands before using them.]
+
+<details><summary>Solution</summary>
+
+```matlab
+% HI_THERE - script file to begin your day
+% To execute, just type Hi_there
+% File written by Alexandra Yakovleva
+% -----------------------------------
+disp('Hello Sasha, how is life?')
+disp(' ')                          % display a blank line
+disp('Today is...')
+disp(date)                         % display date
+time = fix(clock);                 % get time as integers
+hourstr = int2str(time(4));        % get the hour
+minstr = int2str(time(5));         % get the minute
+if time(5) < 10                    % if minute is, say 5,
+    minstr = ['0',minstr];         % write it as 05
+end
+timex = [hourstr ':' minstr];      % create the time string
+disp(' ')
+disp('And the time is..')
+disp(timex)                        % display the time
+
+Hello Sasha, how is life?
+ 
+Today is...
+18-Nov-2026
+ 
+And the time is..
+16:45
+```
+
+- Save as `Hi_there.m`. Greeting kept friendly (no cursing). `clock` returns [year month day hour minute seconds]; `fix` drops the fractions. Date and time in the sample output depend on when you run it.
+
+</details>
+
+### Tutorial 5 Exercises: Function Files
+
+**Exercise 5.1** — **On-line help:** Type `help function` to get on-line help on `function`. Read through the help file.
+
+<details><summary>Solution</summary>
+
+```matlab
+help function
+```
+
+- No answer to give. Shows the syntax `function [out1,out2] = name(in1,in2)` and the rules for function files.
+
+</details>
+
+**Exercise 5.2** — **Convert temperature:** Write a function that outputs a conversion table for Celsius and Fahrenheit temperatures. The input of the function should be two numbers: $T_i$ and $T_f$, specifying the lower and upper range of the table in Celsius. The output should be a two-column matrix: the first column showing the temperature in Celsius from $T_i$ to $T_f$ in the increments of 1 C and the second column showing the corresponding temperatures in Fahrenheit. To do this, (i) create a column vector $C$ from $T_i$ to $T_f$ with the command `C=[Ti:Tf]'`, (ii) calculate the corresponding numbers in Fahrenheit using the formula $[F = \frac{9}{5}C + 32]$, and (iii) make the final matrix with the command `temp=[C F];`. Note that your output variable will be named *temp*.
+
+<details><summary>Solution</summary>
+
+```matlab
+function temptable = ctof(tinitial,tfinal)
+% CTOF - function to convert temperature from C to F
+% call syntax:
+%     temptable = ctof(tinitial,tfinal);
+% -----------------------------------
+C = [tinitial:tfinal]';        % create a column vector C
+F = (9/5)*C + 32;              % compute corresponding F
+temptable = [C F];             % make a 2-column matrix of C and F
+
+ctof(0,5)
+
+ans =
+
+         0   32.0000
+    1.0000   33.8000
+    2.0000   35.6000
+    3.0000   37.4000
+    4.0000   39.2000
+    5.0000   41.0000
+```
+
+- Save as `ctof.m` (file name = function name). Output variable here is called `temptable`; the exercise's `temp` works the same.
+- The transpose `'` makes the colon vector a column, so `[C F]` has 2 columns. $0\,^\circ$C = 32 F, 5 C = 41 F.
+- `ctof([0,100])` (a single vector input) gives an **error**: the function expects two numbers, not one vector. A list of numbers is not the same as a vector passed as one object.
+
+</details>
+
+**Exercise 5.3** — **Calculate factorials:** Write a function `factorial` to compute the factorial $n!$ for any integer $n$. The input should be the number $n$ and the output should be $n!$. You might have to use a *for* loop or a *while* loop to do the calculation. See Section 4.3.4 on page 114 for a quick description of these loops. (You can use the built-in function `prod` to calculate factorials. For example, $n!$ is `prod(1:n)`. In this exercise, however, do not use this function.)
+
+<details><summary>Solution</summary>
+
+```matlab
+function factn = factorial_loop(n)
+% FACTORIAL_LOOP - function to compute factorial n!
+% call syntax:
+%     factn = factorial_loop(n);
+% -----------------------------------
+if n < 0 || n ~= fix(n)         % check for negative or non-integer input
+    error('n must be a nonnegative integer.')
+end
+factn = 1;                      % initialize, also 0! = 1
+for k = n:-1:1                  % go from n down to 1
+    factn = factn*k;            % multiply n by n-1, n-2, etc.
+end
+
+factorial_loop(5)
+factorial_loop(0)
+
+ans =
+
+   120
+
+ans =
+
+     1
+```
+
+- Book calls it `factorial`, which would shadow the built-in `factorial`; renamed `factorial_loop`. Save as `factorial_loop.m`.
+- Book's extra question (check for negative and non-integer input) is the `if ... error` block. $0! = 1$ because the loop does not run when `n = 0`.
+- `||` is the short-circuit OR. Book uses a single `|`, which also works but evaluates both sides.
+
+</details>
+
+**Exercise 5.4** — **Compute the cross product:** Write a function file `crossprod` to compute the cross product of two vectors $u$ and $v$, given $u = (u_1, u_2, u_3)$, $v = (v_1, v_2, v_3)$, and $u \times v = (u_2 v_3 - u_3 v_2, \; u_3 v_1 - u_1 v_3, \; u_1 v_2 - u_2 v_1)$. Check your function by taking cross products of pairs of unit vectors: $(i, j)$, $(j, k)$, etc. $[i = (1,0,0), \; j = (0,1,0), \; k = (0,0,1)]$. (Do not use the built-in function `cross` here.)
+
+<details><summary>Solution</summary>
+
+```matlab
+function w = crossprod(u,v)
+% CROSSPROD - function to compute w = u x v for vectors u and v
+% call syntax:
+%     w = crossprod(u,v);
+% -----------------------------------
+if length(u) > 3 || length(v) > 3    % check if u OR v has more than 3 elements
+    error('Cross product needs vectors with 2 or 3 elements.')
+end
+u = [u(:); zeros(3-length(u),1)];    % 2-D vector: set 3rd component to 0
+v = [v(:); zeros(3-length(v),1)];
+w = [u(2)*v(3) - u(3)*v(2);          % first element of w
+     u(3)*v(1) - u(1)*v(3);          % second element of w
+     u(1)*v(2) - u(2)*v(1)];         % third element of w
+
+i = [1 0 0]; j = [0 1 0]; k = [0 0 1];
+crossprod(i,j)
+crossprod(j,k)
+crossprod(k,i)
+crossprod(j,i)
+
+ans =
+
+     0
+     0
+     1
+
+ans =
+
+     1
+     0
+     0
+
+ans =
+
+     0
+     1
+     0
+
+ans =
+
+     0
+     0
+    -1
+```
+
+- $i \times j = k$, $j \times k = i$, $k \times i = j$, and swapping the order flips the sign: $j \times i = -k$.
+- Book's extra question (2-D vectors, set the third component to zero) is the `zeros(3-length(u),1)` padding. Output is always a column.
+
+</details>
+
+**Exercise 5.5** — **Sum a geometric series:** Write a function to compute the sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ for a given $r$ and $n$. Thus the input to the function must be $r$ and $n$ and the output must be the sum of the series. [See Exercise 4 of Lesson 2.]
+
+<details><summary>Solution</summary>
+
+```matlab
+function s = gseriessum(r,n)
+% GSERIESSUM - function to calculate the sum of a geometric series
+% The series is 1+r+r^2+r^3+...+r^n (up to the nth power).
+% call syntax:
+%     s = gseriessum(r,n);
+% -----------------------------------
+nvector = 0:n;                  % create a vector from 0 to n
+series = r.^nvector;            % create a vector of terms in the series
+s = sum(series);                % sum all elements of the vector 'series'
+
+gseriessum(0.5,10)
+gseriessum(0.5,50)
+gseriessum(0.5,100)
+
+ans =
+
+    1.9990
+
+ans =
+
+    2.0000
+
+ans =
+
+     2
+```
+
+- Same numbers as Exercise 2.4, now reusable for any `r` and `n`. Limit as $n \to \infty$ is $1/(1-r) = 2$.
+
+</details>
+
+**Exercise 5.6** — **Calculate the interest on your money:** The interest you get at the end of $n$ years, at a flat annual rate of $r\%$, depends on how the interest is compounded. If the interest is added to your account $k$ times a year, and the principal amount you invested is $X_0$, then at the end of $n$ years you would have $X = X_0 \left(1 + \dfrac{r}{k}\right)^{kn}$ amount of money in your account. Write a function to compute the interest $(X - X_0)$ on your account for a given $X$, $n$, $r$, and $k$. Use the function to find the difference between the interest paid on \$1000 at the rate of 6% a year at the end of five years if the interest is compounded (i) quarterly ($k = 4$) and (ii) daily ($k = 365$). For screen output, use `format bank` (see Section 1.6.3, page 9, for a description of various formats).
+
+<details><summary>Solution</summary>
+
+```matlab
+function [capital,interest] = compound(capital,years,rate,timescomp)
+% COMPOUND - function to compute the compounded capital and the interest
+% call syntax:
+%     [capital,interest] = compound(capital,years,rate,timescomp);
+% -----------------------------------
+x0 = capital; n = years; r = rate; k = timescomp;
+if r > 1                        % check for common mistake
+    disp('check your interest rate. For 8% enter .08, not 8.')
+end
+capital = x0*(1+r/k)^(k*n);
+interest = capital - x0;
+
+format bank
+[X,I4] = compound(1000,5,0.06,4)
+[X,I365] = compound(1000,5,0.06,365)
+I365 - I4
+format short
+
+X =
+
+        1346.86
+
+I4 =
+
+         346.86
+
+X =
+
+        1349.83
+
+I365 =
+
+         349.83
+
+ans =
+
+           2.97
+```
+
+- Rate is a fraction: 6% is `0.06`, hence the `r > 1` warning. Quarterly interest \$346.86, daily \$349.83, difference about \$2.97.
+- Book answer prints \$346.85 and \$3.02: checking by hand, $1000(1.015)^{20} - 1000 = 346.855$ and $1000(1+0.06/365)^{1825} - 1000 = 349.826$, so the book's last digits look off. Spacing of `format bank` output is approximate (computed, not run in MATLAB).
+
 </details>
 
 ## HW HO Week 10
@@ -12923,4 +13729,593 @@ grid on
   Kim passes Elizabeth at t = 140/11 = 12.73 s, d = 9.64 m.
   
 </details>
+
+## Pratap Chapter 3 — Interactive Computation
+
+> **Source:** Rudra Pratap, *Getting Started with MATLAB*, Ch. 3 (pp. 41-75)
+
+### Summary of functions used in this chapter
+
+| Function / keyword | What it does | Example |
+|---|---|---|
+| `[ ]`, `;`, `,`, `...` | enter matrix, row separator, element separator, continue line | `A = [1 2 3; 4 5 6]` |
+| `A(i,j)`, `A(m:n,k:l)`, `A(:,j)` | index, submatrix, whole row or column | `B = A(2:3,:)` |
+| `A(:,2) = []` | delete a row or column | `A(1,:) = []` |
+| `size`, `reshape`, `A(:)` | dimensions, change shape, stack columns | `[m,n] = size(A)` |
+| `A'` | transpose (conjugate transpose if complex) | `x = A(1,:)'` |
+| `zeros`, `ones`, `eye`, `rand`, `randn` | utility matrices | `eye(3)` |
+| `diag`, `triu`, `tril`, `rot90`, `fliplr`, `flipud` | diagonals, triangles, flips | `diag(v,1)` |
+| `magic`, `hilb`, `pascal`, `toeplitz`, `vander`, `kron` | special matrices (`help specmat`) | `magic(4)` |
+| `a:h:b`, `linspace`, `logspace` | build vectors | `linspace(0,20,5)` |
+| `* / \ ^`, `.* ./ .^` | matrix and array arithmetic | `x = A\b` |
+| `< <= > >= == ~=` | relational, result is 0/1 | `x > 4` |
+| `& | ~ xor` | logical operators | `u & (x>4)` |
+| `all`, `any`, `find`, `exist`, `isempty`, `isinf`, `isnan` | logical functions | `i = find(x>5)` |
+| `sin cos tan asin atan atan2 sinh exp log log10 sqrt abs` | element-by-element math | `atan2(y,x)` |
+| `fix floor ceil round rem sign` | round-off and remainder | `rem(a,b)` |
+| `expm`, `logm`, `sqrtm` | true matrix functions | `expm(A)` |
+| `char`, `strcat`, `num2str`, `int2str`, `eval`, `upper`, `lower`, `strcmp` | strings | `title(['n = ',int2str(n)])` |
+| `help`, `lookfor`, `helpwin`, `helpdesk` | on-line help | `lookfor determinant` |
+| `eig`, `det` | eigenvalues, determinant | `[V,D] = eig(A)` |
+| `save`, `load`, `diary` | store data, record session | `save tubedata.mat x y` |
+| `plot`, `fplot`, `ezplot`, `xlabel`, `ylabel`, `title`, `print` | simple graphs | `plot(x,y)` |
+| `spy` | picture of nonzero structure | `spy(A)` |
+
+### 3.1 Matrices and Vectors
+
+#### 3.1.1 Input
+
+- Matrix entered row-wise: elements separated by space or comma, rows by `;` or Enter. All inside `[ ]`.
+- Vector = matrix with one row or one column. Scalar needs no brackets. `X = []` is the null matrix.
+- `...` (ellipsis) continues a command on the next line (max 4096 characters). Not allowed inside a character string.
+- Comment starts with `%`.
+
+```matlab
+A = [1 2 3; 4 5 6; 7 8 9];
+u = [1 3 9]        % row vector
+v = [1; 3; 9]      % column vector
+g = 9.81;          % scalar
+```
+
+#### 3.1.2 Indexing
+
+- `A(i,j)` is element a_ij. `A(m:n,k:l)` rows m to n, columns k to l. Colon alone means all rows or all columns.
+- Dimensions are automatic. Assign outside the current size and MATLAB grows the matrix, filling with zeros.
+
+```matlab
+A = [1 2 3; 4 5 6; 7 8 9];
+A(2,3)
+A(3,3) = 9
+B = A(2:3,1:3)
+B = A(2:3,:)
+B(:,2) = []
+size(A)
+[m,n] = size(A)
+D(2,3) = 5
+```
+
+- Fig. 3.1 (page 45): screen listing of these commands.
+- `A(:,5:20)` is columns 5 to 20 of all rows. `A([1 3 6 9],:)` picks rows 1, 3, 6, 9.
+
+#### 3.1.3 Manipulation
+
+- Replace rows: `A([1 3 6],:) = [B(1:3,:); y(4:10)]`. Sizes on both sides must match.
+- 0-1 vector as index: `v = logical([1 0 0 1 1]); Q(v,:)` picks rows 1, 4, 5.
+- Reshape: `b = A(:)` stacks columns into one column. `reshape(A,p,q)` needs m*n = p*q.
+- Transpose `A'`. Real: b_ij = a_ji. Complex: conjugate transpose.
+- Initialize large matrices: `A = zeros(m,n)`. For a matrix built in a loop start with `A = []`.
+- Append: `A = [A; u]` adds a row, `A = [A v]` adds a column (sizes must fit).
+- Delete: `A(2,:) = []`, `A(:,3:5) = []`, `A([1 3],:) = []`. `u(5:length(u)) = []` keeps only the first 4.
+
+```matlab
+B = [];
+for k = 1:3, B = [B; k k+1 k+2]; end
+B
+```
+
+#### Utility matrices
+
+- `eye(m,n)`, `zeros(m,n)`, `ones(m,n)`, `rand(m,n)` uniform random, `randn(m,n)` normal random. Single argument gives a square matrix.
+- `diag(v)` makes a diagonal matrix, `diag(A)` pulls out the diagonal, `diag(A,1)` first upper off-diagonal, `diag(A,-2)` second lower.
+- `rot90`, `fliplr`, `flipud`, `tril`, `triu`, `reshape`. Special matrices: `help specmat`.
+
+```matlab
+eye(3)
+B = [ones(3) zeros(3,2); zeros(2,3) 4*eye(2)]
+diag(B)'
+diag(B,1)'
+d = [2 4 6 8]; d1 = [-3 -3 -3]; d2 = [-1 -1];
+D = diag(d) + diag(d1,1) + diag(d2,-2)
+```
+
+- Fig. 3.2 (page 51): screen listing of these commands.
+
+#### 3.1.4 Creating Vectors
+
+- `v = InitialValue:Increment:FinalValue`. Default increment 1. Brackets not needed, but `[1:10 33:-2:19]` joins two ranges.
+- `linspace(a,b,n)` equals `a:(b-a)/(n-1):b`. `logspace(a,b,n)` is `10.^linspace(a,b,n)`.
+
+```matlab
+a = 0:10:100
+b = 0:pi/50:2*pi;
+u = linspace(0,20,5)
+v = logspace(0,3,4)
+```
+
+### 3.2 Matrix and Array Operations
+
+#### 3.2.1 Arithmetic operations
+
+- `+ - * / ^` work as matrix operations. `A*B` needs inner sizes to match. `A^2` needs a square matrix (it is `A*A`).
+- Scalar with matrix: `A+a`, `A*a` act on every element.
+- `u*v` for two same-size column vectors is an error. `u*v'` is the outer product (matrix). `u'*v` is the inner product (scalar).
+- `x = A\b` solves Ax = b (left division). Faster and more stable than `inv(A)*b`. `5\3` gives 0.6.
+- Array operations, term by term: `.*  ./  .^`. `A^2` and `A.^2` are very different.
+- `1./v` works for any v. `u./v` and `u.*v` need the same size.
+
+```matlab
+A = [1 2 3; 4 5 6; 7 8 9];
+x = A(1,:)'
+x'*x
+x*x'
+A*x
+A^2
+A.^2
+```
+
+- Fig. 3.3 (page 55): screen listing of these commands.
+
+#### 3.2.2 Relational operations
+
+- Six operators: `<  <=  >  >=  ==  ~=`. Result has the same size as the operands, 1 where true, 0 where false.
+- Used in `if` and for picking elements.
+
+```matlab
+x = [1 5 3 7]; y = [0 2 8 7];
+k = x < y
+k = x == y
+k = x ~= y
+v = x(x > 4)
+```
+
+#### 3.2.3 Logical operations
+
+- `&` and, `|` or, `~` not, `xor` exclusive or. Output is 0-1, so it can index: `y = x(x>4 & x<9)`.
+- `all(x)` true if all elements true. `any(x)` true if any element nonzero. `exist('name')` zero if nothing of that name.
+- `isempty`, `isinf`, `isfinite`, `isnan`. `find(x)` gives indices of nonzero elements. `[r,c] = find(A>100)` gives row and column indices.
+
+```matlab
+x = [0 2 5 7];
+find(x)
+i = find(x > 5)
+```
+
+#### 3.2.4 Elementary math functions
+
+- All act element by element and return a matrix of the same size: `sin cos tan sec csc cot` (radians), inverses `asin acos atan`, hyperbolic `sinh cosh tanh`, `exp log log10 sqrt abs angle conj real imag`.
+- `atan2(y,x)` is the four-quadrant arctangent, result between -pi and pi.
+- Round-off: `fix` toward 0, `floor` toward -inf, `ceil` toward +inf, `round` nearest. `rem(a,b)` is a - fix(a./b).*b. `sign`.
+
+```matlab
+q = [0 pi/2 pi]; x = [1 -1 -1 1]; y = [1 1 -1 -1];
+sin(q)
+atan(y./x)
+atan2(y,x)
+fix([-2.33 2.66])
+floor([-2.33 2.66])
+ceil([-2.33 2.66])
+round([-2.33 2.66])
+rem([-1.5 7],[2 3])
+```
+
+#### 3.2.5 Matrix functions
+
+- `expm(A)` is e^A (not element-wise `exp(A)`). `logm(A)`, `sqrtm(A)` likewise. `funm` for general matrix functions.
+
+```matlab
+A = [1 2; 3 4];
+Asqrt = sqrt(A)
+Asqrt = sqrtm(A)
+exp_A = exp(A)
+exp_A = expm(A)
+```
+
+- Fig. 3.4 (page 60): screen listing of these commands.
+
+#### 3.2.6 Character strings
+
+- A string is a row vector of characters in single quotes. Quote inside a string: two single quotes `''`.
+- Rows of a string matrix must have equal length. `char('Hi','Hello','Namaste')` pads with blanks.
+- Strings join like matrices: `c = [howdy(2,:) names(3,:)]`. `[ 'n = ', int2str(n) ]` builds titles with numbers.
+- `eval('x = 5*sin(pi/3)')` runs a string as a command. `feval` evaluates a function by name.
+
+```matlab
+names = char('John','Ravi','Mary','Xiao');
+howdy = char('Hi','Hello','Namaste');
+c = [howdy(2,:) names(3,:)]
+n = 10;
+title(['Variance study with sample size n = ',int2str(n)])
+for k = 1:3
+    outputfile = ['result',int2str(k)];
+    x = k; y = k^2;
+    eval(['save ',outputfile,' x y'])
+end
+```
+
+- The blanks inside `'save '` and `' x y'` are needed, otherwise the string runs together.
+
+### 3.3 Using Built-in Functions and On-line Help
+
+- `help name` needs the exact name. `lookfor keyword` searches the first line of every help file (one word only, or quote a phrase: `lookfor 'linear equations'`). `helpwin` window. `helpdesk` browser.
+- `help` alone lists categories (`elfun`, `elmat`, `matfun`, `lang`, ...). `help elfun` lists the functions in a category.
+- Help text is in capitals but functions are lowercase. MATLAB is case sensitive.
+
+```matlab
+lookfor determinant
+help det
+A = rand(10);
+det(A)
+lookfor eigenvalue
+A = [5 -3 2; -3 8 4; 4 2 -9];
+eig(A)
+[eigvec,eigval] = eig(A)
+```
+
+- Fig. 3.5 to 3.8 (pages 65 to 68): screen listings of help, `lookfor determinant`, `lookfor eigenvalue`, `eig`.
+- `[V,D] = eig(A)`: V has eigenvectors as columns, D has eigenvalues on the diagonal. Output list must be in the order the function gives.
+
+### 3.4 Saving and Loading Data
+
+- `save tubedata.mat x y` saves x and y. `save newdata rx ry rz` adds `.mat`. `save` alone saves the whole workspace to `matlab.mat`. `save xdata.dat x -ascii` is 8-digit text.
+- `load tubedata` restores variables. `load` alone loads `matlab.mat`. ASCII file with only numbers also loads.
+- `dlmwrite`, `dlmread` for delimited files.
+- `diary session1.out` records the whole session in a text file. `diary off` stops, `diary on` resumes.
+- Not recommended for saving data: diary keeps only the displayed digits.
+
+### 3.5 Plotting simple graphs
+
+- `plot(xdata,ydata)`. x and y vectors must be the same length. Several pairs: `plot(x1,y1,x2,y2)`.
+- `fplot('function',[xmin xmax])` and `ezplot('function',xmin,xmax)` (symbolic toolbox) plot a function directly.
+- `print resp_amp.eps -deps` saves the current plot as an encapsulated PostScript file.
+
+```matlab
+x = 0:0.2:20;
+y = exp(0.1*x).*sin(x);
+plot(x,y)
+xlabel('Time (t) in Seconds')
+ylabel('The Response Amplitude in mm')
+title('A Simple 2-D Plot')
+print resp_amp.eps -deps
+fplot('exp(-.1*x).*sin(x)',[0, 20])
+xlabel('x'), ylabel('f(x) = e^{x/10} sin(x)')
+title('A function plotted with fplot')
+ezplot('exp(-.1*x).*cos(x)',0,20)
+```
+
+- Fig. 3.9, 3.10, 3.11 (pages 72 and 73): plot, `fplot`, `ezplot` of the decaying sine.
+
+---
+
+## Pratap Chapter 3 — Exercises
+
+**Exercise 1** — **Entering matrices:** Enter the following three matrices: $A = \begin{bmatrix} 2 & 6 \\ 3 & 9 \end{bmatrix}$, $B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$, $C = \begin{bmatrix} -5 & 5 \\ 5 & 3 \end{bmatrix}$.
+
+<details><summary>Solution</summary>
+
+```matlab
+A = [2 6; 3 9]
+B = [1 2; 3 4]
+C = [-5 5; 5 3]
+
+A =
+
+     2     6
+     3     9
+
+
+B =
+
+     1     2
+     3     4
+
+
+C =
+
+    -5     5
+     5     3
+```
+
+- Rows separated by `;`. Outputs computed, not run in MATLAB.
+
+</details>
+
+**Exercise 2** — **Check some linear algebra rules:** Is matrix addition commutative? Compute `A + B` and then `B + A`. Is matrix addition associative? Compute `(A + B) + C` and `A + (B + C)`. Is multiplication with a scalar distributive? Compute $\alpha(A+B)$ and $\alpha A + \alpha B$, taking $\alpha = 5$. Is multiplication with a matrix distributive? Compute `A*(B+C)` and compare with `A*B + A*C`. Matrices are different from scalars! For scalars, $ab = ac$ implies $b = c$ if $a \neq 0$. Is that true for matrices? Check by computing `A*B` and `A*C`. In general matrix products do not commute either: check if `A*B` and `B*A` give different results.
+
+<details><summary>Solution</summary>
+
+```matlab
+A+B
+B+A
+(A+B)+C
+A+(B+C)
+5*(A+B)
+5*A + 5*B
+A*(B+C)
+A*B + A*C
+A*B
+A*C
+B*A
+
+ans =
+
+     3     8
+     6    13
+
+
+ans =
+
+     3     8
+     6    13
+
+
+ans =
+
+    -2    13
+    11    16
+
+
+ans =
+
+    -2    13
+    11    16
+
+
+ans =
+
+    15    40
+    30    65
+
+
+ans =
+
+    15    40
+    30    65
+
+
+ans =
+
+    40    56
+    60    84
+
+
+ans =
+
+    40    56
+    60    84
+
+
+ans =
+
+    20    28
+    30    42
+
+
+ans =
+
+    20    28
+    30    42
+
+
+ans =
+
+     8    24
+    18    54
+```
+
+- Addition is commutative and associative. Scalar and matrix multiplication are distributive: same results.
+- `A*B` equals `A*C` although $B \neq C$: A is singular (det = 0, row 2 is 1.5 times row 1), so $ab = ac$ does not give $b = c$.
+- `A*B` and `B*A` are different: matrix multiplication does not commute.
+
+</details>
+
+**Exercise 3** — **Create matrices with zeros, eye, and ones:** Create the following matrices with `zeros`, `eye`, and `ones` (see `help eye`): $D$ = 2 by 3 matrix of zeros, $E = \begin{bmatrix} 5&0&0\\0&5&0\\0&0&5 \end{bmatrix}$, $F = \begin{bmatrix} 3&3\\3&3 \end{bmatrix}$.
+
+<details><summary>Solution</summary>
+
+```matlab
+D = zeros(2,3)
+E = 5*eye(3)
+F = 3*ones(2)
+
+D =
+
+     0     0     0
+     0     0     0
+
+
+E =
+
+     5     0     0
+     0     5     0
+     0     0     5
+
+
+F =
+
+     3     3
+     3     3
+```
+
+- `zeros(2,3)` is 2 by 3. `eye(3)` identity times 5. `ones(2)` is 2 by 2 (single argument gives a square matrix).
+
+</details>
+
+**Exercise 4** — **Create a big matrix with submatrices:** The following matrix $G$ is created by putting matrices $A$, $B$, and $C$ on its diagonal ($G$ is $6\times6$ with $A$ in rows 1-2, $B$ in rows 3-4, $C$ in rows 5-6, zeros elsewhere). In how many ways can you create this matrix using submatrices $A$, $B$, and $C$ (you are not allowed to enter the non-zero numbers explicitly)?
+
+<details><summary>Solution</summary>
+
+```matlab
+G = [A zeros(2,4); zeros(2,2) B zeros(2,2); zeros(2,4) C]
+
+G = blkdiag(A,B,C);
+
+G = zeros(6);
+G(1:2,1:2) = A;
+G(3:4,3:4) = B;
+G(5:6,5:6) = C;
+G
+
+G =
+
+     2     6     0     0     0     0
+     3     9     0     0     0     0
+     0     0     1     2     0     0
+     0     0     3     4     0     0
+     0     0     0     0    -5     5
+     0     0     0     0     5     3
+```
+
+- Three ways: (1) concatenate blocks with `zeros` fillers, (2) `blkdiag(A,B,C)`, (3) start with `zeros(6)` and assign each diagonal block by indexing. Same G each time.
+
+</details>
+
+**Exercise 5** — **Manipulate a matrix:** Do the following operations on matrix $G$ created above in (4): delete the last row and last column of the matrix; extract the first $4\times4$ submatrix from $G$; replace `G(5,5)` with 4; what do you get if you type `G(13)` and hit return? Can you explain how MATLAB got that answer? What happens if you type `G(12,1) = 1` and hit return?
+
+<details><summary>Solution</summary>
+
+```matlab
+H = G;
+H(end,:) = [];
+H(:,end) = [];
+H
+
+H =
+
+     2     6     0     0     0
+     3     9     0     0     0
+     0     0     1     2     0
+     0     0     3     4     0
+     0     0     0     0    -5
+
+
+
+H = G;
+H(1:4,1:4)
+H(5,5) = 4
+G(13)
+G(12,1) = 1
+
+ans =
+
+     2     6     0     0
+     3     9     0     0
+     0     0     1     2
+     0     0     3     4
+
+
+H =
+
+     2     6     0     0     0     0
+     3     9     0     0     0     0
+     0     0     1     2     0     0
+     0     0     3     4     0     0
+     0     0     0     0     4     5
+     0     0     0     0     5     3
+
+
+ans =
+
+     0
+
+
+
+G =
+
+     2     6     0     0     0     0
+     3     9     0     0     0     0
+     0     0     1     2     0     0
+     0     0     3     4     0     0
+     0     0     0     0    -5     5
+     0     0     0     0     5     3
+     0     0     0     0     0     0
+     0     0     0     0     0     0
+     0     0     0     0     0     0
+     0     0     0     0     0     0
+     0     0     0     0     0     0
+     1     0     0     0     0     0
+```
+
+- Work on a copy `H` so `G` stays $6\times6$ for the last two questions.
+- `G(13)` is a single index: MATLAB counts down the columns. $13 = 2\cdot6 + 1$, so it is row 1 of column 3, which is 0.
+- `G(12,1) = 1` is outside the matrix, so G grows to $12\times6$ and the new entries are zeros, with a 1 in row 12, column 1.
+
+</details>
+
+**Exercise 6** — **See the structure of a matrix:** Create a $20\times20$ matrix with `A = ones(20)`. Replace the $10\times10$ submatrix between rows 6:15 and columns 6:15 with zeros. See the structure of the matrix (in terms of nonzero entries) with `spy(A)`. Set the $5\times5$ submatrices in the top right corner and bottom left corner to zeros and see the structure again.
+
+<details><summary>Solution</summary>
+
+```matlab
+A = ones(20);
+A(6:15,6:15) = 0;
+spy(A)
+A(1:5,16:20) = 0;
+A(16:20,1:5) = 0;
+figure
+spy(A)
+```
+
+- Plot: `spy` shows a dot for every nonzero entry. First picture is a square frame (a hole in the middle), second has two more empty corners (top right and bottom left), so a pinwheel pattern.
+
+</details>
+
+**Exercise 7** — **Create a symmetric matrix:** Create an upper triangular matrix with `A = diag(1:6) + diag(7:11,1) + diag(12:15,2)`. Make sure you understand how this command works (see `help diag`). Now use the upper off-diagonal terms of $A$ to make $A$ a symmetric matrix with `A = A + triu(A,1)'`.
+
+<details><summary>Solution</summary>
+
+```matlab
+A = diag(1:6) + diag(7:11,1) + diag(12:15,2)
+A = A + triu(A,1)'
+
+A =
+
+     1     7    12     0     0     0
+     0     2     8    13     0     0
+     0     0     3     9    14     0
+     0     0     0     4    10    15
+     0     0     0     0     5    11
+     0     0     0     0     0     6
+
+
+A =
+
+     1     7    12     0     0     0
+     7     2     8    13     0     0
+    12     8     3     9    14     0
+     0    13     9     4    10    15
+     0     0    14    10     5    11
+     0     0     0    15    11     6
+```
+
+- `diag(1:6)` main diagonal, `diag(7:11,1)` first upper, `diag(12:15,2)` second upper. `triu(A,1)` keeps only the part above the main diagonal, `'` flips it below, and adding it to A mirrors the upper terms. Check: `isequal(A,A')` is 1.
+
+</details>
+
+**Exercise 8** — **Do some cool operations:** Create a $10\times10$ random matrix with `A = rand(10)`. Multiply all elements by 100 and then round off all elements of the matrix to integers with `A = fix(A)`. Replace all elements of $A < 10$ with zeros. Replace all elements of $A > 90$ with infinity (`inf`). Extract all $30 \le a_{ij} \le 50$ in a vector `b`, that is, find all elements of $A$ that are between 30 and 50 and put them in a vector `b`.
+
+<details><summary>Solution</summary>
+
+```matlab
+A = rand(10);
+A = 100*A;
+A = fix(A);
+A(A < 10) = 0;
+A(A > 90) = inf;
+b = A(A >= 30 & A <= 50);
+```
+
+- Logical indexing: `A < 10` is a 10 by 10 0-1 matrix that picks the elements to replace. `&` for both conditions (not `&&`, which needs scalars). `b` comes out as a column vector. Random numbers, so every run gives different values (nothing to print here).
+
+</details>
+
 
