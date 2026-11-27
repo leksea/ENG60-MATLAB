@@ -51,7 +51,7 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
   - [2.6 Strings & Character Arrays](#26-strings--character-arrays)
   - [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files)
 - [SDC Chapter 2 — Exercises](#sdc-chapter-2--exercises)
-- [Home Loan Assignment](#home-loan-assignment)
+- [HO — Home Loan Assignment](#ho--home-loan-assignment)
 - [SDC Chapter 3 — Programming Basics: Arrays, Structures & Tables](#sdc-chapter-3--programming-basics-arrays-structures--tables)
   - [3.1 Arrays, Matrices, Vectors & Scalars](#31-arrays-matrices-vectors--scalars)
   - [3.2 Growing Arrays & the Empty Array](#32-growing-arrays--the-empty-array)
@@ -108,9 +108,9 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
   - [6.11 Recursion](#611-recursion)
   - [6.12 Persistent Variables](#612-persistent-variables)
 - [SDC Chapter 6 — Exercises](#sdc-chapter-6--exercises)
-- [Midterm Example](#midterm-example)
-- [Numerical Integration](#numerical-integration)
-- [Object-Oriented Programming in Matlab](#object-oriented-programming-in-matlab)
+- [HO — Midterm Example](#ho--midterm-example)
+- [HO — Numerical Integration](#ho--numerical-integration)
+- [HO — Object-Oriented Programming in Matlab](#ho--object-oriented-programming-in-matlab)
   - [1.1 Objects: Introduction](#11-objects-introduction)
   - [1.2 Classes: Using a Class](#12-classes-using-a-class)
   - [1.3 Defining a Class](#13-defining-a-class)
@@ -121,8 +121,8 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
   - [1.8 Mutators, Accessors & Private Helpers](#18-mutators-accessors--private-helpers)
   - [1.9 Handle Classes](#19-handle-classes)
   - [1.10 Handle Class Example: Ball Drop](#110-handle-class-example-ball-drop)
-- [Object-Oriented Programming in Matlab — Exercises](object-oriented-programming-in-matlab--exercises)
-- [Midterm](#midterm)
+- [HO — Object-Oriented Programming in Matlab — Exercises](#ho--object-oriented-programming-in-matlab--exercises)
+- [HO — Midterm](#ho--midterm)
 - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
   - [7.1 Syntactic Errors](#71-syntactic-errors)
   - [7.2 Semantic Errors](#72-semantic-errors)
@@ -157,14 +157,14 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
   - [9.6 Pie Charts](#96-pie-charts)
   - [9.7 3D Surface, Colormap, Viewpoint, Colorbar](#97-3d-surface-colormap-viewpoint-colorbar)
 - [SDC Chapter 9 — Exercises](#sdc-chapter-9--exercises)
-- [Hands-On — Trend Analysis and Forecasting (Week 9)](#hands-on--trend-analysis-and-forecasting-week-9)
+- [HO — Trend Analysis and Forecasting (Week 9)](#ho--trend-analysis-and-forecasting-week-9)
   - [H.1 Forecasting and Trend Projection](#h1-forecasting-and-trend-projection)
   - [H.2 Least-Squares Regression](#h2-least-squares-regression)
   - [H.3 Worked Example: Johnson's Engine Plant](#h3-worked-example-johnsons-engine-plant)
   - [H.4 Stats by Hand and by Excel](#h4-stats-by-hand-and-by-excel)
   - [H.5 My Linear Regression Spreadsheet](#h5-my-linear-regression-spreadsheet)
   - [H.6 Cause and Effect](#h6-cause-and-effect)
-- [Hands-On — Exercises](#hands-on--exercises)
+- [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises)
 - [Pratap Chapter 1 — Introduction](#pratap-chapter-1--introduction)
   - [1.1 What MATLAB Is, Symbolic Math, Platforms](#11-what-matlab-is-symbolic-math-platforms)
   - [1.2 Using This Book and the MATLAB Windows](#12-using-this-book-and-the-matlab-windows)
@@ -220,7 +220,7 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
     - [Exercise 5.4: Compute the cross product](#ex-5-4)
     - [Exercise 5.5: Sum a geometric series](#ex-5-5)
     - [Exercise 5.6: Calculate the interest on your money](#ex-5-6)
-- [HW HO Week 10](#hw-ho-week-10)
+- [HO — Week 10](#ho--week-10)
 - [Pratap Chapter 3 — Interactive Computation](#pratap-chapter-3--interactive-computation)
   - [3.1 Matrices and Vectors](#31-matrices-and-vectors)
     - [3.1.1 Input](#311-input)
@@ -258,7 +258,7 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
     - [4.4.1 Multidimensional matrices](#441-multidimensional-matrices)
     - [4.4.2 Structures](#442-structures)
     - [4.4.3 Cell arrays](#443-cell-arrays)
-- [Pratap Chapter 4 — Grey Scans](#pratap-chapter-5--grey-scans)
+- [Pratap Chapter 4 — Grey Scans](#pratap-chapter-4--grey-scans)
 - [Pratap Chapter 5 — Applications](#pratap-chapter-5--applications)
   - [5.1 Linear Algebra](#51-linear-algebra)
     - [5.1.1 Solving a linear system](#511-solving-a-linear-system)
@@ -282,7 +282,7 @@ SDC *MATLAB Programming for Engineers* - Pratap *Getting Started with MATLAB*
     - [5.6.1 Roots of polynomials](#561-roots-of-polynomials)
   - [5.7 Advanced Topics](#57-advanced-topics)
 - [Pratap Chapter 5 — Exercises](#pratap-chapter-5--exercises)
-- [Final Practice — Infectious World War Z and Bacteria Growth](#final-practice--infectious-world-war-z-and-bacteria-growth)
+- [HO — Sample Final: Infectious World War Z and Bacteria Growth](#ho--sample-final-infectious-world-war-z-and-bacteria-growth)
   - [Final exam learning outcomes](#final-exam-learning-outcomes)
   - [Part 1: Infectious World War Z](#part-1-infectious-world-war-z)
   - [Part 2: Bacteria Growth and Interpretation](#part-2-bacteria-growth-and-interpretation)
@@ -349,25 +349,27 @@ Uses MATLAB to teach computer-based problem solving for science and engineering:
 - **Emergency info:** westvalley.edu/emergency
 
 
-# Notebook Grading Sheet - ENGR 60 (with links into the notebook)
+<a id="grading-rubric"></a>
 
-Links are in-page anchors: paste this section into `MATLAB_Lab_Notebook.md` and they jump to the matching heading. 5 pts per line unless noted; chapter header 20 pts; handout 100 pts. "SDC Book" and "Pratap Book" are the page numbers printed on the sheet.
+## Grading Rubric - ENGR 60
 
-## Handouts (100 pts each)
+5 pts per line unless noted; chapter header 20 pts; handout 100 pts. "SDC Book" and "Pratap Book" are the page numbers printed on the sheet.
+
+### Handouts (100 pts each)
 
 | Handout | Pts | Source | Notebook link |
 |---|---|---|---|
-| Home Mortgage (Lab #3) | 100 | Canvas HO | [Home Loan Assignment](#home-loan-assignment) |
-| Forecasting - Trend Line HO | 100 | Canvas HO | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
-| Great Bike Race HO | 100 | Canvas HO | [HW HO Week 10 (Moto Race)](#hw-ho-week-10) |
-| B737 Max 8 HO | 100 | Canvas HO | [HW HO Week 10](#hw-ho-week-10) |
-| Sample Midterm | 100 | Canvas HO | [Midterm Example](#midterm-example) |
-| Midterm | 5 | Canvas HO | [Midterm](#midterm) |
-| Sample Final (extra credit Wk14) | 100 | Canvas HO | - |
-| Object-Oriented Prog | 100 | Canvas HO | [Object-Oriented Programming in Matlab](#object-oriented-programming-in-matlab) |
-| Numerical Integration | 100 | Canvas HO | [Numerical Integration](#numerical-integration) |
+| Home Mortgage (Lab #3) | 100 | Canvas HO | [HO — Home Loan Assignment](#ho--home-loan-assignment) |
+| Forecasting - Trend Line HO | 100 | Canvas HO | [HO — Trend Analysis and Forecasting (Week 9)](#ho--trend-analysis-and-forecasting-week-9) |
+| Great Bike Race HO | 100 | Canvas HO | [HO — Week 10 (Great Bike Race)](#ho--week-10) |
+| B737 Max 8 HO | 100 | Canvas HO | [HO — Week 10](#ho--week-10) |
+| Sample Midterm | 100 | Canvas HO | [HO — Midterm Example](#ho--midterm-example) |
+| Midterm | 5 | Canvas HO | [HO — Midterm](#ho--midterm) |
+| Sample Final (extra credit Wk14) | 100 | Canvas HO | [HO — Sample Final: Infectious World War Z and Bacteria Growth](#ho--sample-final-infectious-world-war-z-and-bacteria-growth) |
+| Object-Oriented Prog | 100 | Canvas HO | [HO — Object-Oriented Programming in Matlab](#ho--object-oriented-programming-in-matlab) |
+| Numerical Integration | 100 | Canvas HO | [HO — Numerical Integration](#ho--numerical-integration) |
 
-## Column 1 - SDC chapters
+### Column 1 - SDC chapters
 
 ### Front matter
 
@@ -410,10 +412,10 @@ Topics: SDC Ch1 - Intro Load; Load Bearing data  Save; Running the Script Vt; Co
 | Run or Type script name | 5 | P.13 | [1.11 Running a Script, Saving & Closing](#111-running-a-script-saving--closing) |
 | `Vt = 67.4174` | 5 | P.13 | [1.11 Running a Script, Saving & Closing](#111-running-a-script-saving--closing) |
 | **SDC End of Chapter Exercises1 #1 - 4** |  | P.14 |  |
-| #1 Carabiner conversion | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
-| #2 16 significant digits | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
-| #3 Calculation | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
-| #4 Vt\_(Mars) modified | 5 | P.14 | [Ch 1 Exercises](#sdc-chapter-1--exercises) |
+| #1 Carabiner conversion | 5 | P.14 | [Ex 1.1](#sdc-ch1-ex-1) |
+| #2 16 significant digits | 5 | P.14 | [Ex 1.2](#sdc-ch1-ex-2) |
+| #3 Calculation | 5 | P.14 | [Ex 1.3](#sdc-ch1-ex-3) |
+| #4 Vt\_(Mars) modified | 5 | P.14 | [Ex 1.4](#sdc-ch1-ex-4) |
 
 ### SDC Ch 2 - Program Basics (20 pts) - [SDC Chapter 2 — Operators, Variables & Data Types](#sdc-chapter-2--operators-variables--data-types)
 
@@ -449,14 +451,14 @@ Topics: Arithmetic/Relational; Logical-Variable Naming; Storing Numeric Values; 
 |  | 5 | P.31 | [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files) |
 |  | 5 | P.35 | [2.7 Importing Data (VCF Files)](#27-importing-data-vcf-files) |
 | **Exercises2 #1 - 8** |  | P.36 |  |
-| `#1 5+2*8/2-(3*2*10)/-1` | 5 | P.36 | [Ex 2.1](#21) |
-| `#2 z=-(x<y\|\|-(y<x)&&islogical(x))` | 5 | P.37 | [Ex 2.2](#22) |
-| `#3 x=55+uint32(-22)+pi` | 5 | P.37 | [Ex 2.3](#23) |
-| #4 int8(ceil(1271)) | 5 | P.37 | [Ex 2.4](#24) |
-| `#5  x = 'small kittens'` | 5 | P.37 | [Ex 2.5](#25) |
-| #6 A thru H Datatypes | 5 | P.38 | [Ex 2.6](#26) |
-| #7  8' x 11' | 5 | P.38 | [Ex 2.7](#27) |
-| #8  Garbage Calculations | 5 | P.38 | [Ex 2.8](#28) |
+| `#1 5+2*8/2-(3*2*10)/-1` | 5 | P.36 | [Ex 2.1](#sdc-ch2-ex-1) |
+| `#2 z=-(x<y\|\|-(y<x)&&islogical(x))` | 5 | P.37 | [Ex 2.2](#sdc-ch2-ex-2) |
+| `#3 x=55+uint32(-22)+pi` | 5 | P.37 | [Ex 2.3](#sdc-ch2-ex-3) |
+| #4 int8(ceil(1271)) | 5 | P.37 | [Ex 2.4](#sdc-ch2-ex-4) |
+| `#5  x = 'small kittens'` | 5 | P.37 | [Ex 2.5](#sdc-ch2-ex-5) |
+| #6 A thru H Datatypes | 5 | P.38 | [Ex 2.6](#sdc-ch2-ex-6) |
+| #7  8' x 11' | 5 | P.38 | [Ex 2.7](#sdc-ch2-ex-7) |
+| #8  Garbage Calculations | 5 | P.38 | [Ex 2.8](#sdc-ch2-ex-8) |
 | **Lab #1-2** |  |  |  |
 | T1-1 (a,b) | 5 |  | [T1-1](#t1-1--use-matlab-to-compute-the-following) |
 | Cylinder 20% increase | 5 |  | [Cylinder](#cylinder-problem) |
@@ -495,12 +497,12 @@ Topics: Array Types; Strings as Matrices; : ; randi() magic(); Cell Arrays - Str
 | `>>mars-planetary_data(4,:)` | 5 | P.57 | [3.13 Accessing & Adding Table Data](#313-accessing--adding-table-data) |
 | `>>planet_structure=table2struct.` | 5 | P.58-59 | [3.14 Table Conversion Functions](#314-table-conversion-functions) |
 | **Exercises3 #1 - 6** |  |  |  |
-| #1 1x10 array first 5 odd | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
-| #2  6x6 array with randi() | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
-| #3 8x8 array w/new arrays | 5 | P.60 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
-| #4 structure called 'student' | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
-| #5 structure callled 'house' | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
-| #6 table of house | 5 | P.61 | [Ch 3 Exercises](#sdc-chapter-3--exercises) |
+| #1 1x10 array first 5 odd | 5 | P.60 | [Ex 3.1](#sdc-ch3-ex-1) |
+| #2  6x6 array with randi() | 5 | P.60 | [Ex 3.2](#sdc-ch3-ex-2) |
+| #3 8x8 array w/new arrays | 5 | P.60 | [Ex 3.3](#sdc-ch3-ex-3) |
+| #4 structure called 'student' | 5 | P.61 | [Ex 3.4](#sdc-ch3-ex-4) |
+| #5 structure callled 'house' | 5 | P.61 | [Ex 3.5](#sdc-ch3-ex-5) |
+| #6 table of house | 5 | P.61 | [Ex 3.6](#sdc-ch3-ex-6) |
 
 ### SDC Ch 4 - Programming (20 pts) - [SDC Chapter 4 — Looping & Conditionals](#sdc-chapter-4--looping--conditionals)
 
@@ -524,11 +526,11 @@ Topics: While Loops - 4 hr Video (Hr 1 Vectors); For Loops; If - Else Conditiona
 | `if x ==6 break` | 5 | P.79 | [4.10 Exiting a Loop](#410-exiting-a-loop) |
 | `if x ==6 continue` | 5 | P.80 | [4.10 Exiting a Loop](#410-exiting-a-loop) |
 | **Exercises4  #1 - 5** |  |  |  |
-| `#1 x = 1: -2: 10` | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
-| `#2 while x <=10` | 5 | P82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
-| `#3 else villain = 'Dracula'` | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
-| #4 script for factorial | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
-| #5 code an infinite loop | 5 | P.82 | [Ch 4 Exercises](#sdc-chapter-4--exercises) |
+| `#1 x = 1: -2: 10` | 5 | P.82 | [Ex 4.1](#sdc-ch4-ex-1) |
+| `#2 while x <=10` | 5 | P82 | [Ex 4.2](#sdc-ch4-ex-2) |
+| `#3 else villain = 'Dracula'` | 5 | P.82 | [Ex 4.3](#sdc-ch4-ex-3) |
+| #4 script for factorial | 5 | P.82 | [Ex 4.4](#sdc-ch4-ex-4) |
+| #5 code an infinite loop | 5 | P.82 | [Ex 4.5](#sdc-ch4-ex-5) |
 
 ### SDC Ch 5 - Matrices (20 pts) - [SDC Chapter 5 — Matrices](#sdc-chapter-5--matrices)
 
@@ -550,16 +552,16 @@ Topics: Size, diag, eye, magic; Scalar math -  .*   ./; Randi(i,i,i) & Transposi
 | `>> C = inv(A)` | 5 | P.99 | [5.10 Matrix Division & Inverse Matrices](#510-matrix-division--inverse-matrices) |
 | heroes, sidekick, villain example | 5 | P.100 | [5.11 Examples: Solving Linear Systems](#511-examples-solving-linear-systems) |
 | **Exercises5  #1 - 10** |  | P.102 |  |
-| `#1 A.*A` | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #2 heroes, sidekick, villain | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| `#3  3x3 matrix A*A^-1` | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #4 doctor; lawyer; engineer | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #5 fees charged in cities | 5 | P.102 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #6 sum function | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #7 sum columns | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #8 reduce by half | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #9 after tax income | 5 | P.103 | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
-| #10 potatoe, beet, asparagus | 5 |  | [Ch 5 Exercises](#sdc-chapter-5--exercises) |
+| `#1 A.*A` | 5 | P.102 | [Ex 5.1](#sdc-ch5-ex-1) |
+| #2 heroes, sidekick, villain | 5 | P.102 | [Ex 5.2](#sdc-ch5-ex-2) |
+| `#3  3x3 matrix A*A^-1` | 5 | P.102 | [Ex 5.3](#sdc-ch5-ex-3) |
+| #4 doctor; lawyer; engineer | 5 | P.102 | [Ex 5.4](#sdc-ch5-ex-4) |
+| #5 fees charged in cities | 5 | P.102 | [Ex 5.5](#sdc-ch5-ex-5) |
+| #6 sum function | 5 | P.103 | [Ex 5.6](#sdc-ch5-ex-6) |
+| #7 sum columns | 5 | P.103 | [Ex 5.7](#sdc-ch5-ex-7) |
+| #8 reduce by half | 5 | P.103 | [Ex 5.8](#sdc-ch5-ex-8) |
+| #9 after tax income | 5 | P.103 | [Ex 5.9](#sdc-ch5-ex-9) |
+| #10 potatoe, beet, asparagus | 5 |  | [Ex 5.10](#sdc-ch5-ex-10) |
 
 ### SDC Ch 6 - Funct'n, Script (20 pts) - [SDC Chapter 6 — Functions & Scripts](#sdc-chapter-6--functions--scripts)
 
@@ -581,11 +583,11 @@ Topics: Functions Built-in; Function - Format; Function Algorithm Code; Scope - 
 | `>>local_var = 1000` | 5 | P.121 | [6.10 Variable Scope](#610-variable-scope) |
 |  |  | P.124-5 | [6.11 Recursion](#611-recursion) |
 | **Exercises6  #1 - 5** |  |  |  |
-| #1 Terminal velocity | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
-| #2 Modify matrixMax | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
-| #3 function torque1 | 5 | P.126 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
-| #4 function torque2 | 5 | P.127 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
-| #5 write recursive funct. | 5 | P.127 | [Ch 6 Exercises](#sdc-chapter-6--exercises) |
+| #1 Terminal velocity | 5 | P.126 | [Ex 6.1](#sdc-ch6-ex-1) |
+| #2 Modify matrixMax | 5 | P.126 | [Ex 6.2](#sdc-ch6-ex-2) |
+| #3 function torque1 | 5 | P.126 | [Ex 6.3](#sdc-ch6-ex-3) |
+| #4 function torque2 | 5 | P.127 | [Ex 6.4](#sdc-ch6-ex-4) |
+| #5 write recursive funct. | 5 | P.127 | [Ex 6.5](#sdc-ch6-ex-5) |
 
 ### SDC Ch 7 - Debugging (20 pts) - [SDC Chapter 7 — Debugging & Error Handling](#sdc-chapter-7--debugging--error-handling)
 
@@ -606,9 +608,9 @@ Topics: Break Points; Error Handle - Comments
 | `Vt = sqrt((2*...)  disp("Error...` | 5 | P.141 | [7.8 Try/Catch Blocks](#78-trycatch-blocks) |
 | `while 1   x = 1` | 5 | P.142 | [7.9 Manual Debugging Techniques](#79-manual-debugging-techniques) |
 | **Exercises7  #1 - 3** |  |  |  |
-| #1 function w/ 12 zodiac signs | 5 | P.144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
-| #2 debug terminalDebugging.m | 5 | P. 144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
-| #3 secretMessage.m | 5 | P.144 | [Ch 7 Exercises](#sdc-chapter-7--exercises) |
+| #1 function w/ 12 zodiac signs | 5 | P.144 | [Ex 7.1](#sdc-ch7-ex-1) |
+| #2 debug terminalDebugging.m | 5 | P. 144 | [Ex 7.2](#sdc-ch7-ex-2) |
+| #3 secretMessage.m | 5 | P.144 | [Ex 7.3](#sdc-ch7-ex-3) |
 
 ### Chap 8 -Import/Export (20 pts) - [SDC Chapter 8 — Importing & Exporting Data](#sdc-chapter-8--importing--exporting-data)
 
@@ -636,13 +638,13 @@ Topics: ls mkdir * path; importing - exporting
 | `>> fprintf('My name is %s.\n',` | 5 | P.174-5 | [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose) |
 | `>>fclose('all')` | 5 | P.175-6 | [8.11 Exporting Formatted Text: fopen, fprintf, fclose](#811-exporting-formatted-text-fopen-fprintf-fclose) |
 | **Exercises8  #1 - 7** |  |  |  |
-| #1 split to separate folders | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #2 Export/Import | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #3 script to list files | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #4 import HeatTreatData | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #5 Export M to spreadsht | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #6 Export V1, V2 | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
-| #7 Import Mortality-1.xlsx | 5 | P.177 | [Ch 8 Exercises](#sdc-chapter-8--exercises) |
+| #1 split to separate folders | 5 | P.177 | [Ex 8.1](#sdc-ch8-ex-1) |
+| #2 Export/Import | 5 | P.177 | [Ex 8.2](#sdc-ch8-ex-2) |
+| #3 script to list files | 5 | P.177 | [Ex 8.3](#sdc-ch8-ex-3) |
+| #4 import HeatTreatData | 5 | P.177 | [Ex 8.4](#sdc-ch8-ex-4) |
+| #5 Export M to spreadsht | 5 | P.177 | [Ex 8.5](#sdc-ch8-ex-5) |
+| #6 Export V1, V2 | 5 | P.177 | [Ex 8.6](#sdc-ch8-ex-6) |
+| #7 Import Mortality-1.xlsx | 5 | P.177 | [Ex 8.7](#sdc-ch8-ex-7) |
 
 ### Chap 9 - Plotting & Data (20 pts) - [SDC Chapter 9 — Plotting and Data Visualization](#sdc-chapter-9--plotting-and-data-visualization)
 
@@ -659,26 +661,26 @@ Topics: ls mkdir * path; importing - exporting
 | `>>pie(Percentages, explode, Labels)` | 5 | P.193-95 | [9.6 Pie Charts](#96-pie-charts) |
 | VolcanoSpectralData | 5 | P.195 | [9.6 Pie Charts](#96-pie-charts) |
 | **Exercises9 #1 - 5** |  |  |  |
-| `#1 Graph y=X^2 from X=-3 to 3` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
-| `#2 Graph y=2X-X^2` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
-| `#3 Graph y=sqrt(x-1)` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
-| `#4 Graph y=x^3-12x` | 5 | P.202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
-| #5 Graph Mortality-1.xlsx | 5 | P202 | [Ch 9 Exercises](#sdc-chapter-9--exercises) |
+| `#1 Graph y=X^2 from X=-3 to 3` | 5 | P.202 | [Ex 9.1](#sdc-ch9-ex-1) |
+| `#2 Graph y=2X-X^2` | 5 | P.202 | [Ex 9.2](#sdc-ch9-ex-2) |
+| `#3 Graph y=sqrt(x-1)` | 5 | P.202 | [Ex 9.3](#sdc-ch9-ex-3) |
+| `#4 Graph y=x^3-12x` | 5 | P.202 | [Ex 9.4](#sdc-ch9-ex-4) |
+| #5 Graph Mortality-1.xlsx | 5 | P202 | [Ex 9.5](#sdc-ch9-ex-5) |
 
-### Chap 10 - Tools (20 pts) - [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9)
+### Chap 10 - Tools (20 pts) - [HO — Trend Analysis and Forecasting (Week 9)](#ho--trend-analysis-and-forecasting-week-9)
 
 **Chapter 10 - Matlab Toolboxes: Curve Fitting** (Ch.10 - 2 projects - 5 exercises)
 
 | Item | Pts | SDC Book | Notebook link |
 |---|---|---|---|
-| If using Octave - Do in Excel |  | P.203-18 | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
-| Also do Canvas HO "Forcasting" |  |  | [Hands-On Trend Analysis](#hands-on--trend-analysis-and-forecasting-week-9) |
+| If using Octave - Do in Excel |  | P.203-18 | [HO — Trend Analysis and Forecasting (Week 9)](#ho--trend-analysis-and-forecasting-week-9) |
+| Also do Canvas HO "Forcasting" |  |  | [HO — Trend Analysis and Forecasting (Week 9)](#ho--trend-analysis-and-forecasting-week-9) |
 | **Exercises10  #1 - 5** |  |  |  |
-| #1  USPopulationData.xlsx | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
-| #2 Curve fit equation for growth | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
-| #3 Compare Equation for 2016 | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
-| #4 Projected 2043 population | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
-| #5 HeatTreatData.xlsx | 5 | P.219 | [Hands-On — Exercises](#hands-on--exercises) |
+| #1  USPopulationData.xlsx | 5 | P.219 | [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises) |
+| #2 Curve fit equation for growth | 5 | P.219 | [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises) |
+| #3 Compare Equation for 2016 | 5 | P.219 | [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises) |
+| #4 Projected 2043 population | 5 | P.219 | [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises) |
+| #5 HeatTreatData.xlsx | 5 | P.219 | [HO — Trend Analysis and Forecasting — Exercises](#ho--trend-analysis-and-forecasting--exercises) |
 
 ### Chap 11 - Symbolic Math (20 pts)
 
@@ -704,44 +706,44 @@ Topics: ls mkdir * path; importing - exporting
 
 | Item | Pts | Pratap Book | Notebook link |
 |---|---|---|---|
-| 1. compare; sqrt; pi | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
-| 2. Exponents & Log (a,b,c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
-| 3. Trig (a, b, c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
-| 4. Complex No. (a,b,c) | 5 |  | [2.1 Lesson 1: A Minimum MATLAB Session](#21-lesson-1-a-minimum-matlab-session) |
+| 1. compare; sqrt; pi | 5 |  | [Exercise 1.1](#ex-1-1) |
+| 2. Exponents & Log (a,b,c) | 5 |  | [Exercise 1.2](#ex-1-2) |
+| 3. Trig (a, b, c) | 5 |  | [Exercise 1.3](#ex-1-3) |
+| 4. Complex No. (a,b,c) | 5 |  | [Exercise 1.4](#ex-1-4) |
 
 **Pratap  Tutorial 2** - pg 25
 
 | Item | Pts | Pratap Book | Notebook link |
 |---|---|---|---|
-| 1. Equation of Line | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
-| 2. Vectors (a,b,c) | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
-| 3. Points on Circle | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
-| 4. Geometric Series | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
-| 5. Matrices & Vectors | 5 |  | [2.2 Lesson 2: Arrays of Numbers](#22-lesson-2-arrays-of-numbers) |
+| 1. Equation of Line | 5 |  | [Exercise 2.1](#ex-2-1) |
+| 2. Vectors (a,b,c) | 5 |  | [Exercise 2.2](#ex-2-2) |
+| 3. Points on Circle | 5 |  | [Exercise 2.3](#ex-2-3) |
+| 4. Geometric Series | 5 |  | [Exercise 2.4](#ex-2-4) |
+| 5. Matrices & Vectors | 5 |  | [Exercise 2.5](#ex-2-5) |
 
 **Pratap Tutorial 3** - pg 29
 
 | Item | Pts | Pratap Book | Notebook link |
 |---|---|---|---|
-| 1. Simple Sin Plot | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 2. Line Styles | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 3. Decay Sin Plot | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 4 Space Curve | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 5. On-line Help | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 6. Log scale Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 7. Overlay Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
-| 8. 9. Own Plots | 5 |  | [2.3 Lesson 3: Simple Plots](#23-lesson-3-simple-plots) |
+| 1. Simple Sin Plot | 5 |  | [Exercise 3.1](#ex-3-1) |
+| 2. Line Styles | 5 |  | [Exercise 3.2](#ex-3-2) |
+| 3. Decay Sin Plot | 5 |  | [Exercise 3.3](#ex-3-3) |
+| 4 Space Curve | 5 |  | [Exercise 3.4](#ex-3-4) |
+| 5. On-line Help | 5 |  | [Exercise 3.5](#ex-3-5) |
+| 6. Log scale Plots | 5 |  | [Exercise 3.6](#ex-3-6) |
+| 7. Overlay Plots | 5 |  | [Exercise 3.7](#ex-3-7) |
+| 8. 9. Own Plots | 5 |  | [Exercises 3.8](#ex-3-8), [3.9](#ex-3-9) |
 
 **Pratap Tutorial 4** - pg 33
 
 | Item | Pts | Pratap Book | Notebook link |
 |---|---|---|---|
-| 1. Center of Circle | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
-| 2. Change radius of Circle | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
-| 3. Variables in workspace | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
-| 4. Contents of file "type" | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
-| 5. H1 line | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
-| 6. Just for Fun script file | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
+| 1. Center of Circle | 5 |  | [Exercise 4.1](#ex-4-1) |
+| 2. Change radius of Circle | 5 |  | [Exercise 4.2](#ex-4-2) |
+| 3. Variables in workspace | 5 |  | [Exercise 4.3](#ex-4-3) |
+| 4. Contents of file "type" | 5 |  | [Exercise 4.4](#ex-4-4) |
+| 5. H1 line | 5 |  | [Exercise 4.5](#ex-4-5) |
+| 6. Just for Fun script file | 5 |  | [Exercise 4.6](#ex-4-6) |
 | Bearing.mat CANVAS | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
 | Your Own Project | 5 |  | [2.4 Lesson 4: Script Files](#24-lesson-4-script-files) |
 
@@ -749,12 +751,12 @@ Topics: ls mkdir * path; importing - exporting
 
 | Item | Pts | Pratap Book | Notebook link |
 |---|---|---|---|
-| 1. On-line help | 5 | prob pg 37 | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
-| 2. Convert temperature | 5 | ans pg 38 | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
-| 3.Calculate Factorials | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
-| 4. Cross-Product | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
-| 5.Sum Geo series | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
-| 6. Interest Calculation | 5 |  | [Pratap Chapter 2 — Exercises](#pratap-chapter-2--exercises) |
+| 1. On-line help | 5 | prob pg 37 | [Exercise 5.1](#ex-5-1) |
+| 2. Convert temperature | 5 | ans pg 38 | [Exercise 5.2](#ex-5-2) |
+| 3.Calculate Factorials | 5 |  | [Exercise 5.3](#ex-5-3) |
+| 4. Cross-Product | 5 |  | [Exercise 5.4](#ex-5-4) |
+| 5.Sum Geo series | 5 |  | [Exercise 5.5](#ex-5-5) |
+| 6. Interest Calculation | 5 |  | [Exercise 5.6](#ex-5-6) |
 
 **Ch. 3 Matrix Input** - Matrix  manipulation - p41 (65)
 
@@ -792,7 +794,7 @@ Topics: ls mkdir * path; importing - exporting
 
 **Pratap Ch. 6 (extra credit)**
 
-## Totals
+### Totals
 
 | Column | Points |
 |---|---|
@@ -1062,7 +1064,8 @@ ans =
 
 ![Numeric format drop-down](media/ch1_numeric_settings.png)
 
-```matlab11/3
+```matlab
+>> 1/3
 
 ans =
 
@@ -1407,7 +1410,7 @@ cm/s units
 
 ## SDC Chapter 1 — Exercises
 
-**Exercise 1.1** — A climbing carabiner is rated to have a closed gate strength of 20 kN (kiloNewton) and open gate strength of 6 kN. Use MATLAB to calculate the rating for the carabiner in lbf (pounds force). 1 kN = 224.809 lbf.
+<a id="sdc-ch1-ex-1"></a>**Exercise 1.1** — A climbing carabiner is rated to have a closed gate strength of 20 kN (kiloNewton) and open gate strength of 6 kN. Use MATLAB to calculate the rating for the carabiner in lbf (pounds force). 1 kN = 224.809 lbf.
 
 <details><summary>Solution</summary>
 
@@ -1429,7 +1432,7 @@ Closed gate **4496.18 lbf**, open gate **1348.85 lbf**. (`format short` switches
 
 </details>
 
-**Exercise 1.2** — Use the data file **bearingdata.mat** to convert the values stored in the file from ounces to kilograms. One ounce equals 0.0283495 kg. Show the values to 16 significant digits.
+<a id="sdc-ch1-ex-2"></a>**Exercise 1.2** — Use the data file **bearingdata.mat** to convert the values stored in the file from ounces to kilograms. One ounce equals 0.0283495 kg. Show the values to 16 significant digits.
 
 <details><summary>Solution</summary>
 
@@ -1445,7 +1448,7 @@ format short
 
 </details>
 
-**Exercise 1.3** — Use MATLAB to calculate the following:
+<a id="sdc-ch1-ex-3"></a>**Exercise 1.3** — Use MATLAB to calculate the following:
 a. 654.23 + 345.73
 b. 597.64533 - 0.83455
 c. 3984566 / 5.5
@@ -1483,7 +1486,7 @@ ans =
 
 </details>
 
-**Exercise 1.4** — Modify the terminal_velocity script you created previously to calculate the terminal velocity if the 25 mm spherical object of mass 65.4710 was falling towards Mars and not Earth. The gravity of Mars is 3.711 m/s². The atmospheric density at the surface of Mars is estimated to be .020 kg/m³. Notice that these units for the density and gravity of Mars are in m (meters) units not mm (millimeters).
+<a id="sdc-ch1-ex-4"></a>**Exercise 1.4** — Modify the terminal_velocity script you created previously to calculate the terminal velocity if the 25 mm spherical object of mass 65.4710 was falling towards Mars and not Earth. The gravity of Mars is 3.711 m/s². The atmospheric density at the surface of Mars is estimated to be .020 kg/m³. Notice that these units for the density and gravity of Mars are in m (meters) units not mm (millimeters).
 
 <details><summary>Solution</summary>
 
@@ -2537,6 +2540,8 @@ The new variable `tblIDs` appears in the Workspace alongside `ChromeExport2`. Th
 
 *(p.36-38) Exercises 2.1 – 2.8*
 
+<a id="sdc-ch2-ex-1"></a>
+
 ### 2.1
 
 Based on operator precedence, predict the result without using MATLAB:
@@ -2552,6 +2557,8 @@ ans =
 ```
 
 Yes, the answers agree.
+
+<a id="sdc-ch2-ex-2"></a>
 
 ### 2.2
 
@@ -2580,6 +2587,8 @@ z =
 
 Yes, the answers agree.
 
+<a id="sdc-ch2-ex-3"></a>
+
 ### 2.3
 
 Predict both the value and data type of `x`:
@@ -2596,6 +2605,8 @@ x =
 ```
 
 The answers are slightly different — MATLAB displays just the whole number (`58`) rather than `58.14159...`. This demonstrates that variable types follow strict rules, and misunderstanding them can silently produce unexpected results (the integer type truncates/rounds the floating-point result).
+
+<a id="sdc-ch2-ex-4"></a>
 
 ### 2.4
 
@@ -2636,6 +2647,8 @@ ans =
 
 Yes, the numbers match.
 
+<a id="sdc-ch2-ex-5"></a>
+
 ### 2.5
 
 Predict what you'd expect to see (generally, not precisely) from the last two lines:
@@ -2667,6 +2680,8 @@ ans =
     "3small kittens"
 ```
 
+<a id="sdc-ch2-ex-6"></a>
+
 ### 2.6
 
 Data type likely used to store each kind of information, with brief reasoning:
@@ -2681,6 +2696,8 @@ Data type likely used to store each kind of information, with brief reasoning:
 | f. List of separate entries | **String array** | So each entry will be its own string |
 | g. True/false data | **Numeric** (logical) | True and false can be represented by 1 and 0 |
 | h. Non-numeric categories | **Categorical array** | Because it's non-numeric data |
+
+<a id="sdc-ch2-ex-7"></a>
 
 ### 2.7
 
@@ -2725,6 +2742,8 @@ ans =
 | b. | 14' × 9' | **$243.36** | **12.5%** |
 | c. | 12' × 8'-6" | **$172.38** | **0%** |
 | d. | 18' × 13' | **$405.60** | **2.5%** |
+
+<a id="sdc-ch2-ex-8"></a>
 
 ### 2.8
 
@@ -2780,7 +2799,7 @@ V_yd3 =
 
 ---
 
-## Home Loan Assignment
+## HO — Home Loan Assignment
 
 This week you will do some Engineering Economic Analysis and see how computers iterate their formulas to derive answers.  This starts with understanding the time value of money.  You will choose and compare a home with a 30 and 15-year loan to observe the difference in the exercise Home Loan.  I've done a sample, but you will choose your own price and interest and write over my results to get the results for your home.  Answer the questions in the boxes provided and place into your notebook.
 
@@ -4407,7 +4426,7 @@ After converting back, reassign the other metadata (description, units and so on
 
 Each worked solution is collapsed, so you can try the exercise yourself before opening it. The `randi` exercises call `rng('default')` first, so your output should match.
 
-**Exercise 3.1** — Using the colon operator, create a 1 × 10 array whose first five numbers are the odd numbers from 1 to 9 and whose last five are the even numbers from 2 to 10. *Hint: a comma is involved.*
+<a id="sdc-ch3-ex-1"></a>**Exercise 3.1** — Using the colon operator, create a 1 × 10 array whose first five numbers are the odd numbers from 1 to 9 and whose last five are the even numbers from 2 to 10. *Hint: a comma is involved.*
 
 <details><summary>Solution</summary>
 
@@ -4421,7 +4440,7 @@ ans =
 
 </details>
 
-**Exercise 3.2** — Create a 6 × 6 array with `randi()`. Using the colon operator, write an equation that retrieves the upper-left 3 × 3 corner of the array.
+<a id="sdc-ch3-ex-2"></a>**Exercise 3.2** — Create a 6 × 6 array with `randi()`. Using the colon operator, write an equation that retrieves the upper-left 3 × 3 corner of the array.
 
 <details><summary>Solution</summary>
 
@@ -4449,7 +4468,7 @@ corner =
 
 </details>
 
-**Exercise 3.3** — Create an 8 × 8 array with `randi()`. Using the colon operator, write an equation that builds a new array from every other row and column of the original.
+<a id="sdc-ch3-ex-3"></a>**Exercise 3.3** — Create an 8 × 8 array with `randi()`. Using the colon operator, write an equation that builds a new array from every other row and column of the original.
 
 <details><summary>Solution</summary>
 
@@ -4480,7 +4499,7 @@ everyOther =
 
 </details>
 
-**Exercise 3.4** — Create a structure called `student` with four fields: a character array `name`, an `int8` `age`, a floating-point `GPA` and a string array `major`. Give each field a suitable value. Convert the structure to a cell array and multiply each age entry by three.
+<a id="sdc-ch3-ex-4"></a>**Exercise 3.4** — Create a structure called `student` with four fields: a character array `name`, an `int8` `age`, a floating-point `GPA` and a string array `major`. Give each field a suitable value. Convert the structure to a cell array and multiply each age entry by three.
 
 <details><summary>Solution</summary>
 
@@ -4529,7 +4548,7 @@ Multiplying an `int8` by 3 keeps the `int8` type. `int8` values stop at 127, so 
 
 </details>
 
-**Exercise 3.5** — Using a combination of structure arrays and cell arrays, build a MATLAB structure called `house` with this content:
+<a id="sdc-ch3-ex-5"></a>**Exercise 3.5** — Using a combination of structure arrays and cell arrays, build a MATLAB structure called `house` with this content:
 
 ```text
 house
@@ -4616,7 +4635,7 @@ ans =
 
 </details>
 
-**Exercise 3.6** — Use the information from Exercise 3.5 to create a table.
+<a id="sdc-ch3-ex-6"></a>**Exercise 3.6** — Use the information from Exercise 3.5 to create a table.
 
 <details><summary>Solution</summary>
 
@@ -5494,7 +5513,7 @@ branching, condition, conditionals, firstValue, function, infinite loop, lastVal
 
 ## SDC Chapter 4 — Exercises
 
-**Exercise 4.1** — Explain why this loop will never execute, in terms of an array declaration and the resulting array.
+<a id="sdc-ch4-ex-1"></a>**Exercise 4.1** — Explain why this loop will never execute, in terms of an array declaration and the resulting array.
 
 ```matlab
 for x = 1 : -2 : 10
@@ -5516,7 +5535,7 @@ ans =
 
 </details>
 
-**Exercise 4.2** — Rewrite this while loop as a for loop.
+<a id="sdc-ch4-ex-2"></a>**Exercise 4.2** — Rewrite this while loop as a for loop.
 
 ```matlab
 x = 1;
@@ -5538,7 +5557,7 @@ Same output: 1 through 10. The `for` handles the start, the +1 step and the stop
 
 </details>
 
-**Exercise 4.3** — Rewrite this if statement as a switch statement. Assume that the String variable *hero* has been defined earlier in the function.
+<a id="sdc-ch4-ex-3"></a>**Exercise 4.3** — Rewrite this if statement as a switch statement. Assume that the String variable *hero* has been defined earlier in the function.
 
 ```matlab
 if strcmp(hero, 'Superman')
@@ -5588,7 +5607,7 @@ villain =
 
 </details>
 
-**Exercise 4.4** — The factorial of a number is the product of all of the positive integers less than or equal to the number. An exclamation point (!) after a number is used to designate the factorial of that number, for example 150!. Create a script to calculate the factorial of 150 using loops and conditionals. MATLAB has a built-in function to compute factorials, but do not use it in your code. Look in Help for the factorial function, and use it to check your results.
+<a id="sdc-ch4-ex-4"></a>**Exercise 4.4** — The factorial of a number is the product of all of the positive integers less than or equal to the number. An exclamation point (!) after a number is used to designate the factorial of that number, for example 150!. Create a script to calculate the factorial of 150 using loops and conditionals. MATLAB has a built-in function to compute factorials, but do not use it in your code. Look in Help for the factorial function, and use it to check your results.
 
 <details><summary>Solution</summary>
 
@@ -5624,7 +5643,7 @@ Match. (`n = 0` $\rightarrow$ loop runs zero times $\rightarrow$ `result = 1` = 
 
 </details>
 
-**Exercise 4.5** — Create your own code example that will result in an infinite loop. Modify the code to provide a conditional that will exit the loop.
+<a id="sdc-ch4-ex-5"></a>**Exercise 4.5** — Create your own code example that will result in an infinite loop. Modify the code to provide a conditional that will exit the loop.
 
 <details><summary>Solution</summary>
 
@@ -5860,8 +5879,7 @@ ans =
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}+\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a+h&b+i&c+j\\d+k&e+l&f+m\end{bmatrix}$$
 
-**Matrix subtraction** $\rightarrow$ same, but order counts: A − B $
-eq$ B − A (not **commutative**).
+**Matrix subtraction** $\rightarrow$ same, but order counts: A − B $\neq$ B − A (not **commutative**).
 
 $$\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}-\begin{bmatrix}h&i&j\\k&l&m\end{bmatrix}=\begin{bmatrix}a-h&b-i&c-j\\d-k&e-l&f-m\end{bmatrix}$$
 
@@ -6203,8 +6221,7 @@ A * B   ->   (3,5) (5,2)
 ```
 
 - **Inner** dims match (5) $\rightarrow$ valid. Result size = **outer** dims $\rightarrow$ (3,2).
-- Not commutative: `B * A` $\rightarrow$ (5,2)(3,5), inner 2 $
-eq$ 3 $\rightarrow$ error.
+- Not commutative: `B * A` $\rightarrow$ (5,2)(3,5), inner 2 $\neq$ 3 $\rightarrow$ error.
 
 For A (r,s) and B (t,u):
 
@@ -6269,8 +6286,7 @@ Technically no "matrix division". For `x = B/A`, MATLAB help says:
 
 - A scalar $\rightarrow$ `B/A` = `B./A`.
 - A square n × n, B has n columns $\rightarrow$ `x = B/A` solves `x*A = B` (if a solution exists).
-- A rectangular m × n (m $
-eq$ n), B has n columns $\rightarrow$ least-squares solution of `x*A = B` (beyond scope).
+- A rectangular m × n (m $\neq$ n), B has n columns $\rightarrow$ least-squares solution of `x*A = B` (beyond scope).
 
 Middle case = the useful one $\rightarrow$ needs **inverse matrices**.
 
@@ -6416,7 +6432,7 @@ array division, array multiplication, commutative, diagonal matrix, element-by-e
 
 ## SDC Chapter 5 — Exercises
 
-**Exercise 5.1** — A.\*A results in the square of each value in matrix A. A\*A, however, which gives an entirely different answer, can only be performed if what condition is true?
+<a id="sdc-ch5-ex-1"></a>**Exercise 5.1** — A.\*A results in the square of each value in matrix A. A\*A, however, which gives an entirely different answer, can only be performed if what condition is true?
 
 <details><summary>Solution</summary>
 
@@ -6441,7 +6457,7 @@ ans =
 
 </details>
 
-**Exercise 5.2** — In the second week of the Justice League fundraiser discussed in the lesson, contributions were as follows:
+<a id="sdc-ch5-ex-2"></a>**Exercise 5.2** — In the second week of the Justice League fundraiser discussed in the lesson, contributions were as follows:
 
 - For the space station: from each hero $500, each sidekick $300, and each villain $200: a total of $7100
 - For the Fortress of Solitude: from each hero $1000, each sidekick $100, each villain $300: a total of $8300
@@ -6467,7 +6483,7 @@ Same as week 1.
 
 </details>
 
-**Exercise 5.3** — Create a 3 × 3 matrix A, with any numerical content. Use MATLAB to determine its inverse, then *manually* perform the matrix multiplication A \* A⁻¹ to prove that the answer is 1.
+<a id="sdc-ch5-ex-3"></a>**Exercise 5.3** — Create a 3 × 3 matrix A, with any numerical content. Use MATLAB to determine its inverse, then *manually* perform the matrix multiplication A \* A⁻¹ to prove that the answer is 1.
 
 <details><summary>Solution</summary>
 
@@ -6515,7 +6531,7 @@ ans =
 
 </details>
 
-**Exercise 5.4** — In Germany, annual professional fees are set by law for engineers, doctors, and lawyers. In Frankfurt, the total fees charged in a single year by 23 doctors, 18 lawyers, and 12 engineers were equivalent to $76,500,000 US. In that same year in Berlin, 25 doctors, 20 lawyers, and 16 engineers charged $85,500,000. In Munich, 18 doctors, 9 lawyers, and 20 engineers charged $55,000,000.
+<a id="sdc-ch5-ex-4"></a>**Exercise 5.4** — In Germany, annual professional fees are set by law for engineers, doctors, and lawyers. In Frankfurt, the total fees charged in a single year by 23 doctors, 18 lawyers, and 12 engineers were equivalent to $76,500,000 US. In that same year in Berlin, 25 doctors, 20 lawyers, and 16 engineers charged $85,500,000. In Munich, 18 doctors, 9 lawyers, and 20 engineers charged $55,000,000.
 
 In MATLAB, use the formula B = A⁻¹\*C to determine the annual fee charged by each doctor, each lawyer, and each engineer. Tip: Use 76.5 rather than 76,500,000 (etc.) in constructing that matrix.
 
@@ -6539,7 +6555,7 @@ Doctor **$1.5M**, lawyer **$2.0M**, engineer **$0.5M** per year.
 
 </details>
 
-**Exercise 5.5** — Using the matrices A and B from Exercise 5.4, in a single MATLAB command, calculate a new 3 × 3 matrix D that contains the specific amounts charged by each profession in each city. For example, (1,1) will be the total fees charged by doctors in Frankfurt, (2,2) the total fees charged by doctors in Berlin, and so on.
+<a id="sdc-ch5-ex-5"></a>**Exercise 5.5** — Using the matrices A and B from Exercise 5.4, in a single MATLAB command, calculate a new 3 × 3 matrix D that contains the specific amounts charged by each profession in each city. For example, (1,1) will be the total fees charged by doctors in Frankfurt, (2,2) the total fees charged by doctors in Berlin, and so on.
 
 <details><summary>Solution</summary>
 
@@ -6561,7 +6577,7 @@ Book typo: doctors in Berlin are at **(2,1)**, not (2,2). (2,2) = lawyers in Ber
 
 </details>
 
-**Exercise 5.6** — To the matrix D created in Exercise 5.5, add a 4th column that is a sum of each row. Do this with a single MATLAB command. Hint: the sum function, the colon operator, and MATLAB help are your friends.
+<a id="sdc-ch5-ex-6"></a>**Exercise 5.6** — To the matrix D created in Exercise 5.5, add a 4th column that is a sum of each row. Do this with a single MATLAB command. Hint: the sum function, the colon operator, and MATLAB help are your friends.
 
 <details><summary>Solution</summary>
 
@@ -6579,7 +6595,7 @@ Column 4 = city totals $\rightarrow$ matches the C totals.
 
 </details>
 
-**Exercise 5.7** — To the matrix D from Exercise 5.6, add a 4th row that is a sum of each column. Do this with a single MATLAB command.
+<a id="sdc-ch5-ex-7"></a>**Exercise 5.7** — To the matrix D from Exercise 5.6, add a 4th row that is a sum of each column. Do this with a single MATLAB command.
 
 <details><summary>Solution</summary>
 
@@ -6598,7 +6614,7 @@ Row 4 = profession totals; D(4,4) = grand total $217M.
 
 </details>
 
-**Exercise 5.8** — Using a single MATLAB command applied to matrix D from Exercise 5.8, calculate a matrix E where each element is reduced by half to account for the local and national taxes paid by each profession.
+<a id="sdc-ch5-ex-8"></a>**Exercise 5.8** — Using a single MATLAB command applied to matrix D from Exercise 5.8, calculate a matrix E where each element is reduced by half to account for the local and national taxes paid by each profession.
 
 <details><summary>Solution</summary>
 
@@ -6617,7 +6633,7 @@ E =
 
 </details>
 
-**Exercise 5.9** — Based on matrix E from Exercise 5.8, and once again using a single MATLAB command, calculate a new 1 × 3 matrix F that specifies the average annual after-tax income of a doctor, a lawyer, and an engineer in this year. Are you still happy with your career choice?
+<a id="sdc-ch5-ex-9"></a>**Exercise 5.9** — Based on matrix E from Exercise 5.8, and once again using a single MATLAB command, calculate a new 1 × 3 matrix F that specifies the average annual after-tax income of a doctor, a lawyer, and an engineer in this year. Are you still happy with your career choice?
 
 <details><summary>Solution</summary>
 
@@ -6635,7 +6651,7 @@ After tax: doctor **$750K**, lawyer **$1.0M**, engineer **$250K**. (= B'/2, as e
 
 </details>
 
-**Exercise 5.10** — On Monday, a farmer sells 8 pounds of potatoes, 3 pounds of beets, and 6 pounds of asparagus. He receives a total of $44. On Tuesday, he receives $48 dollars for 5 pounds of beets, 3 pounds of potatoes and 7 pounds of asparagus. On Wednesday, he receives a total of $31 for 9 pounds of potatoes, 1 pound of beets, and 4 pounds of asparagus.
+<a id="sdc-ch5-ex-10"></a>**Exercise 5.10** — On Monday, a farmer sells 8 pounds of potatoes, 3 pounds of beets, and 6 pounds of asparagus. He receives a total of $44. On Tuesday, he receives $48 dollars for 5 pounds of beets, 3 pounds of potatoes and 7 pounds of asparagus. On Wednesday, he receives a total of $31 for 9 pounds of potatoes, 1 pound of beets, and 4 pounds of asparagus.
 
 Using MATLAB, determine the inverse of the coefficient matrix. Manually perform the matrix multiplication to determine what price per pound the farmer charges for each of the produce types. Verify your answer using MATLAB.
 
@@ -6674,6 +6690,7 @@ B =
 Potatoes **$1/lb**, beets **$2/lb**, asparagus **$5/lb**. Check Monday: 8 + 6 + 30 = 44, correct.
 
 </details>
+
 ---
 ## SDC Chapter 6 — Functions & Scripts
 
@@ -6783,8 +6800,7 @@ Save to the current folder as **`Torque`**.
 
 > **Book typo:** text shows curly quotes `‘in Newton-meters’`. MATLAB needs straight quotes `'...'`.
 
-- Name is **case-sensitive** $\rightarrow$ `torque` $
-eq$ `Torque`.
+- Name is **case-sensitive** $\rightarrow$ `torque` $\neq$ `Torque`.
 - Runs each command in order using `f`, `ft`, `rads` from the Workspace. Not set $\rightarrow$ error.
 
 ```matlab
@@ -7347,8 +7363,7 @@ local_var =
         1000
 ```
 
-Base variables back; `local_var` still **1000**. Function's `local_var` $
-eq$ base `local_var`, despite the same name. That's scope.
+Base variables back; `local_var` still **1000**. Function's `local_var` $\neq$ base `local_var`, despite the same name. That's scope.
 
 **Global scope** $\rightarrow$ shared across all functions, scripts, and the base workspace. Generally discouraged — often a sign of poor design, confusing errors.
 
@@ -7491,7 +7506,7 @@ algorithm, function definition, functions, global scope, initialize, input value
 
 ## SDC Chapter 6 — Exercises
 
-**Exercise 6.1** — Rewrite the terminal velocity script, first seen in the Introduction and last modified in the loops and conditionals tutorial, as a function which accepts a planet name (as a character array string) as its input parameter and returns the terminal velocity for that planet. Hint: To avoid case-sensitivity issues, you can use the lower or upper function to convert the input string into a standard form that your function expects.
+<a id="sdc-ch6-ex-1"></a>**Exercise 6.1** — Rewrite the terminal velocity script, first seen in the Introduction and last modified in the loops and conditionals tutorial, as a function which accepts a planet name (as a character array string) as its input parameter and returns the terminal velocity for that planet. Hint: To avoid case-sensitivity issues, you can use the lower or upper function to convert the input string into a standard form that your function expects.
 
 <details><summary>Solution</summary>
 
@@ -7540,7 +7555,7 @@ Neptune matches the book's `1.185869183622224e+04` (shown there in `format long`
 
 </details>
 
-**Exercise 6.2** — Modify the matrixMax function defined in the From Algorithm to Code section so that it also returns the row and column of the *last* occurrence of the maximum value, as a 1 × 2 row vector.
+<a id="sdc-ch6-ex-2"></a>**Exercise 6.2** — Modify the matrixMax function defined in the From Algorithm to Code section so that it also returns the row and column of the *last* occurrence of the maximum value, as a 1 × 2 row vector.
 
 <details><summary>Solution</summary>
 
@@ -7584,7 +7599,7 @@ where =
 
 </details>
 
-**Exercise 6.3** — Write a function called torque1 to calculate torque, which was discussed in the Scripts section. The function will accept five parameters:
+<a id="sdc-ch6-ex-3"></a>**Exercise 6.3** — Write a function called torque1 to calculate torque, which was discussed in the Scripts section. The function will accept five parameters:
 
 - a force *f*, in Newtons
 - a distance *d* from the pivot point
@@ -7628,7 +7643,7 @@ First matches the script result. Second = same setup given in meters + degrees (
 
 </details>
 
-**Exercise 6.4** — Write a function called torque2 to calculate torque, based on the code in Exercise 6.3. This version accepts three parameters:
+<a id="sdc-ch6-ex-4"></a>**Exercise 6.4** — Write a function called torque2 to calculate torque, based on the code in Exercise 6.3. This version accepts three parameters:
 
 - a three-column matrix, where column 1 contains the force value, column 2 contains the distance value, and column 3 contains the force angle value
 - a unit indicator for the distance value: 'f' for feet or 'm' for meters
@@ -7671,7 +7686,7 @@ Both rows match the script runs.
 
 </details>
 
-**Exercise 6.5** — Write a recursive function called reversed that accepts a character array string and reverses its order. Do not use the built-in reverse function. Hint: Your solution can use the built-in extractBetween function. Pay close attention to the data types that you're passing and receiving.
+<a id="sdc-ch6-ex-5"></a>**Exercise 6.5** — Write a recursive function called reversed that accepts a character array string and reverses its order. Do not use the built-in reverse function. Hint: Your solution can use the built-in extractBetween function. Pay close attention to the data types that you're passing and receiving.
 
 <details><summary>Solution</summary>
 
@@ -7706,7 +7721,7 @@ ans =
 
 ---
 
-## Midterm Example
+## HO — Midterm Example
 An ambitious boss wants to be a Nobel Laureate for all of the prizes (chemistry, physics, peace, literature, economics and physiology or medicine). His start-up company, Kudos, is hosting job interviews and testing YOU for data-handling skills. It's time to qualify your half-semester skills of MATLAB.
 
 The first data has arrived from Sarah Spongejello, a Google and NASA JPL engineer. The data, a function file, came back from SpaceBee One, one of the Indian Polar Satellite Launch Vehicle (PSLV) rocket's under-sized cube satellites.
@@ -7795,7 +7810,7 @@ axis equal
 ![C vs F vs K plot](media/midterm_spacebee_plot.png)
 
 ---
-## Numerical Integration
+## HO — Numerical Integration
 
 **Assignment: "Distance planet travels in an orbit"** (last 3 pages of the PDF)
 Fill in a template that computes the **perimeter of an ellipse** — the distance a planet travels in one orbit — two ways, and return both.
@@ -7874,7 +7889,7 @@ numIntegrate =
 ```
 ---
 
-## Object-Oriented Programming in Matlab 
+## HO — Object-Oriented Programming in Matlab
 ### Objectives
 
 1. Group related data and operations into objects.
@@ -8833,9 +8848,9 @@ end
 ```
 
 ---
-## Object-Oriented Programming in Matlab — Exercises
+## HO — Object-Oriented Programming in Matlab — Exercises
 
-**Exercise 1.1** — carOnLot is an object in a used-car inventory program. Which of the following variables and functions should be included in carOnLot? A lowercase first letter indicates a variable name, while uppercase and an ending () indicate a function.
+<a id="oop-ex-1"></a>**Exercise 1.1** — carOnLot is an object in a used-car inventory program. Which of the following variables and functions should be included in carOnLot? A lowercase first letter indicates a variable name, while uppercase and an ending () indicate a function.
 
 1) carStickerPrice
 2) todaysTemperature
@@ -8861,7 +8876,7 @@ end
 
 </details>
 
-**Exercise 1.2** — 1) frame1 is a(n) _____. 2) frameWidth is a(n) ___. 3) CalcArea is a(n) _____. 4) Objects defined by the same class can have different properties and methods. 5) Objects defined by the same class can hold different values in the object's properties.
+<a id="oop-ex-2"></a>**Exercise 1.2** — 1) frame1 is a(n) _____. 2) frameWidth is a(n) ___. 3) CalcArea is a(n) _____. 4) Objects defined by the same class can have different properties and methods. 5) Objects defined by the same class can hold different values in the object's properties.
 
 <details><summary>Solution</summary>
 
@@ -8872,7 +8887,8 @@ end
 5. **True**: the values differ (`frame1` is 3 × 10, `frame2` is 20 × 7).
 
 </details>
-**Exercise 1.3** — What does each statement do? `officeFrame = photoFrame(24, 36)`, `officeFrame = officeFrame.SetHeight(40)`, and what value does `officeFrame.CalcArea()` return?
+
+<a id="oop-ex-3"></a>**Exercise 1.3** — What does each statement do? `officeFrame = photoFrame(24, 36)`, `officeFrame = officeFrame.SetHeight(40)`, and what value does `officeFrame.CalcArea()` return?
 
 <details><summary>Solution</summary>
 
@@ -8891,7 +8907,7 @@ ans =
 
 </details>
 
-**Exercise 1.4** — Fill in the placeholders in the `employeeData` class definition. 1) Placeholder_A. 2) Placeholder_B, to define the property currentSalary. 3) Placeholder_C terminates the property block? 4) Placeholder_D defines the constructor method with the arguments name and currentSalary. 5) Placeholder_E, to assign currentSalary the value of newSalary. (Hint: Use dot notation)
+<a id="oop-ex-4"></a>**Exercise 1.4** — Fill in the placeholders in the `employeeData` class definition. 1) Placeholder_A. 2) Placeholder_B, to define the property currentSalary. 3) Placeholder_C terminates the property block? 4) Placeholder_D defines the constructor method with the arguments name and currentSalary. 5) Placeholder_E, to assign currentSalary the value of newSalary. (Hint: Use dot notation)
 
 <details><summary>Solution</summary>
 
@@ -8924,7 +8940,8 @@ end
 - E: the method gets `obj` explicitly; dot notation reaches its property.
 
 </details>
-**Exercise 1.5** — The following properties' access attribute value is _____. Is it public, protected, or private?
+
+<a id="oop-ex-5"></a>**Exercise 1.5** — The following properties' access attribute value is _____. Is it public, protected, or private?
 
 ```matlab
 properties
@@ -8939,7 +8956,7 @@ end
 
 </details>
 
-**Exercise 1.6** — The following properties can be accessed _____. Is it anywhere class is visible, only by class members or no one?
+<a id="oop-ex-6"></a>**Exercise 1.6** — The following properties can be accessed _____. Is it anywhere class is visible, only by class members or no one?
 
 ```matlab
 properties (Access = private)
@@ -8954,7 +8971,7 @@ end
 
 </details>
 
-**Exercise 1.7** — milesToKilometers can be accessed _____. Is it anywhere the class is visible or only by members?
+<a id="oop-ex-7"></a>**Exercise 1.7** — milesToKilometers can be accessed _____. Is it anywhere the class is visible or only by members?
 
 ```matlab
 properties (Constant)
@@ -8967,7 +8984,8 @@ end
 **Anywhere the class is visible.** `Access` defaults to public.
 
 </details>
-**Exercise 1.8** — milesToKilometers can be assigned a new value by _____. Is it anywhere the class is visible, class methods only, or no code?
+
+<a id="oop-ex-8"></a>**Exercise 1.8** — milesToKilometers can be assigned a new value by _____. Is it anywhere the class is visible, class methods only, or no code?
 
 <details><summary>Solution</summary>
 
@@ -8975,7 +8993,7 @@ end
 
 </details>
 
-**Exercise 1.9** — tankCapacity has default value _____. Is it [], 0, or 16.5?
+<a id="oop-ex-9"></a>**Exercise 1.9** — tankCapacity has default value _____. Is it [], 0, or 16.5?
 
 ```matlab
 properties (Access = protected)
@@ -8990,7 +9008,7 @@ end
 
 </details>
 
-**Exercise 1.10** — For the photoFrameModified class of the example above... 1) quantityOrdered is a _____ property. 2) frameArea is a _____ property. 3) The new property framePerimeter, calculated as (2 * frameWidth + 2 * frameHeight) should be defined as a _____ property. 4) A get-access method must be defined for the property quantityOrdered. True or False?
+<a id="oop-ex-10"></a>**Exercise 1.10** — For the photoFrameModified class of the example above... 1) quantityOrdered is a _____ property. 2) frameArea is a _____ property. 3) The new property framePerimeter, calculated as (2 * frameWidth + 2 * frameHeight) should be defined as a _____ property. 4) A get-access method must be defined for the property quantityOrdered. True or False?
 
 <details><summary>Solution</summary>
 
@@ -9001,7 +9019,7 @@ end
 
 </details>
 
-**Exercise 1.11** — True or False? 1) A constructor has the same name as the class. 2) A class definition must define a constructor method. 3) A constructor is called using dot notation. Ex: e1.employeeInfo() creates an object named e1, which is an instance of class employeeInfo. 4) Good practice is to explicitly define a default constructor for a class. 5) Good practice is a constructor that explicitly tests the number of arguments provided in the call.
+<a id="oop-ex-11"></a>**Exercise 1.11** — True or False? 1) A constructor has the same name as the class. 2) A class definition must define a constructor method. 3) A constructor is called using dot notation. Ex: e1.employeeInfo() creates an object named e1, which is an instance of class employeeInfo. 4) Good practice is to explicitly define a default constructor for a class. 5) Good practice is a constructor that explicitly tests the number of arguments provided in the call.
 
 <details><summary>Solution</summary>
 
@@ -9014,7 +9032,7 @@ end
 </details>
 
 
-**Exercise 1.12** — Which code snippet best fills the blank _____, per the description? 1) The ResetSalary method is accessible only by the object's members. Is it: methods, methods (Access = public), or methods (Access = private)?
+<a id="oop-ex-12"></a>**Exercise 1.12** — Which code snippet best fills the blank _____, per the description? 1) The ResetSalary method is accessible only by the object's members. Is it: methods, methods (Access = public), or methods (Access = private)?
 
 ```matlab
 _____
@@ -9031,7 +9049,7 @@ end
 
 </details>
 
-**Exercise 1.13** — The OvertimePay method calculates a paycheck based on the object's hoursWorked property and an argument hourlyRate. Is it: obj, or obj, hourlyRate or hourlyRate?
+<a id="oop-ex-13"></a>**Exercise 1.13** — The OvertimePay method calculates a paycheck based on the object's hoursWorked property and an argument hourlyRate. Is it: obj, or obj, hourlyRate or hourlyRate?
 
 ```matlab
 function otPay = OvertimePay(______)
@@ -9044,7 +9062,8 @@ end
 **`obj, hourlyRate`**: the method reads `obj.hoursWorked`, so the object is passed explicitly; `hourlyRate` comes from the caller.
 
 </details>
-**Exercise 1.14** — employeeData class constructor. Is it: employeeData( ), or obj = employeeData( ), or employeeData( obj) ?
+
+<a id="oop-ex-14"></a>**Exercise 1.14** — employeeData class constructor. Is it: employeeData( ), or obj = employeeData( ), or employeeData( obj) ?
 
 ```matlab
 function ______
@@ -9057,15 +9076,17 @@ end
 **`obj = employeeData()`**: the constructor creates, then returns, an instance.
 
 </details>
+
 ---
-**Exercise 1.15** — CheckBounds() is a method that returns true if all property values are within a predefined range. CheckBounds() should be defined as a(n) ____ method. Is it: ordinary or static?
+<a id="oop-ex-15"></a>**Exercise 1.15** — CheckBounds() is a method that returns true if all property values are within a predefined range. CheckBounds() should be defined as a(n) ____ method. Is it: ordinary or static?
 
 <details><summary>Solution</summary>
 
 **ordinary**: it works on the property values of one instance.
 
 </details>
-**Exercise 1.16** — RoundValue() rounds any numeric input to the nearest ten. Ordinary or static?
+
+<a id="oop-ex-16"></a>**Exercise 1.16** — RoundValue() rounds any numeric input to the nearest ten. Ordinary or static?
 
 <details><summary>Solution</summary>
 
@@ -9074,14 +9095,15 @@ end
 > **Book typo:** this question repeats the `CheckBounds()` text from 22.15, but its answer is about `RoundValue()`. The question here is rewritten to match the answer.
 
 </details>
-**Exercise 1.17** — RemoveSpaces() is a method that returns an input character vector with all whitespace removed from the character vector. RemoveSpaces() should be defined as a(n) ____ method.
+
+<a id="oop-ex-17"></a>**Exercise 1.17** — RemoveSpaces() is a method that returns an input character vector with all whitespace removed from the character vector. RemoveSpaces() should be defined as a(n) ____ method.
 
 <details><summary>Solution</summary>
 
 **static**: it works on any character vector passed in, not on an instance.
 </details>
 
-**Exercise 1.18** — True or False? 4) ConvertToEuros(ticketAmount) is a Static method of class parkingTicket and can be called by `fine = parkingTicket.ConvertToEuros(125);` 5) ticket2250 is an instance of class parkingTicket. TimeNow() is a Static method of class parkingTicket and can be called by `fine = ticket2250.TimeNow();` 6) GetTicketDate() is an ordinary method of class parkingTicket and can be called by `fine = parkingTicket.GetTicketDate();`
+<a id="oop-ex-18"></a>**Exercise 1.18** — True or False? 4) ConvertToEuros(ticketAmount) is a Static method of class parkingTicket and can be called by `fine = parkingTicket.ConvertToEuros(125);` 5) ticket2250 is an instance of class parkingTicket. TimeNow() is a Static method of class parkingTicket and can be called by `fine = ticket2250.TimeNow();` 6) GetTicketDate() is an ordinary method of class parkingTicket and can be called by `fine = parkingTicket.GetTicketDate();`
 
 <details><summary>Solution</summary>
 
@@ -9093,7 +9115,7 @@ end
 
 </details>
 
-**Exercise 1.19** — Refer to the above seat reservation example. True or False? 1) ticketSystem contains one object of type seat. 2) The seat class defines 7 methods. 3) The statement obj.allSeats(1:numberSeats) = seat(); allocates numberOfSeats × 4 member methods. 4) Before a seat can be reserved, the main script first checks if the seat object is empty.
+<a id="oop-ex-19"></a>**Exercise 1.19** — Refer to the above seat reservation example. True or False? 1) ticketSystem contains one object of type seat. 2) The seat class defines 7 methods. 3) The statement obj.allSeats(1:numberSeats) = seat(); allocates numberOfSeats × 4 member methods. 4) Before a seat can be reserved, the main script first checks if the seat object is empty.
 
 <details><summary>Solution</summary>
 
@@ -9104,7 +9126,7 @@ end
 
 </details>
 
-**Exercise 1.20** — flightA and flightB are objects of the class tripDetails. Write a statement that uses the overloaded + operator to assign totalFlightTime with flightA and flightB's combined trip duration.
+<a id="oop-ex-20"></a>**Exercise 1.20** — flightA and flightB are objects of the class tripDetails. Write a statement that uses the overloaded + operator to assign totalFlightTime with flightA and flightB's combined trip duration.
 
 <details><summary>Solution</summary>
 
@@ -9115,7 +9137,8 @@ totalFlightTime = flightA + flightB;
 MATLAB sees two `tripDetails` objects and calls the class's `plus`.
 
 </details>
-**Exercise 1.21** — Given the following code snippet, what is the value of weeklyDrive.tripHours?
+
+<a id="oop-ex-21"></a>**Exercise 1.21** — Given the following code snippet, what is the value of weeklyDrive.tripHours?
 
 ```matlab
 mondayDrive = tripDetails(4, 15);
@@ -9130,7 +9153,8 @@ weeklyDrive = mondayDrive + weddayDrive;
 > **Note:** `tripHours` is private in the 22.7 class, so `weeklyDrive.tripHours` can't actually be read from outside. Use `weeklyDrive.printTripDetails()` to see it.
 
 </details>
-**Exercise 1.22** — Given the following code snippet, what is the value of weekendDrive.tripMinutes?
+
+<a id="oop-ex-22"></a>**Exercise 1.22** — Given the following code snippet, what is the value of weekendDrive.tripMinutes?
 
 ```matlab
 saturdayDrive = tripDetails(1, 45);
@@ -9143,7 +9167,8 @@ weekendDrive = saturdayDrive + sundayDrive;
 **15**: 1 h 45 min + 1 h 30 min = 3 h 15 min. `mod(totalMinutes, 60)` keeps minutes under 60.
 
 </details>
-**Exercise 1.23** — Complete the method definition to overload the == operator.
+
+<a id="oop-ex-23"></a>**Exercise 1.23** — Complete the method definition to overload the == operator.
 
 ```matlab
 function obj = ____(obj1, obj2)
@@ -9155,7 +9180,7 @@ function obj = ____(obj1, obj2)
 
 </details>
 
-**Exercise 1.24** — 1) A mutator should not change the private properties. True or False. 2) An accessor should not change the private properties. True or False. 3) The SetGame1Score method is a(n) _____. 4) The FindHighScore method is a(n) _____.
+<a id="oop-ex-24"></a>**Exercise 1.24** — 1) A mutator should not change the private properties. True or False. 2) An accessor should not change the private properties. True or False. 3) The SetGame1Score method is a(n) _____. 4) The FindHighScore method is a(n) _____.
 
 <details><summary>Solution</summary>
 
@@ -9166,7 +9191,7 @@ function obj = ____(obj1, obj2)
 
 </details>
 
-**Exercise 1.25** — True or False? 1) The set.game2Score() method is automatically called when game2Score's value is accessed. 2) The get.highScore() method is automatically called when highScore's value is accessed. 3) The get-access and set-access methods are built-in methods defined by MATLAB for error checking and formatting property values. 4) userName is a new property added to gameInfo's class definition. userName's get-access method is defined by `function obj = set.userName()`. 5) Good practice is for a user to explicitly call a property's get-access method before assigning a value to the property.
+<a id="oop-ex-25"></a>**Exercise 1.25** — True or False? 1) The set.game2Score() method is automatically called when game2Score's value is accessed. 2) The get.highScore() method is automatically called when highScore's value is accessed. 3) The get-access and set-access methods are built-in methods defined by MATLAB for error checking and formatting property values. 4) userName is a new property added to gameInfo's class definition. userName's get-access method is defined by `function obj = set.userName()`. 5) Good practice is for a user to explicitly call a property's get-access method before assigning a value to the property.
 
 <details><summary>Solution</summary>
 
@@ -9177,15 +9202,19 @@ function obj = ____(obj1, obj2)
 5. **False**: calling them directly is an error; MATLAB calls them for you.
 
 </details>
-**Exercise 1.26** — True or False? 1) A private helper method can be called from the main script. 2) A private helper method typically helps a class's other methods carry out their tasks. 3) A private helper method may not call another private helper method. 4) In MATLAB, a helper method will by default be private.
+
+<a id="oop-ex-26"></a>**Exercise 1.26** — True or False? 1) A private helper method can be called from the main script. 2) A private helper method typically helps a class's other methods carry out their tasks. 3) A private helper method may not call another private helper method. 4) In MATLAB, a helper method will by default be private.
 
 <details><summary>Solution</summary>
 
 1. **False**: only the class's own methods can call it.
 2. **True**: leads to cleaner code.
 3. **False**: other methods in the class can call it, including other private helpers.
+
+</details>
+
 4. **False**: methods default to public; write `Access = private`.
-**Exercise 1.27** — Given the class type for tripDetails, what is each property's numeric value after executing:
+<a id="oop-ex-27"></a>**Exercise 1.27** — Given the class type for tripDetails, what is each property's numeric value after executing:
 
 ```matlab
 tripA = tripDetails(3, 27);
@@ -9208,7 +9237,8 @@ tripB.tripMinutes = 48;
 | handle, `tripB.tripMinutes` | **48** | assigned directly |
 
 </details>
-**Exercise 1.28** — Handle class definition. True or False? 1) The addTravelDelay() method definition includes (obj) as an input parameter because the method accesses an object's property values. 2) The addTravelDelay() method returns an object because the tripHours and tripMinutes properties are modified. 3) The statement tripA.addTravelDelay(2, 5) has no impact on tripA's properties because the addTravelDelay() method doesn't return the modified object.
+
+<a id="oop-ex-28"></a>**Exercise 1.28** — Handle class definition. True or False? 1) The addTravelDelay() method definition includes (obj) as an input parameter because the method accesses an object's property values. 2) The addTravelDelay() method returns an object because the tripHours and tripMinutes properties are modified. 3) The statement tripA.addTravelDelay(2, 5) has no impact on tripA's properties because the addTravelDelay() method doesn't return the modified object.
 
 <details><summary>Solution</summary>
 
@@ -9217,7 +9247,8 @@ tripB.tripMinutes = 48;
 3. **False**: 1 h 30 min before, 3 h 35 min after. The method and caller share the same object.
 
 </details>
-**Exercise 1.29** — Is each class a handle or value class? 4) `classdef employeeData` (define properties, define methods, end). 5) `classdef photoFrame < handle` (define properties, define methods, end).
+
+<a id="oop-ex-29"></a>**Exercise 1.29** — Is each class a handle or value class? 4) `classdef employeeData` (define properties, define methods, end). 5) `classdef photoFrame < handle` (define properties, define methods, end).
 
 <details><summary>Solution</summary>
 
@@ -9225,7 +9256,8 @@ tripB.tripMinutes = 48;
 5. **handle**: `< handle` after the class name.
 
 </details>
-**Exercise 1.30** — Ball drop simulation. True or False? 1) The main script creates 100 instances of class BallDrop. 2) Each instance of the class BallDrop is assigned with the same yVelocity value. 3) BallColor is specified by an RGB vector consisting of three entries, where each entry is a random real number in the interval between 0 and 1.
+
+<a id="oop-ex-30"></a>**Exercise 1.30** — Ball drop simulation. True or False? 1) The main script creates 100 instances of class BallDrop. 2) Each instance of the class BallDrop is assigned with the same yVelocity value. 3) BallColor is specified by an RGB vector consisting of three entries, where each entry is a random real number in the interval between 0 and 1.
 
 <details><summary>Solution</summary>
 
@@ -9245,7 +9277,7 @@ c =
 </details>
 
 <a name="midterm"></a>
-## Midterm
+## HO — Midterm
 
 > **Status:** completed, `midterm_ay.m` -- all 7 parts run and verified below.
 
@@ -9682,8 +9714,7 @@ Output argument "Vt" (and maybe others) not assigned during call to "terminalVel
 ⚠ Line 45: The value assigned to variable 'vt' might be unused.
 ```
 
-- `Vt` $
-eq$ `vt` (case-sensitive). Change `vt` $\rightarrow$ `Vt` in the last assignment.
+- `Vt` $\neq$ `vt` (case-sensitive). Change `vt` $\rightarrow$ `Vt` in the last assignment.
 
 ```matlab
 v = terminalVelocityDebug('Mars')
@@ -9746,11 +9777,9 @@ function Vt = terminalVelocityDebug(planet)      % line 6
 | **Step** | F10 | run current line $\rightarrow$ next line |
 | **Step In** | F11 | line calls a function $\rightarrow$ step into it. (Step $\rightarrow$ runs it normally) |
 | **Step Out** | Shift+F11 | finish called function $\rightarrow$ back to caller, pause on the call line (already executed) |
-| **Run to Cursor** | — | run up to clicked line. Non-executable $\rightarrow$ next executable. Breakpoint in between 
-$\rightarrow$ stops there |
+| **Run to Cursor** | — | run up to clicked line. Non-executable $\rightarrow$ next executable. Breakpoint in between $\rightarrow$ stops there |
 | **Function Call Stack** | — | view workspace of any running function / base |
-| **Quit Debugging** | Shift+F5 | abort 
-$\rightarrow$ Command Window + base workspace. **Ctrl+C** same $\rightarrow$ escape infinite loops |
+| **Quit Debugging** | Shift+F5 | abort $\rightarrow$ Command Window + base workspace. **Ctrl+C** same $\rightarrow$ escape infinite loops |
 
 **db commands** (scriptable):
 
@@ -9798,8 +9827,7 @@ $\rightarrow$ arrow at `switch`.
 $\rightarrow$ first case (Mercury). **Step** 
 $\rightarrow$ Venus… 
 $\rightarrow$ each `case` tested vs `planet` (like an `if-elseif` chain).
-8. Step to **line 34** (`case 'Jupiter'`) $
-$\rightarrow$ Step into it 
+8. Step to **line 34** (`case 'Jupiter'`) $\rightarrow$ Step into it 
 $\rightarrow$ `gravity`, `atmosphericDensity` set 
 $\rightarrow$ next Step leaves `switch` (only one case runs).
 9. At end 
@@ -9935,8 +9963,7 @@ ans =
    Inf
 ```
 
-- Mercury $
-$\rightarrow$ ρ = 0 
+- Mercury $\rightarrow$ ρ = 0 
 $\rightarrow$ divide by 0 
 $\rightarrow$ MATLAB returns `Inf` (many languages crash instead).
 - **try/catch** 
@@ -10029,7 +10056,7 @@ end
 
 debug $\cdot$ debugger $\cdot$ error handling $\cdot$ semantic error $\cdot$ syntax
 
-#### Key Commands 
+#### Key Commands
 
 `%%` $\cdot$ `%{ %}` $\cdot$ `[Ctrl]+[R]` $\cdot$ `[Ctrl]+[T]` $\cdot$ `dbquit` $\cdot$ `dbstep` $\cdot$ `dbstep in` $\cdot$ `dbstep out` $\cdot$ `lower` $\cdot$ `return` $\cdot$ `try/catch` $\cdot$ `upper`
 
@@ -10037,7 +10064,7 @@ debug $\cdot$ debugger $\cdot$ error handling $\cdot$ semantic error $\cdot$ syn
 
 ## SDC Chapter 7 — Exercises
 
-**Exercise 7.1** — Write a function with a single input parameter that is a 3 x 4 matrix that contains either the twelve signs of the Chinese zodiac, the twelve signs of the western zodiac, or a mix of the two, as strings (double-quotes). Write code in the function that verifies that the matrix doesn't contain any strings outside of the expected set and that it contains no duplicate elements.
+<a id="sdc-ch7-ex-1"></a>**Exercise 7.1** — Write a function with a single input parameter that is a 3 x 4 matrix that contains either the twelve signs of the Chinese zodiac, the twelve signs of the western zodiac, or a mix of the two, as strings (double-quotes). Write code in the function that verifies that the matrix doesn't contain any strings outside of the expected set and that it contains no duplicate elements.
 
 <details><summary>Solution</summary>
 
@@ -10109,7 +10136,7 @@ ans =
 
 </details>
 
-**Exercise 7.2** — Open the data file, terminalDebugging.m. Use the debugging skills you have learned to debug and run this code.
+<a id="sdc-ch7-ex-2"></a>**Exercise 7.2** — Open the data file, terminalDebugging.m. Use the debugging skills you have learned to debug and run this code.
 
 <details><summary>Solution</summary>
 
@@ -10124,7 +10151,7 @@ ans =
 
 </details>
 
-**Exercise 7.3** — Open the file secretMessage.m included in the download. Be sure that the secretMessage.dat file is also in the same directory. Run the function by entering the following command in the Command Window:
+<a id="sdc-ch7-ex-3"></a>**Exercise 7.3** — Open the file secretMessage.m included in the download. Be sure that the secretMessage.dat file is also in the same directory. Run the function by entering the following command in the Command Window:
 
 ```matlab
 secretMessage('6')
@@ -11173,7 +11200,7 @@ path, absolute path, relative path, file, folder, directory, working directory, 
 
 ## SDC Chapter 8 — Exercises
 
-**Exercise 8.1** — Use any function that retrieves a path, then split that path into separate individual folder names using MATLAB string functions.
+<a id="sdc-ch8-ex-1"></a>**Exercise 8.1** — Use any function that retrieves a path, then split that path into separate individual folder names using MATLAB string functions.
 
 <details><summary>Solution</summary>
 
@@ -11197,7 +11224,7 @@ folders =
 
 </details>
 
-**Exercise 8.2** — Assign the results of the path function to a matrix variable. Export that matrix to a plain text file using fprintf. Import the matrix back into MATLAB using the backslash as a delimiter.
+<a id="sdc-ch8-ex-2"></a>**Exercise 8.2** — Assign the results of the path function to a matrix variable. Export that matrix to a plain text file using fprintf. Import the matrix back into MATLAB using the backslash as a delimiter.
 
 <details><summary>Solution</summary>
 
@@ -11218,7 +11245,7 @@ size(C)
 
 </details>
 
-**Exercise 8.3** — Create a script to list the files in your work folder. Assign the list to a variable, and sort the list alphabetically
+<a id="sdc-ch8-ex-3"></a>**Exercise 8.3** — Create a script to list the files in your work folder. Assign the list to a variable, and sort the list alphabetically
 
 <details><summary>Solution</summary>
 
@@ -11235,7 +11262,7 @@ names = sort({d.name})'     % column cell array, alphabetical
 
 </details>
 
-**Exercise 8.4** — Import the data in HeatTreatData.xlsx in two ways, first as a single matrix M, then as column vectors V1 and V2. Save those variables for use in the next exercise.
+<a id="sdc-ch8-ex-4"></a>**Exercise 8.4** — Import the data in HeatTreatData.xlsx in two ways, first as a single matrix M, then as column vectors V1 and V2. Save those variables for use in the next exercise.
 
 <details><summary>Solution</summary>
 
@@ -11251,7 +11278,7 @@ whos M V1 V2
 
 </details>
 
-**Exercise 8.5** — Export the numeric content of matrix M created in the previous exercise to a new spreadsheet. Exclude the export of rows that contain NaN, either through a customized opts object or name/value pairs. You will also use this spreadsheet in the next exercise.
+<a id="sdc-ch8-ex-5"></a>**Exercise 8.5** — Export the numeric content of matrix M created in the previous exercise to a new spreadsheet. Exclude the export of rows that contain NaN, either through a customized opts object or name/value pairs. You will also use this spreadsheet in the next exercise.
 
 <details><summary>Solution</summary>
 
@@ -11268,7 +11295,7 @@ writematrix(M, 'HeatTreatClean.xlsx', 'Sheet', 1)
 
 </details>
 
-**Exercise 8.6** — Export the numeric content of vectors V1 and V2 to the same spreadsheet created in the previous exercise. Export the two vectors to the 2nd sheet in the spreadsheet, placing them side-by-side. Use a customized opts object or name/value pairs as necessary. When this exercise is complete, sheets 1 and 2 in the spreadsheet should have identical content.
+<a id="sdc-ch8-ex-6"></a>**Exercise 8.6** — Export the numeric content of vectors V1 and V2 to the same spreadsheet created in the previous exercise. Export the two vectors to the 2nd sheet in the spreadsheet, placing them side-by-side. Use a customized opts object or name/value pairs as necessary. When this exercise is complete, sheets 1 and 2 in the spreadsheet should have identical content.
 
 <details><summary>Solution</summary>
 
@@ -11294,7 +11321,7 @@ ans =
 
 </details>
 
-**Exercise 8.7** — Import the Mortality-1.xlsx file using the readcell function. Delete everything except the columns that contain the country names and the numeric data. Retain the associated column headers. Export the resulting cell array to a new spreadsheet.
+<a id="sdc-ch8-ex-7"></a>**Exercise 8.7** — Import the Mortality-1.xlsx file using the readcell function. Delete everything except the columns that contain the country names and the numeric data. Retain the associated column headers. Export the resulting cell array to a new spreadsheet.
 
 <details><summary>Solution</summary>
 
@@ -11556,7 +11583,7 @@ pie charts, exploded pie chart
 ![Figure 9.9 — Exercises](media/ch9_e.png)
 
 
-**Exercise 9.1** — Graph the equation y = x^2 from x = -3 to x = +3. Use a step of .1 between values in that interval.
+<a id="sdc-ch9-ex-1"></a>**Exercise 9.1** — Graph the equation y = x^2 from x = -3 to x = +3. Use a step of .1 between values in that interval.
 
 <details><summary>Solution</summary>
 
@@ -11570,7 +11597,7 @@ plot(x,y)
 
 </details>
 
-**Exercise 9.2** — Create a graph of y = 2x - x^2 over the interval x = -2 to x = +4. Determine what step to use to show a smooth curve.
+<a id="sdc-ch9-ex-2"></a>**Exercise 9.2** — Create a graph of y = 2x - x^2 over the interval x = -2 to x = +4. Determine what step to use to show a smooth curve.
 
 <details><summary>Solution</summary>
 
@@ -11585,7 +11612,7 @@ plot(x,y)
 
 </details>
 
-**Exercise 9.3** — Create a graph of y = sqrt (x - 1).
+<a id="sdc-ch9-ex-3"></a>**Exercise 9.3** — Create a graph of y = sqrt (x - 1).
 
 <details><summary>Solution</summary>
 
@@ -11599,7 +11626,7 @@ plot(x,y)
 
 </details>
 
-**Exercise 9.4** — Create a graph of y = x^3 - 12 x.
+<a id="sdc-ch9-ex-4"></a>**Exercise 9.4** — Create a graph of y = x^3 - 12 x.
 
 <details><summary>Solution</summary>
 
@@ -11611,7 +11638,7 @@ plot(x,y)
 
 </details>
 
-**Exercise 9.5** — Create a graph of the mortality data for Finland for the years in the data set provided in *Mortality-1.xlsx*
+<a id="sdc-ch9-ex-5"></a>**Exercise 9.5** — Create a graph of the mortality data for Finland for the years in the data set provided in *Mortality-1.xlsx*
 <details><summary>Solution</summary>
 
 File not available. Solution: 
@@ -11631,7 +11658,7 @@ ylabel('Value from Mortality-1.xlsx')
 
 ---
 
-## Hands-On — Trend Analysis and Forecasting (Week 9)
+## HO — Trend Analysis and Forecasting (Week 9)
 
 > **Sources:** `Trend Analysis.docx` (Lincoln University BA 301, Ch. 6), `FORECASTING.docx`, `Stats Sheet.docx`, `Linear Regression2.xlsx` (my sheet), `Cause&Effect.pdf` (Data 8, Berkeley).
 ### Goals
@@ -11914,7 +11941,7 @@ f2018 =
 
 
 ---
-## Hands-On — Exercises
+## HO — Trend Analysis and Forecasting — Exercises
 
 **Home Task 1 — Clothing Store Sales Forecast**
 
@@ -12749,7 +12776,7 @@ cd html; open spiralplot.html
 ## Pratap Chapter 2 — Exercises
 ### Tutorial 1 Exercises: A Minimum MATLAB Session
 
-**Exercise 1.1** — **Arithmetic operations:** Compute the following quantities:
+<a id="ex-1-1"></a>**Exercise 1.1** — **Arithmetic operations:** Compute the following quantities:
 
 - $\dfrac{2^5}{2^5-1}$ and compare with $\left(1-\dfrac{1}{2^5}\right)^{-1}$.
 - $3\dfrac{\sqrt{5}-1}{(\sqrt{5}+1)^2} - 1$. The square root $\sqrt{x}$ can be calculated with the command `sqrt(x)` or `x^0.5`.
@@ -12783,10 +12810,11 @@ area =
     0.6781
 ```
 
-- Same value 1.0323 both ways. Outputs computed, not run in MATLAB.
+- Same value 1.0323 both ways.
 
 </details>
-**Exercise 1.2** — **Exponential and logarithms:** The mathematical quantities $e^x$, $\ln x$, and $\log x$ are calculated with `exp(x)`, `log(x)`, and `log10(x)`, respectively. Calculate the following quantities:
+
+<a id="ex-1-2"></a>**Exercise 1.2** — **Exponential and logarithms:** The mathematical quantities $e^x$, $\ln x$, and $\log x$ are calculated with `exp(x)`, `log(x)`, and `log10(x)`, respectively. Calculate the following quantities:
 
 - $e^3$, $\ln(e^3)$, $\log_{10}(e^3)$, and $\log_{10}(10^5)$.
 - $e^{\pi\sqrt{163}}$.
@@ -12838,10 +12866,11 @@ ans =
     17.0000
 ```
 
-- `3^x` returns 17 (may display 17.0000 from rounding). Computed.
+- `3^x` returns 17 (may display 17.0000 from rounding).
 
 </details>
-**Exercise 1.3** — **Trigonometry:** The basic MATLAB trigonometric functions are `sin`, `cos`, `tan`, `cot`, `sec`, and `csc`. The inverses, e.g., arcsin, arctan, etc., are calculated with `asin`, `atan`, etc. The same is true for hyperbolic functions. The inverse function `atan2` takes two arguments, $y$ and $x$, and gives the four-quadrant inverse tangent. The argument of these functions must be in radians. Calculate the following quantities:
+
+<a id="ex-1-3"></a>**Exercise 1.3** — **Trigonometry:** The basic MATLAB trigonometric functions are `sin`, `cos`, `tan`, `cot`, `sec`, and `csc`. The inverses, e.g., arcsin, arctan, etc., are calculated with `asin`, `atan`, etc. The same is true for hyperbolic functions. The inverse function `atan2` takes two arguments, $y$ and $x$, and gives the four-quadrant inverse tangent. The argument of these functions must be in radians. Calculate the following quantities:
 
 - $\sin\dfrac{\pi}{6}$, $\cos\pi$, and $\tan\dfrac{\pi}{2}$.
 - $\sin^2\dfrac{\pi}{6} + \cos^2\dfrac{\pi}{6}$. (Typing `sin^2(x)` for $\sin^2 x$ will produce an error).
@@ -12883,7 +12912,8 @@ y =
 
 - $\tan(\pi/2)$ is huge (not Inf) because pi is not exact.
 </details>
-**Exercise 1.4** — **Complex numbers:** MATLAB recognizes the letters $i$ and $j$ as the imaginary number $\sqrt{-1}$. A complex number $2 + 5i$ may be input as `2+5i` or `2+5*i` in MATLAB. The former case is always interpreted as a complex number, whereas the latter is taken as complex only if `i` has not been assigned any local value. The same is true for $j$. This kind of context dependence, for better or worse, pervades MATLAB. Compute the following quantities:
+
+<a id="ex-1-4"></a>**Exercise 1.4** — **Complex numbers:** MATLAB recognizes the letters $i$ and $j$ as the imaginary number $\sqrt{-1}$. A complex number $2 + 5i$ may be input as `2+5i` or `2+5*i` in MATLAB. The former case is always interpreted as a complex number, whereas the latter is taken as complex only if `i` has not been assigned any local value. The same is true for $j$. This kind of context dependence, for better or worse, pervades MATLAB. Compute the following quantities:
 
 - $\dfrac{1+3i}{1-3i}$. Can you check the result by hand calculation?
 - $e^{i\frac{\pi}{4}}$. Check the Euler's Formula $e^{ix} = \cos x + i\sin x$ by computing the right-hand side too, i.e., compute $\cos(\pi/4) + i\sin(\pi/4)$.
@@ -12929,7 +12959,7 @@ ans =
 
 ### Tutorial 2 Exercises: Arrays of Numbers
 
-**Exercise 2.1** — **Equation of a straight line:** The equation of a straight line is $y = mx + c$, where $m$ and $c$ are constants. Compute the $y$-coordinates of a line with slope $m = 0.5$ and the intercept $c = -2$ at the following $x$-coordinates: $x = 0, \; 1.5, \; 3, \; 4, \; 5, \; 7, \; 9, \; 10$. [Note: Your command should not involve any array operators because your calculation involves multiplication of a vector with a scalar $m$ and then addition of another scalar $c$.]
+<a id="ex-2-1"></a>**Exercise 2.1** — **Equation of a straight line:** The equation of a straight line is $y = mx + c$, where $m$ and $c$ are constants. Compute the $y$-coordinates of a line with slope $m = 0.5$ and the intercept $c = -2$ at the following $x$-coordinates: $x = 0, \; 1.5, \; 3, \; 4, \; 5, \; 7, \; 9, \; 10$. [Note: Your command should not involve any array operators because your calculation involves multiplication of a vector with a scalar $m$ and then addition of another scalar $c$.]
 
 <details><summary>Solution</summary>
 
@@ -12942,11 +12972,11 @@ y =
    -2.0000   -1.2500   -0.5000         0    0.5000    1.5000    2.5000    3.0000
 ```
 
-- Scalar times vector needs no dot. Outputs computed, not run in MATLAB.
+- Scalar times vector needs no dot.
 
 </details>
 
-**Exercise 2.2** — **Multiply, divide, and exponentiate vectors:** Create a vector $t$ with 10 elements: 1, 2, 3, ..., 10. Now compute the following quantities:
+<a id="ex-2-2"></a>**Exercise 2.2** — **Multiply, divide, and exponentiate vectors:** Create a vector $t$ with 10 elements: 1, 2, 3, ..., 10. Now compute the following quantities:
 
 - $x = t\sin(t)$.
 - $y = \dfrac{t-1}{t+1}$.
@@ -12995,7 +13025,7 @@ z =
 
 </details>
 
-**Exercise 2.3** — **Points on a circle:** All points with coordinates $x = r\cos\theta$ and $y = r\sin\theta$, where $r$ is a constant, lie on a circle with radius $r$, i.e., they satisfy the equation $x^2 + y^2 = r^2$. Create a column vector for $\theta$ with the values $0, \pi/4, \pi/2, 3\pi/4, \pi$, and $5\pi/4$. Take $r = 2$ and compute the column vectors $x$ and $y$. Now check that $x$ and $y$ indeed satisfy the equation of a circle, by computing the radius $r = \sqrt{(x^2 + y^2)}$. [To calculate $r$ you will need the array operator `.^` for squaring $x$ and $y$. Of course, you could compute $x^2$ by `x.*x` also.]
+<a id="ex-2-3"></a>**Exercise 2.3** — **Points on a circle:** All points with coordinates $x = r\cos\theta$ and $y = r\sin\theta$, where $r$ is a constant, lie on a circle with radius $r$, i.e., they satisfy the equation $x^2 + y^2 = r^2$. Create a column vector for $\theta$ with the values $0, \pi/4, \pi/2, 3\pi/4, \pi$, and $5\pi/4$. Take $r = 2$ and compute the column vectors $x$ and $y$. Now check that $x$ and $y$ indeed satisfy the equation of a circle, by computing the radius $r = \sqrt{(x^2 + y^2)}$. [To calculate $r$ you will need the array operator `.^` for squaring $x$ and $y$. Of course, you could compute $x^2$ by `x.*x` also.]
 
 <details><summary>Solution</summary>
 
@@ -13030,7 +13060,7 @@ ans =
 
 </details>
 
-**Exercise 2.4** — **The geometric series:** This is funky! You know how to compute $x^n$ element by element for a vector $x$ and a scalar exponent $n$. How about computing $n^x$, and what does it mean? The result, again, is a vector with elements $n^{x_1}$, $n^{x_2}$, $n^{x_3}$, etc. The sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ approaches the limit $\dfrac{1}{1-r}$ for $r < 1$ as $n \to \infty$. Create a vector $n$ of 11 elements from 0 to 10. Take $r = 0.5$ and create another vector $x = [r^0 \; r^1 \; r^2 \; \cdots \; r^n]$ with the `x=r.^n` command. Now take the sum of this vector with the command `s=sum(x)` ($s$ is the sum of the actual series). Calculate the limit $\dfrac{1}{1-r}$ and compare the computed sum $s$. Repeat the procedure taking $n$ from 0 to 50 and then from 0 to 100.
+<a id="ex-2-4"></a>**Exercise 2.4** — **The geometric series:** This is funky! You know how to compute $x^n$ element by element for a vector $x$ and a scalar exponent $n$. How about computing $n^x$, and what does it mean? The result, again, is a vector with elements $n^{x_1}$, $n^{x_2}$, $n^{x_3}$, etc. The sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ approaches the limit $\dfrac{1}{1-r}$ for $r < 1$ as $n \to \infty$. Create a vector $n$ of 11 elements from 0 to 10. Take $r = 0.5$ and create another vector $x = [r^0 \; r^1 \; r^2 \; \cdots \; r^n]$ with the `x=r.^n` command. Now take the sum of this vector with the command `s=sum(x)` ($s$ is the sum of the actual series). Calculate the limit $\dfrac{1}{1-r}$ and compare the computed sum $s$. Repeat the procedure taking $n$ from 0 to 50 and then from 0 to 100.
 
 <details><summary>Solution</summary>
 
@@ -13063,7 +13093,7 @@ limit =
 
 </details>
 
-**Exercise 2.5** — **Matrices and vectors:** Go to Fig. 3.1 on page 67 and reproduce the results. Now create a vector and a matrix with the following commands: `v=0:0.2:12;` and `M=[sin(v); cos(v)];` (see Section 3.1.4 on page 72 for use of ":" in creating vectors). Find the sizes of $v$ and $M$ using the `size` command. Extract the first 10 elements of each row of the matrix and display them as column vectors.
+<a id="ex-2-5"></a>**Exercise 2.5** — **Matrices and vectors:** Go to Fig. 3.1 on page 67 and reproduce the results. Now create a vector and a matrix with the following commands: `v=0:0.2:12;` and `M=[sin(v); cos(v)];` (see Section 3.1.4 on page 72 for use of ":" in creating vectors). Find the sizes of $v$ and $M$ using the `size` command. Extract the first 10 elements of each row of the matrix and display them as column vectors.
 
 <details><summary>Solution</summary>
 
@@ -13103,7 +13133,7 @@ ans =
 
 ### Tutorial 3 Exercises: Simple Plots
 
-**Exercise 3.1** — **A simple sine plot:** Plot $y = \sin x$, $0 \le x \le 2\pi$, taking 100 linearly spaced points in the given interval. Label the axes and put "Plot created by *yourname*" in the title.
+<a id="ex-3-1"></a>**Exercise 3.1** — **A simple sine plot:** Plot $y = \sin x$, $0 \le x \le 2\pi$, taking 100 linearly spaced points in the given interval. Label the axes and put "Plot created by *yourname*" in the title.
 
 <details><summary>Solution</summary>
 
@@ -13118,7 +13148,7 @@ title('Plot created by Alexandra Yakovleva')
 
 </details>
 
-**Exercise 3.2** — **Line styles:** Make the same plot as in Exercise 1, but rather than displaying the graph as a curve, show the unconnected data points. To display the data points with small circles, use `plot(x,y,'o')`. [Hint: You may look into Section 6.1 on page 175 if you wish.] Now combine the two plots with the command `plot(x,y,x,y,'o')` to show the line through the data points as well as the distinct data points.
+<a id="ex-3-2"></a>**Exercise 3.2** — **Line styles:** Make the same plot as in Exercise 1, but rather than displaying the graph as a curve, show the unconnected data points. To display the data points with small circles, use `plot(x,y,'o')`. [Hint: You may look into Section 6.1 on page 175 if you wish.] Now combine the two plots with the command `plot(x,y,x,y,'o')` to show the line through the data points as well as the distinct data points.
 
 <details><summary>Solution</summary>
 
@@ -13136,7 +13166,7 @@ xlabel('x'), ylabel('sin(x)')
 
 </details>
 
-**Exercise 3.3** — **An exponentially decaying sine plot:** Plot $y = e^{-0.4x}\sin x$, $0 \le x \le 4\pi$, taking 10, 50, and 100 points in the interval. [Be careful about computing $y$. You need array multiplication between `exp(-0.4*x)` and `sin(x)`. See Section 3.2.1 on page 73 for more discussion on array operations.]
+<a id="ex-3-3"></a>**Exercise 3.3** — **An exponentially decaying sine plot:** Plot $y = e^{-0.4x}\sin x$, $0 \le x \le 4\pi$, taking 10, 50, and 100 points in the interval. [Be careful about computing $y$. You need array multiplication between `exp(-0.4*x)` and `sin(x)`. See Section 3.2.1 on page 73 for more discussion on array operations.]
 
 <details><summary>Solution</summary>
 
@@ -13154,7 +13184,7 @@ end
 
 </details>
 
-**Exercise 3.4** — **Space curve:** Use the command `plot3(x,y,z)` to plot the circular helix $x(t) = \sin t$, $y(t) = \cos t$, $z(t) = t$, $0 \le t \le 20$.
+<a id="ex-3-4"></a>**Exercise 3.4** — **Space curve:** Use the command `plot3(x,y,z)` to plot the circular helix $x(t) = \sin t$, $y(t) = \cos t$, $z(t) = t$, $0 \le t \le 20$.
 
 <details><summary>Solution</summary>
 
@@ -13169,7 +13199,7 @@ xlabel('x'), ylabel('y'), zlabel('z')
 
 </details>
 
-**Exercise 3.5** — **On-line help:** Type `help plot` on the MATLAB prompt and hit return. If too much text flashes by the screen, type `more on`, hit return, and then type `help plot` again. This should give you paged screen output. Read through the on-line help. To move to the next page of the screen output, simply press the spacebar.
+<a id="ex-3-5"></a>**Exercise 3.5** — **On-line help:** Type `help plot` on the MATLAB prompt and hit return. If too much text flashes by the screen, type `more on`, hit return, and then type `help plot` again. This should give you paged screen output. Read through the on-line help. To move to the next page of the screen output, simply press the spacebar.
 
 <details><summary>Solution</summary>
 
@@ -13182,7 +13212,7 @@ help plot
 
 </details>
 
-**Exercise 3.6** — **Log-scale plots:** The plot commands `semilogx`, `semilogy`, and `loglog` plot the $x$-values, the $y$-values, and both $x$- and $y$-values on a $\log_{10}$ scale, respectively. Create a vector `x=0:10:1000`. Plot $x$ vs. $x^3$ using the three log-scale plot commands. [Hint: First, compute `y=x.^3` and then use `semilogx(x,y)`, etc.]
+<a id="ex-3-6"></a>**Exercise 3.6** — **Log-scale plots:** The plot commands `semilogx`, `semilogy`, and `loglog` plot the $x$-values, the $y$-values, and both $x$- and $y$-values on a $\log_{10}$ scale, respectively. Create a vector `x=0:10:1000`. Plot $x$ vs. $x^3$ using the three log-scale plot commands. [Hint: First, compute `y=x.^3` and then use `semilogx(x,y)`, etc.]
 
 <details><summary>Solution</summary>
 
@@ -13199,7 +13229,7 @@ figure, loglog(x,y)
 
 </details>
 
-**Exercise 3.7** — **Overlay plots:** Plot $y = \cos x$ and $z = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24}$ for $0 \le x \le \pi$ on the same plot. You might like to read Section 6.1.5 on page 179 to learn how to plot multiple curves on the same graph. [Hint: You can use `plot(x,y,x,z,'--')` or you can plot the first curve, use the `hold on` command, and then plot the second curve on top of the first one.]
+<a id="ex-3-7"></a>**Exercise 3.7** — **Overlay plots:** Plot $y = \cos x$ and $z = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24}$ for $0 \le x \le \pi$ on the same plot. You might like to read Section 6.1.5 on page 179 to learn how to plot multiple curves on the same graph. [Hint: You can use `plot(x,y,x,z,'--')` or you can plot the first curve, use the `hold on` command, and then plot the second curve on top of the first one.]
 
 <details><summary>Solution</summary>
 
@@ -13223,7 +13253,7 @@ hold off
 
 </details>
 
-**Exercise 3.8** — **Fancy plots:** Go to Section 6.1.6 and look at the examples of specialized 2-D plots given there. Reproduce any of the plots you like.
+<a id="ex-3-8"></a>**Exercise 3.8** — **Fancy plots:** Go to Section 6.1.6 and look at the examples of specialized 2-D plots given there. Reproduce any of the plots you like.
 
 <details><summary>Solution</summary>
 
@@ -13236,11 +13266,11 @@ subplot(2,2,3), stem(x,h), title('stem')
 subplot(2,2,4), pie(h), title('pie')
 ```
 
-- Plot: four panels, same data shown as bars, steps, stems, pie slices. I chose these, not the specific book examples (pages 155-158 not in the scans).
+- Plot: four panels, same data shown as bars, steps, stems, pie slices.
 
 </details>
 
-**Exercise 3.9** — **A very difficult plot:** Use your knowledge of *splines* and *interpolation* to draw a lizard (just kidding).
+<a id="ex-3-9"></a>**Exercise 3.9** — **A very difficult plot:** Use your knowledge of *splines* and *interpolation* to draw a lizard (just kidding).
 
 <details><summary>Solution</summary>
 
@@ -13259,7 +13289,7 @@ axis equal
 
 ### Tutorial 4 Exercises: Script Files
 
-**Exercise 4.1** — **Show the center of the circle:** Modify the script file `circle.m` to show the center of the circle on the plot, too. Show the center point with a "+". (Hint: See Exercises 2 and 7 of Lesson 3.)
+<a id="ex-4-1"></a>**Exercise 4.1** — **Show the center of the circle:** Modify the script file `circle.m` to show the center of the circle on the plot, too. Show the center point with a "+". (Hint: See Exercises 2 and 7 of Lesson 3.)
 
 <details><summary>Solution</summary>
 
@@ -13280,7 +13310,7 @@ title('Circle of unit radius')  % put a title
 
 </details>
 
-**Exercise 4.2** — **Change the radius of the circle:** Modify the script file `circle.m` to draw a circle of arbitrary radius $r$ as follows:
+<a id="ex-4-2"></a>**Exercise 4.2** — **Change the radius of the circle:** Modify the script file `circle.m` to draw a circle of arbitrary radius $r$ as follows:
 
 - Include the following command in the script file before the first executable line (`theta=...`) to ask the user to input ($r$) on the screen: `r = input('Enter the radius of the circle:  ')`
 - Modify the $x$- and $y$-coordinate calculations appropriately.
@@ -13310,7 +13340,7 @@ Enter the radius of the circle: 3
 
 </details>
 
-**Exercise 4.3** — **Variables in the workspace:** All variables created by a script file are left in the global workspace. You can get information about them and access them, too:
+<a id="ex-4-3"></a>**Exercise 4.3** — **Variables in the workspace:** All variables created by a script file are left in the global workspace. You can get information about them and access them, too:
 
 - Type `who` to see the variables present in your workspace. You should see the variables `r`, `theta`, `x`, and `y` in the list.
 - Type `whos` to get more information about the variables and the workspace.
@@ -13349,7 +13379,7 @@ ans =
 
 </details>
 
-**Exercise 4.4** — **Contents of the file:** You can see the contents of an M-file without opening the file with an editor. The contents are displayed by the `type` command. To see the contents of `circle.m`, type `type circle.m`.
+<a id="ex-4-4"></a>**Exercise 4.4** — **Contents of the file:** You can see the contents of an M-file without opening the file with an editor. The contents are displayed by the `type` command. To see the contents of `circle.m`, type `type circle.m`.
 
 <details><summary>Solution</summary>
 
@@ -13361,7 +13391,7 @@ type circle.m
 
 </details>
 
-**Exercise 4.5** — **H1 line:** The first commented line before any executable statement in a script file is called the *H1 line*. It is this line that is searched by the `lookfor` command. Because the `lookfor` command is used to look for M-files with keywords in their description, you should put keywords in the H1 line of all M-files you create. Type `lookfor unit` to see what MATLAB comes up with. Does it list the script file you just created?
+<a id="ex-4-5"></a>**Exercise 4.5** — **H1 line:** The first commented line before any executable statement in a script file is called the *H1 line*. It is this line that is searched by the `lookfor` command. Because the `lookfor` command is used to look for M-files with keywords in their description, you should put keywords in the H1 line of all M-files you create. Type `lookfor unit` to see what MATLAB comes up with. Does it list the script file you just created?
 
 <details><summary>Solution</summary>
 
@@ -13377,7 +13407,7 @@ circle        - CIRCLE - script file to draw a unit circle
 
 </details>
 
-**Exercise 4.6** — **Just for fun:** Write a script file that, when executed, greets you, displays the date and time, and curses your favorite TA or professor. [The commands you need are `disp`, `date`, `clock`, and possibly `fix`. See the on-line help on these commands before using them.]
+<a id="ex-4-6"></a>**Exercise 4.6** — **Just for fun:** Write a script file that, when executed, greets you, displays the date and time, and curses your favorite TA or professor. [The commands you need are `disp`, `date`, `clock`, and possibly `fix`. See the on-line help on these commands before using them.]
 
 <details><summary>Solution</summary>
 
@@ -13410,13 +13440,13 @@ And the time is..
 16:45
 ```
 
-- Save as `Hi_there.m`. Greeting kept friendly (no cursing). `clock` returns [year month day hour minute seconds]; `fix` drops the fractions. Date and time in the sample output depend on when you run it.
+- Save as `Hi_there.m`. `clock` returns [year month day hour minute seconds]; `fix` drops the fractions. Date and time in the sample output depend on when you run it.
 
 </details>
 
 ### Tutorial 5 Exercises: Function Files
 
-**Exercise 5.1** — **On-line help:** Type `help function` to get on-line help on `function`. Read through the help file.
+<a id="ex-5-1"></a>**Exercise 5.1** — **On-line help:** Type `help function` to get on-line help on `function`. Read through the help file.
 
 <details><summary>Solution</summary>
 
@@ -13428,7 +13458,7 @@ help function
 
 </details>
 
-**Exercise 5.2** — **Convert temperature:** Write a function that outputs a conversion table for Celsius and Fahrenheit temperatures. The input of the function should be two numbers: $T_i$ and $T_f$, specifying the lower and upper range of the table in Celsius. The output should be a two-column matrix: the first column showing the temperature in Celsius from $T_i$ to $T_f$ in the increments of 1 C and the second column showing the corresponding temperatures in Fahrenheit. To do this, (i) create a column vector $C$ from $T_i$ to $T_f$ with the command `C=[Ti:Tf]'`, (ii) calculate the corresponding numbers in Fahrenheit using the formula $[F = \frac{9}{5}C + 32]$, and (iii) make the final matrix with the command `temp=[C F];`. Note that your output variable will be named *temp*.
+<a id="ex-5-2"></a>**Exercise 5.2** — **Convert temperature:** Write a function that outputs a conversion table for Celsius and Fahrenheit temperatures. The input of the function should be two numbers: $T_i$ and $T_f$, specifying the lower and upper range of the table in Celsius. The output should be a two-column matrix: the first column showing the temperature in Celsius from $T_i$ to $T_f$ in the increments of 1 C and the second column showing the corresponding temperatures in Fahrenheit. To do this, (i) create a column vector $C$ from $T_i$ to $T_f$ with the command `C=[Ti:Tf]'`, (ii) calculate the corresponding numbers in Fahrenheit using the formula $[F = \frac{9}{5}C + 32]$, and (iii) make the final matrix with the command `temp=[C F];`. Note that your output variable will be named *temp*.
 
 <details><summary>Solution</summary>
 
@@ -13460,7 +13490,7 @@ ans =
 
 </details>
 
-**Exercise 5.3** — **Calculate factorials:** Write a function `factorial` to compute the factorial $n!$ for any integer $n$. The input should be the number $n$ and the output should be $n!$. You might have to use a *for* loop or a *while* loop to do the calculation. See Section 4.3.4 on page 114 for a quick description of these loops. (You can use the built-in function `prod` to calculate factorials. For example, $n!$ is `prod(1:n)`. In this exercise, however, do not use this function.)
+<a id="ex-5-3"></a>**Exercise 5.3** — **Calculate factorials:** Write a function `factorial` to compute the factorial $n!$ for any integer $n$. The input should be the number $n$ and the output should be $n!$. You might have to use a *for* loop or a *while* loop to do the calculation. See Section 4.3.4 on page 114 for a quick description of these loops. (You can use the built-in function `prod` to calculate factorials. For example, $n!$ is `prod(1:n)`. In this exercise, however, do not use this function.)
 
 <details><summary>Solution</summary>
 
@@ -13496,7 +13526,7 @@ ans =
 
 </details>
 
-**Exercise 5.4** — **Compute the cross product:** Write a function file `crossprod` to compute the cross product of two vectors $u$ and $v$, given $u = (u_1, u_2, u_3)$, $v = (v_1, v_2, v_3)$, and $u \times v = (u_2 v_3 - u_3 v_2, \; u_3 v_1 - u_1 v_3, \; u_1 v_2 - u_2 v_1)$. Check your function by taking cross products of pairs of unit vectors: $(i, j)$, $(j, k)$, etc. $[i = (1,0,0), \; j = (0,1,0), \; k = (0,0,1)]$. (Do not use the built-in function `cross` here.)
+<a id="ex-5-4"></a>**Exercise 5.4** — **Compute the cross product:** Write a function file `crossprod` to compute the cross product of two vectors $u$ and $v$, given $u = (u_1, u_2, u_3)$, $v = (v_1, v_2, v_3)$, and $u \times v = (u_2 v_3 - u_3 v_2, \; u_3 v_1 - u_1 v_3, \; u_1 v_2 - u_2 v_1)$. Check your function by taking cross products of pairs of unit vectors: $(i, j)$, $(j, k)$, etc. $[i = (1,0,0), \; j = (0,1,0), \; k = (0,0,1)]$. (Do not use the built-in function `cross` here.)
 
 <details><summary>Solution</summary>
 
@@ -13551,7 +13581,7 @@ ans =
 
 </details>
 
-**Exercise 5.5** — **Sum a geometric series:** Write a function to compute the sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ for a given $r$ and $n$. Thus the input to the function must be $r$ and $n$ and the output must be the sum of the series. [See Exercise 4 of Lesson 2.]
+<a id="ex-5-5"></a>**Exercise 5.5** — **Sum a geometric series:** Write a function to compute the sum of a geometric series $1 + r + r^2 + r^3 + \cdots + r^n$ for a given $r$ and $n$. Thus the input to the function must be $r$ and $n$ and the output must be the sum of the series. [See Exercise 4 of Lesson 2.]
 
 <details><summary>Solution</summary>
 
@@ -13587,7 +13617,7 @@ ans =
 
 </details>
 
-**Exercise 5.6** — **Calculate the interest on your money:** The interest you get at the end of $n$ years, at a flat annual rate of $r\%$, depends on how the interest is compounded. If the interest is added to your account $k$ times a year, and the principal amount you invested is $X_0$, then at the end of $n$ years you would have $X = X_0 \left(1 + \dfrac{r}{k}\right)^{kn}$ amount of money in your account. Write a function to compute the interest $(X - X_0)$ on your account for a given $X$, $n$, $r$, and $k$. Use the function to find the difference between the interest paid on \$1000 at the rate of 6% a year at the end of five years if the interest is compounded (i) quarterly ($k = 4$) and (ii) daily ($k = 365$). For screen output, use `format bank` (see Section 1.6.3, page 9, for a description of various formats).
+<a id="ex-5-6"></a>**Exercise 5.6** — **Calculate the interest on your money:** The interest you get at the end of $n$ years, at a flat annual rate of $r\%$, depends on how the interest is compounded. If the interest is added to your account $k$ times a year, and the principal amount you invested is $X_0$, then at the end of $n$ years you would have $X = X_0 \left(1 + \dfrac{r}{k}\right)^{kn}$ amount of money in your account. Write a function to compute the interest $(X - X_0)$ on your account for a given $X$, $n$, $r$, and $k$. Use the function to find the difference between the interest paid on \$1000 at the rate of 6% a year at the end of five years if the interest is compounded (i) quarterly ($k = 4$) and (ii) daily ($k = 365$). For screen output, use `format bank` (see Section 1.6.3, page 9, for a description of various formats).
 
 <details><summary>Solution</summary>
 
@@ -13632,11 +13662,11 @@ ans =
 ```
 
 - Rate is a fraction: 6% is `0.06`, hence the `r > 1` warning. Quarterly interest \$346.86, daily \$349.83, difference about \$2.97.
-- Book answer prints \$346.85 and \$3.02: checking by hand, $1000(1.015)^{20} - 1000 = 346.855$ and $1000(1+0.06/365)^{1825} - 1000 = 349.826$, so the book's last digits look off. Spacing of `format bank` output is approximate (computed, not run in MATLAB).
+- Book answer prints \$346.85 and \$3.02: checking by hand, $1000(1.015)^{20} - 1000 = 346.855$ and $1000(1+0.06/365)^{1825} - 1000 = 349.826$, so the book's last digits look off. Spacing of `format bank` output is approximate.
 
 </details>
 
-## HW HO Week 10
+## HO — Week 10
 
 **B737 Intercept**
 
@@ -13749,7 +13779,7 @@ grid on
 | `a:h:b`, `linspace`, `logspace` | build vectors | `linspace(0,20,5)` |
 | `* / \ ^`, `.* ./ .^` | matrix and array arithmetic | `x = A\b` |
 | `< <= > >= == ~=` | relational, result is 0/1 | `x > 4` |
-| `& | ~ xor` | logical operators | `u & (x>4)` |
+| `& \| ~ xor` | logical operators | `u & (x>4)` |
 | `all`, `any`, `find`, `exist`, `isempty`, `isinf`, `isnan` | logical functions | `i = find(x>5)` |
 | `sin cos tan asin atan atan2 sinh exp log log10 sqrt abs` | element-by-element math | `atan2(y,x)` |
 | `fix floor ceil round rem sign` | round-off and remainder | `rem(a,b)` |
@@ -13998,7 +14028,7 @@ ezplot('exp(-.1*x).*cos(x)',0,20)
 
 ## Pratap Chapter 3 — Exercises
 
-**Exercise 1** — **Entering matrices:** Enter the following three matrices: $A = \begin{bmatrix} 2 & 6 \\ 3 & 9 \end{bmatrix}$, $B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$, $C = \begin{bmatrix} -5 & 5 \\ 5 & 3 \end{bmatrix}$.
+<a id="pratap-ch3-ex-1"></a>**Exercise 1** — **Entering matrices:** Enter the following three matrices: $A = \begin{bmatrix} 2 & 6 \\ 3 & 9 \end{bmatrix}$, $B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$, $C = \begin{bmatrix} -5 & 5 \\ 5 & 3 \end{bmatrix}$.
 
 <details><summary>Solution</summary>
 
@@ -14025,11 +14055,11 @@ C =
      5     3
 ```
 
-- Rows separated by `;`. Outputs computed, not run in MATLAB.
+- Rows separated by `;`.
 
 </details>
 
-**Exercise 2** — **Check some linear algebra rules:** Is matrix addition commutative? Compute `A + B` and then `B + A`. Is matrix addition associative? Compute `(A + B) + C` and `A + (B + C)`. Is multiplication with a scalar distributive? Compute $\alpha(A+B)$ and $\alpha A + \alpha B$, taking $\alpha = 5$. Is multiplication with a matrix distributive? Compute `A*(B+C)` and compare with `A*B + A*C`. Matrices are different from scalars! For scalars, $ab = ac$ implies $b = c$ if $a \neq 0$. Is that true for matrices? Check by computing `A*B` and `A*C`. In general matrix products do not commute either: check if `A*B` and `B*A` give different results.
+<a id="pratap-ch3-ex-2"></a>**Exercise 2** — **Check some linear algebra rules:** Is matrix addition commutative? Compute `A + B` and then `B + A`. Is matrix addition associative? Compute `(A + B) + C` and `A + (B + C)`. Is multiplication with a scalar distributive? Compute $\alpha(A+B)$ and $\alpha A + \alpha B$, taking $\alpha = 5$. Is multiplication with a matrix distributive? Compute `A*(B+C)` and compare with `A*B + A*C`. Matrices are different from scalars! For scalars, $ab = ac$ implies $b = c$ if $a \neq 0$. Is that true for matrices? Check by computing `A*B` and `A*C`. In general matrix products do not commute either: check if `A*B` and `B*A` give different results.
 
 <details><summary>Solution</summary>
 
@@ -14118,7 +14148,7 @@ ans =
 
 </details>
 
-**Exercise 3** — **Create matrices with zeros, eye, and ones:** Create the following matrices with `zeros`, `eye`, and `ones` (see `help eye`): $D$ = 2 by 3 matrix of zeros, $E = \begin{bmatrix} 5&0&0\\0&5&0\\0&0&5 \end{bmatrix}$, $F = \begin{bmatrix} 3&3\\3&3 \end{bmatrix}$.
+<a id="pratap-ch3-ex-3"></a>**Exercise 3** — **Create matrices with zeros, eye, and ones:** Create the following matrices with `zeros`, `eye`, and `ones` (see `help eye`): $D$ = 2 by 3 matrix of zeros, $E = \begin{bmatrix} 5&0&0\\0&5&0\\0&0&5 \end{bmatrix}$, $F = \begin{bmatrix} 3&3\\3&3 \end{bmatrix}$.
 
 <details><summary>Solution</summary>
 
@@ -14150,7 +14180,7 @@ F =
 
 </details>
 
-**Exercise 4** — **Create a big matrix with submatrices:** The following matrix $G$ is created by putting matrices $A$, $B$, and $C$ on its diagonal ($G$ is $6\times6$ with $A$ in rows 1-2, $B$ in rows 3-4, $C$ in rows 5-6, zeros elsewhere). In how many ways can you create this matrix using submatrices $A$, $B$, and $C$ (you are not allowed to enter the non-zero numbers explicitly)?
+<a id="pratap-ch3-ex-4"></a>**Exercise 4** — **Create a big matrix with submatrices:** The following matrix $G$ is created by putting matrices $A$, $B$, and $C$ on its diagonal ($G$ is $6\times6$ with $A$ in rows 1-2, $B$ in rows 3-4, $C$ in rows 5-6, zeros elsewhere). In how many ways can you create this matrix using submatrices $A$, $B$, and $C$ (you are not allowed to enter the non-zero numbers explicitly)?
 
 <details><summary>Solution</summary>
 
@@ -14179,7 +14209,7 @@ G =
 
 </details>
 
-**Exercise 5** — **Manipulate a matrix:** Do the following operations on matrix $G$ created above in (4): delete the last row and last column of the matrix; extract the first $4\times4$ submatrix from $G$; replace `G(5,5)` with 4; what do you get if you type `G(13)` and hit return? Can you explain how MATLAB got that answer? What happens if you type `G(12,1) = 1` and hit return?
+<a id="pratap-ch3-ex-5"></a>**Exercise 5** — **Manipulate a matrix:** Do the following operations on matrix $G$ created above in (4): delete the last row and last column of the matrix; extract the first $4\times4$ submatrix from $G$; replace `G(5,5)` with 4; what do you get if you type `G(13)` and hit return? Can you explain how MATLAB got that answer? What happens if you type `G(12,1) = 1` and hit return?
 
 <details><summary>Solution</summary>
 
@@ -14251,7 +14281,7 @@ G =
 
 </details>
 
-**Exercise 6** — **See the structure of a matrix:** Create a $20\times20$ matrix with `A = ones(20)`. Replace the $10\times10$ submatrix between rows 6:15 and columns 6:15 with zeros. See the structure of the matrix (in terms of nonzero entries) with `spy(A)`. Set the $5\times5$ submatrices in the top right corner and bottom left corner to zeros and see the structure again.
+<a id="pratap-ch3-ex-6"></a>**Exercise 6** — **See the structure of a matrix:** Create a $20\times20$ matrix with `A = ones(20)`. Replace the $10\times10$ submatrix between rows 6:15 and columns 6:15 with zeros. See the structure of the matrix (in terms of nonzero entries) with `spy(A)`. Set the $5\times5$ submatrices in the top right corner and bottom left corner to zeros and see the structure again.
 
 <details><summary>Solution</summary>
 
@@ -14269,7 +14299,7 @@ spy(A)
 
 </details>
 
-**Exercise 7** — **Create a symmetric matrix:** Create an upper triangular matrix with `A = diag(1:6) + diag(7:11,1) + diag(12:15,2)`. Make sure you understand how this command works (see `help diag`). Now use the upper off-diagonal terms of $A$ to make $A$ a symmetric matrix with `A = A + triu(A,1)'`.
+<a id="pratap-ch3-ex-7"></a>**Exercise 7** — **Create a symmetric matrix:** Create an upper triangular matrix with `A = diag(1:6) + diag(7:11,1) + diag(12:15,2)`. Make sure you understand how this command works (see `help diag`). Now use the upper off-diagonal terms of $A$ to make $A$ a symmetric matrix with `A = A + triu(A,1)'`.
 
 <details><summary>Solution</summary>
 
@@ -14301,7 +14331,7 @@ A =
 
 </details>
 
-**Exercise 8** — **Do some cool operations:** Create a $10\times10$ random matrix with `A = rand(10)`. Multiply all elements by 100 and then round off all elements of the matrix to integers with `A = fix(A)`. Replace all elements of $A < 10$ with zeros. Replace all elements of $A > 90$ with infinity (`inf`). Extract all $30 \le a_{ij} \le 50$ in a vector `b`, that is, find all elements of $A$ that are between 30 and 50 and put them in a vector `b`.
+<a id="pratap-ch3-ex-8"></a>**Exercise 8** — **Do some cool operations:** Create a $10\times10$ random matrix with `A = rand(10)`. Multiply all elements by 100 and then round off all elements of the matrix to integers with `A = fix(A)`. Replace all elements of $A < 10$ with zeros. Replace all elements of $A > 90$ with infinity (`inf`). Extract all $30 \le a_{ij} \le 50$ in a vector `b`, that is, find all elements of $A$ that are between 30 and 50 and put them in a vector `b`.
 
 <details><summary>Solution</summary>
 
